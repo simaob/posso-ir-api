@@ -2,9 +2,12 @@
   "name": "covid19_shopping_assistant",
   "private": true,
   "dependencies": {
+    "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "turbolinks": "^5.2.0",
-    "@rails/activestorage": "^6.0.0"
+    "bootstrap": "4.3.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1",
+    "turbolinks": "^5.2.0"
   },
   "version": "0.1.0"
 }
