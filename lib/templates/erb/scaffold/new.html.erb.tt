@@ -1,0 +1,7 @@
+<%% content_for :page_title, I18n.t('views.new.title', resource: <%= class_name %>.model_name.human) %>
+<%% content_for :actions do %>
+  <%%= link_to(I18n.t('views.actions.back'), <%= index_helper %>_path,
+    class: 'btn btn-sm btn-outline-secondary') %>
+<%% end %>
+
+<%%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>
