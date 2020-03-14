@@ -1,0 +1,32 @@
+<% content_for :page_title, User.model_name.human(count: 2) %>
+<% content_for :actions do %>
+  <%= link_to I18n.t('views.actions.new'), new_user_path,
+    class: 'btn btn-sm btn-outline-primary' %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= User.human_attribute_name(:name) %></th>
+      <th><%= User.human_attribute_name(:email) %></th>
+      <th><%= User.human_attribute_name(:admin) %></th>
+      <th><%= I18n.t('views.actions.title') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin %></td>
+        <td>
+          <%= link_to I18n.t('views.actions.show'), user %>
+          |
+          <%= link_to I18n.t('views.actions.edit'), edit_user_path(user) %>
+          |
+          <%= link_to I18n.t('views.actions.destroy'), user, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
