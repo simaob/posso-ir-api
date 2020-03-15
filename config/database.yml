@@ -1,29 +1,15 @@
-# PostgreSQL. Versions 9.3 and up are supported.
-#
-# Install the pg driver:
-#   gem install pg
-# On macOS with Homebrew:
-#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
-# On macOS with MacPorts:
-#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
-# On Windows:
-#   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
-#
-# Configure Using Gemfile
-# gem 'pg'
-#
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DB_USERNAME") {} %>
+  password: <%= ENV.fetch("DB_PASSWORD") {} %>
+  host: <%= ENV.fetch("DB_HOST") {} %>
 
 development:
   <<: *default
   database: covid19_shopping_assistant_development
+  username: postgres
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -81,5 +67,3 @@ test:
 production:
   <<: *default
   database: covid19_shopping_assistant_production
-  username: covid19_shopping_assistant
-  password: <%= ENV['COVID19_SHOPPING_ASSISTANT_DATABASE_PASSWORD'] %>
