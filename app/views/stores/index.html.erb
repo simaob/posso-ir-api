@@ -1,0 +1,42 @@
+<% content_for :page_title, Store.model_name.human(count: 2) %>
+<% content_for :actions do %>
+  <%= link_to I18n.t('views.actions.new'), new_store_path,
+    class: 'btn btn-sm btn-outline-primary' %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Store.human_attribute_name(:name) %></th>
+      <th><%= Store.human_attribute_name(:group) %></th>
+      <th><%= Store.human_attribute_name(:street) %></th>
+      <th><%= Store.human_attribute_name(:city) %></th>
+      <th><%= Store.human_attribute_name(:latitude) %></th>
+      <th><%= Store.human_attribute_name(:longitude) %></th>
+      <th><%= Store.human_attribute_name(:capacity) %></th>
+      <th><%= Store.human_attribute_name(:details) %></th>
+      <th><%= I18n.t('views.actions.title') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= store.name %></td>
+        <td><%= store.group %></td>
+        <td><%= store.street %></td>
+        <td><%= store.city %></td>
+        <td><%= store.latitude %></td>
+        <td><%= store.longitude %></td>
+        <td><%= store.capacity %></td>
+        <td><%= store.details %></td>
+        <td>
+          <%= link_to I18n.t('views.actions.show'), store %>
+          |
+          <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
+          |
+          <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

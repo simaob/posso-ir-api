@@ -1,0 +1,57 @@
+<%= form_with(model: store, local: true) do |form| %>
+  <% if store.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(store.errors.count, "error") %> impediram store de ser guardado:</h2>
+
+      <ul>
+        <% store.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, class: "col-sm-2 col-form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :group, class: "col-sm-2 col-form-label" %>
+    <%= form.text_field :group, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :street, class: "col-sm-2 col-form-label" %>
+    <%= form.text_field :street, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :city, class: "col-sm-2 col-form-label" %>
+    <%= form.text_field :city, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :latitude, class: "col-sm-2 col-form-label" %>
+    <%= form.text_field :latitude, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :longitude, class: "col-sm-2 col-form-label" %>
+    <%= form.text_field :longitude, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :capacity, class: "col-sm-2 col-form-label" %>
+    <%= form.number_field :capacity, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :details, class: "col-sm-2 col-form-label" %>
+    <%= form.text_area :details, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit I18n.t('views.form.submit'), class: "btn btn-primary" %>
+  </div>
+<% end %>

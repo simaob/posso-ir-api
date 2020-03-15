@@ -1,0 +1,49 @@
+
+  <% content_for :page_title, @store.name.titleize %>
+
+<% content_for :actions do %>
+  <%= link_to(I18n.t('views.actions.edit'), edit_store_path(@store),
+    class: 'btn btn-sm btn-outline-primary')
+    .concat(link_to(I18n.t('views.actions.back'), stores_path,
+    class: 'btn btn-sm btn-outline-secondary')) %>
+<% end %>
+<p>
+  <strong><%= Store.human_attribute_name(:name) %>:</strong>
+  <%= @store.name %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:group) %>:</strong>
+  <%= @store.group %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:street) %>:</strong>
+  <%= @store.street %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:city) %>:</strong>
+  <%= @store.city %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:latitude) %>:</strong>
+  <%= @store.latitude %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:longitude) %>:</strong>
+  <%= @store.longitude %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
+  <%= @store.capacity %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:details) %>:</strong>
+  <%= @store.details %>
+</p>
+
