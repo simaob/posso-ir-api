@@ -1,0 +1,3 @@
+class StatusUserCount < Status
+
+end

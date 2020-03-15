@@ -1,0 +1,3 @@
+class StatusCrowdsource < Status
+
+end

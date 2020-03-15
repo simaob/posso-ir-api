@@ -10,16 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_205726) do
+ActiveRecord::Schema.define(version: 2020_03_15_224638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "status_crowdsource_users", force: :cascade do |t|
+    t.integer "status", null: false
+    t.integer "queue"
+    t.datetime "posted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "store_id"
+    t.bigint "user_id"
+    t.index ["store_id"], name: "index_status_crowdsource_users_on_store_id"
+    t.index ["user_id"], name: "index_status_crowdsource_users_on_user_id"
+  end
+
+  create_table "status_user_commitment_users", force: :cascade do |t|
+    t.integer "status", null: false
+    t.datetime "posted_at", null: false
+    t.datetime "start_at"
+    t.integer "duration"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "store_id"
+    t.bigint "user_id"
+    t.index ["store_id"], name: "index_status_user_commitment_users_on_store_id"
+    t.index ["user_id"], name: "index_status_user_commitment_users_on_user_id"
+  end
+
+  create_table "status_user_count_users", force: :cascade do |t|
+    t.integer "status", null: false
+    t.integer "queue_status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "store_id"
+    t.bigint "user_id"
+    t.index ["store_id"], name: "index_status_user_count_users_on_store_id"
+    t.index ["user_id"], name: "index_status_user_count_users_on_user_id"
+  end
+
   create_table "statuses", force: :cascade do |t|
-    t.datetime "updated_time"
+    t.datetime "updated_time", null: false
     t.datetime "valid_until"
     t.integer "status"
-    t.string "type"
+    t.integer "queue_status"
+    t.string "type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "store_id"
@@ -53,5 +90,11 @@ ActiveRecord::Schema.define(version: 2020_03_15_205726) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
+  add_foreign_key "status_crowdsource_users", "users", on_delete: :cascade
+  add_foreign_key "status_user_commitment_users", "stores", on_delete: :cascade
+  add_foreign_key "status_user_commitment_users", "users", on_delete: :cascade
+  add_foreign_key "status_user_count_users", "stores", on_delete: :cascade
+  add_foreign_key "status_user_count_users", "users", on_delete: :cascade
   add_foreign_key "statuses", "stores", on_delete: :cascade
 end

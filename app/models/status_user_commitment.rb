@@ -1,0 +1,3 @@
+class StatusUserCommitment < Status
+
+end

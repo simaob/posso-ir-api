@@ -1,0 +1,3 @@
+class StatusStoreOwner < Status
+
+end
