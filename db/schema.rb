@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_03_15_224638) do
     t.float "longitude"
     t.integer "capacity"
     t.text "details"
+    t.integer "store_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
