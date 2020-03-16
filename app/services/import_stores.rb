@@ -5,6 +5,7 @@ class ImportStores
     import_continente
     import_corte_ingles
     import_intermarche
+    import_lidl
     puts "#{Store.count} stores added"
   end
 
@@ -13,7 +14,7 @@ class ImportStores
   end
 
   def import_auchan
-    src = File.open(Rails.root.join('db', 'files', 'AUCHAN.csv'), 'r')
+    src = File.open(Rails.root.join('db', 'files', 'auchan.csv'), 'r')
     file = File.read(src).force_encoding('UTF-8')
     CSV.parse(file, headers:true, skip_blanks: true). each do |csv|
       Store.create(
@@ -78,6 +79,23 @@ class ImportStores
         street: row['location'],
         latitude: row['lat'],
         longitude: row['long'],
+        store_type: 1
+      )
+    end
+  end
+
+  def import_lidl
+    src = File.open(Rails.root.join('db', 'files', 'lidl.csv'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    CSV.parse(file, headers:true, skip_blanks: true). each do |csv|
+      city, street = csv['name'].split('-')
+      Store.create(
+        name: "LIDL #{city.strip}",
+        group: 'LIDL',
+        city: city&.strip,
+        street: street&.strip,
+        latitude: csv['lat'],
+        longitude: csv['lng'],
         store_type: 1
       )
     end
