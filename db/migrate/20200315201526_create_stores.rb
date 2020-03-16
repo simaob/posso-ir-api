@@ -5,6 +5,9 @@ class CreateStores < ActiveRecord::Migration[6.0]
       t.string :group
       t.string :street
       t.string :city
+      t.string :district
+      t.string :country
+      t.string :zip_code
       t.float :latitude
       t.float :longitude
       t.integer :capacity
