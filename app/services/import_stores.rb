@@ -4,6 +4,7 @@ class ImportStores
     import_auchan
     import_continente
     import_corte_ingles
+    import_intermarche
     puts "#{Store.count} stores added"
   end
 
@@ -60,6 +61,23 @@ class ImportStores
         latitude: coordinates&.first,
         longitude: coordinates&.second,
         details: row['time'],
+        store_type: 1
+      )
+    end
+  end
+
+  def import_intermarche
+    src = File.open(Rails.root.join('db', 'files', 'intermarche.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file).each do |row|
+      Store.create(
+        name: "Intermarché #{row['name']}",
+        group: 'Intermarché',
+        country: 'PT',
+        city: row['name'],
+        street: row['location'],
+        latitude: row['lat'],
+        longitude: row['long'],
         store_type: 1
       )
     end
