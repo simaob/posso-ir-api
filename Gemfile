@@ -54,6 +54,8 @@ group :development do
   gem 'capistrano-passenger', require: false
   gem 'capistrano-resque', require: false
   gem 'capistrano-rvm', require: false
+  gem 'capistrano-nvm', require: false
+  gem 'capistrano-yarn', require: false
 end
 
 group :test do
