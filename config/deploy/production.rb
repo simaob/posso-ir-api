@@ -14,3 +14,5 @@ set :ssh_options, {
 
 set :branch, 'master'
 set :deploy_to, '~/supermarket-rails'
+
+set :rails_env, :production
