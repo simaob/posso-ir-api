@@ -14,7 +14,7 @@ set :repo_url, "git@github.com:simaob/covid19_shopping_assistant.git"
 
 set :passenger_restart_with_touch, true
 
-set :rvm_type, :user
+set :rvm_type, :system
 set :rvm_ruby_version, '2.6.3'
 set :rvm_roles, [:app, :web, :db]
 
