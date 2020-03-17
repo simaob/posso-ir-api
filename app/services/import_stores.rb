@@ -7,6 +7,8 @@ class ImportStores
     import_intermarche
     import_lidl
     import_mercadona
+    import_minipreco
+    import_pingodoce
     puts "#{Store.count} stores added"
   end
 
@@ -116,6 +118,44 @@ class ImportStores
         latitude: row['lt'],
         longitude: row['lg'],
         details: row['fs'],
+        store_type: 1
+      )
+    end
+  end
+
+  def import_minipreco
+    src = File.open(Rails.root.join('db', 'files', 'minipreco.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+
+    JSON.parse(file)['locations'].each do |row|
+      coordinates = Geocoder.search(row['direccionPostal'])&.first&.coordinates
+      Store.create(
+        name: "Minipreço #{row['nombreVia'].titleize}",
+        group: 'Minipreço',
+        country: 'PT',
+        city: row['localidad'].titleize,
+        street: row['direccionPostal'].titleize,
+        latitude: coordinates&.first,
+        longitude: coordinates&.second,
+        store_type: 1
+      )
+    end
+  end
+
+  def import_pingodoce
+    src = File.open(Rails.root.join('db', 'files', 'pingoDoce.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+
+    JSON.parse(file)['stores'].each do |row|
+      Store.create(
+        name: "Pingo Doce #{row['name']}",
+        group: 'Pingo Doce',
+        country: 'PT',
+        city: row['county'],
+        street: row['address'],
+        zip_code: row['postal_code'],
+        latitude: row['lat'],
+        longitude: row['lng'],
         store_type: 1
       )
     end
