@@ -1,4 +1,4 @@
-class ApiController < ApplicationControler
+class ApiController < ApplicationController
   include JSONAPI::ActsAsResourceController
 
   # Prevent CSRF attacks by raising an exception.
