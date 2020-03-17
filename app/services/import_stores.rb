@@ -6,6 +6,7 @@ class ImportStores
     import_corte_ingles
     import_intermarche
     import_lidl
+    import_mercadona
     puts "#{Store.count} stores added"
   end
 
@@ -96,6 +97,25 @@ class ImportStores
         street: street&.strip,
         latitude: csv['lat'],
         longitude: csv['lng'],
+        store_type: 1
+      )
+    end
+  end
+
+  def import_mercadona
+    src = File.open(Rails.root.join('db', 'files', 'mercadona.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file)['tiendasFull'].each do |row|
+      Store.create(
+        name: "Mercadona #{row['lc']}",
+        group: 'Mercadona',
+        country: row['p'],
+        city: row['lc'].titleize,
+        district: row['pv'].titleize,
+        street: row['dr'].titleize,
+        latitude: row['lt'],
+        longitude: row['lg'],
+        details: row['fs'],
         store_type: 1
       )
     end
