@@ -7,6 +7,9 @@
 #  group      :string
 #  street     :string
 #  city       :string
+#  district   :string
+#  country    :string
+#  zip_code   :string
 #  latitude   :float
 #  longitude  :float
 #  capacity   :integer
