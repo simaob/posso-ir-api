@@ -34,15 +34,13 @@ class Store < ApplicationRecord
   # after_validation :geocode
   before_save :set_lonlat, if: -> { latitude_changed? || longitude_changed? }
 
-  private
-
   def address
     [street, city].compact.join(',')
   end
 
   def self.retrieve_stores(lat, lon)
     query=
-<<~SQL
+        <<~SQL
  SELECT *
   FROM stores
   WHERE ST_CONTAINS(
@@ -52,10 +50,12 @@ class Store < ApplicationRecord
       #{RADIUS})::geometry,
     lonlat)
 )))
-SQL
+    SQL
     ActiveRecord::Base.connection.execute(query)
   end
-    
+
+  private
+
   # x: longitude
   # y: latitude
   def set_lonlat
