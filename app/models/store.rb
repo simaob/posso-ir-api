@@ -26,7 +26,7 @@ class Store < ApplicationRecord
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
-  enum store_type: { 'Supermarket': 1, 'Pharmacy': 2 }
+  enum store_type: { 'supermarket': 1, 'pharmacy': 2, 'restaurant': 3 }
 
   validates :capacity, allow_nil: true, numericality: { greater_than: 0 }
 
