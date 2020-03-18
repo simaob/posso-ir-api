@@ -56,6 +56,7 @@ class ImportStores
     file = File.read(src).force_encoding('UTF-8')
     JSON.parse(file).each do |row|
       coordinates = Geocoder.search(row['location'])&.first&.coordinates
+      sleep 0.25 # don't hammer the API
 
       Store.create(
         name: row['name'],
@@ -129,6 +130,8 @@ class ImportStores
 
     JSON.parse(file)['locations'].each do |row|
       coordinates = Geocoder.search(row['direccionPostal'])&.first&.coordinates
+      sleep 0.25 # don't hammer the API
+
       Store.create(
         name: "Minipreço #{row['nombreVia'].titleize}",
         group: 'Minipreço',
