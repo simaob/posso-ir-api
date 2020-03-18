@@ -42,6 +42,6 @@ class Store < ApplicationRecord
     return unless latitude && longitude
 
     self.lonlat = Store.select("ST_MakePoint(#{longitude}, #{latitude}) AS point")
-      .limit(1).first.point
+      .limit(1).first&.point
   end
 end
