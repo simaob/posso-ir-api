@@ -31,11 +31,11 @@ class Store < ApplicationRecord
   # after_validation :geocode
   before_save :set_lonlat, if: -> { latitude_changed? || longitude_changed? }
 
-  private
-
   def address
     [street, city].compact.join(',')
   end
+
+  private
 
   # x: longitude
   # y: latitude
