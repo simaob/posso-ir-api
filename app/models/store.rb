@@ -19,6 +19,9 @@
 #  updated_at :datetime         not null
 #
 class Store < ApplicationRecord
+  RADIUS = 5
+  PROJECTION = 4326
+
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
@@ -31,5 +34,21 @@ class Store < ApplicationRecord
 
   def address
     [street, city].compact.join(',')
+  end
+
+  def self.retrieve_stores(lat, lon)
+    query=
+<<~SQL
+ SELECT *
+  FROM stores
+  WHERE ST_CONTAINS(
+    ST_BUFFER(
+      ST_SetSRID(
+          ST_MakePoint(#{lon}, #{lat}), 4326)::geography,
+      #{RADIUS})::geometry,
+    lonlat)
+)))
+SQL
+    ActiveRecord::Base.connection.execute(query)
   end
 end
