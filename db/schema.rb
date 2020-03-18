@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_224638) do
+ActiveRecord::Schema.define(version: 2020_03_18_140548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "status_crowdsource_users", force: :cascade do |t|
     t.integer "status", null: false
@@ -78,6 +79,8 @@ ActiveRecord::Schema.define(version: 2020_03_15_224638) do
     t.integer "store_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.geometry "lonlat", limit: {:srid=>0, :type=>"st_point"}
+    t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
   end
 
   create_table "users", force: :cascade do |t|

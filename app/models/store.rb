@@ -17,6 +17,7 @@
 #  store_type :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  lonlat     :geometry         point, 0
 #
 class Store < ApplicationRecord
   RADIUS = 5
@@ -25,12 +26,15 @@ class Store < ApplicationRecord
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
-  enum store_type: { 1 => 'Supermarket', 2 => 'Pharmacy' }
+  enum store_type: { 'Supermarket': 1, 'Pharmacy': 2 }
 
   validates :capacity, allow_nil: true, numericality: { greater_than: 0 }
 
   # after_validation :reverse_geocode
   # after_validation :geocode
+  before_save :set_lonlat, if: -> { latitude_changed? || longitude_changed? }
+
+  private
 
   def address
     [street, city].compact.join(',')
@@ -50,5 +54,12 @@ class Store < ApplicationRecord
 )))
 SQL
     ActiveRecord::Base.connection.execute(query)
+  end
+    
+  # x: longitude
+  # y: latitude
+  def set_lonlat
+    self.lonlat = Store.select("ST_MakePoint(#{longitude}, #{latitude}) AS point")
+      .limit(1).first&.point
   end
 end

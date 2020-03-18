@@ -5,7 +5,7 @@ module Api
       caching
 
       attributes :name, :group, :address, :coordinates, :capacity,
-                 :details, :store_type
+                 :details, :store_type, :lonlat
 
       filters :location
 
