@@ -40,7 +40,11 @@ class Store < ApplicationRecord
   # x: longitude
   # y: latitude
   def set_lonlat
-    self.lonlat = Store.select("ST_MakePoint(#{longitude}, #{latitude}) AS point")
-      .limit(1).first&.point
+    self.lonlat = if latitude && longitude
+                    Store.select("ST_MakePoint(#{longitude}, #{latitude}) AS point")
+                      .limit(1).first&.point
+                  else
+                    nil
+                  end
   end
 end
