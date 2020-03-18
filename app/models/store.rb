@@ -17,6 +17,7 @@
 #  store_type :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  lonlat     :geometry         point, 0
 #
 class Store < ApplicationRecord
   # geocoded_by :address
