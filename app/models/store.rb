@@ -20,6 +20,9 @@
 #  lonlat     :geometry         point, 0
 #
 class Store < ApplicationRecord
+  RADIUS = 5000
+  PROJECTION = 4326
+
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
@@ -29,10 +32,23 @@ class Store < ApplicationRecord
 
   # after_validation :reverse_geocode
   # after_validation :geocode
-  before_save :set_lonlat, if: -> { latitude_changed? || longitude_changed? }
+  after_save :set_lonlat
 
   def address
     [street, city].compact.join(',')
+  end
+
+  def self.retrieve_stores(lat, lon)
+    query = <<~SQL
+ST_CONTAINS(
+  ST_BUFFER(
+    ST_SetSRID(
+      ST_MakePoint(#{lon}, #{lat}), 4326)::geography,
+    #{RADIUS})::geometry,
+    lonlat)
+SQL
+
+    Store.where(query)
   end
 
   private
@@ -40,11 +56,13 @@ class Store < ApplicationRecord
   # x: longitude
   # y: latitude
   def set_lonlat
-    self.lonlat = if latitude && longitude
-                    Store.select("ST_MakePoint(#{longitude}, #{latitude}) AS point")
-                      .limit(1).first&.point
-                  else
-                    nil
-                  end
+    return unless persisted? && latitude.present? && longitude.present?
+
+    sql = <<~SQL
+UPDATE stores
+SET lonlat = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326)
+WHERE id = #{id}
+    SQL
+    ActiveRecord::Base.connection.execute sql
   end
 end
