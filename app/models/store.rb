@@ -28,8 +28,20 @@ class Store < ApplicationRecord
 
   # after_validation :reverse_geocode
   # after_validation :geocode
+  before_save :set_lonlat
+
+  private
 
   def address
     [street, city].compact.join(',')
+  end
+
+  # x: longitude
+  # y: latitude
+  def set_lonlat
+    return unless latitude && longitude
+
+    self.lonlat = Store.select("ST_MakePoint(#{longitude}, #{latitude}) AS point")
+      .limit(1).first.point
   end
 end
