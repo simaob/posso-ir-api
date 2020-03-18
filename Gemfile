@@ -24,6 +24,7 @@ gem 'geocoder'
 gem 'jsonapi-resources'
 gem 'rack-cors'
 gem 'dotenv-rails'
+gem 'activerecord-postgis-adapter'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

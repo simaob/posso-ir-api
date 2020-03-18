@@ -45,6 +45,9 @@ GEM
     activerecord (6.0.2.1)
       activemodel (= 6.0.2.1)
       activesupport (= 6.0.2.1)
+    activerecord-postgis-adapter (6.0.0)
+      activerecord (~> 6.0)
+      rgeo-activerecord (~> 6.0)
     activestorage (6.0.2.1)
       actionpack (= 6.0.2.1)
       activejob (= 6.0.2.1)
@@ -238,6 +241,10 @@ GEM
       resque (>= 1.26)
       rufus-scheduler (~> 3.2)
     rexml (3.2.4)
+    rgeo (2.1.1)
+    rgeo-activerecord (6.2.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
     rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -323,6 +330,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgis-adapter
   annotate
   bootsnap (>= 1.4.2)
   byebug
