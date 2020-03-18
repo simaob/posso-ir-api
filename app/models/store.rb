@@ -23,13 +23,13 @@ class Store < ApplicationRecord
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
-  enum store_type: { 1 => 'Supermarket', 2 => 'Pharmacy' }
+  enum store_type: { 'Supermarket': 1, 'Pharmacy': 2 }
 
   validates :capacity, allow_nil: true, numericality: { greater_than: 0 }
 
   # after_validation :reverse_geocode
   # after_validation :geocode
-  before_save :set_lonlat
+  before_save :set_lonlat, if: -> { latitude_changed? || longitude_changed? }
 
   private
 
@@ -40,8 +40,6 @@ class Store < ApplicationRecord
   # x: longitude
   # y: latitude
   def set_lonlat
-    return unless latitude && longitude
-
     self.lonlat = Store.select("ST_MakePoint(#{longitude}, #{latitude}) AS point")
       .limit(1).first&.point
   end
