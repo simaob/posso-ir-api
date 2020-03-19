@@ -10,6 +10,19 @@ class ApiController < ApplicationController
   private
 
   def authenticate_with_jwt!
-    warden.authenticate!(:jwt)
+    begin
+      payload = JwtService.decode(token: token)
+      if DateTime.parse(payload['expiration_date']) <= DateTime.now
+        render json: {error: 'Auth token has expired. Please login again'}, status: 401
+      else
+        @current_user = User.find_or_create_by(app_uuid: payload['uuid'])
+      end
+    rescue
+      render json: {error: 'not authorized'}, status: 401
+    end
+  end
+
+  def token
+    request.headers.fetch('Authorization', '').split(' ').last
   end
 end
