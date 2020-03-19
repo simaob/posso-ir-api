@@ -12,7 +12,15 @@
 #  updated_at   :datetime         not null
 #  store_id     :bigint
 #
-class Status < ApplicationRecord
+module Api
+  module V1
+    class StatusCrowdsourceResource < ApplicationResource
+      immutable
 
-  validates_presence_of :updated_time
+      attributes :id, :updated_time, :valid_until, :status,
+      :queue, :store_id
+
+      filter :store_id
+    end
+  end
 end

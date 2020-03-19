@@ -6,7 +6,7 @@
 #  updated_time :datetime         not null
 #  valid_until  :datetime
 #  status       :integer
-#  queue_status :integer
+#  queue        :integer
 #  type         :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
