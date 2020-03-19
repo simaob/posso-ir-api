@@ -23,6 +23,8 @@ class Store < ApplicationRecord
   RADIUS = 5000
   PROJECTION = 4326
 
+  has_many :status_crowdsources
+
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
@@ -33,6 +35,7 @@ class Store < ApplicationRecord
   # after_validation :reverse_geocode
   # after_validation :geocode
   after_save :set_lonlat
+  after_create :create_crowdsource_status
 
   def address
     [street, city].compact.join(',')
@@ -73,5 +76,12 @@ SET lonlat = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326)
 WHERE id = #{id}
     SQL
     ActiveRecord::Base.connection.execute sql
+  end
+
+  def create_crowdsource_status
+    status = StatusCrowdsourceUser.where(store_id: id).first
+    return if status
+
+    StatusCrowdsource.create(store_id: id, updated_time: Time.now)
   end
 end

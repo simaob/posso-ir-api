@@ -13,5 +13,5 @@
 #  store_id     :bigint
 #
 class StatusCrowdsource < Status
-
+  has_many :status_crowdsource_users
 end
