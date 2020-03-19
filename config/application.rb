@@ -25,7 +25,11 @@ module Covid19ShoppingAssistant
       logger: (-> { Rails.logger }) do
       allow do
         origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :patch, :delete, :options]
+        resource '/api/*',
+          headers: %w(Authorization),
+          methods: :any,
+          expose: %w(Authorization),
+          max_age: 600
       end
     end
 
@@ -37,6 +41,7 @@ module Covid19ShoppingAssistant
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.i18n.default_locale = :pt
+    config.i18n.available_locales = [:pt, :es, :en]
 
     config.generators do |g|
       g.stylesheets false
