@@ -5,7 +5,8 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.order(:group, :name).page(params[:page])
+    @stores = Store.order(:group, :name).search(params[:search])
+      .page(params[:page])
   end
 
   # GET /stores/1

@@ -27,6 +27,14 @@ class User < ApplicationRecord
   end
   validates_uniqueness_of :email
 
+  def self.search(search)
+    return all unless search
+
+    where('name ilike ? OR email ilike ? OR app_uuid ilike ?',
+          "%#{search}%", "%#{search}%",
+          "%#{search}%")
+  end
+
   protected
 
   # Checks whether a password is needed or not. For validations only.

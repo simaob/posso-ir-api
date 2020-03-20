@@ -48,3 +48,11 @@ pt:
       previous: "&lsaquo; Anterior"
       next: "Seguinte &rsaquo;"
       truncate: "&hellip;"
+    stores:
+      search:
+        placeholder: 'Procure por nome ou morada...'
+        button: 'Procurar'
+    users:
+      search:
+        placeholder: 'Procure por nome ou morada...'
+        button: 'Procurar'

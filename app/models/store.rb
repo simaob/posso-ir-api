@@ -38,6 +38,15 @@ class Store < ApplicationRecord
     [street, city].compact.join(',')
   end
 
+  def self.search(search)
+    return all unless search
+
+    where('name ilike ? OR "group" ilike ? OR street ilike ? OR district ilike ? OR city ilike ?',
+          "%#{search}%", "%#{search}%",
+          "%#{search}%", "%#{search}%",
+          "%#{search}%")
+  end
+
   def self.retrieve_stores(lat, lon)
     query = <<~SQL
 ST_CONTAINS(
