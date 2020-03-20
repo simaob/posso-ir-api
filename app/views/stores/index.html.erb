@@ -42,12 +42,10 @@
         <td><%= store.details %></td>
         <td>
           <%= link_to I18n.t('views.actions.show'), store %>
-          <% if current_user&.admin? %>
-            |
-            <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
-            |
-            <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
-          <% end %>
+          |
+          <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
+          |
+          <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
       </tr>
     <% end %>
   </tbody>
