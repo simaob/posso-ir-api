@@ -18,7 +18,7 @@ module Api
       immutable
 
       attributes :id, :updated_time, :valid_until, :status,
-      :queue, :store_id
+                 :queue, :store_id
 
       filter :store_id
     end
