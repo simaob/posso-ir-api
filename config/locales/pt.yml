@@ -7,20 +7,20 @@ pt:
       user:
         one: 'Utilizador'
         other: 'Utilizadores'
-      attributes:
-        store:
-          name: 'Nome'
-          group: 'Grupo'
-          street: 'Morada'
-          city: 'Cidade'
-          district: 'Distrito'
-          country: 'País'
-          zip_code: 'Código Postal'
-          latitude: 'Latitude'
-          longitude: 'Longitude'
-          capacity: 'Capacidade'
-          details: 'Detalhes'
-          store_type: 'Tipo de loja'
+    attributes:
+      store:
+        name: 'Nome'
+        group: 'Grupo'
+        street: 'Morada'
+        city: 'Cidade'
+        district: 'Distrito'
+        country: 'País'
+        zip_code: 'Código Postal'
+        latitude: 'Latitude'
+        longitude: 'Longitude'
+        capacity: 'Capacidade'
+        details: 'Detalhes'
+        store_type: 'Tipo de loja'
   views:
     layout:
       application:
