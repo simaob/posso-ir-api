@@ -1,5 +1,36 @@
 pt:
+  activerecord:
+    models:
+      store:
+        one: 'Loja'
+        other: 'Lojas'
+      user:
+        one: 'Utilizador'
+        other: 'Utilizadores'
+      attributes:
+        store:
+          name: 'Nome'
+          group: 'Grupo'
+          street: 'Morada'
+          city: 'Cidade'
+          district: 'Distrito'
+          country: 'País'
+          zip_code: 'Código Postal'
+          latitude: 'Latitude'
+          longitude: 'Longitude'
+          capacity: 'Capacidade'
+          details: 'Detalhes'
+          store_type: 'Tipo de loja'
   views:
     layout:
       application:
-        title: 'Estabelecimentos Comerciais'
+        title: 'Posso Ir'
+    actions:
+      show: 'Ver'
+      edit: 'Editar'
+      destroy: 'Remover'
+      title: 'Ações'
+    shared:
+      navbar:
+        current: 'Actual'
+        logout: 'Terminar sessão'
