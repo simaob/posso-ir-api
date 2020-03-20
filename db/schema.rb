@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_173857) do
+ActiveRecord::Schema.define(version: 2020_03_20_211910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2020_03_19_173857) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "store_id"
     t.bigint "user_id"
+    t.index ["created_at"], name: "index_status_crowdsource_users_on_created_at"
+    t.index ["posted_at"], name: "index_status_crowdsource_users_on_posted_at"
     t.index ["store_id"], name: "index_status_crowdsource_users_on_store_id"
     t.index ["user_id"], name: "index_status_crowdsource_users_on_user_id"
   end
@@ -55,12 +57,17 @@ ActiveRecord::Schema.define(version: 2020_03_19_173857) do
   create_table "statuses", force: :cascade do |t|
     t.datetime "updated_time", null: false
     t.datetime "valid_until"
-    t.integer "status"
+    t.float "status"
     t.integer "queue"
     t.string "type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "store_id"
+    t.float "previous_status"
+    t.float "previous_queue"
+    t.datetime "previous_updated_time"
+    t.integer "voters"
+    t.integer "previous_voters"
     t.index ["store_id"], name: "index_statuses_on_store_id"
   end
 
