@@ -8,6 +8,10 @@ class ApiController < ApplicationController
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
+  def context
+    { current_user: current_user }
+  end
+
   private
 
   def authenticate_with_jwt!
@@ -21,6 +25,12 @@ class ApiController < ApplicationController
     rescue
       render json: {error: 'not authorized'}, status: 401
     end
+  end
+
+  def current_user
+    @current_user ||= User.find_by(app_uuid: JwtService.decode(token: token)['uuid'])
+  rescue StandardError
+    @current_user = nil
   end
 
   def token

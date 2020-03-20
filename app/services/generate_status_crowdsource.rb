@@ -1,0 +1,18 @@
+class GenerateStatusCrowdsource
+  def call
+    generates_statuses
+  end
+
+  private
+
+  # TODO: Not optimized at all. It's just code that's fast to write and slow to execute
+  # but I don't care cause it's a "run once" task
+  def generates_statuses
+    Store.find_each.with_index do |store, index|
+      puts "Imported #{index}" if (index % 100).zero?
+      next if store.status_crowdsources.any?
+
+      StatusCrowdsource.create!(store_id: store.id, updated_time: Time.now)
+    end
+  end
+end
