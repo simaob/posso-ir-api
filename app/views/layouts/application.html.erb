@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
-		<title><%= I18n.t('views.layout.application.title') %></title>
+		<title><%= [yield(:page_title), I18n.t('views.layout.application.title')].compact.join(' | ') %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,9 +13,13 @@
   </head>
 
   <body>
-		<%= render 'shared/nav' %>
-		<main role="main" class="container">
-      <%= yield %>
+    <header>
+      <%= render 'shared/nav' %>
+    </header>
+    <main role="main" class="flex-shrink-0">
+      <div class="container">
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

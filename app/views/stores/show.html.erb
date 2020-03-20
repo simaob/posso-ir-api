@@ -1,12 +1,13 @@
-
-  <% content_for :page_title, @store.name.titleize %>
-
+ <% content_for :page_title, @store.name.titleize %>
 <% content_for :actions do %>
   <%= link_to(I18n.t('views.actions.edit'), edit_store_path(@store),
     class: 'btn btn-sm btn-outline-primary')
     .concat(link_to(I18n.t('views.actions.back'), stores_path,
     class: 'btn btn-sm btn-outline-secondary')) %>
 <% end %>
+
+<h1 class="mt-5"><%= [@store.name, @store.city].compact.join(' - ') %></h1>
+
 <p>
   <strong><%= Store.human_attribute_name(:name) %>:</strong>
   <%= @store.name %>

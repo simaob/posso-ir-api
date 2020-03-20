@@ -4,6 +4,8 @@
     class: 'btn btn-sm btn-outline-primary' %>
 <% end %>
 
+<h1 class="mt-5"><%= Store.model_name.human(count: 2) %></h1>
+
 <table class="table table-sm">
   <thead>
     <tr>
@@ -32,10 +34,12 @@
         <td><%= store.details %></td>
         <td>
           <%= link_to I18n.t('views.actions.show'), store %>
-          |
-          <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
-          |
-          <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+          <% if current_user&.admin? %>
+            |
+            <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
+            |
+            <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+          <% end %>
       </tr>
     <% end %>
   </tbody>
