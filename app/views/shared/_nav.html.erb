@@ -33,6 +33,11 @@
           <%= link_to I18n.t('views.shared.navbar.logout'), destroy_user_session_path,
             method: :delete, class: 'nav-link' %>
         </li>
+      <% else %>
+        <li class="nav-item text-nowrap">
+          <%= link_to I18n.t('views.shared.navbar.login'), new_user_session_path,
+            class: 'nav-link' %>
+        </li>
       <% end %>
     </ul>
 	</div>

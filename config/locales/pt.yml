@@ -30,7 +30,15 @@ pt:
       edit: 'Editar'
       destroy: 'Remover'
       title: 'Ações'
+      new: 'Adicionar'
     shared:
       navbar:
         current: 'Actual'
         logout: 'Terminar sessão'
+        login: 'Iniciar sessão'
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Seguinte &rsaquo;"
+      truncate: "&hellip;"
