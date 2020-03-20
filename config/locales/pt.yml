@@ -21,6 +21,12 @@ pt:
         capacity: 'Capacidade'
         details: 'Detalhes'
         store_type: 'Tipo de loja'
+      user:
+        email: 'Email'
+        name: 'Nome'
+        admin: 'Administrador'
+        app_uuid: 'UUID'
+
   views:
     layout:
       application:

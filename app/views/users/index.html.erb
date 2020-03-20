@@ -1,8 +1,14 @@
 <% content_for :page_title, User.model_name.human(count: 2) %>
-<% content_for :actions do %>
-  <%= link_to I18n.t('views.actions.new'), new_user_path,
-    class: 'btn btn-sm btn-outline-primary' %>
-<% end %>
+
+<div class="row mt-5">
+  <div class="col-md-11">
+    <h1><%= User.model_name.human(count: 2) %></h1>
+  </div>
+  <div class="col-md-1">
+    <%= link_to I18n.t('views.actions.new'), new_user_path,
+      class: 'btn btn-sm btn-outline-primary' %>
+  </div>
+</div>
 
 <table class="table">
   <thead>
@@ -10,6 +16,7 @@
       <th><%= User.human_attribute_name(:name) %></th>
       <th><%= User.human_attribute_name(:email) %></th>
       <th><%= User.human_attribute_name(:admin) %></th>
+      <th><%= User.human_attribute_name(:app_uuid) %></th>
       <th><%= I18n.t('views.actions.title') %></th>
     </tr>
   </thead>
@@ -20,6 +27,7 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.admin %></td>
+        <td><%= user.app_uuid %></td>
         <td>
           <%= link_to I18n.t('views.actions.show'), user %>
           |
