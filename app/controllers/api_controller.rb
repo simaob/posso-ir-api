@@ -1,6 +1,7 @@
 class ApiController < ApplicationController
   include JSONAPI::ActsAsResourceController
 
+  skip_before_action :authenticate_user!
   before_action :authenticate_with_jwt!
 
   # Prevent CSRF attacks by raising an exception.
