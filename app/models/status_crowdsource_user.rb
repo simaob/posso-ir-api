@@ -13,4 +13,6 @@
 #
 class StatusCrowdsourceUser < ApplicationRecord
   belongs_to :user
+
+  validates :status, :inclusion => 0..10
 end
