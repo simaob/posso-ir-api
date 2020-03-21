@@ -158,7 +158,7 @@ class ImportStores
         street: row['address'],
         zip_code: row['postal_code'],
         latitude: row['lat'],
-        longitude: row['lng'],
+        longitude: row['long'],
         store_type: 1
       )
     end
