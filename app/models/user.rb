@@ -25,7 +25,7 @@ class User < ApplicationRecord
     admin.validates_confirmation_of :password, if: :password_required?
     admin.validates_length_of :password, within: 6..128, allow_blank: true
   end
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, unless: Proc.new { |u| u.email.blank? }
 
   def self.search(search)
     return all unless search
