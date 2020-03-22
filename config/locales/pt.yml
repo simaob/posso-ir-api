@@ -37,6 +37,8 @@ pt:
       destroy: 'Remover'
       title: 'Ações'
       new: 'Adicionar'
+    edit:
+      title: "Editando %{resource}"
     shared:
       navbar:
         current: 'Actual'
