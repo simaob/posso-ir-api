@@ -2,7 +2,7 @@ require 'benchmark'
 namespace :status_crowdsource do
   desc 'Generate a crowdsource_status for all the existing stores'
   task generate: :environment do
-    puts "Going to generate the statuses"
+    puts "[#{Time.now}] Going to generate the statuses"
     duration = Benchmark.ms do
       GenerateStatusCrowdsource.new.call
     end
