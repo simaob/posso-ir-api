@@ -32,6 +32,8 @@ class Store < ApplicationRecord
 
   validates :capacity, allow_nil: true, numericality: { greater_than: 0 }
 
+  scope :by_group, ->(group) { where(group: group) }
+
   # after_validation :reverse_geocode
   # after_validation :geocode
   after_save :set_lonlat
@@ -41,13 +43,17 @@ class Store < ApplicationRecord
     [street, city].compact.join(',')
   end
 
+  def self.groups
+    select(:group).order(:group).distinct.pluck(:group)
+  end
+
   def self.search(search)
     return all unless search
 
-    where('name ilike ? OR "group" ilike ? OR street ilike ? OR district ilike ? OR city ilike ?',
+    where('name ilike ? OR street ilike ? OR district ilike ? OR city ilike ?',
           "%#{search}%", "%#{search}%",
-          "%#{search}%", "%#{search}%",
-          "%#{search}%")
+          "%#{search}%", "%#{search}%")
+
   end
 
   def self.retrieve_stores(lat, lon)
