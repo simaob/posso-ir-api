@@ -13,6 +13,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  app_uuid               :string
+#  last_post              :datetime
 #
 require 'test_helper'
 
