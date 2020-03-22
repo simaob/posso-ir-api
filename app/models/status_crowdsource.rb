@@ -28,9 +28,9 @@ class StatusCrowdsource < Status
   }.freeze
 
   TIME_PARAMS = {
-    first: 10,
-    second: 20,
-    third: 30
+    first: 11,
+    second: 22,
+    third: 33
   }.freeze
 
   def calculate_status
@@ -72,7 +72,7 @@ class StatusCrowdsource < Status
   def new_votes
     StatusCrowdsourceUser
       .where(store_id: store_id)
-      .where("created_at > '#{ Time.now - TIME_PARAMS[:first] }'")
+      .where("created_at > '#{ Time.now - TIME_PARAMS[:first].minutes }'")
   end
 
 
