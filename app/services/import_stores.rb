@@ -302,7 +302,7 @@ class ImportStores
         street: row['address'],
         zip_code: nil,
         latitude: row['lat'],
-        longitude: row['long'],
+        longitude: row['lng'],
         store_type: 1
       )
     end
