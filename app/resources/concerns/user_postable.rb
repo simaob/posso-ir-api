@@ -11,7 +11,7 @@ module UserPostable
     return if current_user.last_post.nil?
     return if current_user.last_post.utc < (Time.now.utc - USER_INTERVAL.minutes)
 
-    render json: { error: 'Too many requests' }, status: 429
+    raise TooManyRequestsError
   end
 
   def update_user_time

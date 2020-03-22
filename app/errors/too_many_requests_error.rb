@@ -1,0 +1,3 @@
+class TooManyRequestsError < StandardError
+
+end
