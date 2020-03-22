@@ -1,19 +1,68 @@
 class ImportStores
   def all
     cleanup
+    import_aldi
+    import_apolonia
     import_auchan
     import_continente
     import_corte_ingles
+    import_coviran
+    import_eleclerc
+    import_froiz
     import_intermarche
     import_lidl
     import_mercadona
     import_minipreco
     import_pingodoce
+    import_spar
     puts "#{Store.count} total stores"
   end
 
   def cleanup
     Store.delete_all
+  end
+
+  def import_aldi
+    puts "Starting Aldi, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'aldi.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file).each do |key, row|
+      row = row.first
+      Store.create(
+        name: row['name'],
+        group: 'Aldi',
+        country: 'PT',
+        city: row['addressLocality'],
+        district: key,
+        zip_code: row['postalCode'],
+        street: row['address'],
+        latitude: nil,
+        longitude: nil,
+        store_type: 1
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_apolonia
+    puts "Starting Apolonia, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'apolonia.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file)['stores'].each do |row|
+      Store.create(
+        name: row['name'],
+        group: 'Apolónia',
+        country: 'PT',
+        city: row['name'].split(' ').last,
+        district: nil,
+        zip_code: nil,
+        street: row['address'],
+        latitude: row['lat'],
+        longitude: row['lng'],
+        store_type: 1
+      )
+    end
+    puts "#{Store.count} total stores"
   end
 
   def import_auchan
@@ -68,6 +117,72 @@ class ImportStores
         latitude: nil,
         longitude: nil,
         details: row['time'],
+        store_type: 1
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_coviran
+    puts "Starting Coviran, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'coviran.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file)['stores'].each do |row|
+      city = row['address'].split(',')[1].strip.titleize
+      Store.create(
+        name: [row['title'], city].join(' - '),
+        group: 'Coviran',
+        country: 'PT',
+        city: city,
+        district: nil,
+        zip_code: nil,
+        street: row['address'].split(',').map(&:strip).join(','),
+        latitude: row['lat'],
+        longitude: row['lng'],
+        store_type: 1
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_eleclerc
+    puts "Starting Eleclerc, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'eleclerc.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file)['locations'].each do |row|
+      Store.create(
+        name: "Eleclerc #{row[0]}",
+        group: 'Eleclerc',
+        country: 'PT',
+        city: row[0].gsub('Hipermercado', '').strip.titleize,
+        district: nil,
+        zip_code: nil,
+        street: nil,
+        latitude: row[1],
+        longitude: row[2],
+        details: row.last,
+        store_type: 1
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_froiz
+    puts "Starting Froiz, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'froiz.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file)['stores']['marker'].each do |row|
+      Store.create(
+        name: "Froiz #{row['-direccion'].split(' - ')[row['-direccion'].size-2]}",
+        group: 'Froiz',
+        country: 'PT',
+        city: row['-direccion'].split(' - ').last,
+        district: nil,
+        zip_code: nil,
+        street: nil,
+        latitude: row['-lat'],
+        longitude: row['-lng'],
+        details: [row['-horario'], row['horariodom']].compact.join(' | '),
         store_type: 1
       )
     end
@@ -166,6 +281,26 @@ class ImportStores
         city: row['county'],
         street: row['address'],
         zip_code: row['postal_code'],
+        latitude: row['lat'],
+        longitude: row['long'],
+        store_type: 1
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_spar
+    puts "Starting Spar, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'spar.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file)['1'].each do |key, row|
+      Store.create(
+        name: row['title'],
+        group: 'Spar',
+        country: 'PT',
+        city: nil,
+        street: row['address'],
+        zip_code: nil,
         latitude: row['lat'],
         longitude: row['long'],
         store_type: 1

@@ -8,6 +8,14 @@ namespace :stores do
     ImportStores.new.cleanup
   end
 
+  task aldi: :environment do
+    ImportStores.new.import_aldi
+  end
+
+  task apolonia: :environment do
+    ImportStores.new.import_apolonia
+  end
+
   task auchan: :environment do
     ImportStores.new.import_auchan
   end
@@ -18,6 +26,18 @@ namespace :stores do
 
   task corte_ingles: :environment do
     ImportStores.new.import_corte_ingles
+  end
+
+  task coviran: :environment do
+    ImportStores.new.import_coviran
+  end
+
+  task eleclerc: :environment do
+    ImportStores.new.import_eleclerc
+  end
+
+  task froiz: :environment do
+    ImportStores.new.import_froiz
   end
 
   task intermarche: :environment do
@@ -38,5 +58,9 @@ namespace :stores do
 
   task pingo_doce: :environment do
     ImportStores.new.import_pingo_doce
+  end
+
+  task spar: :environment do
+    ImportStores.new.import_spar
   end
 end
