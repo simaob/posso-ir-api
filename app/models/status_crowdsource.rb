@@ -35,25 +35,27 @@ class StatusCrowdsource < Status
 
   def calculate_status
     new_voters_status = new_votes
-    new_voters = new_voters_status.count
     # If there's no new data, nothing is updated
-    return if new_votes.none?
+    return if new_voters_status.none?
+
+    new_voters = new_voters_status.count
+    new_voters_status = new_voters_status.pluck(:status).reduce(:+).to_f / new_voters
 
     voters_valid = TimeHelper.valid?(updated_time, TIME_PARAMS[:second])
-    old_voters_valid = TimeHelper.valid?(previous_updated_time, TIME_PARAMS[:third])
+    previous_voters_valid = TimeHelper.valid?(previous_updated_time, TIME_PARAMS[:third])
 
     new_average_weighted = STATUS_PARAMS[:weight_now] * new_voters_status * new_voters rescue 0
     average_weighted = STATUS_PARAMS[:weight_before] * status * voters * voters_valid rescue 0
-    old_average_weighted = STATUS_PARAMS[:weight_long_before] * previous_status * previous_voters * old_voters_valid rescue 0
+    old_average_weighted = STATUS_PARAMS[:weight_long_before] * previous_status * previous_voters * previous_voters_valid rescue 0
+
+    new_voters_weighted = new_voters * STATUS_PARAMS[:weight_now] rescue 0
+    voters_weighted = voters * STATUS_PARAMS[:weight_before] * voters_valid rescue 0
+    old_voters_weighted = old_voters * STATUS_PARAMS[:weight_long_before] * previous_voters_valid rescue 0
 
     begin
       new_status =
-        (new_average_weighted + average_weighted + old_average_weighted) / (
-          (new_voters * STATUS_PARAMS[:weight_now]) +
-          (voters * STATUS_PARAMS[:weight_before] * voters_valid) +
-          (old_voters * STATUS_PARAMS[:weight_long_before] * old_voters_valid)
-        )
-    rescue
+        (new_average_weighted + average_weighted + old_average_weighted) / (new_voters_weighted + voters_weighted + old_voters_weighted)
+    rescue Exception => e
       new_status = nil
     end
 
@@ -64,7 +66,7 @@ class StatusCrowdsource < Status
       previous_status: status,
       previous_voters: voters,
       previous_updated_time: updated_time
-    )
+    ) if new_status
   end
 
   private
@@ -72,7 +74,8 @@ class StatusCrowdsource < Status
   def new_votes
     StatusCrowdsourceUser
       .where(store_id: store_id)
-      .where("created_at > '#{ Time.now - TIME_PARAMS[:first].minutes }'")
+      .where("created_at > '#{ (Time.now - TIME_PARAMS[:first].minutes).utc.to_s(:db) }'")
+      .where.not(status: nil)
   end
 
 
