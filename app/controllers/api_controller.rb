@@ -1,6 +1,8 @@
 class ApiController < ApplicationController
   include JSONAPI::ActsAsResourceController
 
+  rescue_from TooManyRequestsError, with: :too_many_requests
+
   skip_before_action :authenticate_user!
   before_action :authenticate_with_jwt!
 
@@ -35,5 +37,9 @@ class ApiController < ApplicationController
 
   def token
     request.headers.fetch('Authorization', '').split(' ').last
+  end
+
+  def too_many_requests
+    render json: { error: 'Too many requests' }, status: 429
   end
 end
