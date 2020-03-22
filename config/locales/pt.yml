@@ -42,6 +42,8 @@ pt:
         current: 'Actual'
         logout: 'Terminar sessão'
         login: 'Iniciar sessão'
+    form:
+      submit: 'Enviar'
     pagination:
       first: "&laquo; Primeira"
       last: "Última &raquo;"
