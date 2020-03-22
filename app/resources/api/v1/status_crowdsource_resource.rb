@@ -15,6 +15,7 @@
 module Api
   module V1
     class StatusCrowdsourceResource < ApplicationResource
+      MAX_STORES = 2
       immutable
 
       attributes :id, :updated_time, :valid_until, :status,
@@ -29,6 +30,11 @@ module Api
       def queue
         @model.queue.nil? ? -1 : @model.queue
       end
+
+      filter :store_id, apply: ->(records, value, _options) {
+        value = value[0...MAX_STORES]
+        records.where(store_id: value)
+      }
     end
   end
 end
