@@ -58,5 +58,5 @@ pt:
         button: 'Procurar'
     users:
       search:
-        placeholder: 'Procure por nome ou morada...'
+        placeholder: 'Procure por nome ou email...'
         button: 'Procurar'
