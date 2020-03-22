@@ -11,7 +11,7 @@
   <%= text_field_tag :search, params[:search], class: 'form-control col-md-6 mb-2 mr-sm-2',
     placeholder: I18n.t('views.stores.search.placeholder') %>
   <%= label_tag :group, 'Group', class: 'sr-only' %>
-  <%= select_tag :group, options_for_select(Store.groups, params[:group]), class: 'form-control col-md-4 mb-2 mr-sm-2' %>
+  <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: true, class: 'form-control col-md-4 mb-2 mr-sm-2'} %>
   <%= submit_tag I18n.t('views.stores.search.button'),
     class: 'btn btn-primary mb-2' %>
 <% end %>
