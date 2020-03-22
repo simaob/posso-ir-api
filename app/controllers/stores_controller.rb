@@ -4,8 +4,13 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.order(:group, :name).search(params[:search])
-      .page(params[:page])
+    @stores = Store.search(params[:search])
+
+    if params[:no_info]
+      @stores = @stores.where(latitude: nil).or(Store.where(longitude: nil))
+    end
+
+    @stores = @stores.order(:group, :name).page(params[:page])
   end
 
   # GET /stores/1
