@@ -20,6 +20,7 @@
 #  lonlat     :geometry         point, 0
 #
 class Store < ApplicationRecord
+  paginate_per 50
   RADIUS = 5000
   PROJECTION = 4326
 
