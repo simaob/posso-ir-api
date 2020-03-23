@@ -15,7 +15,7 @@
 module Api
   module V1
     class StatusCrowdsourceResource < ApplicationResource
-      MAX_STORES = 50
+      MAX_STORES = 100
       immutable
 
       attributes :id, :updated_time, :valid_until, :status,
