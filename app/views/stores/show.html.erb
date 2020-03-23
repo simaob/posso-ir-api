@@ -14,8 +14,13 @@
 </p>
 
 <p>
+  <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
+  <%= @store.store_type %>
+</p>
+
+<p>
   <strong><%= Store.human_attribute_name(:group) %>:</strong>
-  <%= @store.group %>
+  <%= link_to @store.group, stores_path(group: @store.group) %>
 </p>
 
 <p>
@@ -24,8 +29,23 @@
 </p>
 
 <p>
+  <strong><%= Store.human_attribute_name(:zip_code) %>:</strong>
+  <%= @store.zip_code %>
+</p>
+
+<p>
   <strong><%= Store.human_attribute_name(:city) %>:</strong>
   <%= @store.city %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:district) %>:</strong>
+  <%= @store.district %>
+</p>
+
+<p>
+  <strong><%= Store.human_attribute_name(:country) %>:</strong>
+  <%= @store.country %>
 </p>
 
 <p>
