@@ -1,12 +1,16 @@
 
-  <% content_for :page_title, @user.name.titleize %>
+<% content_for :page_title, @user.name.titleize %>
 
-<% content_for :actions do %>
-  <%= link_to(I18n.t('views.actions.edit'), edit_user_path(@user),
-    class: 'btn btn-sm btn-outline-primary')
-    .concat(link_to(I18n.t('views.actions.back'), users_path,
-    class: 'btn btn-sm btn-outline-secondary')) %>
-<% end %>
+<div class="row mt-5">
+  <div class="col-md-11">
+    <h1><%= @user.name.presence || @user.email.presence || @user.app_uuid %></h1>
+  </div>
+  <div class="col-md-1">
+    <%= link_to I18n.t('views.actions.edit'), edit_user_path(@user),
+      class: 'btn btn-sm btn-outline-primary' %>
+  </div>
+</div>
+
 <p>
   <strong><%= User.human_attribute_name(:name) %>:</strong>
   <%= @user.name %>
@@ -18,7 +22,11 @@
 </p>
 
 <p>
-  <strong><%= User.human_attribute_name(:admin) %>:</strong>
-  <%= @user.admin %>
+  <strong><%= User.human_attribute_name(:role) %>:</strong>
+  <%= enum_l(@user, :role) %>
 </p>
 
+<p>
+  <strong><%= User.human_attribute_name(:app_uuid) %>:</strong>
+  <%= @user.app_uuid %>
+</p>

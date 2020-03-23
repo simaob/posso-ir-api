@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
   validates_uniqueness_of :email, unless: Proc.new { |u| u.email.blank? }
 
-  enum role: { 'store_manager': 1, 'general_manager': 2, 'admin': 3 }
+  enum role: { 'user': 0, 'store_manager': 1, 'general_manager': 2, 'admin': 3 }
 
   def self.search(search)
     return all unless search

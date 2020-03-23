@@ -23,7 +23,7 @@
     <tr>
       <th><%= User.human_attribute_name(:name) %></th>
       <th><%= User.human_attribute_name(:email) %></th>
-      <th><%= User.human_attribute_name(:admin) %></th>
+      <th><%= User.human_attribute_name(:role) %></th>
       <th><%= User.human_attribute_name(:app_uuid) %></th>
       <th><%= I18n.t('views.actions.title') %></th>
     </tr>
@@ -34,7 +34,7 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.admin %></td>
+        <td><%= enum_l(user, :role) %></td>
         <td><%= user.app_uuid %></td>
         <td>
           <%= link_to I18n.t('views.actions.show'), user %>
