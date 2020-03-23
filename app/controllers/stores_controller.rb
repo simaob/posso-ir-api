@@ -5,7 +5,7 @@ class StoresController < ApplicationController
   # GET /stores.json
   def index
     @stores = Store.search(params[:search])
-    @stores = Store.by_group(params[:group]) if params[:group].present?
+    @stores = @stores.by_group(params[:group]) if params[:group].present?
 
     if params[:no_info]
       @stores = @stores.where(latitude: nil).or(Store.where(longitude: nil))
