@@ -75,4 +75,6 @@ gem 'devise-i18n'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'jwt'
 gem 'kaminari'
+
+# used to decode html in some imported strings
 gem 'htmlentities'
