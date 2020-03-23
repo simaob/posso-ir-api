@@ -4,7 +4,15 @@
     class: 'btn btn-sm btn-outline-primary' %>
 <% end %>
 
-<h1 class="mt-5"><%= Store.model_name.human(count: 2) %></h1>
+<div class="row mt-5">
+  <div class="col-md-11">
+    <h1><%= Store.model_name.human(count: 2) %></h1>
+  </div>
+  <div class="col-md-1">
+    <%= link_to I18n.t('views.actions.new'), new_store_path,
+      class: 'btn btn-sm btn-outline-primary' %>
+  </div>
+</div>
 
 <%= form_tag stores_path, method: :get, class: 'form-inline' do %>
   <%= label_tag :search, 'Search', class: 'sr-only' %>
