@@ -6,7 +6,6 @@
 #  email                  :string           default("")
 #  encrypted_password     :string           default("")
 #  name                   :string
-#  admin                  :boolean
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -14,6 +13,7 @@
 #  updated_at             :datetime         not null
 #  app_uuid               :string
 #  last_post              :datetime
+#  role                   :integer
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -27,6 +27,8 @@ class User < ApplicationRecord
     admin.validates_length_of :password, within: 6..128, allow_blank: true
   end
   validates_uniqueness_of :email, unless: Proc.new { |u| u.email.blank? }
+
+  enum role: { 'store_manager': 1, 'general_manager': 2, 'admin': 3 }
 
   def self.search(search)
     return all unless search
