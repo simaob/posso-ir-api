@@ -1,5 +1,5 @@
 class StoresController < ApplicationController
-  before_action :set_store, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /stores
   # GET /stores.json
@@ -69,15 +69,11 @@ class StoresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_store
-      @store = Store.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def store_params
-      params.require(:store).permit(:name, :group, :street, :city,
-                                    :zip_code, :country, :district, :store_type,
-                                    :latitude, :longitude, :capacity, :details)
-    end
+  # Only allow a list of trusted parameters through.
+  def store_params
+    params.require(:store).permit(:name, :group, :street, :city,
+                                  :zip_code, :country, :district, :store_type,
+                                  :latitude, :longitude, :capacity, :details)
+  end
 end

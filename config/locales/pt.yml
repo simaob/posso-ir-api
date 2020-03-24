@@ -24,9 +24,15 @@ pt:
       user:
         email: 'Email'
         name: 'Nome'
-        admin: 'Administrador'
+        role: 'Função'
         app_uuid: 'UUID'
-
+    enums:
+      user:
+        roles:
+          user: 'Utilizador'
+          store_manager: 'Gestor de loja'
+          general_manager: 'Gestor de grupo'
+          admin: 'Administrador'
   views:
     layout:
       application:
@@ -56,6 +62,7 @@ pt:
       search:
         placeholder: 'Procure por nome ou morada...'
         button: 'Procurar'
+        filter_group: 'Filtrar por grupo'
     users:
       search:
         placeholder: 'Procure por nome ou email...'
