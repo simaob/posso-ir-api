@@ -1,0 +1,78 @@
+es:
+  activerecord:
+    models:
+      store:
+        one: 'Tienda'
+        other: 'Tiendas'
+      user:
+        one: 'Usuario'
+        other: 'Usuarios'
+    attributes:
+      store:
+        name: 'Nombre'
+        group: 'Grupo'
+        street: 'Dirección'
+        city: 'Ciudad'
+        district: 'Distrito'
+        country: 'País'
+        zip_code: 'Código Postal'
+        latitude: 'Latitude'
+        longitude: 'Longitud'
+        capacity: 'Capacidad'
+        details: 'Detalles'
+        store_type: 'Tipo de tienda'
+      user:
+        email: 'Correo electrónico'
+        name: 'Nombre'
+        role: 'Papel'
+        app_uuid: 'UUID'
+    enums:
+      user:
+        roles:
+          user: 'Usuario'
+          store_manager: 'Gerente de la tienda'
+          general_manager: 'Gerente de grupo'
+          admin: 'Administrador'
+  views:
+    layout:
+      application:
+        title: 'Puedo Ir'
+    actions:
+      show: 'Mostrar'
+      edit: 'Editar'
+      destroy: 'Destruir'
+      title: 'Acciones'
+      new: 'Añadir'
+    edit:
+      title: "Editando %{resource}"
+    shared:
+      navbar:
+        current: 'Actual'
+        logout: 'Cerrar sesión'
+        login: 'Iniciar sesión'
+    form:
+      submit: 'Enviar'
+    pagination:
+      first: "&laquo; Primera"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Previa"
+      next: "Próxima &rsaquo;"
+      truncate: "&hellip;"
+    stores:
+      search:
+        placeholder: 'Buscar por nombre o dirección...'
+        button: 'Buscar'
+        filter_group: 'Filtrar por grupo'
+    users:
+      search:
+        placeholder: 'Buscar por nombre o correo electrónico...'
+        button: 'Buscar'
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Ninguna %{entry_name} encontrada"
+          one: "Mostrando <b>1</b> %{entry_name}"
+          other: "Mostrando <b>%{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Mostrando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de un total de <b>%{total}</b>"
