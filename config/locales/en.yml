@@ -1,5 +1,12 @@
 en:
   activerecord:
+    models:
+      store:
+        one: 'Store'
+        other: 'Stores'
+      user:
+        one: 'User'
+        other: 'Users'
   views:
     layout:
       application:

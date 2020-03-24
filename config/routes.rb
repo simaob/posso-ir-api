@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "home#index"
-  resources :stores
-  resources :users
+  scope "(:locale)", locale: /en|pt|es/ do
+    root to: "home#index"
+    resources :stores
+    resources :users
+  end
 
   namespace :api do
     namespace :v1 do
