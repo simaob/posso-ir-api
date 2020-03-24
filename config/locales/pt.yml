@@ -62,6 +62,7 @@ pt:
       search:
         placeholder: 'Procure por nome ou morada...'
         button: 'Procurar'
+        filter_group: 'Filtrar por grupo'
     users:
       search:
         placeholder: 'Procure por nome ou email...'

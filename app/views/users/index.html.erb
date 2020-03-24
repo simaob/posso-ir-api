@@ -4,10 +4,12 @@
   <div class="col-md-11">
     <h1><%= User.model_name.human(count: 2) %></h1>
   </div>
-  <div class="col-md-1">
-    <%= link_to I18n.t('views.actions.new'), new_user_path,
-      class: 'btn btn-sm btn-outline-primary' %>
-  </div>
+  <% if can? :new, User %>
+    <div class="col-md-1">
+      <%= link_to I18n.t('views.actions.new'), new_user_path,
+        class: 'btn btn-sm btn-outline-primary' %>
+    </div>
+  <% end %>
 </div>
 
 <%= form_tag users_path, method: :get, class: 'form-inline' do %>
@@ -38,10 +40,12 @@
         <td><%= user.app_uuid %></td>
         <td>
           <%= link_to I18n.t('views.actions.show'), user %>
-          |
-          <%= link_to I18n.t('views.actions.edit'), edit_user_path(user) %>
-          |
-          <%= link_to I18n.t('views.actions.destroy'), user, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+          <% if can? :manage, user %>
+            |
+            <%= link_to I18n.t('views.actions.edit'), edit_user_path(user) %>
+            |
+            <%= link_to I18n.t('views.actions.destroy'), user, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+          <% end %>
       </tr>
     <% end %>
   </tbody>

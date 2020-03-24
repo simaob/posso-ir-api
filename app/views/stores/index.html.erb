@@ -8,10 +8,12 @@
   <div class="col-md-11">
     <h1><%= Store.model_name.human(count: 2) %></h1>
   </div>
-  <div class="col-md-1">
-    <%= link_to I18n.t('views.actions.new'), new_store_path,
-      class: 'btn btn-sm btn-outline-primary' %>
-  </div>
+  <% if can? :new, Store %>
+    <div class="col-md-1">
+      <%= link_to I18n.t('views.actions.new'), new_store_path,
+        class: 'btn btn-sm btn-outline-primary' %>
+    </div>
+  <% end %>
 </div>
 
 <%= form_tag stores_path, method: :get, class: 'form-inline' do %>
@@ -19,7 +21,7 @@
   <%= text_field_tag :search, params[:search], class: 'form-control col-md-6 mb-2 mr-sm-2',
     placeholder: I18n.t('views.stores.search.placeholder') %>
   <%= label_tag :group, 'Group', class: 'sr-only' %>
-  <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: true, class: 'form-control col-md-4 mb-2 mr-sm-2'} %>
+  <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: I18n.t('views.stores.search.filter_group'), class: 'form-control col-md-4 mb-2 mr-sm-2'} %>
   <%= submit_tag I18n.t('views.stores.search.button'),
     class: 'btn btn-primary mb-2' %>
 <% end %>
@@ -52,10 +54,12 @@
         <td><%= store.details %></td>
         <td>
           <%= link_to I18n.t('views.actions.show'), store %>
-          |
-          <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
-          |
-          <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+          <% if can? :manage, store %>
+            |
+            <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
+            |
+            <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+          <% end %>
       </tr>
     <% end %>
   </tbody>

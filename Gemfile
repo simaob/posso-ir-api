@@ -57,6 +57,7 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-nvm', require: false
   gem 'capistrano-yarn', require: false
+  gem 'switch_user'
 end
 
 group :test do
@@ -72,6 +73,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'devise-i18n'
+# authorization
+gem 'cancancan'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'jwt'
 gem 'kaminari'

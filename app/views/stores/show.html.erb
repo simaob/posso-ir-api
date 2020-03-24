@@ -1,19 +1,15 @@
  <% content_for :page_title, @store.name.titleize %>
-<% content_for :actions do %>
-  <%= link_to(I18n.t('views.actions.edit'), edit_store_path(@store),
-    class: 'btn btn-sm btn-outline-primary')
-    .concat(link_to(I18n.t('views.actions.back'), stores_path,
-    class: 'btn btn-sm btn-outline-secondary')) %>
-<% end %>
 
 <div class="row mt-5">
   <div class="col-md-11">
     <h1><%= @store.name %></h1>
   </div>
-  <div class="col-md-1">
-    <%= link_to I18n.t('views.actions.edit'), edit_store_path(@store),
-      class: 'btn btn-sm btn-outline-primary' %>
-  </div>
+  <% if can? :manage, @store %>
+    <div class="col-md-1">
+      <%= link_to I18n.t('views.actions.edit'), edit_store_path(@store),
+        class: 'btn btn-sm btn-outline-primary' %>
+    </div>
+  <% end %>
 </div>
 
 <p>
