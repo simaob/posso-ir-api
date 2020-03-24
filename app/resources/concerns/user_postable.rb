@@ -7,7 +7,7 @@ module UserPostable
 
   def validate_user_interval
     current_user = context[:current_user]
-    return if current_user.admin
+    return if current_user.admin?
     return if current_user.last_post.nil?
     return if current_user.last_post.utc < (Time.now.utc - USER_INTERVAL.minutes)
 
