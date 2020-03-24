@@ -63,4 +63,8 @@ namespace :stores do
   task spar: :environment do
     ImportStores.new.import_spar
   end
+
+  task pharmacies: :environment do
+    ImportStores.new.import_pharmacies
+  end
 end

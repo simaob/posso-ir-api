@@ -15,6 +15,7 @@ class ImportStores
     import_minipreco
     import_pingodoce
     import_spar
+    import_pharmacies
     puts "#{Store.count} total stores"
   end
 
@@ -304,6 +305,29 @@ class ImportStores
         latitude: row['lat'],
         longitude: row['lng'],
         store_type: 1
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_pharmacies
+    puts "Starting Pharmacies, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'pharmacies.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file).each do |row|
+      html = Nokogiri::HTML.parse(row["item"])
+      li = html.xpath("//li").first
+      address = li.xpath("//div //div //span").children.first.to_s
+      Store.create(
+        name: li.xpath("//h5 //a").children.first.to_s,
+        group: 'Farmácias',
+        country: 'PT',
+        city: address.split(' - ').last,
+        street: address.split(' - ').first,
+        zip_code: nil,
+        latitude: li.attributes["data-pharmacy-lat"]&.value,
+        longitude: li.attributes["data-pharmacy-lon"]&.value,
+        store_type: 2
       )
     end
     puts "#{Store.count} total stores"
