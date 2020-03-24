@@ -67,3 +67,12 @@ pt:
       search:
         placeholder: 'Procure por nome ou email...'
         button: 'Procurar'
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Nenhuma %{entry_name} encontrada"
+          one: "A mostrar <b>1</b> %{entry_name}"
+          other: "A mostrar <b>%{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "A mostrar %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de um total de <b>%{total}</b>"
