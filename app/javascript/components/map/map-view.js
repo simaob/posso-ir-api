@@ -67,6 +67,10 @@ function MapView() {
               draft.selectedShop = temporaryId;
               return draft;
             }
+            case 'clickCloseSidebar': {
+              draft.selectedShop = initialState.selectedShop;
+              return draft;
+            }
           }
         }
 
@@ -129,7 +133,7 @@ function MapView() {
     <div className="c-map-view">
       <WRIIcons />
       <Toolbar status={state.status} dispatch={dispatch} />
-      <Sidebar shop={state.shops[state.selectedShop]} />
+      <Sidebar shop={state.shops[state.selectedShop]} dispatch={dispatch} />
       <MapComponent mapOptions={mapOptions} basemap={BASEMAP} events={events}>
         {map => (
           <>
@@ -223,12 +227,20 @@ function Toolbar(props) {
 }
 
 function Sidebar(props) {
-  const { shop } = props;
+  const { shop, dispatch } = props;
   return (
     <aside className={`c-sidebar ${shop ? '-visible' : ''}`}>
       {shop && (
         <div className="header">
           <p>{shop.name || `${shop.latlng.lat.toFixed(3)}, ${shop.latlng.lng.toFixed(3)}`}</p>
+          <button
+            type="button"
+            className="close-button"
+            aria-label="Close"
+            onClick={() => dispatch({ type: 'clickCloseSidebar' })}
+          >
+            close
+          </button>
         </div>
       )}
     </aside>
