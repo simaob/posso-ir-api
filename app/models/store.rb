@@ -36,6 +36,7 @@ class Store < ApplicationRecord
 
   scope :by_group, ->(group) { where(group: group) }
   scope :by_state, ->(state) { where(state: state) }
+  scope :available, -> { where(state: [:live, :marked_for_deletion])}
 
   # after_validation :reverse_geocode
   # after_validation :geocode

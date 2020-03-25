@@ -17,6 +17,10 @@ module Api
       def coordinates
         [@model.latitude, @model.longitude]
       end
+
+      def self.records(options = {})
+        Store.available
+      end
     end
   end
 end
