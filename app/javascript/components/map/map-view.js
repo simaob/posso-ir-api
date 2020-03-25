@@ -10,6 +10,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'vizzuality-components/dist/map.css';
 import 'leaflet/dist/leaflet.css';
 import './map-view.scss';
+import { latLng } from 'leaflet/dist/leaflet-src.esm';
 
 // stupid hack so that leaflet's images work after going through webpack
 // https://github.com/PaulLeCam/react-leaflet/issues/255
@@ -37,7 +38,8 @@ const mapOptions = {
 const initialState = {
   status: 'idle',
   shops: {},
-  prevShops: null
+  prevShops: null,
+  selectedShop: null
 };
 
 function MapView() {
@@ -54,6 +56,15 @@ function MapView() {
             case 'clickDelete': {
               draft.status = 'deleting';
               draft.prevShops = state.shops;
+              return draft;
+            }
+            case 'clickMarker': {
+              const {
+                target: {
+                  options: { temporaryId }
+                }
+              } = action.payload;
+              draft.selectedShop = temporaryId;
               return draft;
             }
           }
@@ -116,8 +127,9 @@ function MapView() {
   };
   return (
     <div className="c-map-view">
-      <Toolbar status={state.status} dispatch={dispatch} />
       <WRIIcons />
+      <Toolbar status={state.status} dispatch={dispatch} />
+      <Sidebar shop={state.shops[state.selectedShop]} />
       <MapComponent mapOptions={mapOptions} basemap={BASEMAP} events={events}>
         {map => (
           <>
@@ -207,6 +219,19 @@ function Toolbar(props) {
         )}
       </div>
     </div>
+  );
+}
+
+function Sidebar(props) {
+  const { shop } = props;
+  return (
+    <aside className={`c-sidebar ${shop ? '-visible' : ''}`}>
+      {shop && (
+        <div className="header">
+          <p>{shop.name || `${shop.latlng.lat.toFixed(3)}, ${shop.latlng.lng.toFixed(3)}`}</p>
+        </div>
+      )}
+    </aside>
   );
 }
 

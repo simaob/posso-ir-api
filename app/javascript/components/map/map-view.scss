@@ -1,6 +1,8 @@
 $nav-height: 56px;
 $toolbar-height: 62px;
 
+$gray: #333a40;
+
 .c-map-view {
   height: calc(100vh - #{$nav-height});
   width: 100%;
@@ -13,6 +15,31 @@ $toolbar-height: 62px;
 
 .c-toolbar {
   padding: 12px 20px;
+}
+
+.c-sidebar {
+  position: absolute;
+  bottom: 36px;
+  width: 400px;
+  height: calc(100% - #{$nav-height} - #{$toolbar-height} - 72px);
+  padding: 12px 0;
+  z-index: 1;
+  transform: translateX(-100%);
+  backdrop-filter: blur(16px);
+  background-color: rgba(#f2f2f2, 0.2);
+  transition: transform ease-in 350ms;
+
+  &.-visible {
+    transform: translateX(0);
+  }
+
+  .header {
+    font-size: 22px;
+    font-weight: 600;
+    color: $gray;
+    padding: 0 22px;
+    border-bottom: solid 1px rgba($gray, 0.2);
+  }
 }
 
 #switch_user_identifier {
