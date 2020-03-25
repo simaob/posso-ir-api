@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   scope "(:locale)", locale: /en|pt|es/ do
     root to: "home#index"
-    resources :stores
+    resources :stores do
+      post :approve_all, on: :collection
+    end
     resources :users
   end
 

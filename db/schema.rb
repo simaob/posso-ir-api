@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_210331) do
+ActiveRecord::Schema.define(version: 2020_03_25_090709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,8 @@ ActiveRecord::Schema.define(version: 2020_03_23_210331) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.geometry "lonlat", limit: {:srid=>0, :type=>"st_point"}
+    t.integer "state", default: 1
+    t.text "reason_to_delete"
     t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
   end
 
