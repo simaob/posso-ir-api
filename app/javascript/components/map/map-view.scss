@@ -1,0 +1,22 @@
+$nav-height: 56px;
+$toolbar-height: 62px;
+
+.c-map-view {
+  height: calc(100vh - #{$nav-height});
+  width: 100%;
+  overflow: hidden;
+
+  .vizzuality__c-map {
+    height: calc(100% - #{$toolbar-height});
+  }
+}
+
+.c-toolbar {
+  padding: 12px 20px;
+}
+
+#switch_user_identifier {
+  position: absolute;
+  top: 56px;
+  left: 0;
+}

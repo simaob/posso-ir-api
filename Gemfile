@@ -81,3 +81,6 @@ gem 'kaminari'
 
 # used to decode html in some imported strings
 gem 'htmlentities'
+
+# frontend stuff
+gem 'react-rails'
