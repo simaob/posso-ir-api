@@ -12,22 +12,26 @@
   <% end %>
 </div>
 
-<p>
-  <strong><%= User.human_attribute_name(:name) %>:</strong>
-  <%= @user.name %>
-</p>
+<div class="row mt-4">
+  <div class="col-md-12">
+    <p>
+      <strong><%= User.human_attribute_name(:name) %>:</strong>
+      <%= @user.name %>
+    </p>
 
-<p>
-  <strong><%= User.human_attribute_name(:email) %>:</strong>
-  <%= @user.email %>
-</p>
+    <p>
+      <strong><%= User.human_attribute_name(:email) %>:</strong>
+      <%= @user.email %>
+    </p>
 
-<p>
-  <strong><%= User.human_attribute_name(:role) %>:</strong>
-  <%= enum_l(@user, :role) %>
-</p>
+    <p>
+      <strong><%= User.human_attribute_name(:role) %>:</strong>
+      <%= enum_l(@user, :role) %>
+    </p>
 
-<p>
-  <strong><%= User.human_attribute_name(:app_uuid) %>:</strong>
-  <%= @user.app_uuid %>
-</p>
+    <p>
+      <strong><%= User.human_attribute_name(:app_uuid) %>:</strong>
+      <%= @user.app_uuid %>
+    </p>
+  </div>
+</div>

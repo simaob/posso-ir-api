@@ -12,68 +12,71 @@
   <% end %>
 </div>
 
-<p>
-  <strong><%= Store.human_attribute_name(:state) %>:</strong>
-  <u><%= enum_l(@store, :state) %></u>
-</p>
+<div class="row mt-4">
+  <div class="col-md-12">
+    <p>
+      <strong><%= Store.human_attribute_name(:state) %>:</strong>
+      <u><%= enum_l(@store, :state) %></u>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:name) %>:</strong>
-  <%= @store.name %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:name) %>:</strong>
+      <%= @store.name %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
-  <%= @store.store_type %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
+      <%= @store.store_type %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:group) %>:</strong>
-  <%= link_to @store.group, stores_path(group: @store.group) %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:group) %>:</strong>
+      <%= link_to @store.group, stores_path(group: @store.group) %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:street) %>:</strong>
-  <%= @store.street %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:street) %>:</strong>
+      <%= @store.street %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:zip_code) %>:</strong>
-  <%= @store.zip_code %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:zip_code) %>:</strong>
+      <%= @store.zip_code %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:city) %>:</strong>
-  <%= @store.city %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:city) %>:</strong>
+      <%= @store.city %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:district) %>:</strong>
-  <%= @store.district %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:district) %>:</strong>
+      <%= @store.district %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:country) %>:</strong>
-  <%= @store.country %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:country) %>:</strong>
+      <%= @store.country %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:latitude) %>:</strong>
-  <%= @store.latitude %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:latitude) %>:</strong>
+      <%= @store.latitude %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:longitude) %>:</strong>
-  <%= @store.longitude %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:longitude) %>:</strong>
+      <%= @store.longitude %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
-  <%= @store.capacity %>
-</p>
+    <p>
+      <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
+      <%= @store.capacity %>
+    </p>
 
-<p>
-  <strong><%= Store.human_attribute_name(:details) %>:</strong>
-  <%= @store.details %>
-</p>
-
+    <p>
+      <strong><%= Store.human_attribute_name(:details) %>:</strong>
+      <%= @store.details %>
+    </p>
+  </div>
+</div>
