@@ -5,10 +5,13 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
+    return if user.user?
+
     if user.admin?
       can :manage, :all
-    elsif user.general_manager? || user.store_manager?
-      can :read, :all
+    elsif user.general_manager?
+      can [:new, :create], Store
     end
+    can :read, :all
   end
 end

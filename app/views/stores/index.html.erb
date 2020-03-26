@@ -1,27 +1,30 @@
 <% content_for :page_title, Store.model_name.human(count: 2) %>
-<% content_for :actions do %>
-  <%= link_to I18n.t('views.actions.new'), new_store_path,
-    class: 'btn btn-sm btn-outline-primary' %>
-<% end %>
 
 <div class="row mt-5">
-  <div class="col-md-11">
+  <div class="col-md-10">
     <h1><%= Store.model_name.human(count: 2) %></h1>
   </div>
-  <% if can? :new, Store %>
-    <div class="col-md-1">
+  <div class="col-md-2">
+    <% if current_user.admin? && params[:state] == 'waiting_approval' %>
+      <%= link_to I18n.t('views.actions.approve_all'), approve_all_stores_path, method: :post,
+        data: {confirm: I18n.t('views.stores.index.confirm_approval')},
+        class: 'btn btn-sm btn-outline-success' %>
+    <% end %>
+    <% if can? :new, Store %>
       <%= link_to I18n.t('views.actions.new'), new_store_path,
         class: 'btn btn-sm btn-outline-primary' %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 <%= form_tag stores_path, method: :get, class: 'form-inline' do %>
   <%= label_tag :search, 'Search', class: 'sr-only' %>
-  <%= text_field_tag :search, params[:search], class: 'form-control col-md-6 mb-2 mr-sm-2',
+  <%= text_field_tag :search, params[:search], class: 'form-control col-md-5 mb-2 mr-sm-2',
     placeholder: I18n.t('views.stores.search.placeholder') %>
   <%= label_tag :group, 'Group', class: 'sr-only' %>
-  <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: I18n.t('views.stores.search.filter_group'), class: 'form-control col-md-4 mb-2 mr-sm-2'} %>
+  <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: I18n.t('views.stores.search.filter_group'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+  <%= label_tag :state, 'State', class: 'sr-only' %>
+  <%= select_tag :state, options_for_select(enum_options_for_select(Store, :state), params[:state]), {include_blank: I18n.t('views.stores.search.filter_state'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
   <%= submit_tag I18n.t('views.stores.search.button'),
     class: 'btn btn-primary mb-2' %>
 <% end %>
@@ -32,6 +35,7 @@
   <thead>
     <tr>
       <th><%= Store.human_attribute_name(:name) %></th>
+      <th><%= Store.human_attribute_name(:state) %></th>
       <th><%= Store.human_attribute_name(:group) %></th>
       <th><%= Store.human_attribute_name(:street) %></th>
       <th><%= Store.human_attribute_name(:city) %></th>
@@ -47,6 +51,7 @@
     <% @stores.each do |store| %>
       <tr>
         <td><%= store.name %></td>
+        <td><%= enum_l(store, :state) %></td>
         <td><%= store.group %></td>
         <td><%= store.street %></td>
         <td><%= store.city %></td>

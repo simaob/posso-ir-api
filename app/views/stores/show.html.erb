@@ -13,6 +13,11 @@
 </div>
 
 <p>
+  <strong><%= Store.human_attribute_name(:state) %>:</strong>
+  <u><%= enum_l(@store, :state) %></u>
+</p>
+
+<p>
   <strong><%= Store.human_attribute_name(:name) %>:</strong>
   <%= @store.name %>
 </p>

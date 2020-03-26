@@ -7,6 +7,18 @@ en:
       user:
         one: 'User'
         other: 'Users'
+    enums:
+      user:
+        roles:
+          user: 'User'
+          store_manager: 'Store manager'
+          general_manager: 'General manager'
+          admin: 'Administrator'
+      store:
+        states:
+          waiting_approval: 'Waiting approval'
+          live: 'Active'
+          marked_for_deletion: 'Marked for deletion'
   views:
     layout:
       application:
@@ -17,6 +29,8 @@ en:
       destroy: 'Delete'
       title: 'Actions'
       new: 'New'
+      back: 'Back'
+      approve_all: 'Approve all'
     edit:
       title: "Editing %{resource}"
     shared:
@@ -31,6 +45,9 @@ en:
         placeholder: 'Search by name or address...'
         button: 'Search'
         filter_group: 'Filter by group'
+        filter_state: 'Filter by state'
+      index:
+        confirm_approval: 'Are you sure you want to approve all stores?'
     users:
       search:
         placeholder: 'Search by name or email...'

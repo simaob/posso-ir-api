@@ -21,6 +21,7 @@ pt:
         capacity: 'Capacidade'
         details: 'Detalhes'
         store_type: 'Tipo de loja'
+        state: 'Estado'
       user:
         email: 'Email'
         name: 'Nome'
@@ -31,8 +32,13 @@ pt:
         roles:
           user: 'Utilizador'
           store_manager: 'Gestor de loja'
-          general_manager: 'Gestor de grupo'
+          general_manager: 'Gestor'
           admin: 'Administrador'
+      store:
+        states:
+          waiting_approval: 'À espera de validação'
+          live: 'Activa'
+          marked_for_deletion: 'Marcada para remoção'
   views:
     layout:
       application:
@@ -43,6 +49,8 @@ pt:
       destroy: 'Remover'
       title: 'Ações'
       new: 'Adicionar'
+      back: 'Voltar'
+      approve_all: 'Aprovar todas'
     edit:
       title: "Editando %{resource}"
     shared:
@@ -63,6 +71,9 @@ pt:
         placeholder: 'Procure por nome ou morada...'
         button: 'Procurar'
         filter_group: 'Filtrar por grupo'
+        filter_state: 'Filtrar por estado'
+      index:
+        confirm_approval: 'Tem a certeza que quer aprovar todas as lojas que estão à espera de validação?'
     users:
       search:
         placeholder: 'Procure por nome ou email...'

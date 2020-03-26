@@ -6,6 +6,7 @@ class StoresController < ApplicationController
   def index
     @stores = Store.search(params[:search])
     @stores = @stores.by_group(params[:group]) if params[:group].present?
+    @stores = @stores.by_state(params[:state]) if params[:state].present?
 
     if params[:no_info]
       @stores = @stores.where(latitude: nil).or(Store.where(longitude: nil))
@@ -68,12 +69,27 @@ class StoresController < ApplicationController
     end
   end
 
+  def approve_all
+    @stores = Store.where(state: :waiting_approval)
+    size = @stores.size
+    @stores.update_all(state: :live)
+
+    respond_to do |format|
+      format.html { redirect_to stores_url, notice: "#{size} stores approved" }
+      format.json { head :no_content }
+    end
+
+  end
+
   private
 
   # Only allow a list of trusted parameters through.
   def store_params
-    params.require(:store).permit(:name, :group, :street, :city,
-                                  :zip_code, :country, :district, :store_type,
-                                  :latitude, :longitude, :capacity, :details)
+    permitted_params = [:name, :group, :street, :city, :zip_code, :country,
+                        :district, :store_type, :latitude, :longitude,
+                        :capacity, :details]
+    permitted_params << :state if current_user.admin?
+
+    params.require(:store).permit(permitted_params)
   end
 end
