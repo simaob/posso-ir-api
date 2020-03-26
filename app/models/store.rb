@@ -54,6 +54,10 @@ class Store < ApplicationRecord
     [street, city].compact.join(',')
   end
 
+  def text
+    [name, city].compact.join(', ')
+  end
+
   def self.groups
     select(:group).order(:group).distinct.pluck(:group)
   end

@@ -28,6 +28,13 @@
           <%= form.label :role, class: "col-sm-2 col-form-label" %>
           <%= form.select :role, enum_options_for_select(User, :role), {}, class: "form-control" %>
         </div>
+
+        <div class="form-group">
+          <%= form.label :store_ids, value: Store.model_name.human(count: 2),
+            class: "col-sm-2 col-form-label" %>
+          <%= form.select:store_ids, @user.stores&.collect{|s| [s.text, s.id]}, {},
+            {class: "form-control store-managers-select", multiple: true} %>
+        </div>
       <% else %>
         <div class="form-group">
           <%= form.label :role, class: "col-sm-2 col-form-label" %>
