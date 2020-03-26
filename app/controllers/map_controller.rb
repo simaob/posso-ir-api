@@ -1,3 +1,5 @@
 class MapController < ApplicationController
-  def index; end
+  def index
+      @shops = Store.all.where.not(latitude: nil, longitude: nil)
+    end
 end

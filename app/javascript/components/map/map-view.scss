@@ -27,7 +27,7 @@ $gray: #333a40;
   transform: translateX(-100%);
   backdrop-filter: blur(16px);
   background-color: rgba(#f2f2f2, 0.2);
-  transition: transform ease-in 350ms;
+  transition: transform ease-in 150ms;
 
   &.-visible {
     transform: translateX(0);

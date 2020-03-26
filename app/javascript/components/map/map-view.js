@@ -1,6 +1,7 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useMemo } from 'react';
 import produce from 'immer';
 import L from 'leaflet';
+import 'leaflet.markercluster';
 import MapComponent, { MapControls, ZoomControl } from 'vizzuality-components/dist/map';
 import WRIIcons from 'vizzuality-components/dist/icons';
 import marker from 'leaflet/dist/images/marker-icon.png';
@@ -9,8 +10,9 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 import 'vizzuality-components/dist/map.css';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import './map-view.scss';
-import { latLng } from 'leaflet/dist/leaflet-src.esm';
 
 // stupid hack so that leaflet's images work after going through webpack
 // https://github.com/PaulLeCam/react-leaflet/issues/255
@@ -32,7 +34,7 @@ const BASEMAP = {
 
 const mapOptions = {
   zoom: 6,
-  center: { lat: 39.74, lng: -724.02 }
+  center: { lat: 39.74, lng: -3.71 }
 };
 
 const initialState = {
@@ -42,7 +44,16 @@ const initialState = {
   selectedShop: null
 };
 
-function MapView() {
+const getInitialState = (apiShops = []) => {
+  const shops = apiShops.reduce((acc, shop) => ({ ...acc, [shop.id]: shop }), {});
+  return {
+    ...initialState,
+    shops
+  };
+};
+
+function MapView(props) {
+  const { shops } = props;
   const [state, dispatch] = useReducer(
     (state, action) =>
       produce(state, draft => {
@@ -61,10 +72,10 @@ function MapView() {
             case 'clickMarker': {
               const {
                 target: {
-                  options: { temporaryId }
+                  options: { id }
                 }
               } = action.payload;
-              draft.selectedShop = temporaryId;
+              draft.selectedShop = id === state.selectedShop ? initialState.selectedShop : id;
               return draft;
             }
             case 'clickCloseSidebar': {
@@ -80,7 +91,8 @@ function MapView() {
               const { latlng } = action.payload;
               const temporaryId = `${latlng.lat}_${latlng.lng}`;
               draft.shops[temporaryId] = {
-                latlng,
+                latitude: latlng.lat,
+                longitude: latlng.lng,
                 temporaryId
               };
               return draft;
@@ -99,10 +111,10 @@ function MapView() {
             case 'clickMarker': {
               const {
                 target: {
-                  options: { temporaryId }
+                  options: { id }
                 }
               } = action.payload;
-              delete draft.shops[temporaryId];
+              delete draft.shops[id];
               return draft;
             }
           }
@@ -124,8 +136,9 @@ function MapView() {
           }
         }
       }),
-    initialState
+    getInitialState(shops)
   );
+  const cluster = useMarkerCluster(state.shops);
   const events = {
     click: e => dispatch({ type: 'clickMap', payload: e })
   };
@@ -140,13 +153,15 @@ function MapView() {
             <MapControls>
               <ZoomControl map={map} />
             </MapControls>
-            {Object.values(state.shops).map((shop, i) => (
+            {Object.values(state.shops).map(shop => (
               <Marker
                 map={map}
-                key={shop.temporaryId + i}
-                latlng={shop.latlng}
-                name={shop.temporaryId}
-                temporaryId={shop.temporaryId}
+                cluster={cluster}
+                key={shop.id || shop.temporaryId}
+                latitude={shop.latitude}
+                longitude={shop.longitude}
+                name={shop.name}
+                id={shop.id || shop.temporaryId}
                 onClick={e => dispatch({ type: 'clickMarker', payload: e })}
               />
             ))}
@@ -157,17 +172,27 @@ function MapView() {
   );
 }
 
+function useMarkerCluster(markers) {
+  return useMemo(() => L.markerClusterGroup({ zoomToBoundsOnClick: true }), [markers]);
+}
+
 function Marker(props) {
-  const { latlng, name, map, temporaryId, onClick } = props;
+  const { latitude, longitude, name, map, id, onClick, cluster } = props;
   useEffect(() => {
-    const marker = L.marker(latlng, { title: name, temporaryId });
+    const marker = L.marker(L.latLng(latitude, longitude), {
+      title: name,
+      id
+    });
     marker.on('click', onClick);
-    marker.addTo(map);
+    cluster.addLayer(marker);
+    map.addLayer(cluster);
     return () => {
+      cluster.removeLayer(marker);
       marker.off();
       marker.remove();
+      cluster.remove();
     };
-  }, [latlng, name, map]);
+  }, [latitude, longitude, name, map]);
 
   return null;
 }
@@ -232,7 +257,7 @@ function Sidebar(props) {
     <aside className={`c-sidebar ${shop ? '-visible' : ''}`}>
       {shop && (
         <div className="header">
-          <p>{shop.name || `${shop.latlng.lat.toFixed(3)}, ${shop.latlng.lng.toFixed(3)}`}</p>
+          <p>{shop.name || `${shop.latitude.toFixed(3)}, ${shop.longitude.toFixed(3)}`}</p>
           <button
             type="button"
             className="close-button"
