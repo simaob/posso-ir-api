@@ -24,9 +24,11 @@
       <%= text_field_tag :search, params[:search], class: 'form-control col-md-5 mb-2 mr-sm-2',
         placeholder: I18n.t('views.stores.search.placeholder') %>
       <%= label_tag :group, 'Group', class: 'sr-only' %>
-      <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: I18n.t('views.stores.search.filter_group'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+      <%= select_tag :group, options_for_select(Store.groups, params[:group]),
+        {include_blank: I18n.t('views.stores.search.filter_group'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
       <%= label_tag :state, 'State', class: 'sr-only' %>
-      <%= select_tag :state, options_for_select(enum_options_for_select(Store, :state), params[:state]), {include_blank: I18n.t('views.stores.search.filter_state'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
+      <%= select_tag :state, options_for_select(enum_options_for_select(Store, :state), params[:state]),
+        {include_blank: I18n.t('views.stores.search.filter_state'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
       <%= submit_tag I18n.t('views.stores.search.button'),
         class: 'btn btn-primary mb-2' %>
     <% end %>
@@ -49,8 +51,6 @@
                 <th><%= Store.human_attribute_name(:city) %></th>
                 <th><%= Store.human_attribute_name(:latitude) %></th>
                 <th><%= Store.human_attribute_name(:longitude) %></th>
-                <th><%= Store.human_attribute_name(:capacity) %></th>
-                <th><%= Store.human_attribute_name(:details) %></th>
                 <th><%= I18n.t('views.actions.title') %></th>
               </tr>
             </thead>
@@ -63,10 +63,8 @@
                   <td><%= store.group %></td>
                   <td><%= store.street %></td>
                   <td><%= store.city %></td>
-                  <td><%= store.latitude %></td>
-                  <td><%= store.longitude %></td>
-                  <td><%= store.capacity %></td>
-                  <td><%= store.details %></td>
+                  <td><%= store.latitude&.round(3) %></td>
+                  <td><%= store.longitude&.round(3) %></td>
                   <td>
                     <%= link_to I18n.t('views.actions.show'), store %>
                     <% if can? :manage, store %>

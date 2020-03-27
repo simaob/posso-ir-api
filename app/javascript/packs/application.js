@@ -17,9 +17,6 @@ import 'select2';
 import '../stylesheets/application'
 
 document.addEventListener('turbolinks:load', function() {
-  $('select').select2({
-    theme: 'bootstrap4'
-  });
   $('.store-managers-select').select2({
     theme: 'bootstrap4',
     ajax: {
