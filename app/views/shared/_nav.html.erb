@@ -25,7 +25,7 @@
           <% end %>
         </li>
       <% end %>
-      <% if current_user.stores.any? %>
+      <% if current_user && current_user.stores.any? %>
         <li class="nav-item <%= 'active' if controller_name == 'manage_stores' %>">
           <%= link_to manage_stores_path, class: 'nav-link' do %>
             <%= I18n.t('views.manage_stores.index.nav') %>
