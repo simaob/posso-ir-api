@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :stores do
       post :approve_all, on: :collection
     end
+    resources :manage_stores, only: [:index]
     resources :users
   end
 

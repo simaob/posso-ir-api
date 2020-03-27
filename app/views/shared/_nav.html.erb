@@ -25,6 +25,16 @@
           <% end %>
         </li>
       <% end %>
+      <% if current_user.stores.any? %>
+        <li class="nav-item <%= 'active' if controller_name == 'manage_stores' %>">
+          <%= link_to manage_stores_path, class: 'nav-link' do %>
+            <%= I18n.t('views.manage_stores.index.nav') %>
+            <% if controller_name == 'manage_stores' %>
+              <span class="sr-only">(<%= I18n.t('views.shared.navbar.current') %>)</span>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lang</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">

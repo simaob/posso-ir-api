@@ -78,6 +78,9 @@ pt:
       search:
         placeholder: 'Procure por nome ou email...'
         button: 'Procurar'
+    manage_stores:
+      index:
+        nav: 'As minhas lojas'
   helpers:
     page_entries_info:
       one_page:
