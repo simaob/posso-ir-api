@@ -2,22 +2,24 @@
 #
 # Table name: stores
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  group      :string
-#  street     :string
-#  city       :string
-#  district   :string
-#  country    :string
-#  zip_code   :string
-#  latitude   :float
-#  longitude  :float
-#  capacity   :integer
-#  details    :text
-#  store_type :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  lonlat     :geometry         point, 0
+#  id               :bigint           not null, primary key
+#  name             :string
+#  group            :string
+#  street           :string
+#  city             :string
+#  district         :string
+#  country          :string
+#  zip_code         :string
+#  latitude         :float
+#  longitude        :float
+#  capacity         :integer
+#  details          :text
+#  store_type       :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  lonlat           :geometry         point, 0
+#  state            :integer          default("1")
+#  reason_to_delete :text
 #
 class Store < ApplicationRecord
   paginates_per 50
@@ -25,6 +27,9 @@ class Store < ApplicationRecord
   PROJECTION = 4326
 
   has_many :status_crowdsources
+  has_many :status_store_owners
+  has_many :status_generals
+
 
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
