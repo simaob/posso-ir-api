@@ -14,27 +14,8 @@
 #
 module Api
   module V1
-    class StatusGeneralResource < ApplicationResource
-      #MAX_STORES = 100
-      #immutable
-      #
-      #attributes :id, :updated_time, :valid_until, :status,
-      #           :queue, :store_id, :is_official
-      #
-      #filter :store_id
-      #
-      #def status
-      #  @model.status.nil? ? -1 : @model.status
-      #end
-      #
-      #def queue
-      #  @model.queue.nil? ? -1 : @model.queue
-      #end
-      #
-      #filter :store_id, apply: ->(records, value, _options) {
-      #  value = value[0...MAX_STORES]
-      #  records.where(store_id: value)
-      #}
+    class StatusGeneralResource < StatusResource
+      attributes :is_official
     end
   end
 end
