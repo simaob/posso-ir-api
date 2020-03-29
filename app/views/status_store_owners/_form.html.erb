@@ -1,0 +1,43 @@
+<div class="row mt-4">
+  <div class="col-md-12">
+    <%= form_with(model: [store, status_store_owner], local: true) do |form| %>
+      <% if status_store_owner.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(status_store_owner.errors.count, "error") %> impediram store de ser guardado:</h2>
+
+          <ul>
+            <% status_store_owner.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :updated_time, class: "col-sm-2 col-form-label" %>
+        <%= form.time_field :updated_time, class: "form-control datetimepicker" %>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :status, 0, class: 'form-check-input' %>
+          <%= form.label :status, 0, value: 0, class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :status, 5.0, class: 'form-check-input' %>
+          <%= form.label :status, 5.0, value: 5.0, class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :status, 10, class: 'form-check-input' %>
+          <%= form.label :status, 10, value: 10, class: 'form-check-label' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit I18n.t('views.form.submit'), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

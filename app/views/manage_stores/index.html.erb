@@ -42,7 +42,8 @@
                   <td><%= store.latitude&.round(3) %></td>
                   <td><%= store.longitude&.round(3) %></td>
                   <td>
-                    TODO: add_status
+                    <%= link_to I18n.t('views.manage_stores.index.manage_link'),
+                      new_store_status_store_owner_path(store) %>
                   </td>
                 </tr>
               <% end %>

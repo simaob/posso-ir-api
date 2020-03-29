@@ -1,0 +1,15 @@
+<% content_for :page_title, I18n.t('views.status_store_owners.new.title', resource: @store.name) %>
+
+<div class="row mt-5">
+  <div class="col-md-11">
+    <h1><%= I18n.t('views.status_store_owners.new.title', resource: @store.name) %></h1>
+  </div>
+  <% if can? :read, :manage_stores %>
+    <div class="col-md-1">
+      <%= link_to I18n.t('views.manage_stores.index.nav'), manage_stores_path,
+        class: 'btn btn-sm btn-outline-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'form', store: @store, status_store_owner: @status_store_owner %>
