@@ -14,7 +14,7 @@ function Sidebar(props) {
   };
 
   return (
-    <aside ref={ref} className={cx('c-sidebar', { '-visible': shop, '-blur': status === 'idle' })}>
+    <aside ref={ref} className={cx('c-sidebar', { '-visible': shop })}>
       <div className="sidebar-header">
         <p className="shop-name">{(shop && shop.name) || 'Create new store'}</p>
         {status === 'idle' && (
@@ -32,22 +32,36 @@ function Sidebar(props) {
       </div>
       <div className="sidebar-footer">
         <div className="sidebar-footer-wrapper">
-          <button
-            type="button"
-            className="btn btn-outline-secondary mr-2"
-            onClick={dispatchAction}
-            data-action-type="clickCancel"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            className="btn btn-outline-success"
-            onClick={dispatchAction}
-            data-action-type="clickSave"
-          >
-            Save
-          </button>
+          {['creating', 'deleting', 'editing'].includes(status) && (
+            <>
+              <button
+                type="button"
+                className="btn btn-outline-secondary mr-2"
+                onClick={dispatchAction}
+                data-action-type="clickCancel"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-success"
+                onClick={dispatchAction}
+                data-action-type="clickSave"
+              >
+                Save
+              </button>
+            </>
+          )}
+          {status === 'idle' && (
+            <button
+              type="button"
+              className="btn btn-outline-info"
+              onClick={dispatchAction}
+              data-action-type="clickEdit"
+            >
+              Edit
+            </button>
+          )}
         </div>
       </div>
     </aside>

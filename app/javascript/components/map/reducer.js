@@ -17,6 +17,18 @@ export const initialState = {
   selectedShop: null
 };
 
+const onClickCancel = (state, action, draft) => {
+  draft.status = 'idle';
+  draft.prevShops = initialState.prevShops;
+  draft.shops = state.prevShops || initialState.shops;
+  draft.selectedShop = initialState.selectedShop;
+};
+
+const onClickSave = (state, action, draft) => {
+  draft.status = 'idle';
+  draft.prevShops = initialState.prevShops;
+};
+
 function idleStatus(state, action, draft) {
   switch (action.type) {
     case 'clickAdd': {
@@ -26,6 +38,11 @@ function idleStatus(state, action, draft) {
     }
     case 'clickDelete': {
       draft.status = 'deleting';
+      draft.prevShops = state.shops;
+      return draft;
+    }
+    case 'clickEdit': {
+      draft.status = 'editing';
       draft.prevShops = state.shops;
       return draft;
     }
@@ -76,11 +93,26 @@ function deletingStatus(state, action, draft) {
 }
 
 function editingStatus(state, action, draft) {
-  return draft;
+  switch (action.type) {
+    case 'clickCancel': {
+      draft.selectedShop = state.selectedShop;
+    }
+  }
 }
 
 const reducer = (state = initialState, action) =>
   produce(state, draft => {
+    if (state.status !== 'idle') {
+      switch (action.type) {
+        case 'clickCancel': {
+          onClickCancel(state, action, draft);
+        }
+        case 'clickSave': {
+          onClickSave(state, action, draft);
+        }
+      }
+    }
+
     if (state.status === 'idle') {
       idleStatus(state, action, draft);
     }
@@ -95,23 +127,6 @@ const reducer = (state = initialState, action) =>
 
     if (state.status === 'editing') {
       editingStatus(state, action, draft);
-    }
-
-    if (state.status !== 'idle') {
-      switch (action.type) {
-        case 'clickCancel': {
-          draft.status = 'idle';
-          draft.prevShops = initialState.prevShops;
-          draft.shops = state.prevShops || initialState.shops;
-          draft.selectedShop = initialState.selectedShop;
-          return draft;
-        }
-        case 'clickSave': {
-          draft.status = 'idle';
-          draft.prevShops = initialState.prevShops;
-          return draft;
-        }
-      }
     }
   });
 
