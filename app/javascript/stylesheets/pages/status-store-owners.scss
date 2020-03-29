@@ -1,0 +1,35 @@
+.queue-radios div {
+  /* HIDE RADIO */
+  [type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* IMAGE STYLES */
+  [type=radio] + img {
+    cursor: pointer;
+  }
+
+  /* CHECKED STYLES */
+  [type=radio]:checked + img.no-queue {
+    outline: 2px solid #7fbf7f;
+  }
+
+  /* CHECKED STYLES */
+  [type=radio]:checked + img.average-queue {
+    outline: 2px solid #f1be5c;
+  }
+
+  /* CHECKED STYLES */
+  [type=radio]:checked + img.long-queue {
+    outline: 2px solid #d1303e;
+  }
+
+  label {
+    img {
+      display: block;
+    }
+  }
+}

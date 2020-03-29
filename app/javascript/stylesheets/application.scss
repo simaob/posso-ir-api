@@ -2,6 +2,5 @@
 @import '~select2/dist/css/select2';
 @import '~@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4';
 
-body {
-  padding-top: 3.5rem;
-}
+@import 'pages/status-store-owners';
+@import 'base';

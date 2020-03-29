@@ -28,7 +28,7 @@ pt:
         role: 'Função'
         app_uuid: 'UUID'
       status_store_owner:
-        updated_time: 'Hora actual'
+        updated_time: 'Hora'
         status: 'Estado'
     enums:
       user:
@@ -85,9 +85,24 @@ pt:
       index:
         nav: 'As minhas lojas'
         manage_link: 'Actualizar estado'
+        latest_status: 'Último estado registado'
+        state_valid_until: '%{state} | Válido até %{time}'
+        state_invalid: '%{state} | Expirado'
+        "0": 'Sem fila'
+        "5": 'Fila média'
+        "10": 'Fila longa'
     status_store_owners:
       new:
         title: 'Actualizar estado da loja %{resource}'
+        no_queue: 'Sem fila'
+        average_queue: 'Fila média'
+        long_queue: 'Fila longa'
+        title_latest: 'Última actualização de estado'
+        valid_until: 'Válido até %{time}'
+        expired_on: 'Expirou em %{time}'
+        "0": 'Sem fila'
+        "5": 'Fila média'
+        "10": 'Fila longa'
   helpers:
     page_entries_info:
       one_page:
