@@ -1,4 +1,5 @@
 import React from 'react';
+import capitalize from 'lodash/capitalize';
 
 function Toolbar(props) {
   const { status, dispatch } = props;
@@ -6,31 +7,35 @@ function Toolbar(props) {
     const { actionType } = e.target.dataset;
     dispatch({ type: actionType });
   };
+
   return (
     <div className="c-toolbar">
-      <div className="d-flex justify-content-end">
-        {status === 'idle' && (
-          <>
-            <button
-              type="button"
-              className="btn btn-outline-primary mr-2"
-              onClick={dispatchAction}
-              data-action-type="clickAdd"
-            >
-              Add stores
-            </button>
-            <button
-              type="button"
-              className="btn btn-outline-danger"
-              onClick={dispatchAction}
-              data-action-type="clickDelete"
-            >
-              Delete stores
-            </button>
-          </>
-        )}
-        {status !== 'idle' && (
-          <>
+      <div className="toolbar-wrapper d-flex justify-content-between align-items-center">
+        <div>
+          {status !== 'idle' && <h3 className="toolbar-title">{capitalize(`${status} store`)}</h3>}
+        </div>
+        <div>
+          {status === 'idle' && (
+            <>
+              <button
+                type="button"
+                className="btn btn-outline-primary mr-2"
+                onClick={dispatchAction}
+                data-action-type="clickAdd"
+              >
+                Add stores
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-danger"
+                onClick={dispatchAction}
+                data-action-type="clickDelete"
+              >
+                Delete stores
+              </button>
+            </>
+          )}
+          {status !== 'idle' && (
             <button
               type="button"
               className="btn btn-outline-secondary mr-2"
@@ -39,16 +44,8 @@ function Toolbar(props) {
             >
               Cancel
             </button>
-            <button
-              type="button"
-              className="btn btn-outline-success"
-              onClick={dispatchAction}
-              data-action-type="clickSave"
-            >
-              Save
-            </button>
-          </>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

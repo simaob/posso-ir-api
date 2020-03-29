@@ -1,4 +1,14 @@
 import produce from 'immer';
+import { v4 as uuidv4 } from 'uuid';
+
+const getMarkerId = payload => {
+  const { layer, target } = payload;
+
+  if (layer) {
+    return layer.options.id;
+  }
+  return target.options.id;
+};
 
 export const initialState = {
   status: 'idle',
@@ -20,11 +30,7 @@ function idleStatus(state, action, draft) {
       return draft;
     }
     case 'clickMarker': {
-      const {
-        target: {
-          options: { id }
-        }
-      } = action.payload;
+      const id = getMarkerId(action.payload);
       draft.selectedShop = id === state.selectedShop ? initialState.selectedShop : id;
       return draft;
     }
@@ -39,12 +45,16 @@ function creatingStatus(state, action, draft) {
   switch (action.type) {
     case 'clickMap': {
       const { latlng } = action.payload;
-      const temporaryId = `${latlng.lat}_${latlng.lng}`;
+      if (state.selectedShop) {
+        delete draft.shops[state.selectedShop];
+      }
+      const temporaryId = uuidv4();
       draft.shops[temporaryId] = {
         latitude: latlng.lat,
         longitude: latlng.lng,
         temporaryId
       };
+      draft.selectedShop = temporaryId;
       return draft;
     }
   }
@@ -59,12 +69,7 @@ function deletingStatus(state, action, draft) {
       return draft;
     }
     case 'clickMarker': {
-      const {
-        target: {
-          options: { id }
-        }
-      } = action.payload;
-      delete draft.shops[id];
+      draft.selectedShop = getMarkerId(action.payload);
       return draft;
     }
   }
@@ -98,6 +103,7 @@ const reducer = (state = initialState, action) =>
           draft.status = 'idle';
           draft.prevShops = initialState.prevShops;
           draft.shops = state.prevShops || initialState.shops;
+          draft.selectedShop = initialState.selectedShop;
           return draft;
         }
         case 'clickSave': {

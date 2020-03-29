@@ -14,7 +14,11 @@ function MapView(props) {
     <div className="c-map-view">
       <WRIIcons />
       <Toolbar status={state.status} dispatch={dispatch} />
-      <Sidebar shop={state.shops[state.selectedShop]} dispatch={dispatch} />
+      <Sidebar
+        status={state.status}
+        shop={state.shops[state.selectedShop]}
+        dispatch={dispatch}
+      />
       <ShopsMap shops={state.shops} dispatch={dispatch} />
     </div>
   );

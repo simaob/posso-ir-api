@@ -56,4 +56,4 @@ function ShopsMap(props) {
   );
 }
 
-export default ShopsMap;
+export default React.memo(ShopsMap);
