@@ -14,7 +14,8 @@ export const initialState = {
   status: 'idle',
   shops: {},
   prevShops: null,
-  selectedShop: null
+  selectedShop: null,
+  method: null
 };
 
 const onClickCancel = (state, action, draft) => {
@@ -25,8 +26,15 @@ const onClickCancel = (state, action, draft) => {
 };
 
 const onClickSave = (state, action, draft) => {
-  draft.status = 'idle';
-  draft.prevShops = initialState.prevShops;
+  const methods = {
+    creating: 'POST',
+    editing: 'PUT',
+    deleting: 'DELETE'
+  };
+  draft.method = methods[state.status];
+  draft.status = 'saving';
+  const shop = draft.shops[state.selectedShop];
+  Object.assign(shop, action.payload);
 };
 
 function idleStatus(state, action, draft) {
@@ -85,45 +93,57 @@ function creatingStatus(state, action, draft) {
       draft.selectedShop = temporaryId;
       return draft;
     }
+    case 'clickSave': {
+      return onClickSave(state, action, draft);
+    }
+    case 'clickCancel': {
+      return onClickCancel(state, action, draft);
+    }
   }
 }
 
 function deletingStatus(state, action, draft) {
   switch (action.type) {
-    case 'clickCancel': {
-      draft.status = 'idle';
-      draft.prevShops = initialState.prevShops;
-      draft.shops = state.prevShops || initialState.shops;
-      return draft;
-    }
     case 'clickMarker': {
       draft.selectedShop = getMarkerId(action.payload);
       return draft;
+    }
+    case 'clickSave': {
+      return onClickSave(state, action, draft);
+    }
+    case 'clickCancel': {
+      return onClickCancel(state, action, draft);
     }
   }
 }
 
 function editingStatus(state, action, draft) {
   switch (action.type) {
+    case 'clickSave': {
+      return onClickSave(state, action, draft);
+    }
     case 'clickCancel': {
       draft.selectedShop = state.selectedShop;
+      return onClickCancel(state, action, draft);
+    }
+  }
+}
+
+function savingStatus(state, action, draft) {
+  switch (action.type) {
+    case 'saveSuccessful': {
+      const shop = action.payload;
+      delete draft.shops[state.selectedShop];
+      draft.shops[shop.id] = { ...shop, temporaryId: state.selectedShop };
+      draft.selectedShop = shop.id;
+      draft.status = 'idle';
+      return draft;
     }
   }
 }
 
 const reducer = (state = initialState, action) =>
   produce(state, draft => {
-    if (state.status !== 'idle') {
-      switch (action.type) {
-        case 'clickCancel': {
-          onClickCancel(state, action, draft);
-        }
-        case 'clickSave': {
-          onClickSave(state, action, draft);
-        }
-      }
-    }
-
     if (state.status === 'idle') {
       idleStatus(state, action, draft);
     }
@@ -138,6 +158,10 @@ const reducer = (state = initialState, action) =>
 
     if (state.status === 'editing') {
       editingStatus(state, action, draft);
+    }
+
+    if (state.status === 'saving') {
+      savingStatus(state, action, draft);
     }
   });
 

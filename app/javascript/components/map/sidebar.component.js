@@ -1,20 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import cx from 'classnames';
 
 function Sidebar(props) {
   const { shop, dispatch, status } = props;
-  const ref = useRef(null);
-  const close = () => dispatch({ type: 'clickCloseSidebar' });
-  useOnClickOutside(ref, close);
+  const sidebarRef = useRef(null);
+  const formRef = useRef(null);
+  const [formState, setFormState] = useState({});
 
-  const dispatchAction = e => {
-    const { actionType } = e.target.dataset;
-    dispatch({ type: actionType });
+  const close = () => dispatch({ type: 'clickCloseSidebar' });
+  useOnClickOutside(sidebarRef, close);
+
+  const onSave = () => {
+    dispatch({ type: 'clickSave', payload: formState });
   };
 
   return (
-    <aside ref={ref} className={cx('c-sidebar', { '-visible': shop })}>
+    <aside ref={sidebarRef} className={cx('c-sidebar', { '-visible': shop })}>
       <div className="sidebar-header">
         <p className="shop-name">{(shop && shop.name) || 'Create new store'}</p>
         {status === 'idle' && (
@@ -24,9 +26,19 @@ function Sidebar(props) {
         )}
       </div>
       <div className="sidebar-content">
-        <form className="sidebar-form">
+        <form className="sidebar-form" ref={formRef}>
           {Object.entries(shop || {}).flatMap(([name, value]) => (
-            <FormField key={name} name={name} value={value} status={status} id={`shop-${name}`} />
+            <FormField
+              key={name}
+              name={name}
+              value={value}
+              status={status}
+              id={`shop-${name}`}
+              onChange={e => {
+                e.persist();
+                setFormState(formState => ({ ...formState, [name]: e.target.value }));
+              }}
+            />
           ))}
         </form>
       </div>
@@ -37,17 +49,11 @@ function Sidebar(props) {
               <button
                 type="button"
                 className="btn btn-outline-secondary mr-2"
-                onClick={dispatchAction}
-                data-action-type="clickCancel"
+                onClick={() => dispatch({ type: 'clickCancel' })}
               >
                 Cancel
               </button>
-              <button
-                type="button"
-                className="btn btn-outline-success"
-                onClick={dispatchAction}
-                data-action-type="clickSave"
-              >
+              <button type="button" onClick={onSave} className="btn btn-outline-success">
                 Save
               </button>
             </>
@@ -56,8 +62,7 @@ function Sidebar(props) {
             <button
               type="button"
               className="btn btn-outline-info"
-              onClick={dispatchAction}
-              data-action-type="clickEdit"
+              onClick={() => dispatch({ type: 'clickEdit' })}
             >
               Edit
             </button>
@@ -69,7 +74,7 @@ function Sidebar(props) {
 }
 
 function FormField(props) {
-  const { id, value, type = 'text', name, status } = props;
+  const { id, value, type = 'text', name, status, onChange } = props;
   const readOnly = name === 'id' || ['idle', 'deleting'].includes(status);
   return (
     <div className="form-group">
@@ -82,6 +87,7 @@ function FormField(props) {
         readOnly={readOnly}
         defaultValue={value}
         className="form-control"
+        onChange={onChange}
       />
     </div>
   );
