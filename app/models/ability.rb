@@ -14,7 +14,7 @@ class Ability
       can :read, :all
     elsif user.store_manager?
       can :index, :manage_stores
-      can :manage, Store, user_stores: {manager: {id: user.id}}
+      can [:new, :create], StatusStoreOwner
     end
   end
 end

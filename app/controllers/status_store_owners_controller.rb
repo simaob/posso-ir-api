@@ -3,10 +3,12 @@ class StatusStoreOwnersController < ApplicationController
   def new
     @status_store_owner = @store.status_store_owners
       .new(updated_time: Time.now)
+    authorize! :new, @status_store_owner
   end
 
   def create
     @status_store_owner = @store.status_store_owners.new(status_store_owner_params)
+    authorize! :create, @status_store_owner
 
     respond_to do |format|
       if @store.save
