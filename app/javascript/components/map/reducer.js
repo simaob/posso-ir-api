@@ -135,7 +135,7 @@ function savingStatus(state, action, draft) {
     case 'saveSuccessful': {
       const shop = action.payload;
       delete draft.shops[state.selectedShop];
-      draft.shops[shop.id] = { ...shop, temporaryId: state.selectedShop };
+      draft.shops[shop.id] = shop;
       draft.selectedShop = shop.id;
       draft.status = 'idle';
       return draft;
