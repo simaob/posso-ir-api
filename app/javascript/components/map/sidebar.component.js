@@ -52,7 +52,7 @@ function Sidebar(props) {
               </button>
             </>
           )}
-          {status === 'idle' && (
+          {status === 'idle' && shop && (
             <button
               type="button"
               className="btn btn-outline-info"

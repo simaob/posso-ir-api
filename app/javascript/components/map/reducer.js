@@ -66,10 +66,21 @@ function creatingStatus(state, action, draft) {
         delete draft.shops[state.selectedShop];
       }
       const temporaryId = uuidv4();
+      let fields = {};
+      if (Object.keys(state.shops).length > 0) {
+        const first = Object.values(state.shops)[0];
+        fields = Object.keys(first).reduce((acc, next) => {
+          if (next === 'id') {
+            return acc;
+          }
+          return { ...acc, [next]: '' };
+        }, {});
+      }
       draft.shops[temporaryId] = {
+        ...fields,
+        temporaryId,
         latitude: latlng.lat,
-        longitude: latlng.lng,
-        temporaryId
+        longitude: latlng.lng
       };
       draft.selectedShop = temporaryId;
       return draft;
