@@ -112,8 +112,9 @@ function deletingStatus(state, action, draft) {
       return onClickSave(state, action, draft);
     }
     case 'clickCancel': {
+      onClickCancel(state, action, draft);
       draft.selectedShop = state.selectedShop;
-      return onClickCancel(state, action, draft);
+      return draft;
     }
   }
 }
@@ -124,8 +125,9 @@ function editingStatus(state, action, draft) {
       return onClickSave(state, action, draft);
     }
     case 'clickCancel': {
+      onClickCancel(state, action, draft);
       draft.selectedShop = state.selectedShop;
-      return onClickCancel(state, action, draft);
+      return draft;
     }
   }
 }

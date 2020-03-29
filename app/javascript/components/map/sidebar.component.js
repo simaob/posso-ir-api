@@ -26,7 +26,7 @@ function Sidebar(props) {
         )}
       </div>
       <div className="sidebar-content">
-        <form className="sidebar-form" ref={formRef}>
+        <form key={status} className="sidebar-form" ref={formRef}>
           {Object.entries(shop || {}).flatMap(([name, value]) => (
             <FormField
               key={name}
