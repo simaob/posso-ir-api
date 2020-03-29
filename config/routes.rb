@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       jsonapi_resources :stores do end
       jsonapi_resources :status_crowdsource_users, only: [:create] do end
       jsonapi_resources :status_crowdsources, only: [:index] do end
+      jsonapi_resources :status_generals, only: [:index] do end
     end
   end
 end

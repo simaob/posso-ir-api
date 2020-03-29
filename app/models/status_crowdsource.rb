@@ -16,6 +16,8 @@
 #  previous_updated_time :datetime
 #  voters                :integer
 #  previous_voters       :integer
+#  is_official           :boolean          default("false")
+#  active                :boolean          default("true")
 #
 class StatusCrowdsource < Status
   include TimeHelper

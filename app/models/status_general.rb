@@ -19,6 +19,6 @@
 #  is_official           :boolean          default("false")
 #  active                :boolean          default("true")
 #
-class StatusUserCount < Status
+class StatusGeneral < Status
 
 end

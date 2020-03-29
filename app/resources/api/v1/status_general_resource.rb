@@ -14,7 +14,8 @@
 #
 module Api
   module V1
-    class StatusCrowdsourceResource < StatusResource
+    class StatusGeneralResource < StatusResource
+      attributes :is_official
     end
   end
 end

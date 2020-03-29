@@ -13,7 +13,7 @@
 #  updated_at             :datetime         not null
 #  app_uuid               :string
 #  last_post              :datetime
-#  role                   :integer
+#  role                   :integer          default("0")
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
