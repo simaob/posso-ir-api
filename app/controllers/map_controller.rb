@@ -26,7 +26,7 @@ class MapController < ApplicationController
 
     respond_to do |format|
       if @shop.save
-        format.json { render json: @shop, status: :created, location: @shop }
+        format.json { render json: @shop, status: :ok, location: @shop }
       else
         format.json { render json: @shop.errors, status: :unprocessable_entity }
       end
@@ -34,13 +34,13 @@ class MapController < ApplicationController
     # TODO: mark as validated
   end
 
-  def delete
+  def destroy
     @shop = Store.find(params[:id])
     @shop.attributes = map_params
 
     respond_to do |format|
       if @shop.save
-        format.json { render json: @shop, status: :created, location: @shop }
+        format.json { render json: @shop, status: :ok, location: @shop }
       else
         format.json { render json: @shop.errors, status: :unprocessable_entity }
       end

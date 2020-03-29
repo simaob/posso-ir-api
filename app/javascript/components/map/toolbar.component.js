@@ -23,7 +23,7 @@ function Toolbar(props) {
                 onClick={dispatchAction}
                 data-action-type="clickAdd"
               >
-                Add stores
+                Add store
               </button>
               <button
                 type="button"
@@ -31,7 +31,7 @@ function Toolbar(props) {
                 onClick={dispatchAction}
                 data-action-type="clickDelete"
               >
-                Delete stores
+                Delete store
               </button>
             </>
           )}

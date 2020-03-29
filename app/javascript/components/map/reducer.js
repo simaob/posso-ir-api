@@ -112,6 +112,7 @@ function deletingStatus(state, action, draft) {
       return onClickSave(state, action, draft);
     }
     case 'clickCancel': {
+      draft.selectedShop = state.selectedShop;
       return onClickCancel(state, action, draft);
     }
   }
@@ -138,6 +139,15 @@ function savingStatus(state, action, draft) {
       draft.selectedShop = shop.id;
       draft.status = 'idle';
       return draft;
+    }
+    case 'saveFailed': {
+      const statuses = {
+        POST: 'creating',
+        PUT: 'editing',
+        DELETE: 'deleting'
+      };
+      draft.status = statuses[state.method];
+      draft.method = initialState.method;
     }
   }
 }

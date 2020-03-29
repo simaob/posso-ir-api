@@ -53,19 +53,35 @@ function Sidebar(props) {
               >
                 Cancel
               </button>
-              <button type="button" onClick={onSave} className="btn btn-outline-success">
-                Save
-              </button>
+              {status !== 'deleting' && (
+                <button type="button" onClick={onSave} className="btn btn-outline-success">
+                  Save
+                </button>
+              )}
+              {status === 'deleting' && (
+                <button type="button" onClick={onSave} className="btn btn-outline-danger">
+                  Confirm
+                </button>
+              )}
             </>
           )}
           {status === 'idle' && shop && (
-            <button
-              type="button"
-              className="btn btn-outline-info"
-              onClick={() => dispatch({ type: 'clickEdit' })}
-            >
-              Edit
-            </button>
+            <>
+              <button
+                type="button"
+                className="btn btn-outline-info mr-2"
+                onClick={() => dispatch({ type: 'clickEdit' })}
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                onClick={() => dispatch({ type: 'clickDelete' })}
+                className="btn btn-outline-danger"
+              >
+                Delete
+              </button>
+            </>
           )}
         </div>
       </div>
