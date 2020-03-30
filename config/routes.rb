@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     root to: "home#index"
     resources :stores do
       post :approve_all, on: :collection
+      resources :status_store_owners, only: [:new, :create]
     end
+    resources :manage_stores, only: [:index]
     resources :users
   end
 

@@ -11,7 +11,10 @@ class Ability
       can :manage, :all
     elsif user.general_manager?
       can [:new, :create], Store
+      can :read, :all
+    elsif user.store_manager?
+      can :index, :manage_stores
+      can [:new, :create], StatusStoreOwner
     end
-    can :read, :all
   end
 end

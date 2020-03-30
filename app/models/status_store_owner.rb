@@ -20,5 +20,12 @@
 #  active                :boolean          default("true")
 #
 class StatusStoreOwner < Status
+  after_validation :set_valid_until
+  validates :updated_time, :status, :store_id, presence: true
 
+  private
+
+  def set_valid_until
+    self.valid_until = self.updated_time + 1.hour
+  end
 end

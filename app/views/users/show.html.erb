@@ -29,6 +29,16 @@
       <%= enum_l(@user, :role) %>
     </p>
 
+    <% if @user.store_manager? %>
+      <p><strong><%= Store.model_name.human(count: 2) %></strong>
+        <ul>
+          <% @user.stores.order(:name).each do |store| %>
+            <li><%= link_to store.name, store %></li>
+          <% end %>
+        </ul>
+      </p>
+    <% end %>
+
     <p>
       <strong><%= User.human_attribute_name(:app_uuid) %>:</strong>
       <%= @user.app_uuid %>

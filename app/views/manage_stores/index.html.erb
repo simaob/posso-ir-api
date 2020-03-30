@@ -5,32 +5,9 @@
     <h1><%= Store.model_name.human(count: 2) %></h1>
   </div>
   <div class="col-md-2">
-    <% if current_user.admin? && params[:state] == 'waiting_approval' %>
-      <%= link_to I18n.t('views.actions.approve_all'), approve_all_stores_path, method: :post,
-        data: {confirm: I18n.t('views.stores.index.confirm_approval')},
-        class: 'btn btn-sm btn-outline-success' %>
-    <% end %>
     <% if can? :new, Store %>
       <%= link_to I18n.t('views.actions.new'), new_store_path,
         class: 'btn btn-sm btn-outline-primary' %>
-    <% end %>
-  </div>
-</div>
-
-<div class="row mt-2">
-  <div class="col-md-12">
-    <%= form_tag stores_path, method: :get, class: 'form-inline' do %>
-      <%= label_tag :search, 'Search', class: 'sr-only' %>
-      <%= text_field_tag :search, params[:search], class: 'form-control col-md-5 mb-2 mr-sm-2',
-        placeholder: I18n.t('views.stores.search.placeholder') %>
-      <%= label_tag :group, 'Group', class: 'sr-only' %>
-      <%= select_tag :group, options_for_select(Store.groups, params[:group]),
-        {include_blank: I18n.t('views.stores.search.filter_group'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
-      <%= label_tag :state, 'State', class: 'sr-only' %>
-      <%= select_tag :state, options_for_select(enum_options_for_select(Store, :state), params[:state]),
-        {include_blank: I18n.t('views.stores.search.filter_state'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
-      <%= submit_tag I18n.t('views.stores.search.button'),
-        class: 'btn btn-primary mb-2' %>
     <% end %>
   </div>
 </div>
@@ -39,7 +16,6 @@
   <div class="col-md-12">
     <div class="main-card mb-3 card">
       <div class="card-body">
-        <%= page_entries_info @stores %>
         <div class="table-responsive">
           <table class="table table-sm">
             <thead>
@@ -51,6 +27,7 @@
                 <th><%= Store.human_attribute_name(:city) %></th>
                 <th><%= Store.human_attribute_name(:latitude) %></th>
                 <th><%= Store.human_attribute_name(:longitude) %></th>
+                <th><%= I18n.t('views.manage_stores.index.latest_status') %></th>
                 <th><%= I18n.t('views.actions.title') %></th>
               </tr>
             </thead>
@@ -65,20 +42,15 @@
                   <td><%= store.city %></td>
                   <td><%= store.latitude&.round(3) %></td>
                   <td><%= store.longitude&.round(3) %></td>
+                  <td><%= latest_status(store.latest_owner_status) %></td>
                   <td>
-                    <%= link_to I18n.t('views.actions.show'), store %>
-                    <% if can? :manage, store %>
-                      |
-                      <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
-                      |
-                      <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
-                    <% end %>
+                    <%= link_to I18n.t('views.manage_stores.index.manage_link'),
+                      new_store_status_store_owner_path(store) %>
                   </td>
                 </tr>
               <% end %>
             </tbody>
           </table>
-          <%= paginate @stores %>
         </div>
       </div>
     </div>

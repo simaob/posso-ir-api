@@ -30,6 +30,8 @@ class Store < ApplicationRecord
   has_many :status_store_owners
   has_many :status_generals
 
+  has_many :user_stores
+  has_many :managers, through: :user_stores
 
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
@@ -52,8 +54,16 @@ class Store < ApplicationRecord
     [street, city].compact.join(',')
   end
 
+  def text
+    [name, city].compact.join(', ')
+  end
+
   def self.groups
     select(:group).order(:group).distinct.pluck(:group)
+  end
+
+  def latest_owner_status
+    status_store_owners.order(updated_at: :desc).limit(1)&.first
   end
 
   def self.search(search)

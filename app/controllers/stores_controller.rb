@@ -12,7 +12,16 @@ class StoresController < ApplicationController
       @stores = @stores.where(latitude: nil).or(Store.where(longitude: nil))
     end
 
-    @stores = @stores.order(:group, :name).page(params[:page])
+    @stores = @stores.order(:group, :name)
+
+    respond_to do |format|
+      format.html do
+        @stores = @stores.page(params[:page])
+      end
+      format.json do
+        @stores = @stores.limit(50)
+      end
+    end
   end
 
   # GET /stores/1
