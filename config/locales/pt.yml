@@ -102,6 +102,7 @@ pt:
       search:
         placeholder: 'Procure por nome ou email...'
         button: 'Procurar'
+        filter_role: 'Filtrar por função'
     manage_stores:
       index:
         nav: 'As minhas lojas'

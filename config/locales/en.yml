@@ -96,6 +96,7 @@ en:
       search:
         placeholder: 'Search by name or email...'
         button: 'Search'
+        filter_role: 'Filter by role'
     manage_stores:
       index:
         nav: 'My stores'

@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def index
     @users = User.order(:created_at).search(params[:search])
       .page(params[:page])
+    @users = @users.where(role: params[:role]) if params[:role]
   end
 
   # GET /users/1
