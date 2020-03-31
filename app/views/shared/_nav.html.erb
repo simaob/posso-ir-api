@@ -5,7 +5,7 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
-      <% if can? :read, :all %>
+      <% if current_user && !current_user.user? %>
         <li class="nav-item <%= 'active' if controller_name == 'map' %>">
           <%= link_to map_index_path, class: 'nav-link' do %>
             <%= I18n.t('views.map.index.title') %>
@@ -14,6 +14,8 @@
             <% end %>
           <% end %>
         </li>
+      <% end %>
+      <% if can? :read, :all %>
         <li class="nav-item <%= 'active' if controller_name == 'stores' %>">
           <%= link_to stores_path, class: 'nav-link' do %>
             <%= Store.model_name.human(count: 2) %>

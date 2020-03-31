@@ -2,9 +2,16 @@ class MapController < ApplicationController
   include EnumI18nHelper
 
   def index
-    @shops = Store.all.where.not(latitude: nil).where.not(longitude: nil)
-      .where(state: 'live')
-      .where(country: 'PT')
+    authorize! :read, :map
+
+    @shops = if current_user.store_manager?
+               current_user.stores
+                 .where.not(latitude: nil).where.not(longitude: nil)
+             else
+               Store.where.not(latitude: nil).where.not(longitude: nil)
+                 .where(state: 'live')
+                 .where(country: 'PT')
+             end
     @shops = Hash[@shops.collect { |item| [item.id, item] } ]
     @labels = {
       delete: I18n.t('views.map.index.delete'),
