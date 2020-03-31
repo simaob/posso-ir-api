@@ -12,7 +12,7 @@ function Toolbar(props) {
     <div className="c-toolbar">
       <div className="toolbar-wrapper d-flex justify-content-between align-items-center">
         <div>
-          {status !== 'idle' && <h3 className="toolbar-title">{capitalize(`${status} store`)}</h3>}
+          {status !== 'idle' && <h3 className="toolbar-title">{labels[status]}</h3>}
         </div>
         <div>
           {status === 'idle' && (

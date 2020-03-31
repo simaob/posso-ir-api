@@ -2,7 +2,9 @@ class MapController < ApplicationController
   include EnumI18nHelper
 
   def index
-    @shops = Store.all.where.not(latitude: nil, longitude: nil).where(country: 'PT')
+    @shops = Store.all.where.not(latitude: nil).where.not(longitude: nil)
+      .where(state: 'live')
+      .where(country: 'PT')
     @shops = Hash[@shops.collect { |item| [item.id, item] } ]
     @labels = {
       delete: I18n.t('views.map.index.delete'),
@@ -13,9 +15,9 @@ class MapController < ApplicationController
       cancel: I18n.t('views.map.index.cancel'),
       save: I18n.t('views.map.index.save'),
       confirm: I18n.t('views.map.index.confirm'),
-      editing: I18n.t('views.map.index.editing_store'),
-      deleting: I18n.t('views.map.index.deleting_store'),
-      creating: I18n.t('views.map.index.creating_store')
+      editing: I18n.t('views.map.index.editing'),
+      deleting: I18n.t('views.map.index.deleting'),
+      creating: I18n.t('views.map.index.creating')
     }
     @fields = [
       {
@@ -96,12 +98,11 @@ class MapController < ApplicationController
         format.json { render json: @shop.errors, status: :unprocessable_entity }
       end
     end
-    # TODO: mark as validated
   end
 
   def destroy
     @shop = Store.find(params[:id])
-    @shop.attributes = map_params
+    @shop.state = 3
 
     respond_to do |format|
       if @shop.save
@@ -110,7 +111,6 @@ class MapController < ApplicationController
         format.json { render json: @shop.errors, status: :unprocessable_entity }
       end
     end
-    # TODO: mark as delete_requested
   end
 
   private
