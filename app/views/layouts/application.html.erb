@@ -17,12 +17,10 @@
       <%= render 'shared/nav' %>
     </header>
     <main role="main" class="flex-shrink-0">
-      <div class="container">
-        <% if Rails.env.development? %>
-          <%= switch_user_select %>
-        <% end %>
-        <%= yield %>
-      </div>
+      <% if Rails.env.development? %>
+        <%= switch_user_select %>
+      <% end %>
+      <%= yield %>
     </main>
   </body>
 </html>

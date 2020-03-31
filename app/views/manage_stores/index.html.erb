@@ -1,56 +1,58 @@
-<% content_for :page_title, Store.model_name.human(count: 2) %>
+<div class="container">
+  <% content_for :page_title, Store.model_name.human(count: 2) %>
 
-<div class="row mt-5">
-  <div class="col-md-10">
-    <h1><%= Store.model_name.human(count: 2) %></h1>
+  <div class="row mt-5">
+    <div class="col-md-10">
+      <h1><%= Store.model_name.human(count: 2) %></h1>
+    </div>
+    <div class="col-md-2">
+      <% if can? :new, Store %>
+        <%= link_to I18n.t('views.actions.new'), new_store_path,
+          class: 'btn btn-sm btn-outline-primary' %>
+      <% end %>
+    </div>
   </div>
-  <div class="col-md-2">
-    <% if can? :new, Store %>
-      <%= link_to I18n.t('views.actions.new'), new_store_path,
-        class: 'btn btn-sm btn-outline-primary' %>
-    <% end %>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="main-card mb-3 card">
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-sm">
-            <thead>
-              <tr>
-                <th><%= Store.human_attribute_name(:name) %></th>
-                <th><%= Store.human_attribute_name(:state) %></th>
-                <th><%= Store.human_attribute_name(:group) %></th>
-                <th><%= Store.human_attribute_name(:street) %></th>
-                <th><%= Store.human_attribute_name(:city) %></th>
-                <th><%= Store.human_attribute_name(:latitude) %></th>
-                <th><%= Store.human_attribute_name(:longitude) %></th>
-                <th><%= I18n.t('views.manage_stores.index.latest_status') %></th>
-                <th><%= I18n.t('views.actions.title') %></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @stores.each do |store| %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
                 <tr>
-                  <td><%= link_to store.name, store %></td>
-                  <td><%= enum_l(store, :state) %></td>
-                  <td><%= store.group %></td>
-                  <td><%= store.street %></td>
-                  <td><%= store.city %></td>
-                  <td><%= store.latitude&.round(3) %></td>
-                  <td><%= store.longitude&.round(3) %></td>
-                  <td><%= latest_status(store.latest_owner_status) %></td>
-                  <td>
-                    <%= link_to I18n.t('views.manage_stores.index.manage_link'),
-                      new_store_status_store_owner_path(store) %>
-                  </td>
+                  <th><%= Store.human_attribute_name(:name) %></th>
+                  <th><%= Store.human_attribute_name(:state) %></th>
+                  <th><%= Store.human_attribute_name(:group) %></th>
+                  <th><%= Store.human_attribute_name(:street) %></th>
+                  <th><%= Store.human_attribute_name(:city) %></th>
+                  <th><%= Store.human_attribute_name(:latitude) %></th>
+                  <th><%= Store.human_attribute_name(:longitude) %></th>
+                  <th><%= I18n.t('views.manage_stores.index.latest_status') %></th>
+                  <th><%= I18n.t('views.actions.title') %></th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                <% @stores.each do |store| %>
+                  <tr>
+                    <td><%= link_to store.name, store %></td>
+                    <td><%= enum_l(store, :state) %></td>
+                    <td><%= store.group %></td>
+                    <td><%= store.street %></td>
+                    <td><%= store.city %></td>
+                    <td><%= store.latitude&.round(3) %></td>
+                    <td><%= store.longitude&.round(3) %></td>
+                    <td><%= latest_status(store.latest_owner_status) %></td>
+                    <td>
+                      <%= link_to I18n.t('views.manage_stores.index.manage_link'),
+                        new_store_status_store_owner_path(store) %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

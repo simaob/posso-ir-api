@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
     resources :manage_stores, only: [:index]
     resources :users
+    resources :map
   end
 
   namespace :api do
