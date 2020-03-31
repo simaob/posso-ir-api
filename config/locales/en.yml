@@ -7,6 +7,29 @@ en:
       user:
         one: 'User'
         other: 'Users'
+    attributes:
+      store:
+        name: 'Name'
+        group: 'Group'
+        street: 'Address'
+        city: 'City'
+        district: 'District'
+        country: 'Country'
+        zip_code: 'Zip Code'
+        latitude: 'Latitude'
+        longitude: 'Longitude'
+        capacity: 'Capacity'
+        details: 'Details'
+        store_type: 'Type of store'
+        state: 'State'
+      user:
+        email: 'Email'
+        name: 'Name'
+        role: 'Role'
+        app_uuid: 'UUID'
+      status_store_owner:
+        updated_time: 'Time'
+        status: 'State'
     enums:
       user:
         roles:
@@ -19,10 +42,17 @@ en:
           waiting_approval: 'Waiting approval'
           live: 'Active'
           marked_for_deletion: 'Marked for deletion'
+        store_types:
+          restaurant: 'Restaurant'
+          supermarket: 'Supermarket'
+          pharmacy: 'Pharmacy'
   views:
     layout:
       application:
         title: 'Can I Go?'
+    home:
+      index:
+        title: 'Welcome to Can I Go management system'
     actions:
       show: 'Show'
       edit: 'Edit'
@@ -31,6 +61,20 @@ en:
       new: 'New'
       back: 'Back'
       approve_all: 'Approve all'
+    map:
+      index:
+        title: 'Map'
+        add_store: 'Create store'
+        edit: 'Edit'
+        delete_store: 'Delete store'
+        cancel: 'Cancel'
+        delete: 'Delete'
+        close: 'Close'
+        save: 'Save'
+        confirm: 'Confirm'
+        editing: 'Editing store'
+        deleting: 'Deleting store'
+        creating: 'Adding store'
     edit:
       title: "Editing %{resource}"
     shared:
@@ -52,3 +96,25 @@ en:
       search:
         placeholder: 'Search by name or email...'
         button: 'Search'
+    manage_stores:
+      index:
+        nav: 'My stores'
+        manage_link: 'Update state'
+        latest_status: 'Last state reported'
+        state_valid_until: '%{state} | Valid until %{time}'
+        state_invalid: '%{state} | Expired'
+        "0": 'No queue'
+        "5": 'Average queue'
+        "10": 'Long queue'
+    status_store_owners:
+      new:
+        title: 'Updatings state of store %{resource}'
+        no_queue: 'No queue'
+        average_queue: 'Average queue'
+        long_queue: 'Long queue'
+        title_latest: 'Last state reported'
+        valid_until: 'Valid until %{time}'
+        expired_on: 'Expired at %{time}'
+        "0": 'No queue'
+        "5": 'Average queue'
+        "10": 'Long queue'
