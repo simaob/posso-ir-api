@@ -21,11 +21,15 @@ es:
         capacity: 'Capacidad'
         details: 'Detalles'
         store_type: 'Tipo de tienda'
+        state: 'Estado'
       user:
         email: 'Correo electrónico'
         name: 'Nombre'
         role: 'Papel'
         app_uuid: 'UUID'
+      status_store_owner:
+        updated_time: 'Hora'
+        status: 'Estado'
     enums:
       user:
         roles:
@@ -33,6 +37,11 @@ es:
           store_manager: 'Gerente de la tienda'
           general_manager: 'Gerente de grupo'
           admin: 'Administrador'
+      store:
+        states:
+          waiting_approval: 'Esperando a ser validado'
+          live: 'Activada'
+          marked_for_deletion: 'Marcado para eliminar'
   views:
     layout:
       application:
@@ -43,6 +52,8 @@ es:
       destroy: 'Destruir'
       title: 'Acciones'
       new: 'Añadir'
+      back: 'Volver'
+      approve_all: 'Validar todas'
     edit:
       title: "Editando %{resource}"
     shared:
@@ -63,6 +74,7 @@ es:
         placeholder: 'Buscar por nombre o dirección...'
         button: 'Buscar'
         filter_group: 'Filtrar por grupo'
+        filter_state: 'Filtrar por estado'
     users:
       search:
         placeholder: 'Buscar por nombre o correo electrónico...'
