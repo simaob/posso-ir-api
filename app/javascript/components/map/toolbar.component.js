@@ -2,7 +2,7 @@ import React from 'react';
 import capitalize from 'lodash/capitalize';
 
 function Toolbar(props) {
-  const { status, dispatch } = props;
+  const { status, dispatch, labels } = props;
   const dispatchAction = e => {
     const { actionType } = e.target.dataset;
     dispatch({ type: actionType });
@@ -23,7 +23,7 @@ function Toolbar(props) {
                 onClick={dispatchAction}
                 data-action-type="clickAdd"
               >
-                Add store
+                {labels.add_store}
               </button>
               <button
                 type="button"
@@ -31,7 +31,7 @@ function Toolbar(props) {
                 onClick={dispatchAction}
                 data-action-type="clickDelete"
               >
-                Delete store
+                {labels.delete_store}
               </button>
             </>
           )}
@@ -42,7 +42,7 @@ function Toolbar(props) {
               onClick={dispatchAction}
               data-action-type="clickCancel"
             >
-              Cancel
+              {labels.cancel}
             </button>
           )}
         </div>

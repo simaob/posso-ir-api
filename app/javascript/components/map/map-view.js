@@ -21,7 +21,7 @@ function saveShop(shop, method) {
 }
 
 function MapView(props) {
-  const { shops } = props;
+  const { shops, fields, labels } = props;
   const [state, dispatch] = useReducer(reducer, { ...initialState, shops });
 
   useEffect(() => {
@@ -39,8 +39,8 @@ function MapView(props) {
   return (
     <div className="c-map-view">
       <WRIIcons />
-      <Toolbar status={state.status} dispatch={dispatch} />
-      <Sidebar status={state.status} shop={state.shops[state.selectedShop]} dispatch={dispatch} />
+      <Toolbar status={state.status} dispatch={dispatch} labels={labels} />
+      <Sidebar status={state.status} shop={state.shops[state.selectedShop]} fields={fields} dispatch={dispatch} labels={labels} />
       <ShopsMap shops={state.shops} dispatch={dispatch} />
     </div>
   );

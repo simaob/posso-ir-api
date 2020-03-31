@@ -42,6 +42,10 @@ es:
           waiting_approval: 'Esperando a ser validado'
           live: 'Activada'
           marked_for_deletion: 'Marcado para eliminar'
+        store_types:
+          restaurant: 'Restaurante'
+          supermarket: 'Supermercado'
+          pharmacy: 'Farmacia'
   views:
     layout:
       application:
@@ -54,6 +58,19 @@ es:
       new: 'Añadir'
       back: 'Volver'
       approve_all: 'Validar todas'
+    map:
+      index:
+        add_store: 'Añadir tienda'
+        edit: 'Editar'
+        delete_store: 'Eliminar tienda'
+        cancel: 'Cancelar'
+        delete: 'Eliminar'
+        close: 'Cerrar'
+        save: 'Guardar'
+        confirm: 'Confirmar'
+        editing: 'Editando tienda'
+        deleting: 'Eliminando tienda'
+        creating: 'Añadindo tienda'
     edit:
       title: "Editando %{resource}"
     shared:
