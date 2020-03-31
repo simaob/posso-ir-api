@@ -6,6 +6,14 @@
 	<div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <% if can? :read, :all %>
+        <li class="nav-item <%= 'active' if controller_name == 'map' %>">
+          <%= link_to map_index_path, class: 'nav-link' do %>
+            <%= I18n.t('views.map.index.title') %>
+            <% if controller_name == 'map' %>
+              <span class="sr-only">(<%= I18n.t('views.shared.navbar.current') %>)</span>
+            <% end %>
+          <% end %>
+        </li>
         <li class="nav-item <%= 'active' if controller_name == 'stores' %>">
           <%= link_to stores_path, class: 'nav-link' do %>
             <%= Store.model_name.human(count: 2) %>

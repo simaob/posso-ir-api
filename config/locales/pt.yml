@@ -50,6 +50,9 @@ pt:
     layout:
       application:
         title: 'Posso Ir'
+    home:
+      index:
+        title: 'Bem-vindo ao sistema de gestão da Posso Ir'
     actions:
       show: 'Ver'
       edit: 'Editar'
@@ -60,6 +63,7 @@ pt:
       approve_all: 'Aprovar todas'
     map:
       index:
+        title: 'Mapa'
         add_store: 'Criar loja'
         edit: 'Editar'
         delete_store: 'Remover loja'

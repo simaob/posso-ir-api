@@ -50,6 +50,9 @@ es:
     layout:
       application:
         title: 'Puedo Ir'
+    home:
+      index:
+        title: 'Bienvenido a lo sistema de gestión de Puedo Ir'
     actions:
       show: 'Mostrar'
       edit: 'Editar'
@@ -60,6 +63,7 @@ es:
       approve_all: 'Validar todas'
     map:
       index:
+        title: 'Mapa'
         add_store: 'Añadir tienda'
         edit: 'Editar'
         delete_store: 'Eliminar tienda'
