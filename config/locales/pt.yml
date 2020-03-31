@@ -116,7 +116,7 @@ pt:
         long_queue: 'Fila longa'
         title_latest: 'Última actualização de estado'
         valid_until: 'Válido até %{time}'
-        expired_on: 'Expirou em %{time}'
+        expired_on: 'Expirou às %{time}'
         "0": 'Sem fila'
         "5": 'Fila média'
         "10": 'Fila longa'
