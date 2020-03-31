@@ -12,8 +12,9 @@ class GenerateStatusStoreOwner
       puts "Imported #{index}" if (index % 100).zero?
       next if store.status_store_owners.any?
 
-      StatusStoreOwner.create!(store_id: store.id, updated_time: Time.now,
-                               active: true)
+      status = StatusStoreOwner.new(store_id: store.id,
+                                    updated_time: Time.now, active: true)
+      status.save!(validate: false)
     end
   end
 end
