@@ -65,6 +65,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV.fetch("DATABASE_URL", "")&.gsub(/postgres/, 'postgis') %>
   database: <%= ENV['RDS_DATABASE'] %>
   username: <%= ENV['RDS_USERNAME'] %>
   password: <%= ENV['RDS_PASSWORD'] %>
