@@ -14,7 +14,7 @@
 #  longitude        :float
 #  capacity         :integer
 #  details          :text
-#  store_type       :integer
+#  store_type       :integer          default("1"), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  lonlat           :geometry         point, 0

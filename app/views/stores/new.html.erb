@@ -1,15 +1,17 @@
-<% content_for :page_title, I18n.t('views.new.title', resource: Store.model_name.human) %>
+<div class="container">
+  <% content_for :page_title, I18n.t('views.new.title', resource: Store.model_name.human) %>
 
-<div class="row mt-5">
-  <div class="col-md-11">
-    <h1><%= "#{I18n.t('views.actions.new')} #{Store.model_name.human(count: 1)}" %></h1>
-  </div>
-  <% if can? :new, Store %>
-    <div class="col-md-1">
-      <%= link_to I18n.t('views.actions.back'), stores_path,
-        class: 'btn btn-sm btn-outline-primary' %>
+  <div class="row mt-5">
+    <div class="col-md-11">
+      <h1><%= "#{I18n.t('views.actions.new')} #{Store.model_name.human(count: 1)}" %></h1>
+    </div>
+    <% if can? :new, Store %>
+      <div class="col-md-1">
+        <%= link_to I18n.t('views.actions.back'), stores_path,
+          class: 'btn btn-sm btn-outline-primary' %>
     </div>
   <% end %>
-</div>
+  </div>
 
-<%= render 'form', store: @store %>
+  <%= render 'form', store: @store %>
+</div>

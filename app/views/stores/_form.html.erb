@@ -28,6 +28,11 @@
       </div>
 
       <div class="form-group">
+        <%= form.label :store_type, class: "col-sm-2 col-form-label" %>
+        <%= form.select :store_type, enum_options_for_select(Store, :store_type), {}, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
         <%= form.label :group, class: "col-sm-2 col-form-label" %>
         <%= form.text_field :group, class: "form-control" %>
       </div>
