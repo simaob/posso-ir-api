@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
   validates_uniqueness_of :email, unless: Proc.new { |u| u.email.blank? }
 
-  has_many :user_stores
+  has_many :user_stores, inverse_of: :manager
   has_many :stores, through: :user_stores
 
   enum role: { 'user': 0, 'store_manager': 1, 'general_manager': 2, 'admin': 3 }

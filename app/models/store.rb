@@ -31,7 +31,7 @@ class Store < ApplicationRecord
   has_many :status_store_owners
   has_many :status_generals
 
-  has_many :user_stores
+  has_many :user_stores, inverse_of: :store
   has_many :managers, through: :user_stores
 
   # geocoded_by :address
