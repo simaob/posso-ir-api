@@ -31,6 +31,11 @@
       </p>
 
       <p>
+        <strong><%= Store.human_attribute_name(:open) %>:</strong>
+        <%= @store.open %>
+      </p>
+
+      <p>
         <strong><%= Store.human_attribute_name(:group) %>:</strong>
         <%= link_to @store.group, stores_path(group: @store.group) %>
       </p>

@@ -20,6 +20,7 @@
 #  lonlat           :geometry         point, 0
 #  state            :integer          default("1")
 #  reason_to_delete :text
+#  open             :boolean          default("true")
 #
 class Store < ApplicationRecord
   paginates_per 50
@@ -36,14 +37,15 @@ class Store < ApplicationRecord
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
-  enum store_type: { 'supermarket': 1, 'pharmacy': 2, 'restaurant': 3 }
+  enum store_type: { 'supermarket': 1, 'pharmacy': 2, 'restaurant': 3, 'gas_station': 4 }
   enum state: { waiting_approval: 1, live: 2, marked_for_deletion: 3 }
 
   validates :capacity, allow_nil: true, numericality: { greater_than: 0 }
 
   scope :by_group, ->(group) { where(group: group) }
   scope :by_state, ->(state) { where(state: state) }
-  scope :available, -> { where(state: [:live, :marked_for_deletion])}
+  scope :by_store_type, ->(store_type) { where(store_type: store_type) }
+  scope :available, -> { where(state: [:live, :marked_for_deletion]).where(open: true)}
 
   # after_validation :reverse_geocode
   # after_validation :geocode

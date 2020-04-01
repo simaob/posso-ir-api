@@ -22,6 +22,7 @@ en:
         details: 'Details'
         store_type: 'Type of store'
         state: 'State'
+        open: 'Open?'
       user:
         email: 'Email'
         name: 'Name'
@@ -46,6 +47,7 @@ en:
           restaurant: 'Restaurant'
           supermarket: 'Supermarket'
           pharmacy: 'Pharmacy'
+          gas_station: 'Gas station'
   views:
     layout:
       application:
@@ -90,6 +92,7 @@ en:
         button: 'Search'
         filter_group: 'Filter by group'
         filter_state: 'Filter by state'
+        filter_store_type: 'Filter by type'
       index:
         confirm_approval: 'Are you sure you want to approve all stores?'
     users:

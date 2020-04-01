@@ -22,6 +22,7 @@ es:
         details: 'Detalles'
         store_type: 'Tipo de tienda'
         state: 'Estado'
+        open: 'Abierto?'
       user:
         email: 'Correo electrónico'
         name: 'Nombre'
@@ -46,6 +47,7 @@ es:
           restaurant: 'Restaurante'
           supermarket: 'Supermercado'
           pharmacy: 'Farmacia'
+          gas_station: 'Gasolinera'
   views:
     layout:
       application:
@@ -96,6 +98,7 @@ es:
         button: 'Buscar'
         filter_group: 'Filtrar por grupo'
         filter_state: 'Filtrar por estado'
+        filter_store_type: 'Filtrar por tipo'
     users:
       search:
         placeholder: 'Buscar por nombre o correo electrónico...'

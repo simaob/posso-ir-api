@@ -16,6 +16,7 @@ class ImportStores
     import_pingodoce
     import_spar
     import_pharmacies
+    import_prio
     puts "#{Store.count} total stores"
   end
 
@@ -311,7 +312,7 @@ class ImportStores
   end
 
   def import_pharmacies
-    puts "Starting Pharmacies 2, we have #{Store.count} total stores"
+    puts "Starting Pharmacies, we have #{Store.count} total stores"
     src = File.open(Rails.root.join('db', 'files', 'farmacias_2.csv'), 'r')
     file = File.read(src).force_encoding('UTF-8')
     CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
@@ -327,6 +328,26 @@ class ImportStores
         latitude: csv[15].split(', ')[0],
         longitude: csv[15].split(', ')[1],
         store_type: 2
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_prio
+    puts "Starting Prio, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'postos_prio.csv'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
+      Store.create(
+        name: "Prio #{csv[0].titleize}",
+        group: 'Prio',
+        country: 'PT',
+        district: csv[8],
+        street: csv[7],
+        latitude: csv[5],
+        longitude: csv[6],
+        store_type: :gas_station,
+        open: csv[1] == 'Sim' ? true : false
       )
     end
     puts "#{Store.count} total stores"

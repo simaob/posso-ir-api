@@ -7,6 +7,7 @@ class StoresController < ApplicationController
     @stores = Store.search(params[:search])
     @stores = @stores.by_group(params[:group]) if params[:group].present?
     @stores = @stores.by_state(params[:state]) if params[:state].present?
+    @stores = @stores.by_store_type(params[:store_type]) if params[:store_type].present?
 
     if params[:no_info]
       @stores = @stores.where(latitude: nil).or(Store.where(longitude: nil))
@@ -96,7 +97,7 @@ class StoresController < ApplicationController
   def store_params
     permitted_params = [:name, :group, :street, :city, :zip_code, :country,
                         :district, :store_type, :latitude, :longitude,
-                        :capacity, :details]
+                        :store_type, :open, :capacity, :details]
     permitted_params << :state if current_user.admin?
 
     params.require(:store).permit(permitted_params)

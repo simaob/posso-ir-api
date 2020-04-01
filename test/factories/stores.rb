@@ -20,6 +20,7 @@
 #  lonlat           :geometry         point, 0
 #  state            :integer          default("1")
 #  reason_to_delete :text
+#  open             :boolean          default("true")
 #
 FactoryBot.define do
   factory :store do

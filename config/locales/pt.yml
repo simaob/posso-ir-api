@@ -22,6 +22,7 @@ pt:
         details: 'Detalhes'
         store_type: 'Tipo de loja'
         state: 'Estado'
+        open: 'Aberto?'
       user:
         email: 'Email'
         name: 'Nome'
@@ -46,6 +47,7 @@ pt:
           restaurant: 'Restaurante'
           supermarket: 'Supermercado'
           pharmacy: 'Farmácia'
+          gas_station: 'Posto de combustivel'
   views:
     layout:
       application:
@@ -96,6 +98,7 @@ pt:
         button: 'Procurar'
         filter_group: 'Filtrar por grupo'
         filter_state: 'Filtrar por estado'
+        filter_store_type: 'Filtrar por tipo'
       index:
         confirm_approval: 'Tem a certeza que quer aprovar todas as lojas que estão à espera de validação?'
     users:
