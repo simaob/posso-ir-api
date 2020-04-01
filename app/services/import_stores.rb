@@ -341,7 +341,7 @@ class ImportStores
     CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
       next unless csv[15].present?
       Store.create(
-        name: csv[1].titleize,
+        name: "Farmácia #{csv[1].titleize}",
         group: 'Farmácias',
         country: 'PT',
         city: csv[7],
