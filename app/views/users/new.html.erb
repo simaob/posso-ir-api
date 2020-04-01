@@ -1,11 +1,9 @@
-<div class="container">
-  <% content_for :page_title, I18n.t('views.new.title', resource: User.model_name.human) %>
+<% content_for :page_title, I18n.t('views.new.title', resource: User.model_name.human) %>
 
-  <div class="row mt-5">
-    <div class="col-md-11">
-      <h1><%= "#{I18n.t('views.actions.new')} #{User.model_name.human(count: 1)}" %></h1>
-    </div>
+<div class="row mt-5">
+  <div class="col-md-11">
+    <h1><%= "#{I18n.t('views.actions.new')} #{User.model_name.human(count: 1)}" %></h1>
   </div>
-
-  <%= render 'form', user: @user %>
 </div>
+
+<%= render 'form', user: @user %>

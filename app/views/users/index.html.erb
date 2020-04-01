@@ -1,69 +1,67 @@
-<div class="container">
-  <% content_for :page_title, User.model_name.human(count: 2) %>
+<% content_for :page_title, User.model_name.human(count: 2) %>
 
-  <div class="row mt-5">
-    <div class="col-md-11">
-      <h1><%= User.model_name.human(count: 2) %></h1>
+<div class="row mt-5">
+  <div class="col-md-11">
+    <h1><%= User.model_name.human(count: 2) %></h1>
+  </div>
+  <% if can? :new, User %>
+    <div class="col-md-1">
+      <%= link_to I18n.t('views.actions.new'), new_user_path, class: 'btn btn-sm btn-outline-primary' %>
     </div>
-    <% if can? :new, User %>
-      <div class="col-md-1">
-        <%= link_to I18n.t('views.actions.new'), new_user_path, class: 'btn btn-sm btn-outline-primary' %>
-      </div>
+  <% end %>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-12">
+    <%= form_tag users_path, method: :get, class: 'form-inline' do %>
+      <%= label_tag :search, 'Search', class: 'sr-only' %>
+      <%= text_field_tag :search, params[:search], class: 'form-control col-md-7 mb-2 mr-sm-2',
+        placeholder: I18n.t('views.users.search.placeholder') %>
+      <%= label_tag :role, 'Role', class: 'sr-only' %>
+      <%= select_tag :role, options_for_select(enum_options_for_select(User, :role), params[:role]), {include_blank: I18n.t('views.users.search.filter_role'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+      <%= submit_tag I18n.t('views.users.search.button'),
+        class: 'btn btn-primary mb-2' %>
     <% end %>
   </div>
+</div>
 
-  <div class="row mt-2">
-    <div class="col-md-12">
-      <%= form_tag users_path, method: :get, class: 'form-inline' do %>
-        <%= label_tag :search, 'Search', class: 'sr-only' %>
-        <%= text_field_tag :search, params[:search], class: 'form-control col-md-7 mb-2 mr-sm-2',
-          placeholder: I18n.t('views.users.search.placeholder') %>
-        <%= label_tag :role, 'Role', class: 'sr-only' %>
-        <%= select_tag :role, options_for_select(enum_options_for_select(User, :role), params[:role]), {include_blank: I18n.t('views.users.search.filter_role'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
-        <%= submit_tag I18n.t('views.users.search.button'),
-          class: 'btn btn-primary mb-2' %>
-      <% end %>
-    </div>
-  </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <%= page_entries_info @users %>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= User.human_attribute_name(:name) %></th>
+                <th><%= User.human_attribute_name(:email) %></th>
+                <th><%= User.human_attribute_name(:role) %></th>
+                <th><%= User.human_attribute_name(:app_uuid) %></th>
+                <th><%= I18n.t('views.actions.title') %></th>
+              </tr>
+            </thead>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="main-card mb-3 card">
-        <div class="card-body">
-          <%= page_entries_info @users %>
-          <div class="table-responsive">
-            <table class="table table-sm">
-              <thead>
+            <tbody>
+              <% @users.each do |user| %>
                 <tr>
-                  <th><%= User.human_attribute_name(:name) %></th>
-                  <th><%= User.human_attribute_name(:email) %></th>
-                  <th><%= User.human_attribute_name(:role) %></th>
-                  <th><%= User.human_attribute_name(:app_uuid) %></th>
-                  <th><%= I18n.t('views.actions.title') %></th>
+                  <td><%= user.name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= enum_l(user, :role) %></td>
+                  <td><%= user.app_uuid %></td>
+                  <td>
+                    <%= link_to I18n.t('views.actions.show'), user %>
+                    <% if can? :manage, user %>
+                      |
+                      <%= link_to I18n.t('views.actions.edit'), edit_user_path(user) %>
+                      |
+                      <%= link_to I18n.t('views.actions.destroy'), user, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+                    <% end %>
                 </tr>
-              </thead>
-
-              <tbody>
-                <% @users.each do |user| %>
-                  <tr>
-                    <td><%= user.name %></td>
-                    <td><%= user.email %></td>
-                    <td><%= enum_l(user, :role) %></td>
-                    <td><%= user.app_uuid %></td>
-                    <td>
-                      <%= link_to I18n.t('views.actions.show'), user %>
-                      <% if can? :manage, user %>
-                        |
-                        <%= link_to I18n.t('views.actions.edit'), edit_user_path(user) %>
-                        |
-                        <%= link_to I18n.t('views.actions.destroy'), user, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
-                      <% end %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <%= paginate @users %>
-          </div>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @users %>
         </div>
       </div>
     </div>

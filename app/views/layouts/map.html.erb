@@ -17,15 +17,13 @@
       <%= render 'shared/nav' %>
     </header>
     <main role="main" class="flex-shrink-0">
-      <div class="container">
-        <% if Rails.env.development? %>
-          <%= switch_user_select %>
-        <% end %>
-        <% if flash[:notice] %>
-          <div class="alert alert-info"><%= flash[:notice] %></div>
-        <% end %>
-        <%= yield %>
-      </div>
+      <% if Rails.env.development? %>
+        <%= switch_user_select %>
+      <% end %>
+      <% if flash[:notice] %>
+        <div class="alert alert-info"><%= flash[:notice] %></div>
+      <% end %>
+      <%= yield %>
     </main>
   </body>
     <!-- Global site tag (gtag.js) - Google Analytics -->
