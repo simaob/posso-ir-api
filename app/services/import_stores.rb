@@ -16,6 +16,7 @@ class ImportStores
     import_pingodoce
     import_spar
     import_pharmacies
+    import_pharmacies_2
     puts "#{Store.count} total stores"
   end
 
@@ -327,6 +328,28 @@ class ImportStores
         zip_code: nil,
         latitude: li.attributes["data-pharmacy-lat"]&.value,
         longitude: li.attributes["data-pharmacy-lon"]&.value,
+        store_type: 2
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_pharmacies_2
+    puts "Starting Pharmacies 2, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'farmacias_2.csv'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
+      next unless csv[15].present?
+      Store.create(
+        name: csv[1].titleize,
+        group: 'Farmácias',
+        country: 'PT',
+        city: csv[7],
+        district: csv[8],
+        street: csv[5],
+        zip_code: csv[6],
+        latitude: csv[15].split(', ')[0],
+        longitude: csv[15].split(', ')[1],
         store_type: 2
       )
     end

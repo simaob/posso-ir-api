@@ -67,4 +67,8 @@ namespace :stores do
   task pharmacies: :environment do
     ImportStores.new.import_pharmacies
   end
+
+  task pharmacies_2: :environment do
+    ImportStores.new.import_pharmacies_2
+  end
 end
