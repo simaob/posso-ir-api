@@ -29,7 +29,7 @@ SQL
                         is_official: true)
       end
 
-      puts "[#{Time.now}] Calculating the general status for crowdsource"
+      puts "[#{Time.now}] Calculating the general status"
 
       where_clause = <<SQL
   (statuses.updated_time < status_crowdsources_stores.updated_time) AND
@@ -42,7 +42,7 @@ SQL
       Store.joins(:status_generals, :status_crowdsources)
            .where(where_clause).find_each.with_index do |store, i|
         puts "Calculated #{i}" if (i % 100).zero?
-        crowdsource = store.status_crowdsource.first
+        crowdsource = store.status_crowdsources.first
         general = store.status_generals.first
         general.update(status: crowdsource.status,
                        updated_time: crowdsource.updated_time,
