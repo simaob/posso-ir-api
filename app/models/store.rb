@@ -85,7 +85,7 @@ ST_CONTAINS(
     lonlat)
 SQL
 
-    Store.where(query)
+    Store.where(query).available
   end
 
   private
