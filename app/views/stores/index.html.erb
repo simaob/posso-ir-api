@@ -6,12 +6,12 @@
   </div>
   <div class="col-md-2">
     <% if current_user.admin? && params[:state] == 'waiting_approval' %>
-      <%= link_to I18n.t('views.actions.approve_all'), approve_all_stores_path, method: :post,
-        data: {confirm: I18n.t('views.stores.index.confirm_approval')},
+      <%= link_to t('views.actions.approve_all'), approve_all_stores_path, method: :post,
+        data: {confirm: t('views.stores.index.confirm_approval')},
         class: 'btn btn-sm btn-outline-success' %>
     <% end %>
     <% if can? :new, Store %>
-      <%= link_to I18n.t('views.actions.new'), new_store_path,
+      <%= link_to t('views.actions.new'), new_store_path,
         class: 'btn btn-sm btn-outline-primary' %>
     <% end %>
   </div>
@@ -22,14 +22,14 @@
     <%= form_tag stores_path, method: :get, class: 'form-inline' do %>
       <%= label_tag :search, 'Search', class: 'sr-only' %>
       <%= text_field_tag :search, params[:search], class: 'form-control col-md-3 mb-2 mr-sm-2',
-        placeholder: I18n.t('views.stores.search.placeholder') %>
+        placeholder: t('views.stores.search.placeholder') %>
       <%= label_tag :store_type, 'Store type', class: 'sr-only' %>
-      <%= select_tag :store_type, options_for_select(enum_options_for_select(Store, :store_type), params[:store_type]), {include_blank: I18n.t('views.stores.search.filter_group'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+      <%= select_tag :store_type, options_for_select(enum_options_for_select(Store, :store_type), params[:store_type]), {include_blank: t('views.stores.search.filter_group'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
       <%= label_tag :group, 'Group', class: 'sr-only' %>
-      <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: I18n.t('views.stores.search.filter_store_type'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
+      <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: t('views.stores.search.filter_store_type'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
       <%= label_tag :state, 'State', class: 'sr-only' %>
-      <%= select_tag :state, options_for_select(enum_options_for_select(Store, :state), params[:state]), {include_blank: I18n.t('views.stores.search.filter_state'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
-      <%= submit_tag I18n.t('views.stores.search.button'),
+      <%= select_tag :state, options_for_select(enum_options_for_select(Store, :state), params[:state]), {include_blank: t('views.stores.search.filter_state'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
+      <%= submit_tag t('views.stores.search.button'),
         class: 'btn btn-primary mb-2' %>
     <% end %>
   </div>
@@ -53,7 +53,7 @@
                 <th><%= Store.human_attribute_name(:longitude) %></th>
                 <th><%= Store.human_attribute_name(:capacity) %></th>
                 <th><%= Store.human_attribute_name(:details) %></th>
-                <th><%= I18n.t('views.actions.title') %></th>
+                <th><%= t('views.actions.title') %></th>
               </tr>
             </thead>
 
@@ -70,12 +70,12 @@
                   <td><%= store.capacity %></td>
                   <td><%= store.details %></td>
                   <td>
-                    <%= link_to I18n.t('views.actions.show'), store %>
+                    <%= link_to t('views.actions.show'), store %>
                     <% if can? :manage, store %>
                       |
-                      <%= link_to I18n.t('views.actions.edit'), edit_store_path(store) %>
+                      <%= link_to t('views.actions.edit'), edit_store_path(store) %>
                       |
-                      <%= link_to I18n.t('views.actions.destroy'), store, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+                      <%= link_to t('views.actions.destroy'), store, method: :delete, data: { confirm: t('views.actions.confirm_destroy') } %>
                     <% end %>
                 </tr>
               <% end %>

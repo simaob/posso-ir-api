@@ -6,7 +6,7 @@
   </div>
   <% if can? :new, User %>
     <div class="col-md-1">
-      <%= link_to I18n.t('views.actions.new'), new_user_path, class: 'btn btn-sm btn-outline-primary' %>
+      <%= link_to t('views.actions.new'), new_user_path, class: 'btn btn-sm btn-outline-primary' %>
     </div>
   <% end %>
 </div>
@@ -16,10 +16,10 @@
     <%= form_tag users_path, method: :get, class: 'form-inline' do %>
       <%= label_tag :search, 'Search', class: 'sr-only' %>
       <%= text_field_tag :search, params[:search], class: 'form-control col-md-7 mb-2 mr-sm-2',
-        placeholder: I18n.t('views.users.search.placeholder') %>
+        placeholder: t('views.users.search.placeholder') %>
       <%= label_tag :role, 'Role', class: 'sr-only' %>
-      <%= select_tag :role, options_for_select(enum_options_for_select(User, :role), params[:role]), {include_blank: I18n.t('views.users.search.filter_role'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
-      <%= submit_tag I18n.t('views.users.search.button'),
+      <%= select_tag :role, options_for_select(enum_options_for_select(User, :role), params[:role]), {include_blank: t('views.users.search.filter_role'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+      <%= submit_tag t('views.users.search.button'),
         class: 'btn btn-primary mb-2' %>
     <% end %>
   </div>
@@ -38,7 +38,7 @@
                 <th><%= User.human_attribute_name(:email) %></th>
                 <th><%= User.human_attribute_name(:role) %></th>
                 <th><%= User.human_attribute_name(:app_uuid) %></th>
-                <th><%= I18n.t('views.actions.title') %></th>
+                <th><%= t('views.actions.title') %></th>
               </tr>
             </thead>
 
@@ -50,12 +50,12 @@
                   <td><%= enum_l(user, :role) %></td>
                   <td><%= user.app_uuid %></td>
                   <td>
-                    <%= link_to I18n.t('views.actions.show'), user %>
+                    <%= link_to t('views.actions.show'), user %>
                     <% if can? :manage, user %>
                       |
-                      <%= link_to I18n.t('views.actions.edit'), edit_user_path(user) %>
+                      <%= link_to t('views.actions.edit'), edit_user_path(user) %>
                       |
-                      <%= link_to I18n.t('views.actions.destroy'), user, method: :delete, data: { confirm: I18n.t('views.actions.confirm_destroy') } %>
+                      <%= link_to t('views.actions.destroy'), user, method: :delete, data: { confirm: t('views.actions.confirm_destroy') } %>
                     <% end %>
                 </tr>
               <% end %>

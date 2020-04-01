@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <%= link_to image_tag('logo.png', size: '50', alt: I18n.t('views.layout.application.title')), root_path, class: "navbar-brand" %>
+  <%= link_to image_tag('logo.png', size: '50', alt: t('views.layout.application.title')), root_path, class: "navbar-brand" %>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -8,9 +8,9 @@
       <% if current_user && !current_user.user? %>
         <li class="nav-item <%= 'active' if controller_name == 'map' %>">
           <%= link_to map_index_path, class: 'nav-link' do %>
-            <%= I18n.t('views.map.index.title') %>
+            <%= t('views.map.index.title') %>
             <% if controller_name == 'map' %>
-              <span class="sr-only">(<%= I18n.t('views.shared.navbar.current') %>)</span>
+              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
             <% end %>
           <% end %>
         </li>
@@ -20,7 +20,7 @@
           <%= link_to stores_path, class: 'nav-link' do %>
             <%= Store.model_name.human(count: 2) %>
             <% if controller_name == 'stores' %>
-              <span class="sr-only">(<%= I18n.t('views.shared.navbar.current') %>)</span>
+              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
             <% end %>
           <% end %>
         </li>
@@ -30,7 +30,7 @@
           <%= link_to users_path, class: 'nav-link' do %>
             <%= User.model_name.human(count: 2) %>
             <% if controller_name == 'users' %>
-              <span class="sr-only">(<%= I18n.t('views.shared.navbar.current') %>)</span>
+              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
             <% end %>
           <% end %>
         </li>
@@ -38,9 +38,9 @@
       <% if current_user && current_user.stores.any? %>
         <li class="nav-item <%= 'active' if controller_name == 'manage_stores' %>">
           <%= link_to manage_stores_path, class: 'nav-link' do %>
-            <%= I18n.t('views.manage_stores.index.nav') %>
+            <%= t('views.manage_stores.index.nav') %>
             <% if controller_name == 'manage_stores' %>
-              <span class="sr-only">(<%= I18n.t('views.shared.navbar.current') %>)</span>
+              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
             <% end %>
           <% end %>
         </li>
@@ -62,12 +62,16 @@
           <span class="nav-link"><%= link_to current_user&.email, current_user %></span>
         </li>
         <li class="nav-item text-nowrap">
-          <%= link_to I18n.t('views.shared.navbar.logout'), destroy_user_session_path,
+          <%= link_to t('views.shared.navbar.logout'), destroy_user_session_path,
             method: :delete, class: 'nav-link' %>
         </li>
       <% else %>
         <li class="nav-item text-nowrap">
-          <%= link_to I18n.t('views.shared.navbar.login'), new_user_session_path,
+          <%= link_to t('views.shared.navbar.login'), new_user_session_path,
+            class: 'nav-link' %>
+        </li>
+        <li class="nav-item text-nowrap">
+          <%= link_to t('views.shared.navbar.sign_up'), new_user_registration_path,
             class: 'nav-link' %>
         </li>
       <% end %>

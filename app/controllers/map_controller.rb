@@ -14,17 +14,17 @@ class MapController < ApplicationController
              end
     @shops = Hash[@shops.collect { |item| [item.id, item] } ]
     @labels = {
-      delete: I18n.t('views.map.index.delete'),
-      edit: I18n.t('views.map.index.edit'),
-      add_store: I18n.t('views.map.index.add_store'),
-      delete_store: I18n.t('views.map.index.delete_store'),
-      close: I18n.t('views.map.index.close'),
-      cancel: I18n.t('views.map.index.cancel'),
-      save: I18n.t('views.map.index.save'),
-      confirm: I18n.t('views.map.index.confirm'),
-      editing: I18n.t('views.map.index.editing'),
-      deleting: I18n.t('views.map.index.deleting'),
-      creating: I18n.t('views.map.index.creating')
+      delete: t('views.map.index.delete'),
+      edit: t('views.map.index.edit'),
+      add_store: t('views.map.index.add_store'),
+      delete_store: t('views.map.index.delete_store'),
+      close: t('views.map.index.close'),
+      cancel: t('views.map.index.cancel'),
+      save: t('views.map.index.save'),
+      confirm: t('views.map.index.confirm'),
+      editing: t('views.map.index.editing'),
+      deleting: t('views.map.index.deleting'),
+      creating: t('views.map.index.creating')
     }
     @fields = [
       {

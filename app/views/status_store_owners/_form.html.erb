@@ -23,7 +23,7 @@
           <%= form.label :status, 0, value: 0, class: 'form-check-label' do %>
             <%= form.radio_button :status, 0, class: 'form-check-input' %>
             <%= image_tag 'no_queue_colored.png', class: 'no-queue' %>
-            <p class='text-center'><%= I18n.t('views.status_store_owners.new.no_queue') %></p>
+            <p class='text-center'><%= t('views.status_store_owners.new.no_queue') %></p>
           <% end %>
         </div>
 
@@ -31,7 +31,7 @@
           <%= form.label :status, 5.0, value: 5.0, class: 'form-check-label' do %>
             <%= form.radio_button :status, 5.0, class: 'form-check-input' %>
             <%= image_tag 'average_queue_colored.png', class: 'average-queue' %>
-            <p class='text-center'><%= I18n.t('views.status_store_owners.new.average_queue') %></p>
+            <p class='text-center'><%= t('views.status_store_owners.new.average_queue') %></p>
           <% end %>
         </div>
 
@@ -39,13 +39,13 @@
           <%= form.label :status, 10, value: 10, class: 'form-check-label' do %>
             <%= form.radio_button :status, 10, class: 'form-check-input' %>
             <%= image_tag 'long_queue_colored.png', class: 'long-queue' %>
-            <p class='text-center'><%= I18n.t('views.status_store_owners.new.long_queue') %></p>
+            <p class='text-center'><%= t('views.status_store_owners.new.long_queue') %></p>
           <% end %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= form.submit I18n.t('views.form.submit'), class: "btn btn-primary" %>
+        <%= form.submit t('views.form.submit'), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

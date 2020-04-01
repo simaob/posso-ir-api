@@ -1,12 +1,12 @@
-<% content_for :page_title, I18n.t('views.new.title', resource: Store.model_name.human) %>
+<% content_for :page_title, t('views.new.title', resource: Store.model_name.human) %>
 
 <div class="row mt-5">
   <div class="col-md-11">
-    <h1><%= "#{I18n.t('views.actions.new')} #{Store.model_name.human(count: 1)}" %></h1>
+    <h1><%= "#{t('views.actions.new')} #{Store.model_name.human(count: 1)}" %></h1>
   </div>
   <% if can? :new, Store %>
     <div class="col-md-1">
-      <%= link_to I18n.t('views.actions.back'), stores_path,
+      <%= link_to t('views.actions.back'), stores_path,
         class: 'btn btn-sm btn-outline-primary' %>
   </div>
 <% end %>

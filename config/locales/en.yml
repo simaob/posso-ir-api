@@ -38,6 +38,7 @@ en:
           store_manager: 'Store manager'
           general_manager: 'General manager'
           admin: 'Administrator'
+          contributor: 'Contributor'
       store:
         states:
           waiting_approval: 'Waiting approval'
@@ -84,6 +85,7 @@ en:
         current: 'Current'
         logout: 'Log out'
         login: 'Log in'
+        sign_up: 'Sign up'
     form:
       submit: 'Submit'
     stores:

@@ -6,7 +6,7 @@
   </div>
   <% if can? :manage, @user %>
     <div class="col-md-1">
-      <%= link_to I18n.t('views.actions.edit'), edit_user_path(@user),
+      <%= link_to t('views.actions.edit'), edit_user_path(@user),
         class: 'btn btn-sm btn-outline-primary' %>
     </div>
   <% end %>

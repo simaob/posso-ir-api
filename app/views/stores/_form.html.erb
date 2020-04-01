@@ -18,7 +18,7 @@
         <% if current_user.admin? %>
           <%= form.select :state, enum_options_for_select(Store, :state), {}, class: "form-control" %>
         <% else %>
-          <span class="form-control"><%= I18n.t('activerecord.enums.store.states.waiting_approval') %></span>
+          <span class="form-control"><%= t('activerecord.enums.store.states.waiting_approval') %></span>
         <% end %>
       </div>
 
@@ -90,7 +90,7 @@
       </div>
 
       <div class="form-group">
-        <%= form.submit I18n.t('views.form.submit'), class: "btn btn-primary" %>
+        <%= form.submit t('views.form.submit'), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

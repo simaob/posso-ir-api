@@ -6,7 +6,7 @@
   </div>
   <div class="col-md-2">
     <% if can? :new, Store %>
-      <%= link_to I18n.t('views.actions.new'), new_store_path,
+      <%= link_to t('views.actions.new'), new_store_path,
         class: 'btn btn-sm btn-outline-primary' %>
     <% end %>
   </div>
@@ -27,8 +27,8 @@
                 <th><%= Store.human_attribute_name(:city) %></th>
                 <th><%= Store.human_attribute_name(:latitude) %></th>
                 <th><%= Store.human_attribute_name(:longitude) %></th>
-                <th><%= I18n.t('views.manage_stores.index.latest_status') %></th>
-                <th><%= I18n.t('views.actions.title') %></th>
+                <th><%= t('views.manage_stores.index.latest_status') %></th>
+                <th><%= t('views.actions.title') %></th>
               </tr>
             </thead>
 
@@ -44,7 +44,7 @@
                   <td><%= store.longitude&.round(3) %></td>
                   <td><%= latest_status(store.latest_owner_status) %></td>
                   <td>
-                    <%= link_to I18n.t('views.manage_stores.index.manage_link'),
+                    <%= link_to t('views.manage_stores.index.manage_link'),
                       new_store_status_store_owner_path(store) %>
                   </td>
                 </tr>

@@ -38,6 +38,7 @@ pt:
           store_manager: 'Gestor de loja'
           general_manager: 'Gestor'
           admin: 'Administrador'
+          contributor: 'Colaborador'
       store:
         states:
           waiting_approval: 'À espera de validação'
@@ -84,6 +85,7 @@ pt:
         current: 'Actual'
         logout: 'Terminar sessão'
         login: 'Iniciar sessão'
+        sign_up: 'Criar conta'
     form:
       submit: 'Enviar'
     pagination:
