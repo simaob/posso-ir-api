@@ -19,7 +19,7 @@
       <p>
         <strong><%= Store.human_attribute_name(:state) %>:</strong>
         <%= I18n.t("views.status_store_owners.new.#{@store.latest_owner_status.status.to_i}") %> |
-        <% if @store.latest_owner_status.valid_until > Time.now %>
+        <% if @store.latest_owner_status.valid_until && @store.latest_owner_status.valid_until > Time.now %>
           <%= I18n.t('views.status_store_owners.new.valid_until', time: @store.latest_owner_status.valid_until.strftime('%H:%M, %d/%m/%Y')) %>
         <% else %>
           <%= I18n.t('views.status_store_owners.new.expired_on', time: @store.latest_owner_status.valid_until.strftime('%H:%M, %d/%m/%Y')) %>
