@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
-		<title><%= [yield(:page_title), I18n.t('views.layout.application.title')].compact.join(' | ') %></title>
+		<title><%= [yield(:page_title).presence, I18n.t('views.layout.application.title')].compact.join(' | ') %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -23,4 +23,14 @@
       <%= yield %>
     </main>
   </body>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162538278-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-162538278-1');
+  </script>
+
 </html>
