@@ -71,4 +71,8 @@ namespace :stores do
   task prio: :environment do
     ImportStores.new.import_prio
   end
+
+  task dia: :environment do
+    ImportStores.new.import_dia
+  end
 end

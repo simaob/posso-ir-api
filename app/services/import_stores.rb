@@ -12,7 +12,7 @@ class ImportStores
     import_intermarche
     import_lidl
     import_mercadona
-    import_minipreco
+    import_dia
     import_pingodoce
     import_spar
     import_pharmacies
@@ -349,6 +349,32 @@ class ImportStores
         store_type: :gas_station,
         open: csv[1] == 'Sim' ? true : false
       )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_dia
+    puts "Starting Dia, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'dia.csv'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
+      next unless csv[9].present?
+      begin
+        Store.create(
+          name: "#{csv[3].titleize} #{csv[2].titleize}",
+          group: 'Dia',
+          country: 'PT',
+          district: csv[4],
+          city: csv[6],
+          street: csv[7],
+          zip_code: csv[8],
+          latitude: csv[9].split(',')[0].strip,
+          longitude: csv[9].split(',')[1].strip,
+          store_type: :supermarket
+        )
+      rescue
+        puts csv
+      end
     end
     puts "#{Store.count} total stores"
   end
