@@ -7,6 +7,8 @@ class Ability
     user ||= User.new # guest user (not logged in)
     return if user.user?
 
+    can [:show, :edit, :update], User, id: user.id
+
     if user.admin?
       can :manage, :all
     elsif user.general_manager?

@@ -37,8 +37,8 @@
         </div>
       <% else %>
         <div class="form-group">
-          <%= form.label :role, class: "col-sm-2 col-form-label" %>
-          <%= form.object.role&.humanize %>
+          <%= form.label :role, class: "col-sm-2 col-form-label" %><br />
+          <%= enum_l(form.object, :role) %>
         </div>
       <% end %>
 
