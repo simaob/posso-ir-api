@@ -51,7 +51,7 @@ pt:
           gas_station: 'Posto de combustivel'
           bank: 'Banco'
           coffee: 'Café'
-          kiosk: 'Quisoque'
+          kiosk: 'Quiosque'
           other: 'Outro'
   controllers:
     stores:
