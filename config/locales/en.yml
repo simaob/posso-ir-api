@@ -49,6 +49,10 @@ en:
           supermarket: 'Supermarket'
           pharmacy: 'Pharmacy'
           gas_station: 'Gas station'
+  controllers:
+    stores:
+      approve_all:
+        notice: '%{size} stores approved'
   views:
     layout:
       application:
@@ -63,7 +67,7 @@ en:
       title: 'Actions'
       new: 'New'
       back: 'Back'
-      approve_all: 'Approve all'
+      approve_all: 'Approve listed'
     map:
       index:
         title: 'Map'

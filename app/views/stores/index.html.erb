@@ -1,12 +1,12 @@
 <% content_for :page_title, Store.model_name.human(count: 2) %>
 
 <div class="row mt-5">
-  <div class="col-md-11">
+  <div class="col-md-<%= current_user.admin? && params[:state] == 'waiting_approval' ? 10 : 11 %>">
     <h1><%= Store.model_name.human(count: 2) %></h1>
   </div>
-  <div class="col-md-1">
+  <div class="col-md-<%= current_user.admin? && params[:state] == 'waiting_approval' ? 2 : 1 %>">
     <% if current_user.admin? && params[:state] == 'waiting_approval' %>
-      <%= link_to t('views.actions.approve_all'), approve_all_stores_path, method: :post,
+      <%= link_to t('views.actions.approve_all'), approve_all_stores_path(group: params[:group], search: params[:search], store_type: params[:store_type], state: params[:state]), method: :post,
         data: {confirm: t('views.stores.index.confirm_approval')},
         class: 'btn btn-sm btn-outline-success' %>
     <% end %>

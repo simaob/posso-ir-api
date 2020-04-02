@@ -49,6 +49,10 @@ es:
           supermarket: 'Supermercado'
           pharmacy: 'Farmacia'
           gas_station: 'Gasolinera'
+  controllers:
+    stores:
+      approve_all:
+        notice: '%{size} tiendas validadas'
   views:
     layout:
       application:
@@ -63,7 +67,7 @@ es:
       title: 'Acciones'
       new: 'Añadir'
       back: 'Volver'
-      approve_all: 'Validar todas'
+      approve_all: 'Validar elegidas'
     map:
       index:
         title: 'Mapa'

@@ -49,6 +49,10 @@ pt:
           supermarket: 'Supermercado'
           pharmacy: 'Farmácia'
           gas_station: 'Posto de combustivel'
+  controllers:
+    stores:
+      approve_all:
+        notice: '%{size} lojas aprovadas'
   views:
     layout:
       application:
@@ -63,7 +67,7 @@ pt:
       title: 'Ações'
       new: 'Adicionar'
       back: 'Voltar'
-      approve_all: 'Aprovar todas'
+      approve_all: 'Aprovar lojas filtradas'
     map:
       index:
         title: 'Mapa'

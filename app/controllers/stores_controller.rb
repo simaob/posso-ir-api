@@ -80,12 +80,15 @@ class StoresController < ApplicationController
   end
 
   def approve_all
-    @stores = Store.where(state: :waiting_approval)
+    @stores = Store.search(params[:search])
+    @stores = @stores.by_group(params[:group]) if params[:group].present?
+    @stores = @stores.by_state(params[:state]) if params[:state].present?
+    @stores = @stores.by_store_type(params[:store_type]) if params[:store_type].present?
     size = @stores.size
     @stores.update_all(state: :live)
 
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: "#{size} stores approved" }
+      format.html { redirect_to stores_url, notice: t('controllers.stores.approve_all.notice', size: size) }
       format.json { head :no_content }
     end
 
