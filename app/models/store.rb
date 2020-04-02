@@ -54,7 +54,7 @@ class Store < ApplicationRecord
   # after_validation :reverse_geocode
   # after_validation :geocode
   after_save :set_lonlat
-  after_create :create_crowdsource_status
+  after_create :create_status
 
   def address
     [street, city].compact.join(',')
@@ -109,10 +109,26 @@ WHERE id = #{id}
     ActiveRecord::Base.connection.execute sql
   end
 
+  def create_status
+    create_crowdsource_status
+    create_store_owner_status
+    create_general_status
+  end
+
   def create_crowdsource_status
     status = StatusCrowdsourceUser.where(store_id: id).first
     return if status
 
     StatusCrowdsource.create(store_id: id, updated_time: Time.now)
+  end
+
+  def create_store_owner_status
+    status = StatusStoreOwner.new(store_id: id,
+                                  updated_time: Time.now, active: true)
+    status.save!(validate: false)
+  end
+
+  def create_general_status
+    StatusGeneral.create!(store_id: id, updated_time: Time.now)
   end
 end
