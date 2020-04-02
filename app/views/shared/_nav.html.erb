@@ -5,7 +5,7 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
-      <% if current_user && !current_user.user? %>
+      <% if can? :read, :map %>
         <li class="nav-item <%= 'active' if controller_name == 'map' %>">
           <%= link_to map_index_path, class: 'nav-link' do %>
             <%= t('views.map.index.title') %>
@@ -15,7 +15,7 @@
           <% end %>
         </li>
       <% end %>
-      <% if can? :read, :all %>
+      <% if can? :read, Store %>
         <li class="nav-item <%= 'active' if controller_name == 'stores' %>">
           <%= link_to stores_path, class: 'nav-link' do %>
             <%= Store.model_name.human(count: 2) %>
@@ -25,7 +25,7 @@
           <% end %>
         </li>
       <% end %>
-      <% if can? :manage, User %>
+      <% if can? :read, User %>
         <li class="nav-item <%= 'active' if controller_name == 'users' %>">
           <%= link_to users_path, class: 'nav-link' do %>
             <%= User.model_name.human(count: 2) %>
@@ -45,16 +45,14 @@
           <% end %>
         </li>
       <% end %>
-      <% if current_user&.admin? %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lang</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <% [:en, :es, :pt].each do |locale| %>
-              <%= link_to locale.to_s, url_for(locale: locale), class: 'dropdown-item' %>
-            <% end %>
-          </div>
-        </li>
-      <% end %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lang</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <% [:en, :es, :pt].each do |locale| %>
+            <%= link_to locale.to_s, url_for(locale: locale), class: 'dropdown-item' %>
+          <% end %>
+        </div>
+      </li>
 		</ul>
     <ul class="navbar-nav px-3">
       <% if current_user %>
