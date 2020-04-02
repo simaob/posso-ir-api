@@ -28,13 +28,6 @@
           <%= form.label :role, class: "col-sm-2 col-form-label" %>
           <%= form.select :role, enum_options_for_select(User, :role), {}, class: "form-control" %>
         </div>
-
-        <div class="form-group">
-          <%= form.label :store_ids, value: Store.model_name.human(count: 2),
-            class: "col-sm-2 col-form-label" %>
-          <%= form.select:store_ids, @user.stores&.collect{|s| [s.text, s.id]}, {},
-            {class: "form-control store-managers-select", multiple: true} %>
-        </div>
       <% else %>
         <div class="form-group">
           <%= form.label :role, class: "col-sm-2 col-form-label" %><br />
@@ -42,7 +35,16 @@
         </div>
       <% end %>
 
-      <% if current_user.admin? || (!@user.new_record? && @user == current_user) %>
+      <% if current_user.admin? || current_user.general_manager? %>
+        <div class="form-group">
+          <%= form.label :store_ids, value: Store.model_name.human(count: 2),
+            class: "col-sm-2 col-form-label" %>
+          <%= form.select:store_ids, @user.stores&.collect{|s| [s.text, s.id]}, {},
+            {class: "form-control store-managers-select", multiple: true} %>
+        </div>
+      <% end %>
+
+      <% if can?(:new, User) && @user.new_record? %>
         <div class="form-group">
           <%= form.label :password, class: "col-sm-2 col-form-label" %>
           <%= form.password_field :password, class: "form-control" %>

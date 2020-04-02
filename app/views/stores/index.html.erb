@@ -71,9 +71,11 @@
                   <td><%= store.details %></td>
                   <td>
                     <%= link_to t('views.actions.show'), store %>
-                    <% if can? :manage, store %>
+                    <% if can? :edit, store %>
                       |
                       <%= link_to t('views.actions.edit'), edit_store_path(store) %>
+                    <% end %>
+                    <% if can? :destroy, store %>
                       |
                       <%= link_to t('views.actions.destroy'), store, method: :delete, data: { confirm: t('views.actions.confirm_destroy') } %>
                     <% end %>

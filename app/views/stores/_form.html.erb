@@ -15,7 +15,7 @@
 
       <div class="form-group">
         <%= form.label :state, class: "col-sm-2 col-form-label" %>
-        <% if current_user.admin? %>
+        <% if can? :manage_state, Store %>
           <%= form.select :state, enum_options_for_select(Store, :state), {}, class: "form-control" %>
         <% else %>
           <span class="form-control"><%= t('activerecord.enums.store.states.waiting_approval') %></span>

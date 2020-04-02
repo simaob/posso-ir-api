@@ -51,9 +51,11 @@
                   <td><%= user.app_uuid %></td>
                   <td>
                     <%= link_to t('views.actions.show'), user %>
-                    <% if can? :manage, user %>
+                    <% if can? :edit, user %>
                       |
                       <%= link_to t('views.actions.edit'), edit_user_path(user) %>
+                    <% end %>
+                    <% if can? :destroy, user %>
                       |
                       <%= link_to t('views.actions.destroy'), user, method: :delete, data: { confirm: t('views.actions.confirm_destroy') } %>
                     <% end %>
