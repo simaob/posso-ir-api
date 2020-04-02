@@ -4,14 +4,10 @@ class MapController < ApplicationController
   def index
     authorize! :read, :map
 
-    @shops = if current_user.store_manager?
-               current_user.stores
-                 .where.not(latitude: nil).where.not(longitude: nil)
-             else
-               Store.where.not(latitude: nil).where.not(longitude: nil)
-                 .where(state: 'live')
-                 .where(country: 'PT')
-             end
+    @shops = Store.where.not(latitude: nil).where.not(longitude: nil)
+      .where(state: [:waiting_approval, :live])
+    @shops = @shops.where(group: current_user.stores&.map(&:group)) if current_user.store_manager?
+
     @shops = Hash[@shops.collect { |item| [item.id, item] } ]
     @labels = {
       delete: t('views.map.index.delete'),
@@ -78,10 +74,11 @@ class MapController < ApplicationController
     ]
   end
 
-  def create
   # POST /map
-    # copy/pasted from stores controller > reuse?
+  def create
     @shop = Store.new(map_params)
+
+    @shop.managers << current_user if current_user.store_manager?
 
     respond_to do |format|
       if @shop.save

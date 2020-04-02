@@ -4,7 +4,7 @@
   <div class="col-md-11">
     <h1><%= @store.name %></h1>
   </div>
-  <% if can? :manage, @store %>
+  <% if can? :edit, @store %>
     <div class="col-md-1">
       <%= link_to t('views.actions.edit'), edit_store_path(@store),
         class: 'btn btn-sm btn-outline-primary' %>
