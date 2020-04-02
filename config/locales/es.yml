@@ -49,6 +49,10 @@ es:
           supermarket: 'Supermercado'
           pharmacy: 'Farmacia'
           gas_station: 'Gasolinera'
+          bank: 'Banco'
+          coffee: 'Cafetería'
+          kiosk: 'Quiosco'
+          other: 'Otro'
   controllers:
     stores:
       approve_all:
