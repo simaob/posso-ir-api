@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_202218) do
+ActiveRecord::Schema.define(version: 2020_04_02_014548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,7 +93,11 @@ ActiveRecord::Schema.define(version: 2020_04_01_202218) do
     t.integer "state", default: 1
     t.text "reason_to_delete"
     t.boolean "open", default: true
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.index ["created_by_id"], name: "index_stores_on_created_by_id"
     t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
+    t.index ["updated_by_id"], name: "index_stores_on_updated_by_id"
   end
 
   create_table "user_stores", force: :cascade do |t|
@@ -128,6 +132,8 @@ ActiveRecord::Schema.define(version: 2020_04_01_202218) do
   add_foreign_key "status_user_count_users", "stores", on_delete: :cascade
   add_foreign_key "status_user_count_users", "users", on_delete: :cascade
   add_foreign_key "statuses", "stores", on_delete: :cascade
+  add_foreign_key "stores", "users", column: "created_by_id"
+  add_foreign_key "stores", "users", column: "updated_by_id"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
 end

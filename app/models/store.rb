@@ -23,6 +23,8 @@
 #  open             :boolean          default("true")
 #
 class Store < ApplicationRecord
+  include UserTrackable
+
   paginates_per 50
   RADIUS = 5000
   PROJECTION = 4326

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :set_current_user
   before_action :set_locale
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -11,6 +12,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_current_user
+    ::Current.user = current_user
+  end
 
   def set_locale
     I18n.locale = extract_locale || I18n.default_locale

@@ -3,8 +3,10 @@ class ApiController < ApplicationController
 
   rescue_from TooManyRequestsError, with: :too_many_requests
 
+  skip_before_action :set_current_user
   skip_before_action :authenticate_user!
   before_action :authenticate_with_jwt!
+
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
