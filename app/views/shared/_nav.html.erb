@@ -56,8 +56,14 @@
 		</ul>
     <ul class="navbar-nav px-3">
       <% if current_user %>
-        <li class="nav-item text-nowrap">
-          <span class="nav-link"><%= link_to current_user&.email, current_user %></span>
+        <li class="nav-item text-nowrap dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.name.presence || current_user.email.presence || 'N/A' %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <%= link_to t('views.shared.navbar.profile'), current_user, class: 'dropdown-item' %>
+            <%= link_to t('views.shared.navbar.change_password'), edit_user_registration_path, class: 'dropdown-item' %>
+          </div>
         </li>
         <li class="nav-item text-nowrap">
           <%= link_to t('views.shared.navbar.logout'), destroy_user_session_path,

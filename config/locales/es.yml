@@ -86,6 +86,8 @@ es:
         logout: 'Cerrar sesión'
         login: 'Iniciar sesión'
         sign_up: 'Criar cuenta'
+        profile: 'Página de perfil'
+        change_password: 'Cambiar la contraseña'
     form:
       submit: 'Enviar'
     pagination:

@@ -86,6 +86,8 @@ pt:
         logout: 'Terminar sessão'
         login: 'Iniciar sessão'
         sign_up: 'Criar conta'
+        profile: 'Página de perfil'
+        change_password: 'Alterar password'
     form:
       submit: 'Enviar'
     pagination:

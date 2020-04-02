@@ -86,6 +86,8 @@ en:
         logout: 'Log out'
         login: 'Log in'
         sign_up: 'Sign up'
+        profile: 'Profile page'
+        change_password: 'Change password'
     form:
       submit: 'Submit'
     stores:
