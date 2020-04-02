@@ -30,7 +30,7 @@ class Ability
 
     elsif user.store_manager?
       can :index, :manage_stores
-      can [:read, :edit, :update], Store do |store|
+      can [:show, :edit, :update], Store do |store|
         store.manager_ids.include?(user.id)
       end
       can [:new, :create], StatusStoreOwner do |sso|

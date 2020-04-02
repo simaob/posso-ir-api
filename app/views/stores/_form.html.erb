@@ -18,7 +18,7 @@
         <% if can? :manage_state, Store %>
           <%= form.select :state, enum_options_for_select(Store, :state), {}, class: "form-control" %>
         <% else %>
-          <span class="form-control"><%= t('activerecord.enums.store.states.waiting_approval') %></span>
+          <span class="form-control"><%= enum_l(form.object, :state) %></span>
         <% end %>
       </div>
 
