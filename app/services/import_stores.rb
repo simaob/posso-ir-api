@@ -313,10 +313,10 @@ class ImportStores
 
   def import_pharmacies
     puts "Starting Pharmacies, we have #{Store.count} total stores"
-    src = File.open(Rails.root.join('db', 'files', 'farmacias_2.csv'), 'r')
+    src = File.open(Rails.root.join('db', 'files', 'farmacias.csv'), 'r')
     file = File.read(src).force_encoding('UTF-8')
     CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
-      next if !csv[15].present? || csv[13] == 'Em regularização'
+      next if !csv[15].present?
       Store.create(
         name: "Farmácia #{csv[1].titleize}",
         group: 'Farmácias',
