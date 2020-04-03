@@ -12,10 +12,23 @@
   </div>
 </div>
 
+<div class="row mt-2">
+  <div class="col-md-12">
+    <%= form_tag manage_stores_path, method: :get, class: 'form-inline' do %>
+      <%= label_tag :search, 'Search', class: 'sr-only' %>
+      <%= text_field_tag :search, params[:search], class: 'form-control col-md-10 mb-2 mr-sm-2',
+        placeholder: t('views.stores.search.placeholder') %>
+      <%= submit_tag t('views.stores.search.button'),
+        class: 'btn btn-primary mb-2' %>
+    <% end %>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
     <div class="main-card mb-3 card">
       <div class="card-body">
+        <%= page_entries_info @stores %>
         <div class="table-responsive">
           <table class="table table-sm">
             <thead>
@@ -55,6 +68,7 @@
               <% end %>
             </tbody>
           </table>
+          <%= paginate @stores %>
         </div>
       </div>
     </div>
