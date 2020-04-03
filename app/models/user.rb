@@ -43,6 +43,10 @@ class User < ApplicationRecord
           "%#{search}%")
   end
 
+  def display_name
+    name.presence || email.presence || app_uuid
+  end
+
   protected
 
   # Checks whether a password is needed or not. For validations only.

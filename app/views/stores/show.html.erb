@@ -35,6 +35,16 @@
         <strong><%= Store.human_attribute_name(:open) %>:</strong>
         <%= @store.open %>
       </p>
+
+      <p>
+        <strong>Created by</strong>
+        <%= link_to(@store.created_by.display_name, @store.created_by) if @store.created_by %>
+      </p>
+
+      <p>
+        <strong>Updated by</strong>
+        <%= link_to(@store.updated_by.display_name, @store.updated_by) if @store.updated_by %>
+      </p>
     <% end %>
 
     <p>
