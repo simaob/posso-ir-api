@@ -2,7 +2,8 @@
 
 <div class="row mt-5">
   <div class="col-md-11">
-    <h1><%= @store.name %></h1>
+    <span class="h2"><%= @store.name %></span>
+    <%= badge_for @store %>
   </div>
   <% if can? :edit, @store %>
     <div class="col-md-1">
@@ -15,28 +16,23 @@
 <div class="row mt-4">
   <div class="col-md-12">
     <p>
-      <strong><%= Store.human_attribute_name(:state) %>:</strong>
-      <u><%= enum_l(@store, :state) %></u>
-    </p>
-
-    <p>
       <strong><%= Store.human_attribute_name(:name) %>:</strong>
       <%= @store.name %>
     </p>
 
     <p>
+      <strong><%= Store.human_attribute_name(:group) %>:</strong>
+      <%= link_to @store.group, stores_path(group: @store.group) %>
+    </p>
+
+    <p>
       <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
-      <%= @store.store_type %>
+      <%= enum_l(@store, :store_type) %>
     </p>
 
     <p>
       <strong><%= Store.human_attribute_name(:open) %>:</strong>
       <%= @store.open %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:group) %>:</strong>
-      <%= link_to @store.group, stores_path(group: @store.group) %>
     </p>
 
     <p>
