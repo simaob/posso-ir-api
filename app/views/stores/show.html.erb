@@ -30,10 +30,12 @@
       <%= enum_l(@store, :store_type) %>
     </p>
 
-    <p>
-      <strong><%= Store.human_attribute_name(:open) %>:</strong>
-      <%= @store.open %>
-    </p>
+    <% if current_user&.admin? %>
+      <p>
+        <strong><%= Store.human_attribute_name(:open) %>:</strong>
+        <%= @store.open %>
+      </p>
+    <% end %>
 
     <p>
       <strong><%= Store.human_attribute_name(:street) %>:</strong>
