@@ -45,13 +45,11 @@
             <thead>
               <tr>
                 <th><%= Store.human_attribute_name(:name) %></th>
-                <th><%= Store.human_attribute_name(:state) %></th>
                 <th><%= Store.human_attribute_name(:group) %></th>
                 <th><%= Store.human_attribute_name(:street) %></th>
                 <th><%= Store.human_attribute_name(:city) %></th>
                 <th><%= Store.human_attribute_name(:latitude) %></th>
                 <th><%= Store.human_attribute_name(:longitude) %></th>
-                <th><%= Store.human_attribute_name(:capacity) %></th>
                 <th><%= Store.human_attribute_name(:details) %></th>
                 <th><%= t('views.actions.title') %></th>
               </tr>
@@ -65,9 +63,8 @@
                   <td><%= store.group %></td>
                   <td><%= store.street %></td>
                   <td><%= store.city %></td>
-                  <td><%= store.latitude %></td>
-                  <td><%= store.longitude %></td>
-                  <td><%= store.capacity %></td>
+                  <td><%= store.latitude&.round(3) %></td>
+                  <td><%= store.longitude&.round(3) %></td>
                   <td><%= store.details %></td>
                   <td>
                     <%= link_to t('views.actions.show'), store %>
