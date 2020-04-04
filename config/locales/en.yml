@@ -7,6 +7,9 @@ en:
       user:
         one: 'User'
         other: 'Users'
+      status:
+        one: 'Status'
+        other: 'Statuses'
     attributes:
       store:
         name: 'Name'
@@ -31,6 +34,15 @@ en:
       status_store_owner:
         updated_time: 'Time'
         status: 'State'
+      status:
+        type: 'Type'
+        updated_time: 'Time'
+        status: 'Status'
+        voters: 'Voters'
+        previous_status: 'Previous status'
+        previous_voters: 'Previous voters'
+        is_official: 'Official'
+        active: 'Active'
     enums:
       user:
         roles:
@@ -109,6 +121,9 @@ en:
         confirm_approval: 'Are you sure you want to approve all stores?'
       show:
         coordinates: 'Coordinates'
+        statuses: 'Reported statuses'
+      statuses:
+        title: '%{store} reported statuses'
       form:
         help_open: 'The store is in operation during the pandemic?'
         help_group: "Example: Tesco, Sainsbury's, Cooperative, etc."

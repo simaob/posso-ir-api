@@ -1,14 +1,16 @@
 <% content_for :page_title, @store.name&.titleize %>
 
 <div class="row mt-5">
-  <div class="col-md-11">
+  <div class="col-md-10">
     <span class="h2"><%= @store.name %></span>
     <%= badge_for @store %>
   </div>
   <% if can? :edit, @store %>
-    <div class="col-md-1">
+    <div class="col-md-2">
       <%= link_to t('views.actions.edit'), edit_store_path(@store),
         class: 'btn btn-sm btn-outline-primary' %>
+      <%= link_to t('views.stores.show.statuses'), statuses_store_path(@store),
+        class: 'btn btn-sm btn-outline-info' %>
     </div>
   <% end %>
 </div>

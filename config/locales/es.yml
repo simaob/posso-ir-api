@@ -7,6 +7,9 @@ es:
       user:
         one: 'Usuario'
         other: 'Usuarios'
+      status:
+        one: 'Estado'
+        other: 'Estados'
     attributes:
       store:
         name: 'Nombre'
@@ -31,6 +34,15 @@ es:
       status_store_owner:
         updated_time: 'Hora'
         status: 'Estado'
+      status:
+        type: 'Tipo'
+        updated_time: 'Hora'
+        status: 'Estado'
+        voters: 'Votantes'
+        previous_status: 'Estado anterior'
+        previous_voters: 'Vontantes anteriores'
+        is_official: 'Oficial'
+        active: 'Activo'
     enums:
       user:
         roles:
@@ -115,6 +127,9 @@ es:
         confirm_approval: '¿Estás seguro de que quieres validar todas las tiendas?'
       show:
         coordinates: 'Coordenadas'
+        statuses: 'Estados reportados'
+      statuses:
+        title: 'Estados reportados de %{store}'
       form:
         help_open: '¿La tienda está en funcionamiento durante la pandemia?'
         help_group: 'Ejemplo: El Corte Inglés, Carrefour, LIDL, etc.'

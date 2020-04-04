@@ -27,8 +27,7 @@ class StoresController < ApplicationController
 
   # GET /stores/1
   # GET /stores/1.json
-  def show
-  end
+  def show; end
 
   # GET /stores/new
   def new
@@ -36,8 +35,7 @@ class StoresController < ApplicationController
   end
 
   # GET /stores/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /stores
   # POST /stores.json
@@ -92,6 +90,10 @@ class StoresController < ApplicationController
       format.json { head :no_content }
     end
 
+  end
+
+  def statuses
+    @statuses = @store.statuses.page(params[:page])
   end
 
   private

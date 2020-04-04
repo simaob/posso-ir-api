@@ -7,6 +7,9 @@ pt:
       user:
         one: 'Utilizador'
         other: 'Utilizadores'
+      status:
+        one: 'Estado'
+        other: 'Estados'
     attributes:
       store:
         name: 'Nome'
@@ -31,6 +34,15 @@ pt:
       status_store_owner:
         updated_time: 'Hora'
         status: 'Estado'
+      status:
+        type: 'Tipo'
+        updated_time: 'Hora'
+        status: 'Estado'
+        voters: 'Votantes'
+        previous_status: 'Estado anterior'
+        previous_voters: 'Vontantes anteriores'
+        is_official: 'Oficial'
+        active: 'Activo'
     enums:
       user:
         roles:
@@ -115,6 +127,9 @@ pt:
         confirm_approval: 'Tem a certeza que quer aprovar todas as lojas que estão à espera de validação?'
       show:
         coordinates: 'Coordenadas'
+        statuses: 'Estados reportados'
+      statuses:
+        title: 'Estados reportados de %{store}'
       form:
         help_open: 'A loja está em funcionamento durante a pandemia?'
         help_group: 'Exemplo: Continente, Dia, LIDL, etc.'

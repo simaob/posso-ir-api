@@ -1,0 +1,54 @@
+<% content_for :page_title, t('views.statuses.title', store: @store.name&.titleize) %>
+
+<div class="row mt-5">
+  <div class="col-md-11">
+    <span class="h2"><%= @store.name %></span>
+    <%= badge_for @store %>
+  </div>
+  <% if can? :edit, @store %>
+    <div class="col-md-1">
+      <%= link_to t('views.actions.back'), @store, class: 'btn btn-sm btn-outline-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <%= page_entries_info @statuses %>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= Status.human_attribute_name(:type) %></th>
+                <th><%= Status.human_attribute_name(:updated_time) %></th>
+                <th><%= Status.human_attribute_name(:status) %></th>
+                <th><%= Status.human_attribute_name(:voters) %></th>
+                <th><%= Status.human_attribute_name(:previous_status) %></th>
+                <th><%= Status.human_attribute_name(:previous_voters) %></th>
+                <th><%= Status.human_attribute_name(:is_official) %></th>
+                <th><%= Status.human_attribute_name(:active) %></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @statuses.each do |status| %>
+                <tr>
+                  <td><%= status.type %></td>
+                  <td><%= status.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
+                  <td><%= status.status&.round(3) %></td>
+                  <td><%= status.voters %></td>
+                  <td><%= status.previous_status&.round(3) %></td>
+                  <td><%= status.previous_voters %></td>
+                  <td><%= status.is_official %></td>
+                  <td><%= status.active %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @statuses %>
+        </div>
+      </div>
+    </div>
+  </div>
