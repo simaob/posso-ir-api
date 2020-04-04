@@ -57,7 +57,7 @@ class Store < ApplicationRecord
   after_create :create_status
 
   def address
-    [street, city, country].compact.join(',')
+    [street, city, country].map(&:presence).compact.join(', ').presence || '-'
   end
 
   def text
