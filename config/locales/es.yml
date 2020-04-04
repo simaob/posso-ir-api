@@ -115,6 +115,11 @@ es:
         confirm_approval: '¿Estás seguro de que quieres validar todas las tiendas?'
       show:
         coordinates: 'Coordenadas'
+      form:
+        help_open: '¿La tienda está en funcionamiento durante la pandemia?'
+        help_group: 'Ejemplo: El Corte Inglés, Carrefour, LIDL, etc.'
+        help_country: 'Ejemplo: Portugal, España, United Kingdom, etc.'
+        help_coordinates: 'Latitude e Longitude são necessários para a loja ficar disponível na aplicação.'
     users:
       search:
         placeholder: 'Buscar por nombre o correo electrónico...'

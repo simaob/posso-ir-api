@@ -115,6 +115,11 @@ pt:
         confirm_approval: 'Tem a certeza que quer aprovar todas as lojas que estão à espera de validação?'
       show:
         coordinates: 'Coordenadas'
+      form:
+        help_open: 'A loja está em funcionamento durante a pandemia?'
+        help_group: 'Exemplo: Continente, Dia, LIDL, etc.'
+        help_country: 'Exemplo: Portugal, España, United Kingdom, etc.'
+        help_coordinates: 'Se requiere latitud y longitud para que la tienda esté disponible en la aplicación.'
     users:
       search:
         placeholder: 'Procure por nome ou email...'

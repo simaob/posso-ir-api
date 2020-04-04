@@ -109,6 +109,11 @@ en:
         confirm_approval: 'Are you sure you want to approve all stores?'
       show:
         coordinates: 'Coordinates'
+      form:
+        help_open: 'The store is in operation during the pandemic?'
+        help_group: "Example: Tesco, Sainsbury's, Cooperative, etc."
+        help_country: 'Example: Portugal, España, United Kingdom, etc.'
+        help_coordinates: 'Latitude and Longitude are required for the store to be available in the application.'
     users:
       search:
         placeholder: 'Search by name or email...'
