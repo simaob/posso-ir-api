@@ -48,6 +48,10 @@
                 <th><%= Store.human_attribute_name(:state) %></th>
                 <th><%= Store.human_attribute_name(:group) %></th>
                 <th><%= Store.human_attribute_name(:street) %></th>
+                <% if current_user.admin? %>
+                  <th>Created by</th>
+                  <th>Updated by</th>
+                <% end %>
                 <th><%= Store.human_attribute_name(:latitude) %></th>
                 <th><%= Store.human_attribute_name(:longitude) %></th>
                 <th><%= Store.human_attribute_name(:details) %></th>
@@ -62,6 +66,15 @@
                   <td><%= enum_l(store, :state) %></td>
                   <td><%= store.group %></td>
                   <td><%= store.address %></td>
+                  <% if current_user.admin? %>
+                    <td>
+                      <%= link_to(store.created_by.display_name, store.created_by) if store.created_by %>
+                    </td>
+                    <td>
+                      <%= link_to(store.updated_by.display_name, store.updated_by) if store.updated_by %>
+                    </td>
+
+                  <% end %>
                   <td><%= store.latitude&.round(3) %></td>
                   <td><%= store.longitude&.round(3) %></td>
                   <td><%= store.details %></td>
