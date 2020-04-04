@@ -113,6 +113,8 @@ pt:
         filter_store_type: 'Filtrar por tipo'
       index:
         confirm_approval: 'Tem a certeza que quer aprovar todas as lojas que estão à espera de validação?'
+      show:
+        coordinates: 'Coordenadas'
     users:
       search:
         placeholder: 'Procure por nome ou email...'

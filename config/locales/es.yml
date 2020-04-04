@@ -111,6 +111,10 @@ es:
         filter_group: 'Filtrar por grupo'
         filter_state: 'Filtrar por estado'
         filter_store_type: 'Filtrar por tipo'
+      index:
+        confirm_approval: '¿Estás seguro de que quieres validar todas las tiendas?'
+      show:
+        coordinates: 'Coordenadas'
     users:
       search:
         placeholder: 'Buscar por nombre o correo electrónico...'

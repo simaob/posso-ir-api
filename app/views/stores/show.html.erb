@@ -14,82 +14,75 @@
 </div>
 
 <div class="row mt-4">
-  <div class="col-md-12">
-    <p>
-      <strong><%= Store.human_attribute_name(:name) %>:</strong>
-      <%= @store.name %>
-    </p>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <p>
+          <strong><%= Store.human_attribute_name(:name) %>:</strong>
+          <%= @store.name %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:group) %>:</strong>
+          <%= link_to @store.group, stores_path(group: @store.group) %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
+          <%= enum_l(@store, :store_type) %>
+        </p>
+        <% if current_user&.admin? %>
+          <p>
+            <strong><%= Store.human_attribute_name(:open) %>:</strong>
+            <%= @store.open %>
+          </p>
+          <p>
+            <strong>Created by</strong>
+            <%= link_to(@store.created_by.display_name, @store.created_by) if @store.created_by %>
+          </p>
+          <p>
+            <strong>Updated by</strong>
+            <%= link_to(@store.updated_by.display_name, @store.updated_by) if @store.updated_by %>
+          </p>
+        <% end %>
+        <p>
+          <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
+          <%= @store.capacity %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:details) %>:</strong>
+          <%= @store.details %>
+        </p>
+      </div>
+    </div>
+  </div>
 
-    <p>
-      <strong><%= Store.human_attribute_name(:group) %>:</strong>
-      <%= link_to @store.group, stores_path(group: @store.group) %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
-      <%= enum_l(@store, :store_type) %>
-    </p>
-
-    <% if current_user&.admin? %>
-      <p>
-        <strong><%= Store.human_attribute_name(:open) %>:</strong>
-        <%= @store.open %>
-      </p>
-
-      <p>
-        <strong>Created by</strong>
-        <%= link_to(@store.created_by.display_name, @store.created_by) if @store.created_by %>
-      </p>
-
-      <p>
-        <strong>Updated by</strong>
-        <%= link_to(@store.updated_by.display_name, @store.updated_by) if @store.updated_by %>
-      </p>
-    <% end %>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:street) %>:</strong>
-      <%= @store.street %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:zip_code) %>:</strong>
-      <%= @store.zip_code %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:city) %>:</strong>
-      <%= @store.city %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:district) %>:</strong>
-      <%= @store.district %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:country) %>:</strong>
-      <%= @store.country %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:latitude) %>:</strong>
-      <%= @store.latitude %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:longitude) %>:</strong>
-      <%= @store.longitude %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
-      <%= @store.capacity %>
-    </p>
-
-    <p>
-      <strong><%= Store.human_attribute_name(:details) %>:</strong>
-      <%= @store.details %>
-    </p>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <p>
+          <strong><%= Store.human_attribute_name(:street) %>:</strong>
+          <%= @store.street %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:zip_code) %>:</strong>
+          <%= @store.zip_code %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:city) %>:</strong>
+          <%= @store.city %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:district) %>:</strong>
+          <%= @store.district %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:country) %>:</strong>
+          <%= @store.country %>
+        </p>
+        <p>
+          <strong><%= t('views.stores.index.coordinates') %>:</strong>
+          <%= [@store.latitude&.round(3), @store.longitude&.round(3)].compact.join(', ') %>
+        </p>
+      </div>
+    </div>
   </div>
 </div>

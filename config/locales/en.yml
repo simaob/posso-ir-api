@@ -107,6 +107,8 @@ en:
         filter_store_type: 'Filter by type'
       index:
         confirm_approval: 'Are you sure you want to approve all stores?'
+      show:
+        coordinates: 'Coordinates'
     users:
       search:
         placeholder: 'Search by name or email...'
