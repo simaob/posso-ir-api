@@ -27,7 +27,7 @@
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
-          <%= enum_l(@store, :store_type) %>
+          <%= link_to enum_l(@store, :store_type), stores_path(store_type: @store.store_type) %>
         </p>
         <% if current_user&.admin? %>
           <p>
@@ -35,11 +35,11 @@
             <%= @store.open %>
           </p>
           <p>
-            <strong>Created by</strong>
+            <strong>Created by:</strong>
             <%= link_to(@store.created_by.display_name, @store.created_by) if @store.created_by %>
           </p>
           <p>
-            <strong>Updated by</strong>
+            <strong>Updated by:</strong>
             <%= link_to(@store.updated_by.display_name, @store.updated_by) if @store.updated_by %>
           </p>
         <% end %>
