@@ -40,7 +40,7 @@ class ImportStores
         street: row['address'],
         latitude: nil,
         longitude: nil,
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
