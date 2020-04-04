@@ -6,6 +6,17 @@
   </div>
 </div>
 
+<div class="row mt-2">
+  <div class="col-md-12">
+    <%= form_tag statuses_path, method: :get, class: 'form-inline' do %>
+      <%= label_tag :type, 'Type', class: 'sr-only' %>
+      <%= select_tag :type, options_for_select(["StatusCrowdsource", "StatusGeneral", "StatusStoreOwner"], params[:store_type]), {include_blank: t('views.statuses.search.filter_type'), class: 'form-control col-md-10 mb-2 mr-sm-2'} %>
+      <%= submit_tag t('views.statuses.search.button'),
+        class: 'btn btn-primary mb-2' %>
+    <% end %>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
     <div class="main-card mb-3 card">

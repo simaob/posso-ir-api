@@ -141,6 +141,9 @@ es:
     statuses:
       index:
         title: 'Estados reportados'
+      search:
+        filter_type: 'Filtrar por tipo'
+        button: 'Filtrar'
     users:
       search:
         placeholder: 'Buscar por nombre o correo electrónico...'

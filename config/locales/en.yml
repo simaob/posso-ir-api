@@ -135,6 +135,9 @@ en:
     statuses:
       index:
         title: 'Reported statuses'
+      search:
+        filter_type: 'Filter by type'
+        button: 'Filter'
     users:
       search:
         placeholder: 'Search by name or email...'
