@@ -119,7 +119,7 @@ pt:
         help_open: 'A loja está em funcionamento durante a pandemia?'
         help_group: 'Exemplo: Continente, Dia, LIDL, etc.'
         help_country: 'Exemplo: Portugal, España, United Kingdom, etc.'
-        help_coordinates: 'Se requiere latitud y longitud para que la tienda esté disponible en la aplicación.'
+        help_coordinates: 'Latitude e Longitude são necessários para a loja ficar disponível na aplicação.'
     users:
       search:
         placeholder: 'Procure por nome ou email...'
