@@ -129,6 +129,6 @@ WHERE id = #{id}
   end
 
   def create_general_status
-    StatusGeneral.create!(store_id: id, updated_time: Time.now)
+    StatusGeneral.create!(store_id: id, updated_time: Time.now, is_official: false)
   end
 end
