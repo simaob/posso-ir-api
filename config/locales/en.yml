@@ -26,6 +26,8 @@ en:
         store_type: 'Type of store'
         state: 'State'
         open: 'Open?'
+        created_by: 'Created by'
+        updated_by: 'Updated by'
       user:
         email: 'Email'
         name: 'Name'
@@ -43,6 +45,7 @@ en:
         previous_voters: 'Previous voters'
         is_official: 'Official'
         active: 'Active'
+        store: 'Store'
     enums:
       user:
         roles:
@@ -129,6 +132,9 @@ en:
         help_group: "Example: Tesco, Sainsbury's, Cooperative, etc."
         help_country: 'Example: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Latitude and Longitude are required for the store to be available in the application.'
+    statuses:
+      index:
+        title: 'Reported statuses'
     users:
       search:
         placeholder: 'Search by name or email...'

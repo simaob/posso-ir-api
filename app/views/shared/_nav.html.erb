@@ -25,6 +25,16 @@
           <% end %>
         </li>
       <% end %>
+      <% if can? :read, Status %>
+        <li class="nav-item <%= 'active' if controller_name == 'statuses' %>">
+          <%= link_to statuses_path, class: 'nav-link' do %>
+            <%= Status.model_name.human(count: 2) %>
+            <% if controller_name == 'statuses' %>
+              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
       <% if can? :read, User %>
         <li class="nav-item <%= 'active' if controller_name == 'users' %>">
           <%= link_to users_path, class: 'nav-link' do %>

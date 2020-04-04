@@ -20,6 +20,7 @@
 #  active                :boolean          default("true")
 #
 class Status < ApplicationRecord
-
+  paginates_per 100
   validates_presence_of :updated_time
+  belongs_to :store
 end

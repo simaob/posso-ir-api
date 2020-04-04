@@ -93,7 +93,9 @@ class StoresController < ApplicationController
   end
 
   def statuses
-    @statuses = @store.statuses.page(params[:page])
+    @statuses = @store.statuses
+      .order(updated_time: :desc)
+      .page(params[:page])
   end
 
   private

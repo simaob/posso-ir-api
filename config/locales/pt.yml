@@ -26,6 +26,8 @@ pt:
         store_type: 'Tipo de loja'
         state: 'Estado'
         open: 'Aberto?'
+        created_by: 'Criado por'
+        updated_by: 'Actualizado por'
       user:
         email: 'Email'
         name: 'Nome'
@@ -43,6 +45,7 @@ pt:
         previous_voters: 'Vontantes anteriores'
         is_official: 'Oficial'
         active: 'Activo'
+        store: 'Loja'
     enums:
       user:
         roles:
@@ -135,6 +138,9 @@ pt:
         help_group: 'Exemplo: Continente, Dia, LIDL, etc.'
         help_country: 'Exemplo: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Latitude e Longitude são necessários para a loja ficar disponível na aplicação.'
+    statuses:
+      index:
+        title: 'Estados reportados'
     users:
       search:
         placeholder: 'Procure por nome ou email...'

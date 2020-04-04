@@ -26,6 +26,8 @@ es:
         store_type: 'Tipo de tienda'
         state: 'Estado'
         open: 'Abierto?'
+        created_by: 'Creado por'
+        updated_by: 'Actualizado por'
       user:
         email: 'Correo electrónico'
         name: 'Nombre'
@@ -43,6 +45,7 @@ es:
         previous_voters: 'Vontantes anteriores'
         is_official: 'Oficial'
         active: 'Activo'
+        store: 'Tienda'
     enums:
       user:
         roles:
@@ -135,6 +138,9 @@ es:
         help_group: 'Ejemplo: El Corte Inglés, Carrefour, LIDL, etc.'
         help_country: 'Ejemplo: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Se requiere latitud y longitud para que la tienda esté disponible en la aplicación.'
+    statuses:
+      index:
+        title: 'Estados reportados'
     users:
       search:
         placeholder: 'Buscar por nombre o correo electrónico...'
