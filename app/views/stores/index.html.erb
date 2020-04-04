@@ -47,7 +47,6 @@
                 <th><%= Store.human_attribute_name(:name) %></th>
                 <th><%= Store.human_attribute_name(:group) %></th>
                 <th><%= Store.human_attribute_name(:street) %></th>
-                <th><%= Store.human_attribute_name(:city) %></th>
                 <th><%= Store.human_attribute_name(:latitude) %></th>
                 <th><%= Store.human_attribute_name(:longitude) %></th>
                 <th><%= Store.human_attribute_name(:details) %></th>
@@ -61,8 +60,7 @@
                   <td><%= link_to store.name, store %></td>
                   <td><%= enum_l(store, :state) %></td>
                   <td><%= store.group %></td>
-                  <td><%= store.street %></td>
-                  <td><%= store.city %></td>
+                  <td><%= store.address %></td>
                   <td><%= store.latitude&.round(3) %></td>
                   <td><%= store.longitude&.round(3) %></td>
                   <td><%= store.details %></td>
