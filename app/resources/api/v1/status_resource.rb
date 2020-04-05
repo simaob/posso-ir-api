@@ -18,7 +18,7 @@ module Api
       abstract
       immutable
 
-      MAX_STORES = 300
+      MAX_STORES = 100
 
       attributes :id, :updated_time, :valid_until, :status,
                  :queue, :store_id
