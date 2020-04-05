@@ -7,6 +7,9 @@ en:
       user:
         one: 'User'
         other: 'Users'
+      status_crowdsource_user:
+        one: 'Status'
+        other: 'Statuses'
       status:
         one: 'Status'
         other: 'Statuses'
@@ -46,6 +49,11 @@ en:
         is_official: 'Official'
         active: 'Active'
         store: 'Store'
+      status_crowdsource_user:
+        posted_at: 'Time'
+        status: 'Status'
+        store: 'Store'
+        user: 'User'
     enums:
       user:
         roles:
@@ -101,6 +109,7 @@ en:
         editing: 'Editing store'
         deleting: 'Deleting store'
         creating: 'Adding store'
+        remove_note: 'NOTE: When marking a store for deletion, please write the reason on the details field.'
     edit:
       title: "Editing %{resource}"
     shared:
@@ -132,9 +141,16 @@ en:
         help_group: "Example: Tesco, Sainsbury's, Cooperative, etc."
         help_country: 'Example: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Latitude and Longitude are required for the store to be available in the application.'
-    statuses:
+        help_state_html: "<strong>Waiting approval</strong>: An Admin will review the information and approve it;<br>
+                     <strong>Live</strong>: Store is available in the application;<br>
+                    <strong>Marked for deletion</strong>: The information will be reviewed and confirmed by an admin."
+        info_deleting: 'NOTE: When marking a store for deletion, please write the reason on the details field.'
+    status_crowdsource_users:
       index:
         title: 'Reported statuses'
+      search:
+        filter_type: 'Filter by type'
+        button: 'Filter'
     users:
       search:
         placeholder: 'Search by name or email...'

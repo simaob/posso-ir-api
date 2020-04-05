@@ -1,5 +1,8 @@
 <div class="row mt-4">
   <div class="col-md-12">
+    <div class="alert alert-warning">
+      <%= t('views.stores.form.info_deleting') %>
+    </div>
     <%= form_with(model: store, local: true) do |form| %>
       <% if store.errors.any? %>
         <div id="error_explanation">
@@ -20,6 +23,9 @@
         <% else %>
           <span class="form-control"><%= enum_l(form.object, :state) %></span>
         <% end %>
+        <small class="form-text text-muted">
+          <%= t('views.stores.form.help_state_html') %>
+        </small>
       </div>
 
       <div class="form-group">

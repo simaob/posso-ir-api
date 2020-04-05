@@ -20,7 +20,8 @@ class MapController < ApplicationController
       confirm: t('views.map.index.confirm'),
       editing: t('views.map.index.editing'),
       deleting: t('views.map.index.deleting'),
-      creating: t('views.map.index.creating')
+      creating: t('views.map.index.creating'),
+      remove_note: t('views.map.index.remove_note')
     }
     @fields = [
       {
@@ -57,6 +58,11 @@ class MapController < ApplicationController
       {
         attribute: 'country',
         label: Store.human_attribute_name(:country),
+        type: 'text'
+      },
+      {
+        attribute: 'details',
+        label: Store.human_attribute_name(:details),
         type: 'text'
       },
       {

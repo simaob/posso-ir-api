@@ -14,7 +14,6 @@ function Sidebar(props) {
   const onSave = () => {
     dispatch({ type: 'clickSave', payload: formState });
   };
-
   return (
     <aside ref={sidebarRef} className={cx('c-sidebar', { '-visible': shop })}>
       <div className="sidebar-header">
@@ -26,6 +25,9 @@ function Sidebar(props) {
         )}
       </div>
       <div className="sidebar-content">
+        {status === 'deleting' && (<p className="alert alert-warning">
+                                   {labels.remove_note}
+                                   </p> )}
         <form key={status} className="sidebar-form" ref={formRef}>
           {shop && fields.map((field) => (
             <FormField

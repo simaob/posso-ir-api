@@ -16,7 +16,7 @@
   <div class="col-md-12">
     <div class="main-card mb-3 card">
       <div class="card-body">
-        <%= page_entries_info @statuses %>
+        <h5 class="card-title"><%= Status.model_name.human(count: 1) %></h5>
         <div class="table-responsive">
           <table class="table table-sm">
             <thead>
@@ -47,8 +47,21 @@
               <% end %>
             </tbody>
           </table>
-          <%= paginate @statuses %>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<% if current_user.admin? %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.status_crowdsource_users.index.title') %></h5>
+          <%= render 'status_crowdsource_users/table', status_crowdsource_users: @status_crowdsource_users %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

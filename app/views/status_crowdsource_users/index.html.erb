@@ -1,0 +1,18 @@
+<% content_for :page_title, t('views.status_crowdsource_users.index.title') %>
+
+<div class="row mt-5">
+  <div class="col-md-12">
+    <h1><%= StatusCrowdsourceUser.model_name.human(count: 2) %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <%= render 'table', status_crowdsource_users: @status_crowdsource_users %>
+      </div>
+    </div>
+  </div>
+</div>
+
