@@ -10,7 +10,7 @@
   <div class="col-md-12">
     <div class="main-card mb-3 card">
       <div class="card-body">
-        <%= page_entries_info @statuses %>
+        <%= page_entries_info @status_crowdsource_users %>
         <div class="table-responsive">
           <table class="table table-sm">
             <thead>
@@ -23,7 +23,7 @@
             </thead>
 
             <tbody>
-              <% @statuses.each do |status| %>
+              <% @status_crowdsource_users.each do |status| %>
                 <tr>
                   <td><%= link_to status.store&.name, status.store %></td>
                   <td><%= status.posted_at&.strftime('%H:%M %d/%m/%Y') %></td>
@@ -33,7 +33,7 @@
               <% end %>
             </tbody>
           </table>
-          <%= paginate @statuses %>
+          <%= paginate @status_crowdsource_users %>
         </div>
       </div>
     </div>
