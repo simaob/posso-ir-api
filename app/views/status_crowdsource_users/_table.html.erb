@@ -13,7 +13,7 @@
     <tbody>
       <% status_crowdsource_users.each do |status| %>
         <tr>
-          <td><%= link_to status.store&.name, status.store %></td>
+          <td><%= link_to status.store&.name, statuses_store_path(status.store) %></td>
           <td><%= link_to status.user&.display_name, status.user %></td>
           <td><%= status.status&.round(3) %></td>
           <td><%= status.posted_at&.strftime('%H:%M %d/%m/%Y') %></td>
