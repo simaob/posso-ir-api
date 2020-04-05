@@ -10,6 +10,9 @@ pt:
       status_crowdsource_user:
         one: 'Estado'
         other: 'Estados'
+      status:
+        one: 'Estado'
+        other: 'Estados'
     attributes:
       store:
         name: 'Nome'

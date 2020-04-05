@@ -10,6 +10,9 @@ en:
       status_crowdsource_user:
         one: 'Status'
         other: 'Statuses'
+      status:
+        one: 'Status'
+        other: 'Statuses'
     attributes:
       store:
         name: 'Name'

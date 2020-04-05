@@ -12,6 +12,7 @@
 #  user_id    :bigint
 #
 class StatusCrowdsourceUser < ApplicationRecord
+  paginates_per 50
   belongs_to :user
   belongs_to :store
 

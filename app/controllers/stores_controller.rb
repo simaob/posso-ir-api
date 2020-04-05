@@ -93,9 +93,12 @@ class StoresController < ApplicationController
   end
 
   def statuses
-    @statuses = @store.statuses
-      .order(updated_time: :desc)
-      .page(params[:page])
+    @statuses = @store.statuses.order(updated_time: :desc)
+    if current_user.admin?
+      @status_crowdsource_users = @store.status_crowdsource_users
+        .order(posted_at: :desc)
+        .page(params[:page])
+    end
   end
 
   private

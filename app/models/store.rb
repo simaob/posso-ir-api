@@ -25,7 +25,6 @@
 class Store < ApplicationRecord
   include UserTrackable
 
-  paginates_per 50
   RADIUS = 5000
   PROJECTION = 4326
 
@@ -33,6 +32,7 @@ class Store < ApplicationRecord
   has_many :status_store_owners
   has_many :status_generals
   has_many :statuses
+  has_many :status_crowdsource_users
 
   has_many :user_stores, inverse_of: :store
   has_many :managers, through: :user_stores
