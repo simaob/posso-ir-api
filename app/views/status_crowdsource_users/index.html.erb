@@ -1,0 +1,40 @@
+<% content_for :page_title, t('views.status_crowdsource_users.index.title') %>
+
+<div class="row mt-5">
+  <div class="col-md-12">
+    <h1><%= StatusCrowdsourceUser.model_name.human(count: 2) %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <%= page_entries_info @statuses %>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= StatusCrowdsourceUser.human_attribute_name(:store) %></th>
+                <th><%= StatusCrowdsourceUser.human_attribute_name(:user) %></th>
+                <th><%= StatusCrowdsourceUser.human_attribute_name(:posted_at) %></th>
+                <th><%= StatusCrowdsourceUser.human_attribute_name(:status) %></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @statuses.each do |status| %>
+                <tr>
+                  <td><%= link_to status.store&.name, status.store %></td>
+                  <td><%= status.posted_at&.strftime('%H:%M %d/%m/%Y') %></td>
+                  <td><%= status.status&.round(3) %></td>
+                  <td><%= link_to status.user&.display_name, status.user %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @statuses %>
+        </div>
+      </div>
+    </div>
+  </div>

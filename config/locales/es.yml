@@ -7,7 +7,7 @@ es:
       user:
         one: 'Usuario'
         other: 'Usuarios'
-      status:
+      status_crowdsource_user:
         one: 'Estado'
         other: 'Estados'
     attributes:
@@ -46,6 +46,11 @@ es:
         is_official: 'Oficial'
         active: 'Activo'
         store: 'Tienda'
+      status_crowdsource_user:
+        posted_at: 'Hora'
+        status: 'Estado'
+        store: 'Tienda'
+        user: 'Usuario'
     enums:
       user:
         roles:
@@ -138,7 +143,7 @@ es:
         help_group: 'Ejemplo: El Corte Inglés, Carrefour, LIDL, etc.'
         help_country: 'Ejemplo: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Se requiere latitud y longitud para que la tienda esté disponible en la aplicación.'
-    statuses:
+    status_crowdsource_users:
       index:
         title: 'Estados reportados'
       search:

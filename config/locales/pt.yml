@@ -7,7 +7,7 @@ pt:
       user:
         one: 'Utilizador'
         other: 'Utilizadores'
-      status:
+      status_crowdsource_user:
         one: 'Estado'
         other: 'Estados'
     attributes:
@@ -46,6 +46,11 @@ pt:
         is_official: 'Oficial'
         active: 'Activo'
         store: 'Loja'
+      status_crowdsource_user:
+        posted_at: 'Hora'
+        status: 'Estado'
+        store: 'Loja'
+        user: 'Utilizador'
     enums:
       user:
         roles:
@@ -138,7 +143,7 @@ pt:
         help_group: 'Exemplo: Continente, Dia, LIDL, etc.'
         help_country: 'Exemplo: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Latitude e Longitude são necessários para a loja ficar disponível na aplicação.'
-    statuses:
+    status_crowdsource_users:
       index:
         title: 'Estados reportados'
       search:

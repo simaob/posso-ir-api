@@ -7,7 +7,7 @@ en:
       user:
         one: 'User'
         other: 'Users'
-      status:
+      status_crowdsource_user:
         one: 'Status'
         other: 'Statuses'
     attributes:
@@ -46,6 +46,11 @@ en:
         is_official: 'Official'
         active: 'Active'
         store: 'Store'
+      status_crowdsource_user:
+        posted_at: 'Time'
+        status: 'Status'
+        store: 'Store'
+        user: 'User'
     enums:
       user:
         roles:
@@ -132,7 +137,7 @@ en:
         help_group: "Example: Tesco, Sainsbury's, Cooperative, etc."
         help_country: 'Example: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Latitude and Longitude are required for the store to be available in the application.'
-    statuses:
+    status_crowdsource_users:
       index:
         title: 'Reported statuses'
       search:

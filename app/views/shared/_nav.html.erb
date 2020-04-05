@@ -25,11 +25,11 @@
           <% end %>
         </li>
       <% end %>
-      <% if can? :read, Status %>
-        <li class="nav-item <%= 'active' if controller_name == 'statuses' %>">
-          <%= link_to statuses_path, class: 'nav-link' do %>
-            <%= Status.model_name.human(count: 2) %>
-            <% if controller_name == 'statuses' %>
+      <% if can? :read, StatusCrowdsourceUser %>
+        <li class="nav-item <%= 'active' if controller_name == 'status_crowdsource_users' %>">
+          <%= link_to status_crowdsource_users_path, class: 'nav-link' do %>
+            <%= StatusCrowdsourceUser.model_name.human(count: 2) %>
+            <% if controller_name == 'status_crowdsource_users' %>
               <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
             <% end %>
           <% end %>
