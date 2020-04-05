@@ -3,7 +3,7 @@
 module UserPostable
   extend ActiveSupport::Concern
 
-  USER_INTERVAL = 5
+  USER_INTERVAL = 0.75
 
   def validate_user_interval
     current_user = context[:current_user]
