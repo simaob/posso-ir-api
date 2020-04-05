@@ -109,6 +109,7 @@ es:
         editing: 'Editando tienda'
         deleting: 'Eliminando tienda'
         creating: 'Añadindo tienda'
+        remove_note: 'NOTA: Al marcar una tienda para su eliminación, escriba el motivo de esta marca en el campo de detalles.'
     edit:
       title: "Editando %{resource}"
     shared:
@@ -146,6 +147,10 @@ es:
         help_group: 'Ejemplo: El Corte Inglés, Carrefour, LIDL, etc.'
         help_country: 'Ejemplo: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Se requiere latitud y longitud para que la tienda esté disponible en la aplicación.'
+        help_state_html: "<strong>Esperando a ser validado</strong>: Um administrador irá confirmar la información y aprobación;<br>
+                     <strong>Activada</strong>: Tienda disponible en la aplicación;<br>
+                    <strong>Marcado para eliminar</strong>: La eliminación será revisada y confirmada por un administrador."
+        info_deleting: 'NOTA: Al marcar una tienda para su eliminación, escriba el motivo de esta marca en el campo de detalles.'
     status_crowdsource_users:
       index:
         title: 'Estados reportados'

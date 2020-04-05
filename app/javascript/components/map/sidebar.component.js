@@ -14,9 +14,11 @@ function Sidebar(props) {
   const onSave = () => {
     dispatch({ type: 'clickSave', payload: formState });
   };
-
   return (
     <aside ref={sidebarRef} className={cx('c-sidebar', { '-visible': shop })}>
+      {status === 'deleting' && (<div className="alert alert-warning">
+          {labels.remove_note}
+      </div> )}
       <div className="sidebar-header">
         <p className="shop-name">{(shop && shop.name) || labels.add_store }</p>
         {status === 'idle' && (

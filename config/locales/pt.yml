@@ -109,6 +109,7 @@ pt:
         editing: 'Editando loja'
         deleting: 'Removendo loja'
         creating: 'Adicionando loja'
+        remove_note: 'NOTA: Quando marcar uma loja para remoção por favor escreva o porquê dessa marcação no campo de detalhes.'
     edit:
       title: "Editando %{resource}"
     shared:
@@ -146,6 +147,10 @@ pt:
         help_group: 'Exemplo: Continente, Dia, LIDL, etc.'
         help_country: 'Exemplo: Portugal, España, United Kingdom, etc.'
         help_coordinates: 'Latitude e Longitude são necessários para a loja ficar disponível na aplicação.'
+        help_state_html: "<strong>À espera de validação</strong>: Um administrador irá confirmar a informação e aprovar;<br>
+                     <strong>Activa</strong>: Loja disponível na aplicação.<br>
+                    <strong>Marcada para remoção</strong>: Remoção será revista e confirmada por um administrador."
+        info_deleting: 'NOTA: Quando marcar uma loja para remoção por favor escreva o porquê dessa marcação no campo de detalhes.'
     status_crowdsource_users:
       index:
         title: 'Estados reportados'
