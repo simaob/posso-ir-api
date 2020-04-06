@@ -1,4 +1,4 @@
-![Posso Ir? Logo](https://raw.github.com/simaob/posso-ir-api/master/posso-ir.png =100x)
+![Posso Ir? Logo](https://raw.github.com/simaob/posso-ir-api/master/posso-ir.png)
 
 # README - Posso Ir API [![Build Status](https://travis-ci.org/simaob/posso-ir-api.svg?branch=master)](https://travis-ci.org/simaob/posso-ir-api)
 
