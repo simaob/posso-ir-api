@@ -66,7 +66,19 @@ Otherwise just use the web interface to create your own stores.
 This tool is being built by the following people, who are part of the larger
 __Posso Ir?__ team.
 
+* Bruno Pinto
+* Danton Dornellas
+* Francisca Fonseca
+* Hugo Dias
+* Joana Silva
+* João Crisóstomo
+* João Lobato
+* João Rodrigues
+* Luís Certo
 * Miguel Torres
+* Paulo Leite
+* Pedro Bertucci
+* Rafael Pires
 * Rodrigo Solís
 * Tiago Santos
 * Simão Belchior
