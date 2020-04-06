@@ -1,4 +1,4 @@
-# README - COVID-19 - Shopping Assistant
+# README - Posso Ir API [![Build Status](https://travis-ci.org/simaob/posso-ir-api.svg?branch=master)](https://travis-ci.org/simaob/posso-ir-api)
 
 ## Intro
 
