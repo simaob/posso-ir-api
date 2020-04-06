@@ -35,11 +35,11 @@ free to reach out to us or to just clone the tool and have a go at it!
 
 ## Setting up the project locally
 
-1- Clone the repository;
-2- Install dependencies: `bundle install` and `yarn install`
-3- Create and migrate database: `rails db:create db:migrate`
-4- Start the server with `rails server`
-5- Open your browser and visit `http://localhost:3000` and ta-da!
+1. Clone the repository;
+2. Install dependencies: `bundle install` and `yarn install`
+3. Create and migrate database: `rails db:create db:migrate`
+4. Start the server with `rails server`
+5. Open your browser and visit `http://localhost:3000` and ta-da!
 
 ## Running the API
 
