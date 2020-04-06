@@ -1,12 +1,12 @@
 module EnumI18nHelper
-
   # Returns an array of the possible key/i18n values for the enum
   # Example usage:
   # enum_options_for_select(User, :approval_state)
   def enum_options_for_select(class_name, enum)
-    class_name.send(enum.to_s.pluralize).map do |key, _|
+    values = class_name.send(enum.to_s.pluralize).map do |key, _|
       [enum_i18n(class_name, enum, key), key]
-    end.sort {|a, b| a[0] <=> b[0] }
+    end
+    values.sort { |a, b| a[0] <=> b[0] }
   end
 
   # Returns the i18n version the models current enum key

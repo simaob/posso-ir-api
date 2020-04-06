@@ -16,5 +16,5 @@ class StatusCrowdsourceUser < ApplicationRecord
   belongs_to :user
   belongs_to :store
 
-  validates :status, :inclusion => 0..10
+  validates :status, inclusion: 0..10
 end

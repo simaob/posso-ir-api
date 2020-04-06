@@ -71,7 +71,7 @@ class ImportStores
     puts "Starting Auchan, we have #{Store.count} total stores"
     src = File.open(Rails.root.join('db', 'files', 'auchan.csv'), 'r')
     file = File.read(src).force_encoding('UTF-8')
-    CSV.parse(file, headers:true, skip_blanks: true). each do |csv|
+    CSV.parse(file, headers: true, skip_blanks: true). each do |csv|
       Store.create(
         name: csv['name'],
         country: 'PT',
@@ -89,7 +89,7 @@ class ImportStores
     puts "Starting Continente, we have #{Store.count} total stores"
     src = File.open(Rails.root.join('db', 'files', 'continente.json'), 'r')
     file = File.read(src).force_encoding('UTF-8')
-    JSON.parse(file)["response"]["locations"].each do |row|
+    JSON.parse(file)['response']['locations'].each do |row|
       Store.create(
         name: row['name'],
         group: 'Continente',
@@ -175,7 +175,7 @@ class ImportStores
     file = File.read(src).force_encoding('UTF-8')
     JSON.parse(file)['stores']['marker'].each do |row|
       Store.create(
-        name: "Froiz #{row['-direccion'].split(' - ')[row['-direccion'].size-2]}",
+        name: "Froiz #{row['-direccion'].split(' - ')[row['-direccion'].size - 2]}",
         group: 'Froiz',
         country: 'PT',
         city: row['-direccion'].split(' - ').last,
@@ -214,7 +214,7 @@ class ImportStores
     puts "Starting Lidl, we have #{Store.count} total stores"
     src = File.open(Rails.root.join('db', 'files', 'lidl.csv'), 'r')
     file = File.read(src).force_encoding('UTF-8')
-    CSV.parse(file, headers:true, skip_blanks: true). each do |csv|
+    CSV.parse(file, headers: true, skip_blanks: true). each do |csv|
       city, street = csv['name'].split('-')
       Store.create(
         name: "LIDL #{city.strip}",
@@ -295,7 +295,7 @@ class ImportStores
     puts "Starting Spar, we have #{Store.count} total stores"
     src = File.open(Rails.root.join('db', 'files', 'spar.json'), 'r')
     file = File.read(src).force_encoding('UTF-8')
-    JSON.parse(file)['1'].each do |key, row|
+    JSON.parse(file)['1'].each do |_, row|
       Store.create(
         name: row['title'],
         group: 'Spar',
@@ -316,7 +316,8 @@ class ImportStores
     src = File.open(Rails.root.join('db', 'files', 'farmacias.csv'), 'r')
     file = File.read(src).force_encoding('UTF-8')
     CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
-      next if !csv[15].present?
+      next unless csv[15].present?
+
       Store.create(
         name: "Farmácia #{csv[1].titleize}",
         group: 'Farmácias',
@@ -347,7 +348,7 @@ class ImportStores
         latitude: csv[5],
         longitude: csv[6],
         store_type: :gas_station,
-        open: csv[1] == 'Sim' ? true : false
+        open: csv[1] == 'Sim'
       )
     end
     puts "#{Store.count} total stores"
@@ -359,22 +360,19 @@ class ImportStores
     file = File.read(src).force_encoding('UTF-8')
     CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
       next unless csv[9].present?
-      begin
-        Store.create(
-          name: "#{csv[3].titleize} #{csv[2].titleize}",
-          group: 'Dia',
-          country: 'PT',
-          district: csv[4],
-          city: csv[6],
-          street: csv[7],
-          zip_code: csv[8],
-          latitude: csv[9].split(',')[0].strip,
-          longitude: csv[9].split(',')[1].strip,
-          store_type: :supermarket
-        )
-      rescue
-        puts csv
-      end
+
+      Store.create(
+        name: "#{csv[3].titleize} #{csv[2].titleize}",
+        group: 'Dia',
+        country: 'PT',
+        district: csv[4],
+        city: csv[6],
+        street: csv[7],
+        zip_code: csv[8],
+        latitude: csv[9].split(',')[0].strip,
+        longitude: csv[9].split(',')[1].strip,
+        store_type: :supermarket
+      )
     end
     puts "#{Store.count} total stores"
   end

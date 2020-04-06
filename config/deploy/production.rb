@@ -3,9 +3,9 @@ server ENV['PRODUCTION_IP'],
        roles: %w{web app db}, primary: true
 
 set :ssh_options, {
-    forward_agent: true,
-    auth_methods: %w(publickey password),
-    password: fetch(:password)
+  forward_agent: true,
+  auth_methods: %w(publickey password),
+  password: fetch(:password)
 }
 
 set :branch, 'master'

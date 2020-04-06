@@ -27,4 +27,3 @@ namespace :generate do
     puts "Finished generating general statuses in #{duration} ms"
   end
 end
-

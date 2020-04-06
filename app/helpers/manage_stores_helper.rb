@@ -1,6 +1,6 @@
 module ManageStoresHelper
-  def latest_status status
-    return 'N/A' unless status && status.valid_until
+  def latest_status(status)
+    return 'N/A' unless status&.valid_until
 
     state = I18n.t("views.manage_stores.index.#{status.status.to_i}")
 

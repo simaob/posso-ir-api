@@ -40,17 +40,17 @@ class Store < ApplicationRecord
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
-  enum store_type: { supermarket: 1, pharmacy: 2, restaurant: 3,
-                     gas_station: 4, bank: 5, coffee: 6, kiosk: 7,
-                     other: 8 }
-  enum state: { waiting_approval: 1, live: 2, marked_for_deletion: 3 }
+  enum store_type: {supermarket: 1, pharmacy: 2, restaurant: 3,
+                    gas_station: 4, bank: 5, coffee: 6, kiosk: 7,
+                    other: 8}
+  enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3}
 
-  validates :capacity, allow_nil: true, numericality: { greater_than: 0 }
+  validates :capacity, allow_nil: true, numericality: {greater_than: 0}
 
   scope :by_group, ->(group) { where(group: group) }
   scope :by_state, ->(state) { where(state: state) }
   scope :by_store_type, ->(store_type) { where(store_type: store_type) }
-  scope :available, -> { where(state: [:live, :marked_for_deletion]).where(open: true)}
+  scope :available, -> { where(state: [:live, :marked_for_deletion]).where(open: true) }
 
   # after_validation :reverse_geocode
   # after_validation :geocode
@@ -79,18 +79,16 @@ class Store < ApplicationRecord
     where('name ilike ? OR street ilike ? OR district ilike ? OR city ilike ?',
           "%#{search}%", "%#{search}%",
           "%#{search}%", "%#{search}%")
-
   end
 
   def self.retrieve_stores(lat, lon)
     query = <<~SQL
-ST_CONTAINS(
-  ST_BUFFER(
-    ST_SetSRID(
-      ST_MakePoint(#{lon}, #{lat}), 4326)::geography,
-    #{RADIUS})::geometry,
-    lonlat)
-SQL
+      ST_CONTAINS(
+        ST_BUFFER(
+          ST_SetSRID(
+            ST_MakePoint(#{lon}, #{lat}), 4326)::geography,
+              #{RADIUS})::geometry, lonlat)
+    SQL
 
     Store.where(query).available
   end
@@ -103,9 +101,9 @@ SQL
     return unless persisted? && latitude.present? && longitude.present?
 
     sql = <<~SQL
-UPDATE stores
-SET lonlat = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326)
-WHERE id = #{id}
+      UPDATE stores
+      SET lonlat = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326)
+      WHERE id = #{id}
     SQL
     ActiveRecord::Base.connection.execute sql
   end

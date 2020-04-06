@@ -8,7 +8,7 @@ class MapController < ApplicationController
       .where(state: [:waiting_approval, :live])
     @shops = @shops.where(group: current_user.stores&.map(&:group)) if current_user.store_manager?
 
-    @shops = Hash[@shops.collect { |item| [item.id, item] } ]
+    @shops = Hash[@shops.collect { |item| [item.id, item] }]
     @labels = {
       delete: t('views.map.index.delete'),
       edit: t('views.map.index.edit'),
@@ -93,7 +93,7 @@ class MapController < ApplicationController
         format.json { render json: @shop.errors, status: :unprocessable_entity }
       end
     end
-      # TODO: mark as to validate
+    # TODO: mark as to validate
   end
 
   def update
@@ -126,9 +126,8 @@ class MapController < ApplicationController
   private
 
   def map_params
-  # copy/pasted from stores controller > reuse?
     params.permit(:name, :group, :street, :city,
-                                      :zip_code, :country, :district, :store_type,
-                                      :latitude, :longitude, :capacity, :details)
+                  :zip_code, :country, :district, :store_type,
+                  :latitude, :longitude, :capacity, :details)
   end
 end

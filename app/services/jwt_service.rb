@@ -1,12 +1,12 @@
 class JwtService
-  ALGORITHM = 'HS256'
+  ALGORITHM = 'HS256'.freeze
 
   def self.encode(payload:)
-    JWT.encode(payload, self.secret, ALGORITHM)
+    JWT.encode(payload, secret, ALGORITHM)
   end
 
   def self.decode(token:)
-    JWT.decode(token, self.secret, true, { algorithm: ALGORITHM}).first
+    JWT.decode(token, secret, true, {algorithm: ALGORITHM}).first
   end
 
   def self.secret
