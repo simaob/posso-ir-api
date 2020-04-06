@@ -59,7 +59,7 @@ pt:
         roles:
           user: 'Utilizador'
           store_manager: 'Gestor de loja'
-          general_manager: 'Gestor'
+          general_manager: 'Gestor do sistema'
           admin: 'Administrador'
           contributor: 'Colaborador'
       store:

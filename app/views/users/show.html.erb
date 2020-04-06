@@ -8,40 +8,46 @@
     <div class="col-md-1">
       <%= link_to t('views.actions.edit'), edit_user_path(@user),
         class: 'btn btn-sm btn-outline-primary' %>
-    </div>
-  <% end %>
+  </div>
+<% end %>
 </div>
 
 <div class="row mt-4">
   <div class="col-md-12">
-    <p>
-      <strong><%= User.human_attribute_name(:name) %>:</strong>
-      <%= @user.name %>
-    </p>
+    <div class="card">
+      <div class="card-body">
+        <p>
+        <strong><%= User.human_attribute_name(:name) %>:</strong>
+        <%= @user.name %>
+        </p>
 
-    <p>
-      <strong><%= User.human_attribute_name(:email) %>:</strong>
-      <%= @user.email %>
-    </p>
+        <p>
+        <strong><%= User.human_attribute_name(:email) %>:</strong>
+        <%= @user.email %>
+        </p>
 
-    <p>
-      <strong><%= User.human_attribute_name(:role) %>:</strong>
-      <%= enum_l(@user, :role) %>
-    </p>
+        <p>
+        <strong><%= User.human_attribute_name(:role) %>:</strong>
+        <%= enum_l(@user, :role) %>
+        </p>
 
-    <p>
-      <strong><%= User.human_attribute_name(:app_uuid) %>:</strong>
-      <%= @user.app_uuid %>
-    </p>
+        <% if @user.app_uuid.present? %>
+          <p>
+          <strong><%= User.human_attribute_name(:app_uuid) %>:</strong>
+          <%= @user.app_uuid %>
+          </p>
+        <% end %>
 
-    <% if @user.stores.any? %>
-      <p><strong><%= Store.model_name.human(count: 2) %></strong>
-        <ul>
-          <% @user.stores.order(:name).each do |store| %>
-            <li><%= link_to store.name, store %></li>
-          <% end %>
-        </ul>
-      </p>
-    <% end %>
+        <% if @user.stores.any? %>
+          <p><strong><%= Store.model_name.human(count: 2) %></strong>
+          <ul>
+            <% @user.stores.order(:name).each do |store| %>
+              <li><%= link_to store.name, store %></li>
+            <% end %>
+          </ul>
+          </p>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
