@@ -48,7 +48,8 @@ class StatusCrowdsource < Status
 
     new_average_weighted = STATUS_PARAMS[:weight_now] * new_voters_status * new_voters rescue 0
     average_weighted = STATUS_PARAMS[:weight_before] * status * voters * voters_valid rescue 0
-    old_average_weighted = STATUS_PARAMS[:weight_long_before] * previous_status * previous_voters * previous_voters_valid rescue 0
+    old_average_weighted = STATUS_PARAMS[:weight_long_before] * previous_status *
+      previous_voters * previous_voters_valid rescue 0
 
     new_voters_weighted = new_voters * STATUS_PARAMS[:weight_now] rescue 0
     voters_weighted = voters * STATUS_PARAMS[:weight_before] * voters_valid rescue 0
@@ -56,10 +57,13 @@ class StatusCrowdsource < Status
 
     begin
       new_status =
-        (new_average_weighted + average_weighted + old_average_weighted) / (new_voters_weighted + voters_weighted + old_voters_weighted)
-    rescue Exception => e
+        (new_average_weighted + average_weighted + old_average_weighted) /
+        (new_voters_weighted + voters_weighted + old_voters_weighted)
+    rescue StandardError
       new_status = nil
     end
+
+    return unless new_status
 
     update(
       status: new_status,
@@ -68,7 +72,7 @@ class StatusCrowdsource < Status
       previous_status: status,
       previous_voters: voters,
       previous_updated_time: updated_time
-    ) if new_status
+    )
   end
 
   private
@@ -76,9 +80,7 @@ class StatusCrowdsource < Status
   def new_votes
     StatusCrowdsourceUser
       .where(store_id: store_id)
-      .where("created_at > '#{ (Time.now - TIME_PARAMS[:first].minutes).utc.to_s(:db) }'")
+      .where("created_at > '#{(Time.now - TIME_PARAMS[:first].minutes).utc.to_s(:db)}'")
       .where.not(status: nil)
   end
-
-
 end

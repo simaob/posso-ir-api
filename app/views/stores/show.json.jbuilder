@@ -1,1 +1,1 @@
-json.partial! "stores/store", store: @store
+json.partial! 'stores/store', store: @store

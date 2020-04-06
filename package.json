@@ -1,6 +1,11 @@
 {
-  "name": "covid19_shopping_assistant",
+  "name": "posso-ir-api",
   "private": true,
+  "scripts": {
+    "test": "run-p rails:test rails:lint",
+    "rails:test": "bundle exec rspec",
+    "rails:lint": "bundle exec rubocop"
+  },
   "dependencies": {
     "@babel/preset-react": "^7.9.4",
     "@rails/activestorage": "^6.0.0",

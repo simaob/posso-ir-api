@@ -5,7 +5,7 @@ module Api
       abstract
 
       def custom_links(_)
-        { self: nil }
+        {self: nil}
       end
     end
   end

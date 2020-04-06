@@ -20,5 +20,4 @@
 #  active                :boolean          default("true")
 #
 class StatusUserCommitment < Status
-
 end

@@ -20,5 +20,4 @@
 #  active                :boolean          default("true")
 #
 class StatusUserCount < Status
-
 end

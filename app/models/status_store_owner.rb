@@ -26,6 +26,6 @@ class StatusStoreOwner < Status
   private
 
   def set_valid_until
-    self.valid_until = self.updated_time + 1.hour
+    self.valid_until = updated_time + 1.hour
   end
 end

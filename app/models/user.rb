@@ -18,8 +18,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable,
-    :registerable
+  devise :database_authenticatable, :recoverable, :rememberable, :registerable
 
   with_options if: :admin? do |admin|
     admin.validates_presence_of :email
@@ -27,13 +26,12 @@ class User < ApplicationRecord
     admin.validates_confirmation_of :password, if: :password_required?
     admin.validates_length_of :password, within: 8..128, allow_blank: true
   end
-  validates_uniqueness_of :email, unless: Proc.new { |u| u.email.blank? }
+  validates_uniqueness_of :email, unless: proc { |u| u.email.blank? }
 
   has_many :user_stores, inverse_of: :manager
   has_many :stores, through: :user_stores
 
-  enum role: { user: 0, store_manager: 1, general_manager: 2,
-               admin: 3, contributor: 4 }
+  enum role: {user: 0, store_manager: 1, general_manager: 2, admin: 3, contributor: 4}
 
   def self.search(search)
     return all unless search

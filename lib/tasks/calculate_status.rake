@@ -20,7 +20,7 @@ namespace :status do
 SQL
       # TODO: This can be optimized
       Store.joins(:status_generals).joins(:status_store_owners)
-           .where(where_clause).find_each.with_index do |store, i|
+        .where(where_clause).find_each.with_index do |store, i|
         puts "Calculated #{i}" if (i % 100).zero?
         owner = store.status_store_owners.first
         general = store.status_generals.first
@@ -40,7 +40,7 @@ SQL
 SQL
       # TODO: This can be optimized
       Store.joins(:status_generals, :status_crowdsources)
-           .where(where_clause).find_each.with_index do |store, i|
+        .where(where_clause).find_each.with_index do |store, i|
         puts "Calculated #{i}" if (i % 100).zero?
         crowdsource = store.status_crowdsources.first
         general = store.status_generals.first

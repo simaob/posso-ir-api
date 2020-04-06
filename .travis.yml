@@ -1,0 +1,30 @@
+dist: bionic
+language: ruby
+language: node_js
+  node_js:
+    - 10
+cache:
+  bundler: true
+  yarn: true
+  directories:
+    - node_modules
+    - /home/travis/.rvm/
+services:
+  - postgres
+addons:
+  postgresql: 11
+  apt:
+    packages:
+      - postgresql-11-postgis-2.5
+before_install:
+  - nvm install
+  - node -v
+  - npm i -g yarn
+install:
+  - bundle install --jobs=3 --retry=3
+  - yarn
+before_script:
+  - psql -U postgres -c "create extension postgis"
+  - bundle exec rake db:drop db:create db:schema:load RAILS_ENV=test
+script:
+  - yarn test

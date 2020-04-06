@@ -9,8 +9,8 @@ module Api
 
       filters :location
 
-      filter :location, apply: ->(records, value, _options) {
-        #records.by_category(value)
+      filter :location, apply: ->(_records, value, _options) {
+        # records.by_category(value)
         Store.retrieve_stores(value.first, value.second)
       }
 
@@ -18,7 +18,7 @@ module Api
         [@model.latitude, @model.longitude]
       end
 
-      def self.records(options = {})
+      def self.records(_options = {})
         Store.available
       end
     end

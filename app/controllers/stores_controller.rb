@@ -8,10 +8,7 @@ class StoresController < ApplicationController
     @stores = @stores.by_group(params[:group]) if params[:group].present?
     @stores = @stores.by_state(params[:state]) if params[:state].present?
     @stores = @stores.by_store_type(params[:store_type]) if params[:store_type].present?
-
-    if params[:no_info]
-      @stores = @stores.where(latitude: nil).or(Store.where(longitude: nil))
-    end
+    @stores = @stores.where(latitude: nil).or(Store.where(longitude: nil)) if params[:no_info]
 
     @stores = @stores.order(:group, :name)
 
@@ -89,16 +86,14 @@ class StoresController < ApplicationController
       format.html { redirect_to stores_url, notice: t('controllers.stores.approve_all.notice', size: size) }
       format.json { head :no_content }
     end
-
   end
 
   def statuses
     @statuses = @store.statuses.order(updated_time: :desc)
-    if current_user.admin?
-      @status_crowdsource_users = @store.status_crowdsource_users
-        .order(posted_at: :desc)
-        .page(params[:page])
-    end
+    return unless current_user.admin?
+
+    @status_crowdsource_users = @store.status_crowdsource_users
+      .order(posted_at: :desc).page(params[:page])
   end
 
   private
