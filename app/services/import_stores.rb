@@ -17,6 +17,7 @@ class ImportStores
     import_spar
     import_pharmacies
     import_prio
+    import_from_osm
     puts "#{Store.count} total stores"
   end
 
@@ -372,6 +373,22 @@ class ImportStores
         latitude: csv[9].split(',')[0].strip,
         longitude: csv[9].split(',')[1].strip,
         store_type: :supermarket
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_from_osm
+    puts "Starting OSM Import, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'osm_export.csv'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
+      Store.create(
+        name: "#{csv[0].titleize}",
+        country: 'Portugal',
+        latitude: csv[1],
+        longitude: csv[2],
+        store_type: csv[3].to_i
       )
     end
     puts "#{Store.count} total stores"
