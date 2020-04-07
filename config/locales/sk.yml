@@ -4,9 +4,11 @@ sk:
       store:
         one: 'Predajňa'
         other: 'Predajne'
+        few: 'Predajne'
       user:
         one: 'Používateľ'
         other: 'Používatelia'
+        few: 'Používatelia'
     attributes:
       store:
         name: 'Názov'

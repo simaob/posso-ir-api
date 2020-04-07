@@ -58,7 +58,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lang</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <% [:en, :es, :pt].each do |locale| %>
+          <% [:en, :es, :pt, :sk].each do |locale| %>
             <%= link_to locale.to_s, url_for(locale: locale), class: 'dropdown-item' %>
           <% end %>
         </div>
