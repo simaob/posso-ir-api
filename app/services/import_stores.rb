@@ -384,7 +384,7 @@ class ImportStores
     file = File.read(src).force_encoding('UTF-8')
     CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
       Store.create(
-        name: "#{csv[0].titleize}",
+        name: csv[0],
         country: 'Portugal',
         latitude: csv[1],
         longitude: csv[2],
