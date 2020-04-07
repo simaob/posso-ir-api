@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  scope "(:locale)", locale: /en|pt|es/ do
+  scope "(:locale)", locale: /en|pt|es|sk/ do
     root to: "home#index"
     resources :stores do
       post :approve_all, on: :collection

@@ -1,0 +1,138 @@
+sk:
+  activerecord:
+    models:
+      store:
+        one: 'Predajňa'
+        other: 'Predajne'
+        few: 'Predajne'
+      user:
+        one: 'Používateľ'
+        other: 'Používatelia'
+        few: 'Používatelia'
+    attributes:
+      store:
+        name: 'Názov'
+        group: 'Reťazec'
+        street: 'Adresa'
+        city: 'Mesto'
+        district: 'Región'
+        country: 'Krajina'
+        zip_code: 'PSČ'
+        latitude: 'Zemepisná šírka'
+        longitude: 'Zemepisná dĺžka'
+        capacity: 'Kapacita'
+        details: 'Detaily'
+        store_type: 'Typ predajne'
+        state: 'Stav'
+        open: 'Otvorené?'
+      user:
+        email: 'Email'
+        name: 'Meno'
+        role: 'Rola'
+        app_uuid: 'UUID'
+      status_store_owner:
+        updated_time: 'Čas'
+        status: 'Stav'
+    enums:
+      user:
+        roles:
+          user: 'Používateľ'
+          store_manager: 'Manažér predajne'
+          general_manager: 'Hlavný manažér'
+          admin: 'Administrátor'
+          contributor: 'Prispievateľ'
+      store:
+        states:
+          waiting_approval: 'Očakáva sa schválenie'
+          live: 'Aktívne'
+          marked_for_deletion: 'Označené na vymazanie'
+        store_types:
+          restaurant: 'Reštaurácia'
+          supermarket: 'Supermarket'
+          pharmacy: 'Lekáreň'
+          gas_station: 'Čerpacia stanica'
+          bank: 'Banka'
+          coffee: 'Kaviareň'
+          kiosk: 'Trafika'
+          other: 'Iné'
+  controllers:
+    stores:
+      approve_all:
+        notice: '%{size} Schválené predajne'
+  views:
+    layout:
+      application:
+        title: 'Nečakaj v rade'
+    home:
+      index:
+        title: 'Vitajte na stránke Nečakaj v rade'
+    actions:
+      show: 'Zobraziť'
+      edit: 'Upraviť'
+      destroy: 'Vymazať'
+      title: 'Možnosti'
+      new: 'Nové'
+      back: 'Späť'
+      approve_all: 'Schváliť uvedené'
+    map:
+      index:
+        title: 'Mapa'
+        add_store: 'Pridať predajňu'
+        edit: 'Upraviť'
+        delete_store: 'Vymazať predajňu'
+        cancel: 'Zrušiť'
+        delete: 'Vymazať'
+        close: 'Zavrieť'
+        save: 'Uložiť'
+        confirm: 'Potvrdiť'
+        editing: 'Upraviť predajňu'
+        deleting: 'Vymazať predajňu'
+        creating: 'Pridať predajňu'
+    edit:
+      title: "Úpravy %{resource}"
+    shared:
+      navbar:
+        current: 'Aktuálne'
+        logout: 'Odhlásiť'
+        login: 'Prihlásiť'
+        sign_up: 'Registrovať'
+        profile: 'Môj profil'
+        change_password: 'Zmeniť heslo'
+    form:
+      submit: 'Potvrdiť'
+    stores:
+      search:
+        placeholder: 'Vyhľadávať podľa názvu alebo adresy...'
+        button: 'Hľadať'
+        filter_group: 'Filtrovať podľa reťazca'
+        filter_state: 'Filtrovať podľa stavu'
+        filter_store_type: 'Filtrovať podľa typu'
+      index:
+        confirm_approval: 'Ste si istý, že chcete potvrdiť všetky predajne?'
+    users:
+      search:
+        placeholder: 'Vyhľadávať podľa mena alebo emailu...'
+        button: 'Vyhľadávať'
+        filter_role: 'Filtrovať podľa role'
+    manage_stores:
+      index:
+        nav: 'Moje predajne'
+        manage_link: 'Upraviť stav'
+        latest_status: 'Posledný nahlásený stav'
+        state_valid_until: '%{state} | Platné do %{time}'
+        state_invalid: '%{state} | Vypršalo'
+        "0": 'Bez zdržania'
+        "5": 'Mierne zdržanie'
+        "10": 'Veľké zdržanie'
+    status_store_owners:
+      new:
+        title: 'Aktualizácia stavu predajne %{resource}'
+        no_queue: 'Bez zdržania'
+        average_queue: 'Mierne zdržanie'
+        long_queue: 'Veľké zdržanie'
+        title_latest: 'Posledný nahlásený stav'
+        valid_until: 'Platné do %{time}'
+        expired_on: 'Vypršalo o %{time}'
+        "0": 'Bez zdržania'
+        "5": 'Mierne zdržanie'
+        "10": 'Veľké zdržanie'

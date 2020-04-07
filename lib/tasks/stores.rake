@@ -75,4 +75,8 @@ namespace :stores do
   task dia: :environment do
     ImportStores.new.import_dia
   end
+
+  task osm: :environment do
+    ImportStores.new.import_from_osm
+  end
 end

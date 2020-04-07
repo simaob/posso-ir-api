@@ -26,7 +26,11 @@ module Api
       filter :store_id
 
       def status
-        @model.status.nil? ? -1 : @model.status
+        if Rails.env.production?
+          @model.status.nil? ? -1 : @model.status
+        else
+          rand -1..10
+        end
       end
 
       def queue
