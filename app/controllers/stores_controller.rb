@@ -103,7 +103,7 @@ class StoresController < ApplicationController
     permitted_params = [:name, :group, :street, :city, :zip_code, :country,
                         :district, :store_type, :latitude, :longitude,
                         :store_type, :open, :capacity, :details]
-    permitted_params << :state if current_user.admin?
+    permitted_params << :state if current_user.admin? || current_user.general_manager?
 
     params.require(:store).permit(permitted_params)
   end
