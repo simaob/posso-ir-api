@@ -60,11 +60,9 @@ class Store < ApplicationRecord
   after_save :set_lonlat
   after_create :create_status
 
-  def address unique: false
+  def address(unique: false)
     result = [street, city, country].map(&:presence).compact
-    if unique
-      result << "store-#{id}"
-    end
+    result << "store-#{id}" if unique
     result.join(', ')
   end
 

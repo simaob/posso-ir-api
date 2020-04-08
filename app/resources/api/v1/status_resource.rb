@@ -35,7 +35,7 @@ module Api
         if Rails.env.production?
           @model.status.nil? ? -1 : @model.status
         else
-          rand -1..10
+          rand(-1..10)
         end
       end
 
