@@ -5,14 +5,16 @@
     <span class="h2"><%= @store.name %></span>
     <%= badge_for @store %>
   </div>
-  <% if can? :edit, @store %>
-    <div class="col-md-2">
+  <div class="col-md-2">
+    <% if can? :edit, @store %>
       <%= link_to t('views.actions.edit'), edit_store_path(@store),
         class: 'btn btn-sm btn-outline-primary' %>
+    <% end %>
+    <% if can? :read, :statuses_store %>
       <%= link_to t('views.stores.show.statuses'), statuses_store_path(@store),
         class: 'btn btn-sm btn-outline-info' %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 <div class="row mt-4">

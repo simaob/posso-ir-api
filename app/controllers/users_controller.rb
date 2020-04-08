@@ -11,7 +11,13 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show; end
+  def show
+    @created_stores = @user.created_stores.search(params[:search])
+    @created_stores = @created_stores.by_group(params[:group]) if params[:group].present?
+    @created_stores = @created_stores.by_state(params[:state]) if params[:state].present?
+    @created_stores = @created_stores.by_store_type(params[:store_type]) if params[:store_type].present?
+    @created_stores = @created_stores.order(:name).page(params[:page])
+  end
 
   # GET /users/new
   def new
