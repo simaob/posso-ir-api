@@ -1,4 +1,5 @@
 pt:
+  language_name: 'Português'
   activerecord:
     models:
       store:

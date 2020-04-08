@@ -1,4 +1,5 @@
 sk:
+  language_name: 'Slovenský'
   activerecord:
     models:
       store:
@@ -98,6 +99,7 @@ sk:
         sign_up: 'Registrovať'
         profile: 'Môj profil'
         change_password: 'Zmeniť heslo'
+        language: 'Jazyk'
     form:
       submit: 'Potvrdiť'
     stores:
