@@ -18,8 +18,6 @@ module Api
       abstract
       immutable
 
-      MAX_STORES = 300
-
       attributes :id, :updated_time, :valid_until, :status,
                  :queue, :store_id
 
@@ -46,7 +44,6 @@ module Api
       end
 
       filter :store_id, apply: ->(records, value, _options) {
-        value = value[0...MAX_STORES]
         records.where(store_id: value)
       }
     end
