@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def display_name
-    name.presence || email.presence || app_uuid
+    name.presence || email.presence || 'N/A'
   end
 
   protected
