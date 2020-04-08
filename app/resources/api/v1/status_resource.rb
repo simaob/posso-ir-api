@@ -27,7 +27,7 @@ module Api
         if Rails.env.production?
           @model.updated_time
         else
-          Time.now - rand(1..120).minutes
+          Time.now - rand(1..65).minutes
         end
       end
 
