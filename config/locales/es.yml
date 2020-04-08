@@ -163,6 +163,8 @@ es:
         placeholder: 'Buscar por nombre o correo electrónico...'
         button: 'Buscar'
         filter_role: 'Filtrar por papel'
+      show:
+        stores_title: 'Tiendas agregadas'
   helpers:
     page_entries_info:
       one_page:

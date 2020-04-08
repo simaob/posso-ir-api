@@ -39,63 +39,8 @@
   <div class="col-md-12">
     <div class="main-card mb-3 card">
       <div class="card-body">
-        <%= page_entries_info @stores %>
-        <div class="table-responsive">
-          <table class="table table-sm">
-            <thead>
-              <tr>
-                <th><%= Store.human_attribute_name(:name) %></th>
-                <th><%= Store.human_attribute_name(:state) %></th>
-                <th><%= Store.human_attribute_name(:group) %></th>
-                <th><%= Store.human_attribute_name(:street) %></th>
-                <% if current_user.admin? || current_user.general_manager? %>
-                  <th>Created by</th>
-                  <th>Updated by</th>
-                <% end %>
-                <th><%= Store.human_attribute_name(:latitude) %></th>
-                <th><%= Store.human_attribute_name(:longitude) %></th>
-                <th><%= Store.human_attribute_name(:details) %></th>
-                <th><%= t('views.actions.title') %></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @stores.each do |store| %>
-                <tr>
-                  <td><%= link_to store.name, store %></td>
-                  <td><%= enum_l(store, :state) %></td>
-                  <td><%= store.group %></td>
-                  <td><%= store.address %></td>
-                  <% if current_user.admin? || current_user.general_manager? %>
-                    <td>
-                      <%= link_to(store.created_by.display_name, store.created_by) if store.created_by %>
-                    </td>
-                    <td>
-                      <%= link_to(store.updated_by.display_name, store.updated_by) if store.updated_by %>
-                    </td>
-                  <% end %>
-                  <td><%= store.latitude&.round(3) %></td>
-                  <td><%= store.longitude&.round(3) %></td>
-                  <td><%= store.details %></td>
-                  <td>
-                    <%= link_to t('views.actions.show'), store %>
-                    <% if can? :edit, store %>
-                      |
-                      <%= link_to t('views.actions.edit'), edit_store_path(store) %>
-                      |
-                      <%= link_to t('views.stores.show.statuses'), statuses_store_path(store) %>
-                    <% end %>
-                    <% if can? :destroy, store %>
-                      |
-                      <%= link_to t('views.actions.destroy'), store, method: :delete, data: { confirm: t('views.actions.confirm_destroy') } %>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <%= paginate @stores %>
-        </div>
+        <%= render 'table', stores: @stores %>
       </div>
     </div>
   </div>
+</div>

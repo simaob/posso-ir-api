@@ -122,7 +122,7 @@ pt:
         profile: 'Página de perfil'
         change_password: 'Alterar password'
     form:
-      submit: 'Enviar'
+      submit: 'Gravar'
     pagination:
       first: "&laquo; Primeira"
       last: "Última &raquo;"
@@ -163,6 +163,8 @@ pt:
         placeholder: 'Procure por nome ou email...'
         button: 'Procurar'
         filter_role: 'Filtrar por função'
+      show:
+        stores_title: 'Lojas adicionadas'
     manage_stores:
       index:
         nav: 'As minhas lojas'

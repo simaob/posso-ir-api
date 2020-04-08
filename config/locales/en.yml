@@ -157,6 +157,8 @@ en:
         placeholder: 'Search by name or email...'
         button: 'Search'
         filter_role: 'Filter by role'
+      show:
+        stores_title: 'Stores created'
     manage_stores:
       index:
         nav: 'My stores'
