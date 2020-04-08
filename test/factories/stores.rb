@@ -21,6 +21,9 @@
 #  state            :integer          default("1")
 #  reason_to_delete :text
 #  open             :boolean          default("true")
+#  created_by_id    :bigint
+#  updated_by_id    :bigint
+#  from_osm         :boolean          default("false")
 #
 FactoryBot.define do
   factory :store do

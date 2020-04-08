@@ -7,12 +7,15 @@ module Api
       attributes :name, :group, :address, :coordinates, :capacity,
                  :details, :store_type, :lonlat
 
-      filters :location
+      filters :location, :store_type
 
       filter :location, apply: ->(_records, value, _options) {
-        # records.by_category(value)
         Store.retrieve_stores(value.first, value.second)
       }
+
+      def address
+        @model.address(unique: true)
+      end
 
       def coordinates
         [@model.latitude, @model.longitude]

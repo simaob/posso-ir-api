@@ -37,7 +37,6 @@
                 <th><%= User.human_attribute_name(:name) %></th>
                 <th><%= User.human_attribute_name(:email) %></th>
                 <th><%= User.human_attribute_name(:role) %></th>
-                <th><%= User.human_attribute_name(:app_uuid) %></th>
                 <th><%= t('views.actions.title') %></th>
               </tr>
             </thead>
@@ -48,7 +47,6 @@
                   <td><%= user.name %></td>
                   <td><%= user.email %></td>
                   <td><%= enum_l(user, :role) %></td>
-                  <td><%= user.app_uuid %></td>
                   <td>
                     <%= link_to t('views.actions.show'), user %>
                     <% if can? :edit, user %>

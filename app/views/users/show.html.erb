@@ -31,13 +31,6 @@
         <%= enum_l(@user, :role) %>
         </p>
 
-        <% if @user.app_uuid.present? %>
-          <p>
-          <strong><%= User.human_attribute_name(:app_uuid) %>:</strong>
-          <%= @user.app_uuid %>
-          </p>
-        <% end %>
-
         <% if @user.stores.any? %>
           <p><strong><%= Store.model_name.human(count: 2) %></strong>
           <ul>

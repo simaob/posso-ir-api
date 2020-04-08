@@ -62,7 +62,7 @@ class ImportStores
         street: row['address'],
         latitude: row['lat'],
         longitude: row['lng'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -80,7 +80,7 @@ class ImportStores
         city: csv['city'],
         latitude: csv['lat'],
         longitude: csv['lng'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -101,7 +101,7 @@ class ImportStores
         street: row['streetAndNumber'],
         latitude: row['lat'],
         longitude: row['lng'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -120,7 +120,7 @@ class ImportStores
         latitude: nil,
         longitude: nil,
         details: row['time'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -142,7 +142,7 @@ class ImportStores
         street: row['address'].split(',').map(&:strip).join(','),
         latitude: row['lat'],
         longitude: row['lng'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -164,7 +164,7 @@ class ImportStores
         latitude: row[1],
         longitude: row[2],
         details: row.last,
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -186,7 +186,7 @@ class ImportStores
         latitude: row['-lat'],
         longitude: row['-lng'],
         details: [row['-horario'], row['horariodom']].compact.join(' | '),
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -205,7 +205,7 @@ class ImportStores
         street: row['data-search'],
         latitude: row['data-latitude'],
         longitude: row['data-longitude'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -216,15 +216,17 @@ class ImportStores
     src = File.open(Rails.root.join('db', 'files', 'lidl.csv'), 'r')
     file = File.read(src).force_encoding('UTF-8')
     CSV.parse(file, headers: true, skip_blanks: true). each do |csv|
-      city, street = csv['name'].split('-')
       Store.create(
-        name: "LIDL #{city.strip}",
+        name: "LIDL #{csv[1]}",
         group: 'LIDL',
-        city: city&.strip,
-        street: street&.strip,
-        latitude: csv['lat'],
-        longitude: csv['lng'],
-        store_type: 1
+        street: csv[2],
+        zip_code: csv[3],
+        city: csv[4],
+        district: csv[5],
+        country: 'Portugal',
+        latitude: csv[7],
+        longitude: csv[8],
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -245,7 +247,7 @@ class ImportStores
         latitude: row['lt'],
         longitude: row['lg'],
         details: row['fs'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -265,7 +267,7 @@ class ImportStores
         street: row['direccionPostal'].titleize,
         latitude: nil,
         longitude: nil,
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -286,7 +288,7 @@ class ImportStores
         zip_code: row['postal_code'],
         latitude: row['lat'],
         longitude: row['long'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -306,7 +308,7 @@ class ImportStores
         zip_code: nil,
         latitude: row['lat'],
         longitude: row['lng'],
-        store_type: 1
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
@@ -388,7 +390,8 @@ class ImportStores
         country: 'Portugal',
         latitude: csv[1],
         longitude: csv[2],
-        store_type: csv[3].to_i
+        store_type: csv[3].to_i,
+        from_osm: true
       )
     end
     puts "#{Store.count} total stores"

@@ -18,18 +18,24 @@ module Api
       abstract
       immutable
 
-      MAX_STORES = 300
-
       attributes :id, :updated_time, :valid_until, :status,
                  :queue, :store_id
 
       filter :store_id
 
+      def updated_time
+        if Rails.env.production?
+          @model.updated_time
+        else
+          Time.now.utc - rand(1..65).minutes
+        end
+      end
+
       def status
         if Rails.env.production?
           @model.status.nil? ? -1 : @model.status
         else
-          rand -1..10
+          rand(-1..10)
         end
       end
 
@@ -38,7 +44,6 @@ module Api
       end
 
       filter :store_id, apply: ->(records, value, _options) {
-        value = value[0...MAX_STORES]
         records.where(store_id: value)
       }
     end
