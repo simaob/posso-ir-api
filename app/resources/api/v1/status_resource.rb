@@ -25,6 +25,14 @@ module Api
 
       filter :store_id
 
+      def updated_time
+        if Rails.env.production?
+          @model.updated_time
+        else
+          Time.now - rand(1..120).minutes
+        end
+      end
+
       def status
         if Rails.env.production?
           @model.status.nil? ? -1 : @model.status
