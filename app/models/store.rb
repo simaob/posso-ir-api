@@ -21,6 +21,9 @@
 #  state            :integer          default("1")
 #  reason_to_delete :text
 #  open             :boolean          default("true")
+#  created_by_id    :bigint
+#  updated_by_id    :bigint
+#  from_osm         :boolean          default("false")
 #
 class Store < ApplicationRecord
   include UserTrackable
@@ -57,8 +60,12 @@ class Store < ApplicationRecord
   after_save :set_lonlat
   after_create :create_status
 
-  def address
-    [street, city, country].map(&:presence).compact.join(', ').presence || '-'
+  def address unique: false
+    result = [street, city, country].map(&:presence).compact
+    if unique
+      result << "store-#{id}"
+    end
+    result.join(', ')
   end
 
   def text

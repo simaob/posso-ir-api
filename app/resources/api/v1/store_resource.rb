@@ -14,6 +14,10 @@ module Api
         Store.retrieve_stores(value.first, value.second)
       }
 
+      def address
+        @model.address(unique: true)
+      end
+
       def coordinates
         [@model.latitude, @model.longitude]
       end
