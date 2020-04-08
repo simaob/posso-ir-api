@@ -388,7 +388,8 @@ class ImportStores
         country: 'Portugal',
         latitude: csv[1],
         longitude: csv[2],
-        store_type: csv[3].to_i
+        store_type: csv[3].to_i,
+        from_osm: true
       )
     end
     puts "#{Store.count} total stores"
