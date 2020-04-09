@@ -77,6 +77,8 @@ en:
           coffee: 'Café'
           kiosk: 'Kiosk'
           other: 'Other'
+          atm: 'ATM'
+          post_office: 'Post Office'
   controllers:
     stores:
       approve_all:

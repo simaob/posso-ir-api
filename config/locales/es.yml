@@ -80,6 +80,8 @@ es:
           coffee: 'Cafetería'
           kiosk: 'Quiosco'
           other: 'Otro'
+          atm: 'Cajero automático'
+          post_office: 'Correos'
   controllers:
     stores:
       approve_all:

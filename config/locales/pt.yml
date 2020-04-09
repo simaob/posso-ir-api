@@ -77,6 +77,8 @@ pt:
           coffee: 'Café'
           kiosk: 'Quiosque'
           other: 'Outro'
+          atm: 'Multibanco'
+          post_office: 'Correios'
   controllers:
     stores:
       approve_all:
