@@ -56,6 +56,8 @@ sk:
           coffee: 'Kaviareň'
           kiosk: 'Trafika'
           other: 'Iné'
+          atm: 'Bankomat'
+          post_office: 'Pošta'
   controllers:
     stores:
       approve_all:
