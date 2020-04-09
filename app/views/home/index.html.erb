@@ -2,22 +2,24 @@
   <h1><%= I18n.t('views.home.index.title') %></h1>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= t('views.home.index.users_per_day') %></h5>
-        <%= line_chart @users_per_day %>
+<% if current_user %>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.users_per_day') %></h5>
+          <%= line_chart @users_per_day %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= t('views.home.index.statuses_per_day') %></h5>
-        <%= line_chart @statuses_per_day %>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.statuses_per_day') %></h5>
+          <%= line_chart @statuses_per_day %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
