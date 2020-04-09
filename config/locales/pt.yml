@@ -163,6 +163,10 @@ pt:
         placeholder: 'Procure por nome ou email...'
         button: 'Procurar'
         filter_role: 'Filtrar por função'
+        filter_created: 'Filtrar com lojas criadas'
+        word_yes: 'Sim'
+      index:
+        stores_created: 'Lojas adicionadas'
       show:
         stores_title: 'Lojas adicionadas'
     manage_stores:

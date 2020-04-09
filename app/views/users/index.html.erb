@@ -15,10 +15,15 @@
   <div class="col-md-12">
     <%= form_tag users_path, method: :get, class: 'form-inline' do %>
       <%= label_tag :search, 'Search', class: 'sr-only' %>
-      <%= text_field_tag :search, params[:search], class: 'form-control col-md-7 mb-2 mr-sm-2',
+      <%= text_field_tag :search, params[:search], class: 'form-control col-md-5 mb-2 mr-sm-2',
         placeholder: t('views.users.search.placeholder') %>
       <%= label_tag :role, 'Role', class: 'sr-only' %>
-      <%= select_tag :role, options_for_select(enum_options_for_select(User, :role), params[:role]), {include_blank: t('views.users.search.filter_role'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+      <%= select_tag :role, options_for_select(enum_options_for_select(User, :role), params[:role]),
+        {include_blank: t('views.users.search.filter_role'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+      <%= label_tag :created_stores, 'Created stores', class: 'sr-only' %>
+      <% arr = [[t('views.users.search.word_yes')]] %>
+      <%= select_tag :created_stores, options_for_select(arr, params[:created_stores]),
+        {include_blank: t('views.users.search.filter_created'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
       <%= submit_tag t('views.users.search.button'),
         class: 'btn btn-primary mb-2' %>
     <% end %>
@@ -37,6 +42,7 @@
                 <th><%= User.human_attribute_name(:name) %></th>
                 <th><%= User.human_attribute_name(:email) %></th>
                 <th><%= User.human_attribute_name(:role) %></th>
+                <th><%= t('views.users.index.stores_created') %></th>
                 <th><%= t('views.actions.title') %></th>
               </tr>
             </thead>
@@ -47,6 +53,7 @@
                   <td><%= user.name %></td>
                   <td><%= user.email %></td>
                   <td><%= enum_l(user, :role) %></td>
+                  <td><%= user.created_stores.count %></td>
                   <td>
                     <%= link_to t('views.actions.show'), user %>
                     <% if can? :edit, user %>
