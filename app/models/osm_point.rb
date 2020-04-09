@@ -1,2 +1,0 @@
-class OsmPoint < ApplicationRecord
-end

@@ -1,8 +1,7 @@
-DROP TABLE IF EXISTS osm_points;
-
-CREATE TABLE osm_points AS
-SELECT 
-"addr:housename" AS housename
+COPY
+(SELECT
+osm_id AS original_id
+, "addr:housename" AS housename
 , "addr:housenumber" AS housenumber
 , name
 , brand
@@ -23,10 +22,11 @@ SELECT
 , way AS geom 
 , CURRENT_TIMESTAMP as created_at
 , CURRENT_TIMESTAMP as updated_at
-	FROM planet_osm_point
+    FROM planet_osm_point
 UNION ALL
 SELECT 
-"addr:housename" AS housename
+osm_id AS original_id
+, "addr:housename" AS housename
 , "addr:housenumber" AS housenumber
 , name
 , brand
@@ -47,4 +47,6 @@ SELECT
 , ST_Centroid(way) AS geom
 , CURRENT_TIMESTAMP as created_at
 , CURRENT_TIMESTAMP as updated_at
-	FROM planet_osm_polygon;
+    FROM planet_osm_polygon)
+    TO STDOUT
+ WITH CSV HEADER DELIMITER ',';
