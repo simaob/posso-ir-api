@@ -4,9 +4,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:created_at).search(params[:search])
+    @users = User.order(:created_at).includes(:created_stores)
+      .search(params[:search])
       .page(params[:page])
     @users = @users.where(role: params[:role]) if params[:role].present?
+    @users = @users.joins(:created_stores).distinct if params[:created_stores].present?
   end
 
   # GET /users/1

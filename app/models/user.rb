@@ -37,7 +37,7 @@ class User < ApplicationRecord
   def self.search(search)
     return all unless search
 
-    where('name ilike ? OR email ilike ? OR app_uuid ilike ?',
+    where('users.name ilike ? OR email ilike ? OR app_uuid ilike ?',
           "%#{search}%", "%#{search}%",
           "%#{search}%")
   end

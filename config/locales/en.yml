@@ -157,6 +157,10 @@ en:
         placeholder: 'Search by name or email...'
         button: 'Search'
         filter_role: 'Filter by role'
+        filter_created: 'With stores created'
+        word_yes: 'Yes'
+      index:
+        stores_created: 'Stores created'
       show:
         stores_title: 'Stores created'
     manage_stores:
