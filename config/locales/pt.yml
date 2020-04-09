@@ -176,6 +176,9 @@ pt:
         stores_created: 'Lojas adicionadas'
       show:
         stores_title: 'Lojas adicionadas'
+        statuses: 'Estados reportados'
+      statuses:
+        title: 'Estados reportados por %{user}'
     manage_stores:
       index:
         nav: 'As minhas lojas'

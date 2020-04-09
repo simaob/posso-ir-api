@@ -127,6 +127,9 @@ sk:
         stores_created: 'Pridané obchody'
       show:
         stores_title: 'Pridané obchody'
+        statuses: 'Hlásené stavy'
+      statuses:
+        title: 'Statuses reported by %{user}'
     manage_stores:
       index:
         nav: 'Moje predajne'
