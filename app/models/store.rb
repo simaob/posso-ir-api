@@ -28,7 +28,7 @@
 class Store < ApplicationRecord
   include UserTrackable
 
-  RADIUS = 2500
+  RADIUS = 5000
   PROJECTION = 4326
 
   has_many :status_crowdsources
