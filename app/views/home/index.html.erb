@@ -62,7 +62,7 @@
             <tbody>
               <% @users_by_reports.each do |user| %>
                 <tr>
-                  <td><%= link_to user.display_name, user %></td>
+                  <td><%= link_to user.display_name, statuses_user_path(user) %></td>
                   <td><%= user.count %></td>
                 </tr>
               <% end %>

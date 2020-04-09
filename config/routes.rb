@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     end
     resources :status_crowdsource_users, only: [:index]
     resources :manage_stores, only: [:index]
-    resources :users
+    resources :users do
+      get :statuses, on: :member
+    end
     resources :map
   end
 

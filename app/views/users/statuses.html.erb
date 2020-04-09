@@ -1,0 +1,27 @@
+<% content_for :page_title, t('views.users.statuses.title', user: @user.name&.titleize) %>
+
+<div class="row mt-5">
+  <div class="col-md-10">
+    <span class="h2"><%= @user.display_name %></span>
+  </div>
+  <div class="col-md-2">
+    <% if can? :read, @user %>
+      <%= link_to t('views.actions.back'), @user, class: 'btn btn-sm btn-outline-primary' %>
+    <% end %>
+    <% if can? :read, :statuses_user %>
+      <%= link_to t('views.users.show.statuses'), statuses_user_path(@user),
+        class: 'btn btn-sm btn-outline-info' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <h5 class="card-title"><%= t('views.status_crowdsource_users.index.title') %></h5>
+        <%= render 'status_crowdsource_users/table', status_crowdsource_users: @status_crowdsource_users %>
+      </div>
+    </div>
+  </div>
+</div>

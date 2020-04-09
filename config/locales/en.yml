@@ -170,6 +170,9 @@ en:
         stores_created: 'Stores created'
       show:
         stores_title: 'Stores created'
+        statuses: 'Estados reportados'
+      statuses:
+        title: 'Statuses reported by %{user}'
     manage_stores:
       index:
         nav: 'My stores'

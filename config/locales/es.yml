@@ -179,6 +179,9 @@ es:
         stores_created: 'Tiendas agregadas'
       show:
         stores_title: 'Tiendas agregadas'
+        statuses: 'Estados reportados'
+      statuses:
+        title: 'Estados reportados por %{user}'
   helpers:
     page_entries_info:
       one_page:

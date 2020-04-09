@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:statuses]
 
   # GET /users
   # GET /users.json
@@ -67,6 +67,13 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def statuses
+    authorize! :read, :statuses_user
+    @user = User.find(params[:id])
+    @status_crowdsource_users = @user.status_crowdsource_users.order(posted_at: :desc)
+      .page(params[:page])
   end
 
   private
