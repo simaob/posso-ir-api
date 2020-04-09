@@ -1,5 +1,8 @@
 es:
   language_name: 'Español'
+  words:
+    yes: 'Si'
+    no: 'No'
   activerecord:
     models:
       store:
@@ -163,6 +166,12 @@ es:
         placeholder: 'Buscar por nombre o correo electrónico...'
         button: 'Buscar'
         filter_role: 'Filtrar por papel'
+        filter_created: 'Con tiendas agregadas'
+        word_yes: 'Sí'
+      index:
+        stores_created: 'Tiendas agregadas'
+      show:
+        stores_title: 'Tiendas agregadas'
   helpers:
     page_entries_info:
       one_page:

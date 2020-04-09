@@ -116,6 +116,10 @@ sk:
         placeholder: 'Vyhľadávať podľa mena alebo emailu...'
         button: 'Vyhľadávať'
         filter_role: 'Filtrovať podľa role'
+      index:
+        stores_created: 'Pridané obchody'
+      show:
+        stores_title: 'Pridané obchody'
     manage_stores:
       index:
         nav: 'Moje predajne'

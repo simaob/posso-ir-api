@@ -1,5 +1,5 @@
 class StoresController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:statuses]
 
   # GET /stores
   # GET /stores.json
@@ -89,9 +89,9 @@ class StoresController < ApplicationController
   end
 
   def statuses
+    authorize! :read, :statuses_store
+    @store = Store.find(params[:id])
     @statuses = @store.statuses.order(updated_time: :desc)
-    return unless current_user.admin?
-
     @status_crowdsource_users = @store.status_crowdsource_users
       .order(posted_at: :desc).page(params[:page])
   end
