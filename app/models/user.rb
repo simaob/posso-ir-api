@@ -31,6 +31,7 @@ class User < ApplicationRecord
   has_many :user_stores, inverse_of: :manager
   has_many :stores, through: :user_stores
   has_many :created_stores, class_name: 'Store', foreign_key: :created_by_id
+  has_many :status_crowdsource_users
 
   enum role: {user: 0, store_manager: 1, general_manager: 2, admin: 3, contributor: 4}
 

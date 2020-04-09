@@ -90,6 +90,9 @@ pt:
         title: 'Bem-vindo ao sistema de gestão da Posso Ir?'
         users_per_day: 'Novos utilizadores por dia'
         statuses_per_day: 'Total estados reportados por dia'
+        stores_by_reports: 'Lojas por número de relatórios'
+        users_by_reports: 'Utilizadores por número de relatórios'
+        total: 'Total'
     actions:
       show: 'Ver'
       edit: 'Editar'
