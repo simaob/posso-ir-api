@@ -91,6 +91,8 @@ es:
     home:
       index:
         title: 'Bienvenido a lo sistema de gestión de Puedo Ir'
+        users_per_day: 'Nuevos usuários por día'
+        statuses_per_day: 'Estados reportados por día'
     actions:
       show: 'Mostrar'
       edit: 'Editar'

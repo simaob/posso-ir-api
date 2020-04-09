@@ -88,3 +88,7 @@ gem 'htmlentities'
 
 # frontend stuff
 gem 'react-rails'
+
+# charts management
+gem 'chartkick'
+gem 'groupdate'
