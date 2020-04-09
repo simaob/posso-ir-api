@@ -66,6 +66,7 @@ sk:
     layout:
       application:
         title: 'Nečakaj v rade'
+        page_time: 'Čas servera'
     home:
       index:
         title: 'Vitajte na stránke Nečakaj v rade'

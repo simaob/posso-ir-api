@@ -86,7 +86,8 @@ pt:
   views:
     layout:
       application:
-        title: 'Posso Ir'
+        title: 'Posso Ir?'
+        page_time: 'Hora do servidor'
     home:
       index:
         title: 'Bem-vindo ao sistema de gestão da Posso Ir?'
