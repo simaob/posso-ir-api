@@ -88,6 +88,8 @@ pt:
     home:
       index:
         title: 'Bem-vindo ao sistema de gestão da Posso Ir'
+        users_per_day: 'Novos utilizadores por dia'
+        statuses_per_day: 'Total estados reportados por dia'
     actions:
       show: 'Ver'
       edit: 'Editar'
