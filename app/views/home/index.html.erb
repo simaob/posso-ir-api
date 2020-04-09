@@ -2,7 +2,7 @@
   <h1><%= I18n.t('views.home.index.title') %></h1>
 </div>
 
-<% if current_user %>
+<% if current_user&.admin? || current_user&.general_manager? %>
   <div class="row mt-4">
     <div class="col-md-6">
       <div class="card">
