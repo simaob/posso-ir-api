@@ -38,7 +38,7 @@
             <tbody>
               <% @stores_by_reports.each do |store| %>
                 <tr>
-                  <td><%= link_to store.name, store %></td>
+                  <td><%= link_to store.name, statuses_store_path(store) %></td>
                   <td><%= store.count %></td>
                 </tr>
               <% end %>
@@ -62,7 +62,7 @@
             <tbody>
               <% @users_by_reports.each do |user| %>
                 <tr>
-                  <td><%= link_to user.name, user %></td>
+                  <td><%= link_to user.display_name, user %></td>
                   <td><%= user.count %></td>
                 </tr>
               <% end %>

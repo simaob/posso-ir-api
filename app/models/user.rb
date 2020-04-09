@@ -44,7 +44,7 @@ class User < ApplicationRecord
   end
 
   def display_name
-    name.presence || email.presence || 'N/A'
+    name.presence || email.presence || "ID: #{id}"
   end
 
   protected
