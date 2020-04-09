@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +12,7 @@
 		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column h-100">
     <header>
       <%= render 'shared/nav' %>
     </header>
@@ -27,6 +27,18 @@
         <%= yield %>
       </div>
     </main>
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <p class="small">
+          <span class="float-left">
+            <%= t('views.layout.application.title') %> &copy; <%= Time.now.year %>
+          </span>
+          <span class="float-right">
+            <%= t('views.layout.application.page_time') %> <%= Time.now.strftime('%H:%M') %>
+          </span>
+        </p>
+      </div>
+    </footer>
   </body>
     <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162538278-1"></script>

@@ -87,6 +87,7 @@ en:
     layout:
       application:
         title: 'Can I Go?'
+        page_time: 'Server time'
     home:
       index:
         title: 'Welcome to Can I Go management system'
