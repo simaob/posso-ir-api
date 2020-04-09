@@ -10,11 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_08_072503) do
+ActiveRecord::Schema.define(version: 2020_04_08_233004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "osm_points", force: :cascade do |t|
+    t.string "housename"
+    t.string "housenumber"
+    t.string "name"
+    t.string "brand"
+    t.string "denomination"
+    t.string "building"
+    t.string "amenity"
+    t.string "shop"
+    t.float "latitude"
+    t.float "longitude"
+    t.geometry "geom", limit: {:srid=>0, :type=>"geometry"}
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "operator"
+    t.string "street"
+    t.string "city"
+    t.string "district"
+    t.string "country"
+    t.string "zip_code"
+    t.string "place"
+    t.string "opening_hours"
+  end
 
   create_table "status_crowdsource_users", force: :cascade do |t|
     t.integer "status", null: false
