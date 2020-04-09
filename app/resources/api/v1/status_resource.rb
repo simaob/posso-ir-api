@@ -25,11 +25,19 @@ module Api
 
       filter :store_id
 
+      def updated_time
+        if Rails.env.production?
+          @model.updated_time
+        else
+          Time.now.utc - rand(1..65).minutes
+        end
+      end
+
       def status
         if Rails.env.production?
           @model.status.nil? ? -1 : @model.status
         else
-          rand -1..10
+          rand(-1..10)
         end
       end
 

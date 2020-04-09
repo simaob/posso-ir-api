@@ -22,4 +22,54 @@
       </div>
     </div>
   </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.stores_by_reports') %></h5>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= Store.model_name.human(count: 1) %></th>
+                <th><%= t('views.home.index.total') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @stores_by_reports.each do |store| %>
+                <tr>
+                  <td><%= link_to store.name, store %></td>
+                  <td><%= store.count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.users_by_reports') %></h5>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= User.model_name.human(count: 1) %></th>
+                <th><%= t('views.home.index.total') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users_by_reports.each do |user| %>
+                <tr>
+                  <td><%= link_to user.name, user %></td>
+                  <td><%= user.count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

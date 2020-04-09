@@ -90,6 +90,9 @@ en:
         title: 'Welcome to Can I Go management system'
         users_per_day: 'New users per day'
         statuses_per_day: 'Total statuses reported per day'
+        stores_by_reports: 'Stores by number of reports'
+        users_by_reports: 'Users by number of reports'
+        total: 'Total'
     actions:
       show: 'Show'
       edit: 'Edit'

@@ -45,7 +45,7 @@ class Store < ApplicationRecord
 
   enum store_type: {supermarket: 1, pharmacy: 2, restaurant: 3,
                     gas_station: 4, bank: 5, coffee: 6, kiosk: 7,
-                    other: 8}
+                    other: 8, atm: 9, post_office: 10}
   enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3}
 
   validates :capacity, allow_nil: true, numericality: {greater_than: 0}
@@ -60,11 +60,9 @@ class Store < ApplicationRecord
   after_save :set_lonlat
   after_create :create_status
 
-  def address unique: false
+  def address(unique: false)
     result = [street, city, country].map(&:presence).compact
-    if unique
-      result << "store-#{id}"
-    end
+    result << "store-#{id}" if unique
     result.join(', ')
   end
 

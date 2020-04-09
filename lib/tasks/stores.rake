@@ -79,4 +79,8 @@ namespace :stores do
   task osm: :environment do
     ImportStores.new.import_from_osm
   end
+
+  task :osm_from, [:country] => :environment do |_t, args|
+    ImportOsm.new.import(args.country)
+  end
 end
