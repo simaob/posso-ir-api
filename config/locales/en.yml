@@ -88,6 +88,8 @@ en:
     home:
       index:
         title: 'Welcome to Can I Go management system'
+        users_per_day: 'New users per day'
+        statuses_per_day: 'Total statuses reported per day'
     actions:
       show: 'Show'
       edit: 'Edit'
