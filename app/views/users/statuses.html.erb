@@ -1,16 +1,12 @@
 <% content_for :page_title, t('views.users.statuses.title', user: @user.name&.titleize) %>
 
 <div class="row mt-5">
-  <div class="col-md-10">
+  <div class="col-md-11">
     <span class="h2"><%= @user.display_name %></span>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-1">
     <% if can? :read, @user %>
       <%= link_to t('views.actions.back'), @user, class: 'btn btn-sm btn-outline-primary' %>
-    <% end %>
-    <% if can? :read, :statuses_user %>
-      <%= link_to t('views.users.show.statuses'), statuses_user_path(@user),
-        class: 'btn btn-sm btn-outline-info' %>
     <% end %>
   </div>
 </div>
