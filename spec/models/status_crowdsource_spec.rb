@@ -58,7 +58,7 @@ RSpec.describe StatusCrowdsource, type: :model do
 
   context 'after two users have voted different values a few minutes apart' do
     let!(:set_the_scene) do
-      store.status_crowdsources.first.update(status: 10, voters: 1, updated_time: a_time - 15.minutes)
+      create(:status_crowdsource_user, status: 10, store: store, created_at: a_time - 15.minutes)
       create(:status_crowdsource_user, status: 0, store: store, created_at: a_time)
     end
 
@@ -70,10 +70,7 @@ RSpec.describe StatusCrowdsource, type: :model do
 
   context 'after three users have voted different values a many minutes apart' do
     let!(:set_the_scene) do
-      store.status_crowdsources.first.update(status: 10, voters: 1,
-                                             updated_time: a_time - 15.minutes,
-                                             previous_status: 10, voters: 1,
-                                             previous_updated_time: a_time - 23.minutes)
+      create(:status_crowdsource_user, status: 10, store: store, created_at: a_time - 60.minutes)
       create(:status_crowdsource_user, status: 10, store: store, created_at: a_time)
     end
 
@@ -85,10 +82,8 @@ RSpec.describe StatusCrowdsource, type: :model do
 
   context 'after three users have voted different values a many minutes apart and the oldest is not valid' do
     let!(:set_the_scene) do
-      store.status_crowdsources.first.update(status: 10, voters: 1,
-                                             updated_time: a_time - 15.minutes,
-                                             previous_status: 10, voters: 1,
-                                             previous_updated_time: a_time - 40.minutes)
+      create(:status_crowdsource_user, status: 0, store: store, created_at: a_time - 60.minutes)
+      create(:status_crowdsource_user, status: 10, store: store, created_at: a_time)
       create(:status_crowdsource_user, status: 10, store: store, created_at: a_time)
     end
 
