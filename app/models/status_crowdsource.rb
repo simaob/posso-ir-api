@@ -23,6 +23,9 @@ class StatusCrowdsource < Status
   include TimeHelper
   has_many :status_crowdsource_users
 
+  # TODO, this should be async! Move this to sidekiq+redis (or activejobs)
+  after_update :create_history
+
   WEIGHT = {
     first: 0.6,
     second: 0.3,
@@ -79,7 +82,6 @@ class StatusCrowdsource < Status
       voters: total_votes.count,
       updated_time: DateTime.now
     )
-
   end
 
   private
@@ -90,5 +92,13 @@ class StatusCrowdsource < Status
       .where("created_at > '#{(Time.now - TIME_PARAMS[:third].minutes).utc.to_s(:db)}'")
       .where.not(status: nil)
       .order(created_at: :desc)
+  end
+
+  # Saves the current status into history
+  def create_history
+    StatusCrowdsourceHistory
+      .create(updated_time: updated_time, valid_until: valid_until, status: status,
+              queue: queue, store_id: store_id, voters: voters, is_official: is_official,
+              old_created_at: created_at, old_updated_at: updated_at)
   end
 end

@@ -24,6 +24,7 @@
 #  created_by_id    :bigint
 #  updated_by_id    :bigint
 #  from_osm         :boolean          default("false")
+#  original_id      :bigint
 #
 require 'test_helper'
 
