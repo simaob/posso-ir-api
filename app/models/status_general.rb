@@ -20,4 +20,14 @@
 #  active                :boolean          default("true")
 #
 class StatusGeneral < Status
+  after_update :create_history
+
+  private
+
+  def create_history
+    StatusGeneralHistory
+      .create(updated_time: updated_time, valid_until: valid_until, status: status,
+              queue: queue, store_id: store_id, voters: voters, is_official: is_official,
+              old_created_at: created_at, old_updated_at: updated_at)
+  end
 end
