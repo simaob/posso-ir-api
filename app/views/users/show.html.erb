@@ -1,15 +1,19 @@
 <% content_for :page_title, @user.name&.titleize %>
 
 <div class="row mt-5">
-  <div class="col-md-11">
+  <div class="col-md-10">
     <h1><%= @user.display_name %></h1>
   </div>
-  <% if can? :edit, @user %>
-    <div class="col-md-1">
+  <div class="col-md-2">
+    <% if can? :edit, @user %>
       <%= link_to t('views.actions.edit'), edit_user_path(@user),
         class: 'btn btn-sm btn-outline-primary' %>
+    <% end %>
+    <% if can? :read, :statuses_user %>
+      <%= link_to t('views.users.show.statuses'), statuses_user_path(@user),
+        class: 'btn btn-sm btn-outline-info' %>
+    <% end %>
   </div>
-<% end %>
 </div>
 
 <div class="row mt-4">
