@@ -15,9 +15,9 @@
 module Api
   module V1
     class StatusGeneralResource < StatusResource
-      attributes :official?
+      attributes :is_official
 
-      def official?
+      def is_official
         if Rails.env.production?
           @model.is_official
         else
