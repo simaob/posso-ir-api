@@ -1,10 +1,9 @@
 import React, { useReducer, useEffect } from 'react';
 import pickBy from 'lodash/pickBy';
-import WRIIcons from 'vizzuality-components/dist/icons';
 import reducer, { initialState } from './reducer';
-import ShopsMap from './shops-map.component';
 import Toolbar from './toolbar.component';
 import Sidebar from './sidebar.component';
+import ShopsMap from './mapbox'
 
 import './map-view.scss';
 
@@ -38,9 +37,14 @@ function MapView(props) {
   });
   return (
     <div className="c-map-view">
-      <WRIIcons />
       <Toolbar status={state.status} dispatch={dispatch} labels={labels} />
-      <Sidebar status={state.status} shop={state.shops[state.selectedShop]} fields={fields} dispatch={dispatch} labels={labels} />
+      <Sidebar
+        status={state.status}
+        shop={state.shops[state.selectedShop]}
+        fields={fields}
+        dispatch={dispatch}
+        labels={labels}
+      />
       <ShopsMap shops={state.shops} dispatch={dispatch} />
     </div>
   );

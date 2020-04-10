@@ -2,12 +2,7 @@ import produce from 'immer';
 import { v4 as uuidv4 } from 'uuid';
 
 const getMarkerId = payload => {
-  const { layer, target } = payload;
-
-  if (layer) {
-    return layer.options.id;
-  }
-  return target.options.id;
+  return payload.id;
 };
 
 export const initialState = {
@@ -69,8 +64,8 @@ function idleStatus(state, action, draft) {
 function creatingStatus(state, action, draft) {
   switch (action.type) {
     case 'clickMap': {
-      const { latlng } = action.payload;
-      if (state.selectedShop) {
+      const { lngLat } = action.payload;
+      if (state.selectedShop && draft.shops) {
         delete draft.shops[state.selectedShop];
       }
       const temporaryId = uuidv4();
@@ -87,8 +82,8 @@ function creatingStatus(state, action, draft) {
       draft.shops[temporaryId] = {
         ...fields,
         temporaryId,
-        latitude: latlng.lat,
-        longitude: latlng.lng
+        longitude: lngLat[0],
+        latitude: lngLat[1]
       };
       draft.selectedShop = temporaryId;
       return draft;

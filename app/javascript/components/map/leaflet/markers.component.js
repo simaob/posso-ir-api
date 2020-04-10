@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import 'leaflet.markercluster';
+// import 'leaflet.markercluster';
 
-import 'leaflet.markercluster/dist/MarkerCluster.css';
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+// import 'leaflet.markercluster/dist/MarkerCluster.css';
+// import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 function Markers(props) {
   const { data, onClick, map } = props;

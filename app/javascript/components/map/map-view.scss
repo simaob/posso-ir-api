@@ -1,4 +1,4 @@
-$nav-height: 56px;
+$nav-height: 76px;
 $toolbar-height: 62px;
 $sidebar-header-height: 69px;
 $sidebar-footer-height: 60px;
@@ -25,7 +25,7 @@ $blur-level: 16px;
   width: 100%;
   overflow: hidden;
 
-  .vizzuality__c-map {
+  .vizzuality__c-map, .c-map {
     height: calc(100% - #{$toolbar-height});
   }
 }
