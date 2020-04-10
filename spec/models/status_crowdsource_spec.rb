@@ -36,8 +36,9 @@ RSpec.describe StatusCrowdsource, type: :model do
   end
 
   context 'after a user has just voted' do
-    let!(:status_crowdsource_user) { create(:status_crowdsource_user, status: 10,
-                                            store: store) }
+    let!(:status_crowdsource_user) do
+      create(:status_crowdsource_user, status: 10, store: store)
+    end
     it 'should have the status added by the user' do
       status_crowdsource.calculate_status
       expect(status_crowdsource.status).to eq(10)
@@ -45,8 +46,11 @@ RSpec.describe StatusCrowdsource, type: :model do
   end
 
   context 'after two users have voted the same thing at the same time' do
-    let!(:status_crowdsource_user) { 2.times { create(:status_crowdsource_user, status: 10,
-                                            store: store, posted_at: a_time) }}
+    let!(:status_crowdsource_user) do
+      2.times do
+        create(:status_crowdsource_user, status: 10, store: store, posted_at: a_time)
+      end
+    end
     it 'should have the status the two users voted' do
       status_crowdsource.calculate_status
       expect(status_crowdsource.status).to eq(10)
@@ -116,9 +120,10 @@ RSpec.describe StatusCrowdsource, type: :model do
 
   context 'finding an eleven' do
     let!(:set_the_scene) do
-      store.status_crowdsources.first.update(status: 5, voters: 1,
+      store.status_crowdsources.first.update(status: 5,
+                                             voters: 1,
                                              updated_time: a_time - 1.day,
-                                             previous_status: 7, voters: 1,
+                                             previous_status: 7,
                                              previous_updated_time: a_time - 2.days)
       create(:status_crowdsource_user, status: 10, store: store, created_at: a_time - 13.minutes)
     end

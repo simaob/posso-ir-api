@@ -16,6 +16,6 @@ FactoryBot.define do
     status { 5 }
     posted_at { Time.now }
     association :user
-    association:store
+    association :store
   end
 end
