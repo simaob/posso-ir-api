@@ -66,7 +66,7 @@ class StatusCrowdsource < Status
     return unless new_status
 
     update(
-      status: new_status,
+      status: new_status.round(2),
       voters: new_voters,
       updated_time: DateTime.now,
       previous_status: status,
