@@ -17,7 +17,6 @@
     "chart.js": "^2.9.3",
     "chartkick": "^3.2.0",
     "classnames": "^2.2.6",
-    "d3-ease": "^1.0.6",
     "deck.gl": "7.3.6",
     "dotenv": "^8.2.0",
     "expose-loader": "^0.7.5",
@@ -36,7 +35,6 @@
     "turbolinks": "^5.2.0",
     "use-onclickoutside": "^0.3.1",
     "uuid": "^7.0.2",
-    "viewport-mercator-project": "^7.0.1",
     "webpack": "^4.42.0"
   },
   "version": "0.1.0",

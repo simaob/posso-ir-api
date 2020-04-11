@@ -25,7 +25,7 @@ function MapView(props) {
 
   useEffect(() => {
     if (state.status === 'saving') {
-      const shop = state.shops[state.selectedShop];
+      const shop = state.shops[state.selectedShopId];
       saveShop(shop, state.method)
         .then(data => dispatch({ type: 'saveSuccessful', payload: data }))
         .catch(error => {
@@ -40,7 +40,7 @@ function MapView(props) {
       <Toolbar status={state.status} dispatch={dispatch} labels={labels} />
       <Sidebar
         status={state.status}
-        shop={state.shops[state.selectedShop]}
+        shop={state.shops[state.selectedShopId]}
         fields={fields}
         dispatch={dispatch}
         labels={labels}

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import cx from 'classnames';
+import kebabCase from 'lodash/kebabCase';
 
 function Sidebar(props) {
   const { shop, fields, dispatch, status, labels } = props;
@@ -16,6 +17,15 @@ function Sidebar(props) {
   };
   return (
     <aside ref={sidebarRef} className={cx('c-sidebar', { '-visible': shop })}>
+      {shop && shop.state && (
+        <span
+          className={cx('shop-state-tag', {
+            [`-${kebabCase(shop.state)}`]: shop.state
+          })}
+        >
+          {labels[`state_${shop.state}`]}
+        </span>
+      )}
       <div className="sidebar-header">
         <p className="shop-name">{(shop && shop.name) || labels.add_store}</p>
         {status === 'idle' && (
@@ -66,7 +76,7 @@ function Sidebar(props) {
               )}
             </>
           )}
-          {status === 'idle' && shop && (
+          {status === 'idle' && shop && ['live', 'waiting_for_approval'].includes(shop.state) && (
             <>
               <button
                 type="button"

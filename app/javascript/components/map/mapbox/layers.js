@@ -1,3 +1,4 @@
+import colors from '../map-view.scss'
 export const devBasemapLayer = () => ({
   id: 'dev-basemap',
   type: 'raster',
@@ -65,10 +66,17 @@ export const shopsLayer = data => ({
         type: 'circle',
         filter: ['!', ['has', 'point_count']],
         paint: {
-          'circle-color': '#FFCC00',
-          'circle-stroke-width': 1,
-          'circle-stroke-color': '#333',
-          'circle-radius': 10
+          'circle-color': [
+            'match',
+            ['get', 'state'],
+            'live', colors['shop-state-live'],
+            'waiting_approval', colors['shop-state-waiting-approval'],
+            'marked_for_deletion', colors['shop-state-marked-for-deletion'],
+            colors['shop-state-unknown']
+          ],
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#fff',
+          'circle-radius': 8
         }
       }
     ]

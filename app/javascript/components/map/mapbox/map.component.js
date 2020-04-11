@@ -47,7 +47,7 @@ function MapboxMap(props) {
       mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
       mapStyle={process.env.NODE_ENV !== 'development' ? process.env.MAPBOX_STYLE : undefined}
       minZoom={2}
-      interactiveLayerIds={['shops-clusters', 'shops']}
+      interactiveLayerIds={['shops']}
       onClick={onClick}
       initialViewport={initialViewport}
     >
