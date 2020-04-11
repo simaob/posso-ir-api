@@ -1,3 +1,18 @@
+export const devBasemapLayer = () => ({
+  id: 'dev-basemap',
+  type: 'raster',
+  source: {
+    tileSize: 256,
+    tiles: [
+      'https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+      'https://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+      'https://c.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+    ],
+    attribution:
+      '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
+  }
+});
+
 export const shopsLayer = data => ({
   id: 'shops',
   type: 'geojson',

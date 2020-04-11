@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 import { PluginMapboxGl } from 'layer-manager';
 import BasicMap from './basic-map';
-import { shopsLayer } from './layers';
+import * as Layers from './layers';
 
 const initialViewport = {
   latitude: 39.65,
@@ -12,8 +12,12 @@ const initialViewport = {
 
 function MapboxMap(props) {
   const { shops = {}, dispatch } = props;
-  const layer = useMemo(() => {
-    const collection = {
+  const layers = useMemo(() => {
+    const _layers = [];
+    if (process.env.NODE_ENV === 'development') {
+      _layers.push(Layers.devBasemapLayer());
+    }
+    const shopsGeoJson = {
       type: 'FeatureCollection',
       features: Object.values(shops).map(shop => ({
         type: 'Feature',
@@ -24,8 +28,9 @@ function MapboxMap(props) {
         properties: shop
       }))
     };
+    _layers.push(Layers.shopsLayer(shopsGeoJson));
 
-    return shopsLayer(collection);
+    return _layers;
   }, [shops]);
 
   const onClick = e => {
@@ -39,8 +44,8 @@ function MapboxMap(props) {
 
   return (
     <BasicMap
-      mapboxApiAccessToken="pk.eyJ1IjoicG9zc29pciIsImEiOiJjazh1aG90MzgwNmV4M2ZwODg1emlzcDhwIn0.oj2w7Ri9H3WRoZUQwgR3DQ"
-      mapStyle="mapbox://styles/possoir/ck8uiswqg0k3k1ipb3sgurmqm"
+      mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
+      mapStyle={process.env.NODE_ENV !== 'development' ? process.env.MAPBOX_STYLE : undefined}
       minZoom={2}
       interactiveLayerIds={['shops-clusters', 'shops']}
       onClick={onClick}
@@ -48,7 +53,7 @@ function MapboxMap(props) {
     >
       {map => (
         <LayerManager map={map} plugin={PluginMapboxGl}>
-          {[layer].map(l => (
+          {layers.map(l => (
             <Layer key={l.id} {...l} />
           ))}
         </LayerManager>

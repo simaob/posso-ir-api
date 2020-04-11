@@ -19,6 +19,7 @@
     "classnames": "^2.2.6",
     "d3-ease": "^1.0.6",
     "deck.gl": "7.3.6",
+    "dotenv": "^8.2.0",
     "expose-loader": "^0.7.5",
     "immer": "^6.0.2",
     "jquery": "^3.4.1",

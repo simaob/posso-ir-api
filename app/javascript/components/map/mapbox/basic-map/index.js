@@ -46,6 +46,7 @@ function MapboxMap(props) {
         // DEFAULT FUNC IMPLEMENTATIONS
         onLoad={setLoaded}
         onViewStateChange={setViewport}
+        onViewportChange={setViewport}
         onResize={setViewport}
       >
         {loaded && map.current && typeof children === 'function' && children(map.current)}

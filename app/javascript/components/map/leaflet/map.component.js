@@ -20,11 +20,9 @@ import Markers from './markers.component';
 
 const BASEMAP = {
   id: 'streets',
-  title: 'Streets (OSM)',
   url: '//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
   attribution:
-    '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',
-  thumbnail: '/images/maps/thumb-basemap-streets.png'
+    '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
 };
 
 const mapOptions = {
