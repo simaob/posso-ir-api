@@ -4,6 +4,76 @@
 
 <% if current_user&.admin? || current_user&.general_manager? %>
   <div class="row mt-4">
+    <div class="col-md-12"><p class="h2"><%= t('views.home.index.totals') %></p></div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.total_users') %></h5>
+          <table class="table table-sm">
+            <tbody>
+              <% User.roles.each do |r| %>
+                <tr>
+                  <td><%= t("activerecord.enums.user.roles.#{r[0]}") %></td>
+                  <td><%= User.where(role: r).count %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <th><%= t('views.home.index.total') %></th>
+                <td><%= User.count %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.total_stores') %></h5>
+          <table class="table table-sm">
+            <tbody>
+              <% Store.store_types.each do |r| %>
+                <tr>
+                  <td><%= t("activerecord.enums.store.store_types.#{r[0]}") %></td>
+                  <td><%= Store.where(store_type: r, state: :live).count %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <th><%= t('views.home.index.total') %></th>
+                <td><%= Store.where(state: :live).count %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.total_statuses') %></h5>
+          <table class="table table-sm">
+            <tbody>
+              <% Store.store_types.each do |r| %>
+                <tr>
+                  <td><%= t("activerecord.enums.store.store_types.#{r[0]}") %></td>
+                  <td><%= StatusCrowdsourceUser.joins(:store).where(stores: {store_type: r, state: :live}).count %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <th><%= t('views.home.index.total') %></th>
+                <td><%= StatusCrowdsourceUser.count %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12"><p class="h3"><%= t('views.home.index.break_per_day') %></p></div>
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
@@ -24,6 +94,7 @@
   </div>
 
   <div class="row mt-4">
+    <div class="col-md-12"><p class="h3"><%= t('views.home.index.daily_ranking') %></p></div>
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
@@ -74,6 +145,7 @@
   </div>
 
   <div class="row mt-4">
+    <div class="col-md-12"><p class="h3"><%= t('views.home.index.total_ranking') %></p></div>
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">

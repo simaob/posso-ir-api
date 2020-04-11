@@ -91,6 +91,14 @@ pt:
     home:
       index:
         title: 'Bem-vindo ao sistema de gestão da Posso Ir?'
+        total: 'Total'
+        totals: 'Total de registos no sistema'
+        total_users: 'Utilizadores por função'
+        total_stores: 'Lojas activas por tipo'
+        total_statuses: 'Estados por tipo de loja'
+        daily_ranking: 'Classificações diária'
+        total_ranking: 'Classificações totais'
+        break_per_day: 'Evolução diária'
         users_per_day: 'Novos utilizadores por dia'
         statuses_per_day: 'Total estados reportados por dia'
         todays_stores_by_reports: 'Top 15 Lojas com mais relatórios hoje'

@@ -70,6 +70,14 @@ sk:
     home:
       index:
         title: 'Vitajte na stránke Nečakaj v rade'
+        total: 'Celkom'
+        totals: 'Celkový počet záznamov v systéme'
+        total_users: 'Používatelia podľa rolí'
+        total_stores: 'Aktívne obchody podľa typu'
+        total_statuses: 'Stavy podľa typu obchodu'
+        daily_ranking: 'Denné poradie'
+        total_ranking: 'Globálne hodnotenie'
+        break_per_day: 'Denný vývoj'
         users_per_day: 'Nuevos usuários por día'
         statuses_per_day: 'Estados reportados por día'
         todays_stores_by_reports: 'Lojas por número de relatórios hoje'
