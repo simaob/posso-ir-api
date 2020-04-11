@@ -72,6 +72,8 @@ sk:
         title: 'Vitajte na stránke Nečakaj v rade'
         users_per_day: 'Nuevos usuários por día'
         statuses_per_day: 'Estados reportados por día'
+        todays_stores_by_reports: 'Lojas por número de relatórios hoje'
+        todays_users_by_reports: 'Utilizadores por número de relatórios hoje'
         stores_by_reports: 'Lojas por número de relatórios'
         users_by_reports: 'Utilizadores por número de relatórios'
         total: 'Total'

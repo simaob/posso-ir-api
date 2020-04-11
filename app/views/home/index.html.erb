@@ -27,6 +27,56 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.todays_stores_by_reports') %></h5>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= Store.model_name.human(count: 1) %></th>
+                <th><%= t('views.home.index.total') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @todays_stores_by_reports.each do |store| %>
+                <tr>
+                  <td><%= link_to store.name, statuses_store_path(store) %></td>
+                  <td><%= store.count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.home.index.todays_users_by_reports') %></h5>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= User.model_name.human(count: 1) %></th>
+                <th><%= t('views.home.index.total') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @todays_users_by_reports.each do |user| %>
+                <tr>
+                  <td><%= link_to user.display_name, statuses_user_path(user) %></td>
+                  <td><%= user.count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
           <h5 class="card-title"><%= t('views.home.index.stores_by_reports') %></h5>
           <table class="table table-sm">
             <thead>
