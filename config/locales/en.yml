@@ -91,6 +91,14 @@ en:
     home:
       index:
         title: 'Welcome to Can I Go management system'
+        total: 'Total'
+        totals: 'Total records in the system'
+        total_users: 'Users per role'
+        total_stores: 'Active stores per type'
+        total_statuses: 'Statuses per store type'
+        daily_ranking: 'Daily rankings'
+        total_ranking: 'Global rankings'
+        break_per_day: 'Daily evolution'
         users_per_day: 'New users per day'
         statuses_per_day: 'Total statuses reported per day'
         todays_stores_by_reports: "Today's top 15 stores by reports"

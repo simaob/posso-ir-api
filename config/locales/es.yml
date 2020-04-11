@@ -94,6 +94,14 @@ es:
     home:
       index:
         title: 'Bienvenido a lo sistema de gestión de Puedo Ir'
+        total: 'Total'
+        totals: 'Registros totales en el sistema'
+        total_users: 'Usuarios por papel'
+        total_stores: 'Tiendas activas por tipo'
+        total_statuses: 'Estados por tipo de tienda'
+        daily_ranking: 'Clasificaciones diarias'
+        total_ranking: 'Clasificaciones totales'
+        break_per_day: 'Evolución diaria'
         users_per_day: 'Nuevos usuários por día'
         statuses_per_day: 'Estados reportados por día'
         todays_stores_by_reports: 'Top 15 Tiendas por numero de reportes hoy'
