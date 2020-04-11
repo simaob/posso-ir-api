@@ -99,6 +99,11 @@ class Store < ApplicationRecord
     Store.where(query).available
   end
 
+  def self.in_bounding_box(coordinates)
+    Store.where(['lonlat && ST_MakeEnvelope(?, ?, ?, ?, 4326)',
+                 coordinates.flatten(1)].flatten(1))
+  end
+
   private
 
   # x: longitude
