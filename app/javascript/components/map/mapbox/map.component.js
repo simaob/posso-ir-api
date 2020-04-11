@@ -42,9 +42,9 @@ function MapboxMap(props) {
       mapboxApiAccessToken="pk.eyJ1IjoicG9zc29pciIsImEiOiJjazh1aG90MzgwNmV4M2ZwODg1emlzcDhwIn0.oj2w7Ri9H3WRoZUQwgR3DQ"
       mapStyle="mapbox://styles/possoir/ck8uiswqg0k3k1ipb3sgurmqm"
       minZoom={2}
-      viewport={initialViewport}
       interactiveLayerIds={['shops-clusters', 'shops']}
       onClick={onClick}
+      initialViewport={initialViewport}
     >
       {map => (
         <LayerManager map={map} plugin={PluginMapboxGl}>

@@ -24,12 +24,7 @@ export const shopsLayer = data => ({
         paint: {
           'circle-color': '#FFF',
           'circle-stroke-width': 2,
-          'circle-stroke-color': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            '#000',
-            '#5ca2d1'
-          ],
+          'circle-stroke-color': '#5ca2d1',
           'circle-radius': 12
         }
       },
@@ -58,7 +53,7 @@ export const shopsLayer = data => ({
           'circle-color': '#FFCC00',
           'circle-stroke-width': 1,
           'circle-stroke-color': '#333',
-          'circle-radius': ['case', ['boolean', ['feature-state', 'hover'], false], 12, 10]
+          'circle-radius': 10
         }
       }
     ]
