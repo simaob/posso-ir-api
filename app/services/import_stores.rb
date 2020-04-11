@@ -18,6 +18,7 @@ class ImportStores
     import_pharmacies
     import_prio
     import_from_osm
+    import_spanish_stores
     puts "#{Store.count} total stores"
   end
 
@@ -392,6 +393,26 @@ class ImportStores
         longitude: csv[2],
         store_type: csv[3].to_i,
         from_osm: true
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_spanish_stores
+    puts "Starting Spanish Stores Import, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'stores_spain.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file).each do |row|
+      Store.create(
+        name: row['storeName'],
+        group: row['businessName'],
+        country: 'España',
+        city: row['city'],
+        street: row['address'],
+        zip_code: row['postalCode'],
+        latitude: row['lat'],
+        longitude: row['lng'],
+        store_type: :supermarket
       )
     end
     puts "#{Store.count} total stores"
