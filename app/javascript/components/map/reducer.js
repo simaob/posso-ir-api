@@ -32,6 +32,12 @@ const onClickSave = (state, action, draft) => {
   Object.assign(shop, action.payload);
 };
 
+const onDragMarker = (state, action, draft) => {
+  const shop = draft.shops[state.selectedShopId];
+  shop.longitude = action.payload[0];
+  shop.latitude = action.payload[1];
+};
+
 function idleStatus(state, action, draft) {
   switch (action.type) {
     case 'clickAdd': {
@@ -88,6 +94,9 @@ function creatingStatus(state, action, draft) {
       draft.selectedShopId = temporaryId;
       return draft;
     }
+    case 'dragMarker': {
+      return onDragMarker(state, action, draft);
+    }
     case 'clickSave': {
       return onClickSave(state, action, draft);
     }
@@ -119,6 +128,9 @@ function deletingStatus(state, action, draft) {
 
 function editingStatus(state, action, draft) {
   switch (action.type) {
+    case 'dragMarker': {
+      return onDragMarker(state, action, draft);
+    }
     case 'clickSave': {
       return onClickSave(state, action, draft);
     }

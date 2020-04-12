@@ -1,4 +1,4 @@
-import colors from '../map-view.scss'
+import colors from '../map-view.scss';
 export const devBasemapLayer = () => ({
   id: 'dev-basemap',
   type: 'raster',
@@ -14,7 +14,7 @@ export const devBasemapLayer = () => ({
   }
 });
 
-export const shopsLayer = data => ({
+export const shopsLayer = (data, selectedId) => ({
   id: 'shops',
   type: 'geojson',
   source: {
@@ -64,14 +64,31 @@ export const shopsLayer = data => ({
           position: 'top'
         },
         type: 'circle',
-        filter: ['!', ['has', 'point_count']],
+        filter: [
+          'all',
+          ['!', ['has', 'point_count']],
+          [
+            'case',
+            ['to-boolean', selectedId],
+            [
+              'case',
+              ['has', 'temporaryId'],
+              ['!=', ['get', 'temporaryId'], selectedId],
+              ['!=', ['get', 'id'], selectedId]
+            ],
+            true
+          ]
+        ],
         paint: {
           'circle-color': [
             'match',
             ['get', 'state'],
-            'live', colors['shop-state-live'],
-            'waiting_approval', colors['shop-state-waiting-approval'],
-            'marked_for_deletion', colors['shop-state-marked-for-deletion'],
+            'live',
+            colors['shop-state-live'],
+            'waiting_approval',
+            colors['shop-state-waiting-approval'],
+            'marked_for_deletion',
+            colors['shop-state-marked-for-deletion'],
             colors['shop-state-unknown']
           ],
           'circle-stroke-width': 2,

@@ -8,6 +8,7 @@ $white: #fff;
 $gray: #333a40;
 $light-gray: #f2f2f2;
 $blue: #5ca2d1;
+$red: #dc3545;
 
 $shop-state-live: #41c14f;
 $shop-state-waiting-approval: #ffcc00;
@@ -45,6 +46,52 @@ $blur-level: 16px;
   .vizzuality__c-map,
   .c-map {
     height: calc(100% - #{$toolbar-height});
+  }
+
+  .selected-shop-marker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    height: 16px;
+    width: 16px;
+
+    &:before {
+      content: '';
+      position: relative;
+      display: block;
+      width: 300%;
+      height: 300%;
+      box-sizing: border-box;
+      margin-left: -100%;
+      margin-top: -100%;
+      border-radius: 45px;
+      background-color: #01a4e9;
+      animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: #5ca2d1;
+      border-radius: 15px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
+    }
+
+    &.-dragging {
+      &::after {
+        animation: none;
+      }
+      &::before {
+        content: none;
+      }
+    }
   }
 }
 
@@ -140,6 +187,12 @@ $blur-level: 16px;
     padding: 18px 22px 16px;
     height: calc(100% - #{$sidebar-header-height} - #{$sidebar-footer-height});
     overflow: auto;
+
+    .sidebar-alert {
+      color: $red;
+      border-color: $red;
+      background-color: transparent;
+    }
   }
 
   .sidebar-form {
@@ -171,4 +224,26 @@ $blur-level: 16px;
   position: absolute;
   top: 5.5rem;
   left: 0;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+  }
+  80%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
 }

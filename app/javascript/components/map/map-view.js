@@ -3,7 +3,7 @@ import pickBy from 'lodash/pickBy';
 import reducer, { initialState } from './reducer';
 import Toolbar from './toolbar.component';
 import Sidebar from './sidebar.component';
-import ShopsMap from './mapbox'
+import ShopsMap from './mapbox';
 
 import './map-view.scss';
 
@@ -45,7 +45,12 @@ function MapView(props) {
         dispatch={dispatch}
         labels={labels}
       />
-      <ShopsMap shops={state.shops} dispatch={dispatch} />
+      <ShopsMap
+        shops={state.shops}
+        dispatch={dispatch}
+        selectedShopId={state.selectedShopId}
+        status={state.status}
+      />
     </div>
   );
 }
