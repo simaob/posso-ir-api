@@ -5,7 +5,10 @@ class CalculateStatus
     puts "[#{Time.now}] Going to calculate the statuses"
     duration = Benchmark.ms do
       puts "[#{Time.now}] Calculating the Crowdsource status"
-      StatusCrowdsource.find_each.with_index do |s, i|
+      StatusCrowdsource
+        .joins(store: :status_crowdsource_users)
+        .where('status_crowdsource_users.created_at > ?', 2.hours.ago)
+        .find_each.with_index do |s, i|
         puts "Calculated #{i}" if (i % 100).zero?
         s.calculate_status
       end
@@ -19,7 +22,8 @@ class CalculateStatus
       SQL
 
       # TODO: This can be optimized
-      Store.joins(:status_generals).joins(:status_store_owners)
+      Store.includes(:status_store_owners, :status_generals)
+        .joins(:status_generals).joins(:status_store_owners)
         .where(where_clause).find_each.with_index do |store, i|
         puts "Calculated #{i}" if (i % 100).zero?
         owner = store.status_store_owners.first
@@ -41,7 +45,8 @@ class CalculateStatus
       SQL
 
       # TODO: This can be optimized
-      Store.joins(:status_generals, :status_crowdsources)
+      Store.includes(:status_generals, :status_crowdsources)
+        .joins(:status_generals, :status_crowdsources)
         .where(where_clause).find_each.with_index do |store, i|
         puts "Calculated #{i}" if (i % 100).zero?
         crowdsource = store.status_crowdsources.first
