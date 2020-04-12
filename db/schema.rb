@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_201225) do
+ActiveRecord::Schema.define(version: 2020_04_11_145245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 2020_04_10_201225) do
     t.bigint "updated_by_id"
     t.boolean "from_osm", default: false
     t.bigint "original_id"
+    t.string "source"
     t.index ["created_by_id"], name: "index_stores_on_created_by_id"
     t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
     t.index ["updated_by_id"], name: "index_stores_on_updated_by_id"

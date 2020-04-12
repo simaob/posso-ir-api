@@ -411,8 +411,9 @@ class ImportStores
         street: row['address'],
         zip_code: row['postalCode'],
         latitude: row['lat'],
-        longitude: row['lng'],
-        store_type: :supermarket
+        longitude: row['lon'],
+        store_type: :supermarket,
+        source: 'Tiendo'
       )
     end
     puts "#{Store.count} total stores"
