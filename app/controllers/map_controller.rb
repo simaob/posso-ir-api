@@ -65,19 +65,17 @@ class MapController < ApplicationController
       {
         attribute: 'details',
         label: Store.human_attribute_name(:details),
-        type: 'text'
+        type: 'textarea'
       },
       {
         attribute: 'latitude',
         label: Store.human_attribute_name(:latitude),
-        type: 'text',
-        readonly: true
+        type: 'text'
       },
       {
         attribute: 'longitude',
         label: Store.human_attribute_name(:longitude),
-        type: 'text',
-        readonly: true
+        type: 'text'
       }
     ]
   end
