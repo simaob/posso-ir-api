@@ -1,11 +1,28 @@
-$nav-height: 56px;
+$nav-height: 76px;
 $toolbar-height: 62px;
-$sidebar-header-height: 69px;
+$sidebar-header-height: 77px;
 $sidebar-footer-height: 60px;
 
+$black: #000;
 $white: #fff;
 $gray: #333a40;
 $light-gray: #f2f2f2;
+$blue: #5ca2d1;
+
+$shop-state-live: #41c14f;
+$shop-state-waiting-approval: #ffcc00;
+$shop-state-marked-for-deletion: #979797;
+$shop-state-unknown: $blue;
+
+:export {
+  shop-state: {
+    live: $shop-state-live;
+    waiting-approval: $shop-state-waiting-approval;
+    marked-for-deletion: $shop-state-marked-for-deletion;
+    unknown: $shop-state-unknown;
+  }
+}
+
 $border: solid 1px rgba($gray, 0.1);
 $light-gray-fade: rgba($light-gray, 0.2);
 $blur-level: 16px;
@@ -25,7 +42,8 @@ $blur-level: 16px;
   width: 100%;
   overflow: hidden;
 
-  .vizzuality__c-map {
+  .vizzuality__c-map,
+  .c-map {
     height: calc(100% - #{$toolbar-height});
   }
 }
@@ -57,14 +75,42 @@ $blur-level: 16px;
     transform: translateX(0);
   }
 
+  .shop-state-tag {
+    position: absolute;
+    top: $sidebar-header-height;
+    right: 22px;
+    padding: 2px 4px;
+    background-color: $shop-state-unknown;
+    border-radius: 2px;
+    white-space: nowrap;
+    font-size: 12px;
+    max-width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+
+    &.-live {
+      background-color: $shop-state-live;
+    }
+
+    &.-waiting-approval {
+      background-color: $shop-state-waiting-approval;
+    }
+
+    &.-marked-for-deletion {
+      color: $white;
+      background-color: $shop-state-marked-for-deletion;
+    }
+  }
+
   .sidebar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: $gray;
+    padding: 0 22px 18px;
     font-size: 22px;
     font-weight: 600;
-    color: $gray;
-    padding: 0 22px 16px;
     border-bottom: $border;
     height: $sidebar-header-height;
 
@@ -76,6 +122,7 @@ $blur-level: 16px;
       line-height: 1.2;
       max-height: 78px;
       overflow: hidden;
+      width: calc(100% - 100px);
     }
 
     .close-button {
@@ -85,11 +132,12 @@ $blur-level: 16px;
       text-transform: uppercase;
       background-color: transparent;
       padding: 0;
+      height: 78px;
     }
   }
 
   .sidebar-content {
-    padding: 16px 22px;
+    padding: 18px 22px 16px;
     height: calc(100% - #{$sidebar-header-height} - #{$sidebar-footer-height});
     overflow: auto;
   }
