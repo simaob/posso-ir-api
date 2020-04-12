@@ -40,8 +40,7 @@ class StatusCrowdsource < Status
 
   def calculate_status
     votes = total_votes
-    arr = votes.to_a
-    return if arr.empty?
+    return unless votes.any?
 
     # We'll recalculate it for now
     # return if updated_time > votes.first.created_at
