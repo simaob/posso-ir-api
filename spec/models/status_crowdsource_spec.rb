@@ -122,9 +122,7 @@ RSpec.describe StatusCrowdsource, type: :model do
     let!(:set_the_scene) do
       store.status_crowdsources.first.update(status: 5,
                                              voters: 1,
-                                             updated_time: a_time - 1.day,
-                                             previous_status: 7,
-                                             previous_updated_time: a_time - 2.days)
+                                             updated_time: a_time - 1.day)
       create(:status_crowdsource_user, status: 10, store: store, created_at: a_time - 13.minutes)
     end
 
