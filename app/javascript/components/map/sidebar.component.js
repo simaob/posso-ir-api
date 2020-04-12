@@ -10,19 +10,14 @@ function Sidebar(props) {
   const [formState, setFormState] = useState({});
   const [showWarning, setShowWarning] = useState(false);
 
+  const formKey = `${status}${shop && (shop.id || shop.temporaryId)}`;
+
   const close = () => dispatch({ type: 'clickCloseSidebar' });
   useOnClickOutside(sidebarRef, close);
-
-  useEffect(() => {
-    if (!shop) {
-      setShowWarning(false);
-      setFormState({});
-    }
-  }, [shop]);
   useEffect(() => {
     setShowWarning(false);
     setFormState({});
-  }, [status]);
+  }, [formKey]);
 
   const onSave = () => {
     if (status === 'deleting' && !formState.details) {
@@ -54,7 +49,7 @@ function Sidebar(props) {
         {status === 'deleting' && showWarning && (
           <p className="alert alert-warning sidebar-alert">{labels.remove_note}</p>
         )}
-        <form key={status} className="sidebar-form" ref={formRef}>
+        <form key={formKey} className="sidebar-form" ref={formRef}>
           {shop &&
             fields
               .filter(field => (status === 'deleting' ? field.attribute === 'details' : true))
