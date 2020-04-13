@@ -84,7 +84,7 @@
         </p>
         <p>
           <strong><%= t('views.stores.index.coordinates') %>:</strong>
-          <%= [@store.latitude&.round(3), @store.longitude&.round(3)].compact.join(', ') %>
+          <%= [@store.latitude, @store.longitude].compact.join(', ') %>
         </p>
       </div>
     </div>
