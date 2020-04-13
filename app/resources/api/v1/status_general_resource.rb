@@ -16,16 +16,6 @@ module Api
   module V1
     class StatusGeneralResource < StatusResource
       attributes :is_official
-
-      # rubocop:disable Naming/PredicateName
-      def is_official
-        if Rails.env.production?
-          @model.is_official
-        else
-          [true, false].sample
-        end
-      end
-      # rubocop:enable Naming/PredicateName
     end
   end
 end

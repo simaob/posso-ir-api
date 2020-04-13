@@ -14,33 +14,44 @@
 #
 module Api
   module V1
-    class StatusResource < ApplicationResource
-      abstract
+    class RandomStatusGeneralResource < ApplicationResource
+      model_name 'StatusGeneral'
       immutable
 
       MAX_STORES = 300
 
-      attributes :id, :updated_time, :valid_until, :status,
-                 :queue, :store_id
+      attributes :updated_time, :valid_until, :status,
+                 :queue, :store_id, :is_official
 
       filter :store_id
 
       def updated_time
-        @model.updated_time
+        Time.now.utc - rand(1..65).minutes
       end
 
       def status
-        @model.status.nil? ? -1 : @model.status
+        rand(-1..10)
       end
 
       def queue
         @model.queue.nil? ? -1 : @model.queue
       end
 
+      # rubocop:disable Naming/PredicateName
+      def is_official
+        [true, false].sample
+      end
+      # rubocop:enable Naming/PredicateName
+
       filter :store_id, apply: ->(records, value, _options) {
         value = value[0...MAX_STORES]
         records.where(store_id: value)
       }
+
+      def self.records(_options = {})
+        StatusGeneral.all
+      end
     end
   end
 end
+
