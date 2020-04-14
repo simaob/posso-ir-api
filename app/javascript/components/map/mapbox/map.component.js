@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { Marker } from 'react-map-gl';
-import { LayerManager, Layer } from 'layer-manager/dist/components';
+import { LayerManager, Layer } from 'layer-manager/dist/components/index';
 import { PluginMapboxGl } from 'layer-manager';
 import cx from 'classnames';
 import BasicMap from './basic-map';
-import * as Layers from './layers';
+import { shopsLayer, devBasemapLayer } from './layers';
 
 const initialViewport = {
   latitude: 39.65,
@@ -18,7 +18,7 @@ function MapboxMap(props) {
   const layers = useMemo(() => {
     const _layers = [];
     if (process.env.NODE_ENV === 'development') {
-      _layers.push(Layers.devBasemapLayer());
+      _layers.push(devBasemapLayer());
     }
     const shopsGeoJson = {
       type: 'FeatureCollection',
@@ -31,7 +31,7 @@ function MapboxMap(props) {
         properties: shop
       }))
     };
-    _layers.push(Layers.shopsLayer(shopsGeoJson, selectedShopId));
+    _layers.push(shopsLayer(shopsGeoJson, selectedShopId));
 
     return _layers;
   }, [shops, selectedShopId]);

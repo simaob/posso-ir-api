@@ -3,7 +3,7 @@ import pickBy from 'lodash/pickBy';
 import reducer, { initialState } from './reducer';
 import Toolbar from './toolbar.component';
 import Sidebar from './sidebar.component';
-import ShopsMap from './mapbox';
+import ShopsMap from './mapbox/map.component';
 
 import './map-view.scss';
 
