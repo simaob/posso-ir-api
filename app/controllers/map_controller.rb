@@ -5,7 +5,6 @@ class MapController < ApplicationController
     authorize! :read, :map
 
     @shops = Store.where.not(latitude: nil).where.not(longitude: nil)
-      .where(state: [:waiting_approval, :live])
     @shops = @shops.where(group: current_user.stores&.map(&:group)) if current_user.store_manager?
 
     @shops = Hash[@shops.collect { |item| [item.id, item] }]
@@ -21,7 +20,10 @@ class MapController < ApplicationController
       editing: t('views.map.index.editing'),
       deleting: t('views.map.index.deleting'),
       creating: t('views.map.index.creating'),
-      remove_note: t('views.map.index.remove_note')
+      remove_note: t('views.map.index.remove_note'),
+      state_live: t('activerecord.enums.store.states.live'),
+      state_marked_for_deletion: t('activerecord.enums.store.states.marked_for_deletion'),
+      state_waiting_approval: t('activerecord.enums.store.states.waiting_approval')
     }
     @fields = [
       {
@@ -63,19 +65,17 @@ class MapController < ApplicationController
       {
         attribute: 'details',
         label: Store.human_attribute_name(:details),
-        type: 'text'
+        type: 'textarea'
       },
       {
         attribute: 'latitude',
         label: Store.human_attribute_name(:latitude),
-        type: 'text',
-        readonly: true
+        type: 'text'
       },
       {
         attribute: 'longitude',
         label: Store.human_attribute_name(:longitude),
-        type: 'text',
-        readonly: true
+        type: 'text'
       }
     ]
   end

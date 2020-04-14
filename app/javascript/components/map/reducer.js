@@ -2,19 +2,14 @@ import produce from 'immer';
 import { v4 as uuidv4 } from 'uuid';
 
 const getMarkerId = payload => {
-  const { layer, target } = payload;
-
-  if (layer) {
-    return layer.options.id;
-  }
-  return target.options.id;
+  return payload.id;
 };
 
 export const initialState = {
   status: 'idle',
   shops: {},
   prevShops: null,
-  selectedShop: null,
+  selectedShopId: null,
   method: null
 };
 
@@ -22,7 +17,7 @@ const onClickCancel = (state, action, draft) => {
   draft.status = 'idle';
   draft.prevShops = initialState.prevShops;
   draft.shops = state.prevShops || initialState.shops;
-  draft.selectedShop = initialState.selectedShop;
+  draft.selectedShopId = initialState.selectedShopId;
 };
 
 const onClickSave = (state, action, draft) => {
@@ -33,8 +28,14 @@ const onClickSave = (state, action, draft) => {
   };
   draft.method = methods[state.status];
   draft.status = 'saving';
-  const shop = draft.shops[state.selectedShop];
+  const shop = draft.shops[state.selectedShopId];
   Object.assign(shop, action.payload);
+};
+
+const onDragMarker = (state, action, draft) => {
+  const shop = draft.shops[state.selectedShopId];
+  shop.longitude = action.payload[0];
+  shop.latitude = action.payload[1];
 };
 
 function idleStatus(state, action, draft) {
@@ -56,11 +57,11 @@ function idleStatus(state, action, draft) {
     }
     case 'clickMarker': {
       const id = getMarkerId(action.payload);
-      draft.selectedShop = id === state.selectedShop ? initialState.selectedShop : id;
+      draft.selectedShopId = id === state.selectedShopId ? initialState.selectedShopId : id;
       return draft;
     }
     case 'clickCloseSidebar': {
-      draft.selectedShop = initialState.selectedShop;
+      draft.selectedShopId = initialState.selectedShopId;
       return draft;
     }
   }
@@ -69,9 +70,9 @@ function idleStatus(state, action, draft) {
 function creatingStatus(state, action, draft) {
   switch (action.type) {
     case 'clickMap': {
-      const { latlng } = action.payload;
-      if (state.selectedShop) {
-        delete draft.shops[state.selectedShop];
+      const { lngLat } = action.payload;
+      if (state.selectedShopId && draft.shops) {
+        delete draft.shops[state.selectedShopId];
       }
       const temporaryId = uuidv4();
       let fields = {};
@@ -87,11 +88,14 @@ function creatingStatus(state, action, draft) {
       draft.shops[temporaryId] = {
         ...fields,
         temporaryId,
-        latitude: latlng.lat,
-        longitude: latlng.lng
+        longitude: lngLat[0],
+        latitude: lngLat[1]
       };
-      draft.selectedShop = temporaryId;
+      draft.selectedShopId = temporaryId;
       return draft;
+    }
+    case 'dragMarker': {
+      return onDragMarker(state, action, draft);
     }
     case 'clickSave': {
       return onClickSave(state, action, draft);
@@ -105,7 +109,10 @@ function creatingStatus(state, action, draft) {
 function deletingStatus(state, action, draft) {
   switch (action.type) {
     case 'clickMarker': {
-      draft.selectedShop = getMarkerId(action.payload);
+      draft.selectedShopId = getMarkerId(action.payload);
+      if (state.shops[draft.selectedShopId].state === 'marked_for_deletion') {
+        draft.status = 'idle';
+      }
       return draft;
     }
     case 'clickSave': {
@@ -113,7 +120,7 @@ function deletingStatus(state, action, draft) {
     }
     case 'clickCancel': {
       onClickCancel(state, action, draft);
-      draft.selectedShop = state.selectedShop;
+      draft.selectedShopId = state.selectedShopId;
       return draft;
     }
   }
@@ -121,12 +128,15 @@ function deletingStatus(state, action, draft) {
 
 function editingStatus(state, action, draft) {
   switch (action.type) {
+    case 'dragMarker': {
+      return onDragMarker(state, action, draft);
+    }
     case 'clickSave': {
       return onClickSave(state, action, draft);
     }
     case 'clickCancel': {
       onClickCancel(state, action, draft);
-      draft.selectedShop = state.selectedShop;
+      draft.selectedShopId = state.selectedShopId;
       return draft;
     }
   }
@@ -136,9 +146,9 @@ function savingStatus(state, action, draft) {
   switch (action.type) {
     case 'saveSuccessful': {
       const shop = action.payload;
-      delete draft.shops[state.selectedShop];
+      delete draft.shops[state.selectedShopId];
       draft.shops[shop.id] = shop;
-      draft.selectedShop = shop.id;
+      draft.selectedShopId = shop.id;
       draft.status = 'idle';
       return draft;
     }

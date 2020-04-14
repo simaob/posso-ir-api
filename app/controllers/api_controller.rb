@@ -18,6 +18,8 @@ class ApiController < ApplicationController
   private
 
   def authenticate_with_jwt!
+    return @current_user = User.first if Rails.env.development?
+
     payload = JwtService.decode(token: token)
     if DateTime.parse(payload['expiration_date']) <= DateTime.now
       render json: {error: 'Auth token has expired. Please login again'}, status: 401

@@ -24,6 +24,8 @@
 #  created_by_id    :bigint
 #  updated_by_id    :bigint
 #  from_osm         :boolean          default("false")
+#  original_id      :bigint
+#  source           :string
 #
 class Store < ApplicationRecord
   include UserTrackable
@@ -96,6 +98,11 @@ class Store < ApplicationRecord
     SQL
 
     Store.where(query).available
+  end
+
+  def self.in_bounding_box(coordinates)
+    Store.where(['lonlat && ST_MakeEnvelope(?, ?, ?, ?, 4326)',
+                 coordinates.flatten(1)].flatten(1))
   end
 
   private

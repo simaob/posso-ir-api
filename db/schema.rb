@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_142241) do
+ActiveRecord::Schema.define(version: 2020_04_11_145245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,19 @@ ActiveRecord::Schema.define(version: 2020_04_09_142241) do
     t.index ["posted_at"], name: "index_status_crowdsource_users_on_posted_at"
     t.index ["store_id"], name: "index_status_crowdsource_users_on_store_id"
     t.index ["user_id"], name: "index_status_crowdsource_users_on_user_id"
+  end
+
+  create_table "status_histories", force: :cascade do |t|
+    t.datetime "updated_time"
+    t.datetime "valid_until"
+    t.float "status"
+    t.float "queue"
+    t.string "type"
+    t.bigint "store_id"
+    t.integer "voters"
+    t.boolean "is_official"
+    t.datetime "old_created_at"
+    t.datetime "old_updated_at"
   end
 
   create_table "status_user_commitment_users", force: :cascade do |t|
@@ -97,6 +110,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_142241) do
     t.bigint "updated_by_id"
     t.boolean "from_osm", default: false
     t.bigint "original_id"
+    t.string "source"
     t.index ["created_by_id"], name: "index_stores_on_created_by_id"
     t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
     t.index ["updated_by_id"], name: "index_stores_on_updated_by_id"
