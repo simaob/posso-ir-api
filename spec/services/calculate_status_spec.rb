@@ -11,6 +11,8 @@ describe ImportStores do
       create(:status_crowdsource_user, status: 10, store: store1, created_at: a_time)
       create(:status_crowdsource_user, status: 10, store: store2, created_at: a_time - 30.minutes)
       create(:status_crowdsource_user, status: 10, store: store3, created_at: a_time - 3.hours)
+
+      sleep 1
       CalculateStatus.new.call
     end
 
