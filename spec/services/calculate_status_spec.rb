@@ -9,7 +9,7 @@ describe ImportStores do
   context 'three status added, but only one in the last two hours' do
     let!(:set_the_scene) do
       create(:status_crowdsource_user, status: 10, store: store1, created_at: a_time)
-      create(:status_crowdsource_user, status: 10, store: store2, created_at: a_time - 33.minutes)
+      create(:status_crowdsource_user, status: 10, store: store2, created_at: a_time - 30.minutes)
       create(:status_crowdsource_user, status: 10, store: store3, created_at: a_time - 3.hours)
       CalculateStatus.new.call
     end
