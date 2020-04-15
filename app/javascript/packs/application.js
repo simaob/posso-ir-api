@@ -10,6 +10,7 @@ require("jquery")
 require("chartkick")
 require("chart.js")
 
+var ReactRailsUJS = require("react_ujs");
 
 import 'bootstrap'
 import $ from 'jquery';
@@ -25,7 +26,6 @@ import '../stylesheets/application';
 // const imagePath = (name) => images(name, true)
 // Support component names relative to this directory:
 var componentRequireContext = require.context("components", true);
-var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
 
 document.addEventListener('turbolinks:load', function() {
