@@ -15,15 +15,6 @@ $shop-state-waiting-approval: #ffcc00;
 $shop-state-marked-for-deletion: #979797;
 $shop-state-unknown: $blue;
 
-:export {
-  shop-state: {
-    live: $shop-state-live;
-    waiting-approval: $shop-state-waiting-approval;
-    marked-for-deletion: $shop-state-marked-for-deletion;
-    unknown: $shop-state-unknown;
-  }
-}
-
 $border: solid 1px rgba($gray, 0.1);
 $light-gray-fade: rgba($light-gray, 0.2);
 $blur-level: 16px;

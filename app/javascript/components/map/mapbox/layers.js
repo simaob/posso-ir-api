@@ -1,4 +1,11 @@
-import colors from '../map-view.scss';
+const colors = {
+  shopStateLive: '#41c14f',
+  shopStateWaitingApproval: '#ffcc00',
+  shopStateMarkedForDeletion: '#979797',
+  shopStateUnknown: '#5ca2d1',
+  white: '#fff'
+};
+
 export const devBasemapLayer = () => ({
   id: 'dev-basemap',
   type: 'raster',
@@ -38,9 +45,9 @@ export const shopsLayer = (data, selectedId) => ({
         type: 'circle',
         filter: ['has', 'point_count'],
         paint: {
-          'circle-color': '#FFF',
+          'circle-color': colors.white,
           'circle-stroke-width': 2,
-          'circle-stroke-color': '#5ca2d1',
+          'circle-stroke-color': colors.shopStateUnknown,
           'circle-radius': 12
         }
       },
@@ -84,15 +91,15 @@ export const shopsLayer = (data, selectedId) => ({
             'match',
             ['get', 'state'],
             'live',
-            colors['shop-state-live'],
+            colors.shopStateLive,
             'waiting_approval',
-            colors['shop-state-waiting-approval'],
+            colors.shopStateWaitingApproval,
             'marked_for_deletion',
-            colors['shop-state-marked-for-deletion'],
-            colors['shop-state-unknown']
+            colors.shopStateMarkedForDeletion,
+            colors.shopStateUnknown
           ],
           'circle-stroke-width': 2,
-          'circle-stroke-color': '#fff',
+          'circle-stroke-color': colors.white,
           'circle-radius': 8
         }
       }
