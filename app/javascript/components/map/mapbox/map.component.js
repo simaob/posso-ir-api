@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Marker } from 'react-map-gl';
-import { LayerManager, Layer } from 'layer-manager/dist/components/index';
+import { LayerManager, Layer } from 'layer-manager/src/components/index';
 import { PluginMapboxGl } from 'layer-manager';
 import cx from 'classnames';
 import BasicMap from './basic-map';
