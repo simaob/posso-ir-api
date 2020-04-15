@@ -1,16 +1,17 @@
 class CalculateStatus
   UPDATE_TIME = 1
 
-  def call
+  def call(new_cool: true)
     puts "[#{Time.now}] Going to calculate the statuses"
     duration = Benchmark.ms do
-      puts "[#{Time.now}] Calculating the Crowdsource status"
-      StatusCrowdsource
-        .joins(store: :status_crowdsource_users)
-        .where('status_crowdsource_users.created_at > ?', 2.hours.ago)
-        .find_each.with_index do |s, i|
+      puts "[#{Time.now}] Calculating the Crowdsource status #{new_cool ? 'new' : 'old'}"
+      StatusCrowdsource.find_each.with_index do |s, i|
         puts "Calculated #{i}" if (i % 100).zero?
-        s.calculate_status
+        if new_cool
+          s.calculate_status_new
+        else
+          s.calculate_status
+        end
       end
 
       puts "[#{Time.now}] Calculating the status"

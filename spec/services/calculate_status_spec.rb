@@ -22,4 +22,35 @@ describe ImportStores do
       expect(store3.status_generals.first.status).to be_nil
     end
   end
+
+  context 'benchmark' do
+    before do
+      puts 'mass inserting...'
+      stores = create_list(:store, 10)
+      puts 'stores inserted'
+
+      data = Array.new(100_000) do |i|
+        time = Faker::Time.between(from: 2.hours.ago, to: 1.minute.ago)
+        {
+          store_id: stores[i % stores.size].id,
+          created_at: time,
+          updated_at: time,
+          status: 10
+        }
+      end
+
+      puts 'scu prepared'
+      StatusCrowdsourceUser.insert_all(data)
+
+      puts 'mass insert done'
+    end
+
+    it 'pulling rails' do
+      CalculateStatus.new.call(new_cool: false)
+    end
+
+    it 'single query' do
+      CalculateStatus.new.call(new_cool: true)
+    end
+  end
 end
