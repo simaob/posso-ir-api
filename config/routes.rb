@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       jsonapi_resources :status_crowdsources, only: [:index] do end
       jsonapi_resources :status_generals, only: [:index] do end
       jsonapi_resources :random_status_generals, only: [:index] do end
+
+      post 'status-phone', to: 'status_phone_controller#create'
     end
   end
 end
