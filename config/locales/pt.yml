@@ -37,6 +37,7 @@ pt:
         name: 'Nome'
         role: 'Função'
         app_uuid: 'UUID'
+        store_owner_code: 'Código lojista'
       status_store_owner:
         updated_time: 'Hora'
         status: 'Estado'

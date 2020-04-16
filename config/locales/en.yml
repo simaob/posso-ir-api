@@ -37,6 +37,7 @@ en:
         name: 'Name'
         role: 'Role'
         app_uuid: 'UUID'
+        store_owner_code: 'Store owner code'
       status_store_owner:
         updated_time: 'Time'
         status: 'State'

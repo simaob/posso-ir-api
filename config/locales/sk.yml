@@ -31,6 +31,7 @@ sk:
         name: 'Meno'
         role: 'Rola'
         app_uuid: 'UUID'
+        store_owner_code: 'Kód vlastníka obchodu'
       status_store_owner:
         updated_time: 'Čas'
         status: 'Stav'

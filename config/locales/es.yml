@@ -40,6 +40,7 @@ es:
         name: 'Nombre'
         role: 'Papel'
         app_uuid: 'UUID'
+        store_owner_code: 'Código de propietario de la tienda'
       status_store_owner:
         updated_time: 'Hora'
         status: 'Estado'
