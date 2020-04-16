@@ -35,9 +35,9 @@
           <%= enum_l(@user, :role) %>
         </p>
 
-        <% if current_user.admin? || current_user.store_manager? %>
+        <% if current_user.admin? || current_user.store_owner? %>
           <p>
-            <strong><%= User.human-attribute_name(:store_owner_code) %>:</strong>
+            <strong><%= User.human_attribute_name(:store_owner_code) %>:</strong>
             <%= @user.store_owner_code %>
           </p>
         <% end %>

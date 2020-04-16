@@ -39,7 +39,7 @@ sk:
       user:
         roles:
           user: 'Používateľ'
-          store_manager: 'Manažér predajne'
+          store_owner: 'Manažér predajne'
           general_manager: 'Hlavný manažér'
           admin: 'Administrátor'
           contributor: 'Prispievateľ'

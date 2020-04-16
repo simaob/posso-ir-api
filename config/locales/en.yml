@@ -60,7 +60,7 @@ en:
       user:
         roles:
           user: 'User'
-          store_manager: 'Store manager'
+          store_owner: 'Store manager'
           general_manager: 'General manager'
           admin: 'Administrator'
           contributor: 'Contributor'

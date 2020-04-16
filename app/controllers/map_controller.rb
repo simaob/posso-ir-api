@@ -5,7 +5,7 @@ class MapController < ApplicationController
     authorize! :read, :map
 
     @shops = Store.where.not(latitude: nil).where.not(longitude: nil)
-    @shops = @shops.where(group: current_user.stores&.map(&:group)) if current_user.store_manager?
+    @shops = @shops.where(group: current_user.stores&.map(&:group)) if current_user.store_owner?
 
     @shops = Hash[@shops.collect { |item| [item.id, item] }]
     @labels = {
@@ -84,7 +84,7 @@ class MapController < ApplicationController
   def create
     @shop = Store.new(map_params)
 
-    @shop.managers << current_user if current_user.store_manager?
+    @shop.managers << current_user if current_user.store_owner?
 
     respond_to do |format|
       if @shop.save
