@@ -97,7 +97,7 @@ class Store < ApplicationRecord
               #{RADIUS})::geometry, lonlat)
     SQL
 
-    Store.where(query).available
+    where(query).available
   end
 
   def self.in_bounding_box(coordinates)

@@ -24,6 +24,10 @@ class ApiController < ApplicationController
     if DateTime.parse(payload['expiration_date']) <= DateTime.now
       render json: {error: 'Auth token has expired. Please login again'}, status: 401
     else
+      if store_owner_code
+        @current_user = User.where(store_owner_code: store_owner_code, role: :store_owner).first
+        return if @current_user
+      end
       @current_user = User.find_or_create_by(app_uuid: payload['uuid'])
     end
   rescue StandardError
@@ -38,6 +42,10 @@ class ApiController < ApplicationController
 
   def token
     request.headers.fetch('Authorization', '').split(' ').last
+  end
+
+  def store_owner_code
+    request.headers.fetch('StoreOwnerCode', '')
   end
 
   def too_many_requests
