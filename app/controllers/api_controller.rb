@@ -23,7 +23,7 @@ class ApiController < ApplicationController
     payload = JwtService.decode(token: token)
     if DateTime.parse(payload['expiration_date']) <= DateTime.now
       render json: {error: 'Auth token has expired. Please login again'}, status: 401
-    elsif store_owner_code.present?
+    elsif store_owner_code
       @current_user = User.where(store_owner_code: store_owner_code, role: :store_owner).first
     else
       @current_user = User.find_or_create_by(app_uuid: payload['uuid'])
@@ -33,7 +33,7 @@ class ApiController < ApplicationController
   end
 
   def current_user
-    @current_user ||= if store_owner_code.present?
+    @current_user ||= if store_owner_code
                         User.where(store_owner_code: store_owner_code, role: :store_owner).first
                       else
                         User.find_by(app_uuid: JwtService.decode(token: token)['uuid'])
@@ -47,7 +47,7 @@ class ApiController < ApplicationController
   end
 
   def store_owner_code
-    request.headers.fetch('StoreOwnerCode', '')
+    request.headers.fetch('StoreOwnerCode', '').presence
   end
 
   def too_many_requests

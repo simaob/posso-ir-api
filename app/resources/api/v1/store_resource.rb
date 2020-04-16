@@ -11,7 +11,7 @@ module Api
 
       filter :location, apply: ->(_records, value, options) {
         current_user = options[:context][:current_user]
-        if current_user.store_owner?
+        if current_user&.store_owner?
           current_user.stores.retrieve_stores(value.first, value.second)
         else
           Store.retrieve_stores(value.first, value.second)
@@ -28,7 +28,7 @@ module Api
 
       def self.records(options = {})
         current_user = options[:context][:current_user]
-        if current_user.store_owner?
+        if current_user&.store_owner?
           current_user.stores.available
         else
           Store.available
