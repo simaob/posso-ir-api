@@ -33,7 +33,11 @@ class ApiController < ApplicationController
   end
 
   def current_user
-    @current_user ||= User.find_by(app_uuid: JwtService.decode(token: token)['uuid'])
+    @current_user ||= if store_owner_code
+                        User.where(store_owner_code: store_owner_code, role: :store_owner).first
+                      else
+                        User.find_by(app_uuid: JwtService.decode(token: token)['uuid'])
+                      end
   rescue StandardError
     @current_user = nil
   end
