@@ -2,7 +2,7 @@ module Api
   module V1
     class StatusStoreOwnersController < ApiController
       def create
-        unless context[:current_user].store_owner? && user_owns_store?
+        unless context[:current_user] && context[:current_user].store_owner? && user_owns_store?
           render(json: {error: 'you are not authorized to manage this store'}, status: 403) and return
         end
         super
