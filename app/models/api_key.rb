@@ -12,10 +12,11 @@
 #  user_id      :bigint
 #
 class ApiKey < ApplicationRecord
-  belongs_to user
+  belongs_to :user
 
   validates_presence_of :access_token
   validates_presence_of :expires_at
+  validates_uniqueness_of :access_token
 
   before_validation :set_expires_at
   before_validation :set_access_token
