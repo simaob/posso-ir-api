@@ -11,7 +11,7 @@ module Api
       private
 
       def user_owns_store?
-        context[:current_user].stores.pluck(:id).include?(params.dig(:data, :attributes, "store-id")&.to_i)
+        context[:current_user].stores.pluck(:id).include?(params.dig(:data, :attributes, 'store-id')&.to_i)
       end
     end
   end
