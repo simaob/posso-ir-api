@@ -53,4 +53,8 @@ class ApiController < ApplicationController
   def too_many_requests
     render json: {error: 'Too many requests'}, status: 429
   end
+
+  def api_key
+    request.headers.fetch('ApiKey', '').presence
+  end
 end
