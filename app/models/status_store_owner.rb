@@ -22,10 +22,16 @@
 class StatusStoreOwner < Status
   after_validation :set_valid_until
   validates :updated_time, :status, :store_id, presence: true
+  after_create :update_general_status
 
   private
 
   def set_valid_until
     self.valid_until = updated_time + 1.hour
+  end
+
+  def update_general_status
+    StatusGeneral.find_by(store_id: store_id).update(
+      status: status, queue: queue, valid_until: valid_until, is_official: true)
   end
 end
