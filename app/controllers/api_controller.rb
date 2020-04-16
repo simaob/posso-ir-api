@@ -18,16 +18,14 @@ class ApiController < ApplicationController
   private
 
   def authenticate_with_jwt!
-    return @current_user = User.first if Rails.env.development?
-
+    #return @current_user = User.first if Rails.env.development?
     payload = JwtService.decode(token: token)
     if DateTime.parse(payload['expiration_date']) <= DateTime.now
       render json: {error: 'Auth token has expired. Please login again'}, status: 401
-    else
-      if store_owner_code
+    elsif store_owner_code
         @current_user = User.where(store_owner_code: store_owner_code, role: :store_owner).first
-        return if @current_user
-      end
+        raise StandardError unless @current_user
+    else
       @current_user = User.find_or_create_by(app_uuid: payload['uuid'])
     end
   rescue StandardError
