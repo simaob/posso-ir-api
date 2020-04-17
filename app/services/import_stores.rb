@@ -19,6 +19,7 @@ class ImportStores
     import_prio
     import_from_osm
     import_spanish_stores
+    import_continente_from_api
     puts "#{Store.count} total stores"
   end
 
@@ -414,6 +415,29 @@ class ImportStores
         longitude: row['lon'],
         store_type: :supermarket,
         source: 'Tiendo'
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_continente_from_api
+    puts "Starting Continente from api import, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'continente.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file)['response']['locations'].each do |row|
+      Store.create(
+        name: row['name'],
+        group: 'Continente',
+        country: 'Portugal',
+        city: row['city'],
+        district: row['province'],
+        original_id: row['id'],
+        street: row['streetAndNumber'],
+        zip_code: row['zip'],
+        latitude: row['lat'],
+        longitude: row['lng'],
+        store_type: :supermarket,
+        source: 'Uberall-Sonae'
       )
     end
     puts "#{Store.count} total stores"
