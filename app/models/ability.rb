@@ -36,6 +36,10 @@ class Ability
       can [:new, :create], StatusStoreOwner do |sso|
         user.store_ids.include?(sso.store_id)
       end
+      can :index, :phones
+      can [:new, :create, :edit], Phone do |phone|
+        user.store_ids.include?(phone.store_id)
+      end
     end
   end
 end

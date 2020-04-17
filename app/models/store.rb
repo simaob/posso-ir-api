@@ -42,6 +42,8 @@ class Store < ApplicationRecord
   has_many :user_stores, inverse_of: :store
   has_many :managers, through: :user_stores
 
+  has_many :phones
+
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 

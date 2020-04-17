@@ -14,6 +14,9 @@
         <th><%= Store.human_attribute_name(:latitude) %></th>
         <th><%= Store.human_attribute_name(:longitude) %></th>
         <th><%= Store.human_attribute_name(:details) %></th>
+        <% if current_user.admin? %>
+          <th><%= Store.human_attribute_name(:phones) %></th>
+        <% end %>
         <th><%= t('views.actions.title') %></th>
       </tr>
     </thead>
@@ -36,6 +39,9 @@
           <td><%= store.latitude&.round(3) %></td>
           <td><%= store.longitude&.round(3) %></td>
           <td><%= store.details %></td>
+          <% if current_user.admin? %>
+            <td><%= store.phones.pluck(:phone_number).join(' ') %></td>
+          <%= end %>
           <td>
             <%= link_to t('views.actions.show'), store %>
             <% if can? :edit, store %>

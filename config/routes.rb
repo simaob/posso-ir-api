@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     resources :status_crowdsource_users, only: [:index]
     resources :manage_stores, only: [:index]
+    resources :phones
     resources :users do
       get :statuses, on: :member
     end
