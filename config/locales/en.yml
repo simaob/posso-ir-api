@@ -145,6 +145,7 @@ en:
       search:
         placeholder: 'Search by name or address...'
         button: 'Search'
+        filter_country: 'Filter by country'
         filter_group: 'Filter by group'
         filter_state: 'Filter by state'
         filter_store_type: 'Filter by type'

@@ -154,6 +154,7 @@ es:
       search:
         placeholder: 'Buscar por nombre o dirección...'
         button: 'Buscar'
+        filter_country: 'Filtrar por país'
         filter_group: 'Filtrar por grupo'
         filter_state: 'Filtrar por estado'
         filter_store_type: 'Filtrar por tipo'
