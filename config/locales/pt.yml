@@ -65,9 +65,10 @@ pt:
           contributor: 'Colaborador'
       store:
         states:
-          waiting_approval: 'À espera de validação'
+          waiting_approval: 'Aguarda validação'
           live: 'Activa'
           marked_for_deletion: 'Marcada para remoção'
+          archived: 'Arquivada'
         store_types:
           restaurant: 'Restaurante'
           supermarket: 'Supermercado'
