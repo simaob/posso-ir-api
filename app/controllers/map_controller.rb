@@ -5,6 +5,7 @@ class MapController < ApplicationController
     authorize! :read, :map
 
     @shops = Store.where.not(latitude: nil).where.not(longitude: nil)
+      .where.not(state: :archived)
     @shops = @shops.where(group: current_user.stores&.map(&:group)) if current_user.store_owner?
 
     @shops = Hash[@shops.collect { |item| [item.id, item] }]
