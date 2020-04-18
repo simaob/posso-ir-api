@@ -21,10 +21,12 @@
   <div class="col-md-12">
     <%= form_tag stores_path, method: :get, class: 'form-inline' do %>
       <%= label_tag :search, 'Search', class: 'sr-only' %>
-      <%= text_field_tag :search, params[:search], class: 'form-control col-md-3 mb-2 mr-sm-2',
+      <%= text_field_tag :search, params[:search], class: 'form-control col-md-2 mb-2 mr-sm-2',
         placeholder: t('views.stores.search.placeholder') %>
+      <%= label_tag :country, 'Country', class: 'sr-only' %>
+      <%= select_tag :country, options_for_select(Store.countries, params[:country]), {include_blank: t('views.stores.search.filter_country'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
       <%= label_tag :store_type, 'Store type', class: 'sr-only' %>
-      <%= select_tag :store_type, options_for_select(enum_options_for_select(Store, :store_type), params[:store_type]), {include_blank: t('views.stores.search.filter_store_type'), class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+      <%= select_tag :store_type, options_for_select(enum_options_for_select(Store, :store_type), params[:store_type]), {include_blank: t('views.stores.search.filter_store_type'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
       <%= label_tag :group, 'Group', class: 'sr-only' %>
       <%= select_tag :group, options_for_select(Store.groups, params[:group]), {include_blank: t('views.stores.search.filter_group'), class: 'form-control col-md-2 mb-2 mr-sm-2'} %>
       <%= label_tag :state, 'State', class: 'sr-only' %>
