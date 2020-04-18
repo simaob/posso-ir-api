@@ -142,6 +142,7 @@ sk:
       show:
         stores_title: 'Pridané obchody'
         statuses: 'Hlásené stavy'
+        copy_clipboard: 'Skopírovať do schránky'
       statuses:
         title: 'Statuses reported by %{user}'
     manage_stores:

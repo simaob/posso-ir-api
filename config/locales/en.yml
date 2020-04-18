@@ -185,6 +185,7 @@ en:
       show:
         stores_title: 'Stores created'
         statuses: 'Estados reportados'
+        copy_clipboard: 'Copy to clipboard'
       statuses:
         title: 'Statuses reported by %{user}'
     manage_stores:

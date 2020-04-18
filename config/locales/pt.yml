@@ -191,6 +191,7 @@ pt:
       show:
         stores_title: 'Lojas adicionadas'
         statuses: 'Estados reportados'
+        copy_clipboard: 'Copiar'
       statuses:
         title: 'Estados reportados por %{user}'
     manage_stores:

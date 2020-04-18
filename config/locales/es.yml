@@ -194,6 +194,7 @@ es:
       show:
         stores_title: 'Tiendas agregadas'
         statuses: 'Estados reportados'
+        copy_clipboard: 'Copiar al portapapeles'
       statuses:
         title: 'Estados reportados por %{user}'
   helpers:
