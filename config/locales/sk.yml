@@ -48,6 +48,7 @@ sk:
           waiting_approval: 'Očakáva sa schválenie'
           live: 'Aktívne'
           marked_for_deletion: 'Označené na vymazanie'
+          archived: 'Archivovali'
         store_types:
           restaurant: 'Reštaurácia'
           supermarket: 'Supermarket'

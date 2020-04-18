@@ -72,6 +72,7 @@ es:
           waiting_approval: 'Esperando a ser validado'
           live: 'Activada'
           marked_for_deletion: 'Marcado para eliminar'
+          archived: 'Archivada'
         store_types:
           restaurant: 'Restaurante'
           supermarket: 'Supermercado'

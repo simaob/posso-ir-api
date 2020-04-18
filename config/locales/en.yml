@@ -69,6 +69,7 @@ en:
           waiting_approval: 'Waiting approval'
           live: 'Active'
           marked_for_deletion: 'Marked for deletion'
+          archived: 'Archived'
         store_types:
           restaurant: 'Restaurant'
           supermarket: 'Supermarket'
