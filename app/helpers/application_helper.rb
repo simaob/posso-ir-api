@@ -2,7 +2,6 @@ module ApplicationHelper
   # This method creates a link with `data-id` `data-fields` attributes.
   # These attributes are used to create new instances of the nested fields through Javascript.
   def link_to_add_fields(name, form, association)
-
     # Takes an object (@person) and creates a new instance of its associated model (:addresses)
     # To better understand, run the following in your terminal:
     # rails c --sandbox
@@ -24,7 +23,6 @@ module ApplicationHelper
     # and that it matched the value in the `data-id` attribute.
     # `person[addresses_attributes][child_index_value][_destroy]`
     fields = form.fields_for(association, new_object, child_index: id) do |builder|
-
       # `association.to_s.singularize + "_fields"` ends up evaluating to `address_fields`
       # The render function will then look for `views/people/_address_fields.html.erb`
       # The render function also needs to be passed the value of 'builder',

@@ -56,6 +56,7 @@ class User < ApplicationRecord
     ApiKey.where(user_id: id).update_all(is_active: false)
     ApiKey.create(user: self, is_active: true)
   end
+
   protected
 
   # Checks whether a password is needed or not. For validations only.
