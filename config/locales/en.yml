@@ -32,6 +32,7 @@ en:
         open: 'Open?'
         created_by: 'Created by'
         updated_by: 'Updated by'
+        phones: 'Mobile phones'
       user:
         email: 'Email'
         name: 'Name'
@@ -107,7 +108,6 @@ en:
         todays_users_by_reports: "Today's top 15 users by reports"
         stores_by_reports: 'Stores by number of reports'
         users_by_reports: 'Users by number of reports'
-        total: 'Total'
     actions:
       show: 'Show'
       edit: 'Edit'
@@ -167,6 +167,8 @@ en:
                      <strong>Live</strong>: Store is available in the application;<br>
                     <strong>Marked for deletion</strong>: The information will be reviewed and confirmed by an admin."
         info_deleting: 'NOTE: When marking a store for deletion, please write the reason on the details field.'
+        phone_number: 'Phone Numbers'
+        add_phone: "Add Phone"
     status_crowdsource_users:
       index:
         title: 'Reported statuses'

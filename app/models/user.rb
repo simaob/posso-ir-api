@@ -50,6 +50,13 @@ class User < ApplicationRecord
     name.presence || email.presence || "ID: #{id}"
   end
 
+  def regenerate_api_key
+    return unless persisted?
+
+    ApiKey.where(user_id: id).update_all(active: false)
+    ApiKey.create(user: self, active: true)
+  end
+
   protected
 
   # Checks whether a password is needed or not. For validations only.

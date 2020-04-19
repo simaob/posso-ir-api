@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     resources :status_crowdsource_users, only: [:index]
     resources :manage_stores, only: [:index]
+    resources :phones
     resources :users do
       get :statuses, on: :member
     end
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
       jsonapi_resources :status_crowdsources, only: [:index] do end
       jsonapi_resources :status_generals, only: [:index] do end
       jsonapi_resources :random_status_generals, only: [:index] do end
+
+      post 'status-phone', to: 'status_phone#create'
     end
   end
 end

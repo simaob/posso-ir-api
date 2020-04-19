@@ -109,7 +109,8 @@ class StoresController < ApplicationController
   def store_params
     permitted_params = [:name, :group, :street, :city, :zip_code, :country,
                         :district, :store_type, :latitude, :longitude,
-                        :store_type, :open, :capacity, :details]
+                        :store_type, :open, :capacity, :details,
+                        phones_attributes: [:id, :phone_number, :name, :active, :_destroy]]
     permitted_params << :state if current_user.admin? || current_user.general_manager?
 
     params.require(:store).permit(permitted_params)

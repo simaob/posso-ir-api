@@ -10,11 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_074234) do
+ActiveRecord::Schema.define(version: 2020_04_16_204432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string "access_token", null: false
+    t.datetime "expires_at", null: false
+    t.boolean "active", default: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["access_token"], name: "index_api_keys_on_access_token"
+    t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.string "phone_number", null: false
+    t.string "name"
+    t.boolean "active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "store_id"
+    t.index ["phone_number"], name: "index_phones_on_phone_number"
+    t.index ["store_id"], name: "index_phones_on_store_id"
+  end
 
   create_table "status_crowdsource_users", force: :cascade do |t|
     t.integer "status", null: false
@@ -142,6 +165,8 @@ ActiveRecord::Schema.define(version: 2020_04_16_074234) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "api_keys", "users", on_delete: :cascade
+  add_foreign_key "phones", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "users", on_delete: :cascade
   add_foreign_key "status_user_commitment_users", "stores", on_delete: :cascade
