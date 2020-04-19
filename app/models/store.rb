@@ -43,6 +43,7 @@ class Store < ApplicationRecord
   has_many :managers, through: :user_stores
 
   has_many :phones
+  accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
 
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude

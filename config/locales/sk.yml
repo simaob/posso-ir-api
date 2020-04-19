@@ -130,6 +130,9 @@ sk:
         filter_store_type: 'Filtrovať podľa typu'
       index:
         confirm_approval: 'Ste si istý, že chcete potvrdiť všetky predajne?'
+      form:
+        phone_number: 'Telefónne čísla'
+        add_phone: "Pridať tel. číslo"
     users:
       search:
         placeholder: 'Vyhľadávať podľa mena alebo emailu...'

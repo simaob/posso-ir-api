@@ -41,7 +41,7 @@
           <td><%= store.details %></td>
           <% if current_user.admin? %>
             <td><%= store.phones.pluck(:phone_number).join(' ') %></td>
-          <%= end %>
+          <% end %>
           <td>
             <%= link_to t('views.actions.show'), store %>
             <% if can? :edit, store %>

@@ -9,6 +9,8 @@ require("@rails/activestorage").start()
 require("jquery")
 require("chartkick")
 require("chart.js")
+require('./nested_forms/addFields')
+require('./nested_forms/removeFields')
 
 var ReactRailsUJS = require("react_ujs");
 

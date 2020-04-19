@@ -111,6 +111,16 @@
       </div>
 
       <div class="form-group">
+        <fieldset>
+          <legend><%= t('views.stores.form.phone_number') %></legend>
+          <%= form.fields_for :phones do |phone_form| %>
+            <%= render 'phone_fields', f: phone_form %>
+          <% end %>
+          <%= link_to_add_fields t('views.stores.form.add_phone'), form, :phones %>
+        </fieldset>
+      </div>
+
+      <div class="form-group">
         <%= form.submit t('views.form.submit'), class: "btn btn-primary" %>
       </div>
     <% end %>

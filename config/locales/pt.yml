@@ -171,6 +171,8 @@ pt:
                      <strong>Activa</strong>: Loja disponível na aplicação.<br>
                     <strong>Marcada para remoção</strong>: Remoção será revista e confirmada por um administrador."
         info_deleting: 'NOTA: Quando marcar uma loja para remoção por favor escreva o porquê dessa marcação no campo de detalhes.'
+        phone_number: 'Números de telefone'
+        add_phone: "Adicionar Telefone"
     status_crowdsource_users:
       index:
         title: 'Estados reportados'
