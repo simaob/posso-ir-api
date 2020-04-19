@@ -76,6 +76,11 @@ class UsersController < ApplicationController
       .page(params[:page])
   end
 
+  def regenerate_api_key
+    @user.regenerate_api_key
+    redirect_to @user, notice: 'Success!'
+  end
+
   private
 
   # Only allow a list of trusted parameters through.

@@ -39,7 +39,9 @@ class ApiKey < ApplicationRecord
   end
 
   def set_access_token
-    self.access_token =
-      JwtService.encode payload: {user_id: user_id, created_at: Time.now}
+    self.access_token = JwtService.encode payload: {
+      user_id: user_id, created_at: Time.now,
+      expiration_date: expires_at
+    }
   end
 end

@@ -48,6 +48,10 @@
             <strong><%= ApiKey.human_attribute_name(:access_token) %>:</strong>
             <%= ApiKey.where(user_id: @user.id, active: true).pluck(:access_token).first %>
           </p>
+          <% if current_user.admin? %>
+            <%= link_to 'Regenerate api key', regenerate_api_key_user_path(@user),
+              method: :post %>
+          <% end %>
         <% end %>
 
         <% if @user.stores.any? %>
