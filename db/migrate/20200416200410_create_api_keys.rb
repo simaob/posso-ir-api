@@ -3,7 +3,7 @@ class CreateApiKeys < ActiveRecord::Migration[6.0]
     create_table :api_keys do |t|
       t.string :access_token, uniq: true, null: false
       t.datetime :expires_at, null: false
-      t.boolean :is_active, default: false
+      t.boolean :active, default: false
       t.string :name
 
       t.timestamps

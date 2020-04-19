@@ -45,7 +45,7 @@
         <% if current_user.admin? || current_user.store_owner? %>
           <p>
             <strong><%= ApiKey.human_attribute_name(:access_token) %>:</strong>
-            <%= ApiKey.where(user_id: @user.id, is_active: true).pluck(:access_token).first %>
+            <%= ApiKey.where(user_id: @user.id, active: true).pluck(:access_token).first %>
           </p>
         <% end %>
 

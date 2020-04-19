@@ -3,7 +3,7 @@ module Api
     class StatusPhoneController < ExternalApiController
       def create
         phone = params['phone']
-        store = Phone.find_by(phone_number: phone)&.store
+        store = Phone.find_by(phone_number: phone, active: true)&.store
         return wrong_phone unless store
         return forbidden_store unless current_user.stores.pluck(:id)&.include?(store.id)
 

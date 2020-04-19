@@ -53,8 +53,8 @@ class User < ApplicationRecord
   def regenerate_api_key
     return unless persisted?
 
-    ApiKey.where(user_id: id).update_all(is_active: false)
-    ApiKey.create(user: self, is_active: true)
+    ApiKey.where(user_id: id).update_all(active: false)
+    ApiKey.create(user: self, active: true)
   end
 
   protected

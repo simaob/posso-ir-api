@@ -5,7 +5,7 @@
 #  id           :bigint           not null, primary key
 #  access_token :string           not null
 #  expires_at   :datetime         not null
-#  is_active    :boolean          default("false")
+#  active       :boolean          default("false")
 #  name         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -25,13 +25,13 @@ class ApiKey < ApplicationRecord
   private
 
   def one_active_per_user
-    return unless is_active
+    return unless active?
 
-    active_keys = ApiKey.where(user_id: user_id, is_active: true).count
+    active_keys = ApiKey.where(user_id: user_id, active: true).count
     max_active = persisted? ? 1 : 0
     return if active_keys <= max_active
 
-    errors.add(:is_active, 'Only one active key allowed per user')
+    errors.add(:active, 'Only one active key allowed per user')
   end
 
   def set_expires_at
