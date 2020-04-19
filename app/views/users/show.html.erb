@@ -39,7 +39,7 @@
           <p data-controller='clipboard'>
             <strong><%= User.human_attribute_name(:store_owner_code) %>:</strong>
             <input itype='text' value="<%= @user.store_owner_code %>" data-target='clipboard.source' readonly>
-            <button data-target='clipboard.trigger' data-action='clipboard#copy' class="btn btn-primary"><%= t('views.users.show.copy_clipboard') %></button>
+            <button data-target='clipboard.trigger' data-action='clipboard#copy' class="btn btn-info"><%= t('views.users.show.copy_clipboard') %></button>
           </p>
         <% end %>
 

@@ -5,11 +5,11 @@ export default class extends Controller {
   copy(event) {
     this.sourceTarget.select()
     document.execCommand('copy')
-    this.triggerTarget.classList.remove('btn-primary')
+    this.triggerTarget.classList.remove('btn-info')
     this.triggerTarget.classList.add('btn-success')
     const that = this
     setInterval(function() {
-      that.triggerTarget.classList.add('btn-primary')
+      that.triggerTarget.classList.add('btn-info')
       that.triggerTarget.classList.remove('btn-success')
     }, 5000)
   }
