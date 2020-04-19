@@ -26,6 +26,9 @@ sk:
         store_type: 'Typ predajne'
         state: 'Stav'
         open: 'Otvorené?'
+        created_by: 'Vytvorené'
+        updated_by: 'Aktualizoval používateľ'
+        phones: 'Mobil'
       user:
         email: 'Email'
         name: 'Meno'
@@ -85,7 +88,6 @@ sk:
         todays_users_by_reports: 'Utilizadores por número de relatórios hoje'
         stores_by_reports: 'Lojas por número de relatórios'
         users_by_reports: 'Utilizadores por número de relatórios'
-        total: 'Total'
     actions:
       show: 'Zobraziť'
       edit: 'Upraviť'

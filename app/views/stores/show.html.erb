@@ -39,12 +39,21 @@
             <%= @store.open %>
           </p>
           <p>
-            <strong>Created by:</strong>
+          <strong><%= Store.human_attribute_name(:created_by) %>:</strong>
             <%= link_to(@store.created_by.display_name, @store.created_by) if @store.created_by %>
           </p>
           <p>
-            <strong>Updated by:</strong>
+            <strong><%= Store.human_attribute_name(:updated_by) %>:</strong>
             <%= link_to(@store.updated_by.display_name, @store.updated_by) if @store.updated_by %>
+          </p>
+        <% end %>
+        <% if current_user&.admin? || (current_user.store_owner? && current_user.stores.include?(@store)) %>
+          <p><strong><%= Store.human_attribute_name(:phones) %>:</strong><br>
+            <ul>
+              <% @store.phones.each do |p| %>
+                <li><%= "#{p.phone_number} (#{p.name})" %> <%= p.active? ? 'Active' : 'Not active' %></li>
+              <% end %>
+            </ul>
           </p>
         <% end %>
         <p>

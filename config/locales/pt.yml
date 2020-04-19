@@ -32,6 +32,7 @@ pt:
         open: 'Aberto?'
         created_by: 'Criado por'
         updated_by: 'Actualizado por'
+        phones: 'Telefones'
       user:
         email: 'Email'
         name: 'Nome'
@@ -106,7 +107,6 @@ pt:
         todays_users_by_reports: 'Top 15 Utilizadores com mais relatórios hoje'
         stores_by_reports: 'Top 30 Lojas por número de relatórios'
         users_by_reports: 'Top 30 Utilizadores por número de relatórios'
-        total: 'Total'
     actions:
       show: 'Ver'
       edit: 'Editar'

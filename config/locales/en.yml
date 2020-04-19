@@ -32,6 +32,7 @@ en:
         open: 'Open?'
         created_by: 'Created by'
         updated_by: 'Updated by'
+        phones: 'Mobile phones'
       user:
         email: 'Email'
         name: 'Name'

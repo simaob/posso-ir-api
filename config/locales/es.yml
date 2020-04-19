@@ -35,6 +35,7 @@ es:
         open: 'Abierto?'
         created_by: 'Creado por'
         updated_by: 'Actualizado por'
+        phones: 'Movil'
       user:
         email: 'Correo electrónico'
         name: 'Nombre'
@@ -109,7 +110,6 @@ es:
         todays_users_by_reports: 'Top 15 Usuários por numero de reportes hoy'
         stores_by_reports: 'Tiendas por numero de reportes'
         users_by_reports: 'Usuários por numero de reportes'
-        total: 'Total'
     actions:
       show: 'Mostrar'
       edit: 'Editar'
