@@ -91,4 +91,8 @@ namespace :stores do
   task continente_from_api: :environment do
     ImportStores.new.import_continente_from_api
   end
+
+  task meu_super: :environment do
+    ImportStores.new.import_meu_super
+  end
 end
