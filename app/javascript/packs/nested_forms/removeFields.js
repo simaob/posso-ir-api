@@ -2,13 +2,16 @@
 class removeFields {
   // This executes when the function is instantiated.
   constructor() {
-    this.iterateLinks()
+    this.wrapper = document.getElementsByClassName('nested-form-fields')
+    if(this.wrapper.length > 0) {
+      this.iterateLinks()
+    }
   }
 
   iterateLinks() {
     // Use event delegation to ensure any fields added after the page loads are captured.
-    document.addEventListener('click', e => {
-      if (e.target && e.target.className == 'remove_fields') {
+    this.wrapper[0].addEventListener('click', e => {
+      if (e.target && e.target.classList.contains('remove_fields')) {
         this.handleClick(e.target, e)
       }
     })
