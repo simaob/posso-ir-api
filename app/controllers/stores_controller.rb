@@ -9,10 +9,10 @@ class StoresController < ApplicationController
     @stores = @stores.by_group(params[:group]) if params[:group].present?
 
     @stores = if params[:state].present?
-      @stores.by_state(params[:state])
-    else
-      @stores.where.not(state: :archived)
-    end
+                @stores.by_state(params[:state])
+              else
+                @stores.where.not(state: :archived)
+              end
 
     @stores = @stores.by_store_type(params[:store_type]) if params[:store_type].present?
     @stores = @stores.where(latitude: nil).or(Store.where(longitude: nil)) if params[:no_info]

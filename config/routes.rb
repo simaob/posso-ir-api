@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       jsonapi_resources :stores do end
       jsonapi_resources :status_crowdsource_users, only: [:create] do end
+      jsonapi_resources :status_store_owners, only: [:create] do end
       jsonapi_resources :status_crowdsources, only: [:index] do end
       jsonapi_resources :status_generals, only: [:index] do end
       jsonapi_resources :random_status_generals, only: [:index] do end

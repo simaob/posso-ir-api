@@ -31,6 +31,7 @@ sk:
         name: 'Meno'
         role: 'Rola'
         app_uuid: 'UUID'
+        store_owner_code: 'Kód vlastníka obchodu'
       status_store_owner:
         updated_time: 'Čas'
         status: 'Stav'
@@ -38,7 +39,7 @@ sk:
       user:
         roles:
           user: 'Používateľ'
-          store_manager: 'Manažér predajne'
+          store_owner: 'Manažér predajne'
           general_manager: 'Hlavný manažér'
           admin: 'Administrátor'
           contributor: 'Prispievateľ'
@@ -141,6 +142,7 @@ sk:
       show:
         stores_title: 'Pridané obchody'
         statuses: 'Hlásené stavy'
+        copy_clipboard: 'Skopírovať do schránky'
       statuses:
         title: 'Statuses reported by %{user}'
     manage_stores:

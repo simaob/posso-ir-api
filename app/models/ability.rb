@@ -28,7 +28,7 @@ class Ability
       can [:new, :create, :edit, :update], Store
       can :read, Store
 
-    elsif user.store_manager?
+    elsif user.store_owner?
       can :index, :manage_stores
       can [:show, :edit, :update], Store do |store|
         store.manager_ids.include?(user.id)

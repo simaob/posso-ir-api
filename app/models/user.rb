@@ -14,6 +14,7 @@
 #  app_uuid               :string
 #  last_post              :datetime
 #  role                   :integer          default("0")
+#  store_owner_code       :string
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -33,7 +34,9 @@ class User < ApplicationRecord
   has_many :created_stores, class_name: 'Store', foreign_key: :created_by_id
   has_many :status_crowdsource_users
 
-  enum role: {user: 0, store_manager: 1, general_manager: 2, admin: 3, contributor: 4}
+  has_secure_token :store_owner_code
+
+  enum role: {user: 0, store_owner: 1, general_manager: 2, admin: 3, contributor: 4}
 
   def self.search(search)
     return all unless search

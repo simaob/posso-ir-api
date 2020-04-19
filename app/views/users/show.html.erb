@@ -21,19 +21,27 @@
     <div class="card">
       <div class="card-body">
         <p>
-        <strong><%= User.human_attribute_name(:name) %>:</strong>
-        <%= @user.name %>
+          <strong><%= User.human_attribute_name(:name) %>:</strong>
+          <%= @user.name %>
         </p>
 
         <p>
-        <strong><%= User.human_attribute_name(:email) %>:</strong>
-        <%= @user.email %>
+          <strong><%= User.human_attribute_name(:email) %>:</strong>
+          <%= @user.email %>
         </p>
 
         <p>
-        <strong><%= User.human_attribute_name(:role) %>:</strong>
-        <%= enum_l(@user, :role) %>
+          <strong><%= User.human_attribute_name(:role) %>:</strong>
+          <%= enum_l(@user, :role) %>
         </p>
+
+        <% if current_user.admin? || current_user.store_owner? %>
+          <p data-controller='clipboard'>
+            <strong><%= User.human_attribute_name(:store_owner_code) %>:</strong>
+            <input itype='text' value="<%= @user.store_owner_code %>" data-target='clipboard.source' readonly>
+            <button data-target='clipboard.trigger' data-action='clipboard#copy' class="btn btn-info"><%= t('views.users.show.copy_clipboard') %></button>
+          </p>
+        <% end %>
 
         <% if @user.stores.any? %>
           <p><strong><%= Store.model_name.human(count: 2) %></strong>

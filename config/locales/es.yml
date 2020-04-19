@@ -40,6 +40,7 @@ es:
         name: 'Nombre'
         role: 'Papel'
         app_uuid: 'UUID'
+        store_owner_code: 'Código de propietario de la tienda'
       status_store_owner:
         updated_time: 'Hora'
         status: 'Estado'
@@ -62,7 +63,7 @@ es:
       user:
         roles:
           user: 'Usuario'
-          store_manager: 'Gerente de la tienda'
+          store_owner: 'Gerente de la tienda'
           general_manager: 'Gerente de grupo'
           admin: 'Administrador'
           contributor: 'Colaborador'
@@ -193,6 +194,7 @@ es:
       show:
         stores_title: 'Tiendas agregadas'
         statuses: 'Estados reportados'
+        copy_clipboard: 'Copiar al portapapeles'
       statuses:
         title: 'Estados reportados por %{user}'
   helpers:

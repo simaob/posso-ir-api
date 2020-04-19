@@ -20,6 +20,7 @@ class ImportStores
     import_from_osm
     import_spanish_stores
     import_continente_from_api
+    import_meu_super
     puts "#{Store.count} total stores"
   end
 
@@ -438,6 +439,31 @@ class ImportStores
         longitude: row['lng'],
         store_type: :supermarket,
         source: 'Uberall-Sonae'
+      )
+    end
+    puts "#{Store.count} total stores"
+  end
+
+  def import_meu_super
+    puts "Starting Meu Super from api import, we have #{Store.count} total stores"
+    src = File.open(Rails.root.join('db', 'files', 'meu_super.json'), 'r')
+    file = File.read(src).force_encoding('UTF-8')
+    JSON.parse(file).each do |row|
+      interm = row['morada'].split(', ')
+      zip_code = interm.pop
+      morada = interm
+      Store.create(
+        name: "Meu Super #{row['name']}",
+        group: 'Meu Super',
+        country: 'Portugal',
+        original_id: row['id'],
+        street: morada.join(', '),
+        zip_code: zip_code,
+        latitude: row['latitude'],
+        longitude: row['longitude'],
+        details: row['horarios'],
+        store_type: :supermarket,
+        source: 'MeuSuper-Website'
       )
     end
     puts "#{Store.count} total stores"

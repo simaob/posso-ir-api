@@ -1,10 +1,19 @@
 class ImportOsm
-  def import(country)
+  def import(country, page = nil, page_size = 100_000)
     src = File.open(Rails.root.join('db', 'files', "#{country}.csv"), 'r')
     file = File.read(src).force_encoding('UTF-8')
-    CSV.parse(file, headers: true, header_converters: :symbol, skip_blanks: true).each do |point|
-      create_store(point, country)
+
+    stores = parse_csv(file)
+    if page
+      start_point = page * page_size - page_size
+      end_point = page * page_size - 1
+      stores = stores[start_point..end_point]
     end
+    stores&.each { |point| create_store(point, country) }
+  end
+
+  def parse_csv(file)
+    CSV.parse(file, headers: true, header_converters: :symbol, skip_blanks: true)
   end
 
   def create_store(point, country)

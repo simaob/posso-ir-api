@@ -9,8 +9,13 @@ module Api
 
       filters :location, :store_type
 
-      filter :location, apply: ->(_records, value, _options) {
-        Store.retrieve_stores(value.first, value.second)
+      filter :location, apply: ->(_records, value, options) {
+        current_user = options[:context][:current_user]
+        if current_user&.store_owner?
+          current_user.stores.retrieve_stores(value.first, value.second)
+        else
+          Store.retrieve_stores(value.first, value.second)
+        end
       }
 
       def address
@@ -21,8 +26,13 @@ module Api
         [@model.latitude, @model.longitude]
       end
 
-      def self.records(_options = {})
-        Store.available
+      def self.records(options = {})
+        current_user = options[:context][:current_user]
+        if current_user&.store_owner?
+          current_user.stores.available
+        else
+          Store.available
+        end
       end
     end
   end
