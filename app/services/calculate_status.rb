@@ -26,7 +26,7 @@ class CalculateStatus
         .joins(:status_generals).joins(:status_store_owners)
         .where(where_clause).find_each.with_index do |store, i|
         puts "Calculated #{i}" if (i % 100).zero?
-        owner = store.status_store_owners.first
+        owner = store.status_store_owners.order(created_at: :desc).first
         general = store.status_generals.first
         general.update!(status: owner.status, updated_time: owner.updated_time,
                         valid_until: owner.updated_time + UPDATE_TIME.hour,

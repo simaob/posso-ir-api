@@ -69,6 +69,7 @@ en:
           waiting_approval: 'Waiting approval'
           live: 'Active'
           marked_for_deletion: 'Marked for deletion'
+          archived: 'Archived'
         store_types:
           restaurant: 'Restaurant'
           supermarket: 'Supermarket'
@@ -146,6 +147,7 @@ en:
       search:
         placeholder: 'Search by name or address...'
         button: 'Search'
+        filter_country: 'Filter by country'
         filter_group: 'Filter by group'
         filter_state: 'Filter by state'
         filter_store_type: 'Filter by type'
@@ -183,6 +185,7 @@ en:
       show:
         stores_title: 'Stores created'
         statuses: 'Estados reportados'
+        copy_clipboard: 'Copy to clipboard'
       statuses:
         title: 'Statuses reported by %{user}'
     manage_stores:

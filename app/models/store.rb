@@ -48,10 +48,11 @@ class Store < ApplicationRecord
   enum store_type: {supermarket: 1, pharmacy: 2, restaurant: 3,
                     gas_station: 4, bank: 5, coffee: 6, kiosk: 7,
                     other: 8, atm: 9, post_office: 10}
-  enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3}
+  enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3, archived: 4}
 
   validates :capacity, allow_nil: true, numericality: {greater_than: 0}
 
+  scope :by_country, ->(country) { where(country: country) }
   scope :by_group, ->(group) { where(group: group) }
   scope :by_state, ->(state) { where(state: state) }
   scope :by_store_type, ->(store_type) { where(store_type: store_type) }
@@ -73,7 +74,11 @@ class Store < ApplicationRecord
   end
 
   def self.groups
-    select(:group).order(:group).distinct.pluck(:group)
+    select(:group).order(:group).distinct.pluck(:group).map(&:presence).compact
+  end
+
+  def self.countries
+    select(:country).order(:country).distinct.pluck(:country).map(&:presence).compact
   end
 
   def latest_owner_status

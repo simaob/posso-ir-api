@@ -66,9 +66,10 @@ pt:
           contributor: 'Colaborador'
       store:
         states:
-          waiting_approval: 'À espera de validação'
+          waiting_approval: 'Aguarda validação'
           live: 'Activa'
           marked_for_deletion: 'Marcada para remoção'
+          archived: 'Arquivada'
         store_types:
           restaurant: 'Restaurante'
           supermarket: 'Supermercado'
@@ -152,6 +153,7 @@ pt:
       search:
         placeholder: 'Procure por nome ou morada...'
         button: 'Procurar'
+        filter_country: 'Filtrar por país'
         filter_group: 'Filtrar por grupo'
         filter_state: 'Filtrar por estado'
         filter_store_type: 'Filtrar por tipo'
@@ -189,6 +191,7 @@ pt:
       show:
         stores_title: 'Lojas adicionadas'
         statuses: 'Estados reportados'
+        copy_clipboard: 'Copiar'
       statuses:
         title: 'Estados reportados por %{user}'
     manage_stores:

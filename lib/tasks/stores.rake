@@ -87,4 +87,8 @@ namespace :stores do
   task spanish_stores: :environment do
     ImportStores.new.import_spanish_stores
   end
+
+  task continente_from_api: :environment do
+    ImportStores.new.import_continente_from_api
+  end
 end

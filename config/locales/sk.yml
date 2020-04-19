@@ -48,6 +48,7 @@ sk:
           waiting_approval: 'Očakáva sa schválenie'
           live: 'Aktívne'
           marked_for_deletion: 'Označené na vymazanie'
+          archived: 'Archivovali'
         store_types:
           restaurant: 'Reštaurácia'
           supermarket: 'Supermarket'
@@ -125,6 +126,7 @@ sk:
       search:
         placeholder: 'Vyhľadávať podľa názvu alebo adresy...'
         button: 'Hľadať'
+        filter_country: 'Filtrovať podľa krajiny'
         filter_group: 'Filtrovať podľa reťazca'
         filter_state: 'Filtrovať podľa stavu'
         filter_store_type: 'Filtrovať podľa typu'
@@ -140,6 +142,7 @@ sk:
       show:
         stores_title: 'Pridané obchody'
         statuses: 'Hlásené stavy'
+        copy_clipboard: 'Skopírovať do schránky'
       statuses:
         title: 'Statuses reported by %{user}'
     manage_stores:
