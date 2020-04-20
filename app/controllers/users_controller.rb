@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   end
 
   def regenerate_key
-    if (current_user.admin? || current_user == @user) && ['store_owner_code', 'api_key'].include?(params[:key])
+    if (current_user.admin? || current_user == @user) && %w[store_owner_code api_key].include?(params[:key])
       @user.send("regenerate_#{params[:key]}")
       redirect_to @user, notice: 'Success!'
     else
