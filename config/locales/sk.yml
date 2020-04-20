@@ -38,6 +38,8 @@ sk:
       status_store_owner:
         updated_time: 'Čas'
         status: 'Stav'
+      api_key:
+        access_token: 'Prístupový kľúč API'
     enums:
       user:
         roles:
@@ -148,6 +150,8 @@ sk:
         stores_title: 'Pridané obchody'
         statuses: 'Hlásené stavy'
         copy_clipboard: 'Skopírovať do schránky'
+        regenerate_store_owner_code: 'Vygenerujte nový kód vlastníka obchodu'
+        regenerate_api_key: 'Vygenerujte nový kľúč API'
       statuses:
         title: 'Statuses reported by %{user}'
     manage_stores:

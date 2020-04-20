@@ -60,6 +60,8 @@ es:
         status: 'Estado'
         store: 'Tienda'
         user: 'Usuario'
+      api_key:
+        access_token: 'Clave de acceso API'
     enums:
       user:
         roles:
@@ -197,6 +199,8 @@ es:
         stores_title: 'Tiendas agregadas'
         statuses: 'Estados reportados'
         copy_clipboard: 'Copiar al portapapeles'
+        regenerate_store_owner_code: 'Generar nuevo código de propietario de tienda'
+        regenerate_api_key: 'Generar nueva clave API'
       statuses:
         title: 'Estados reportados por %{user}'
   helpers:

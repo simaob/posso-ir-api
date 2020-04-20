@@ -76,9 +76,13 @@ class UsersController < ApplicationController
       .page(params[:page])
   end
 
-  def regenerate_api_key
-    @user.regenerate_api_key
-    redirect_to @user, notice: 'Success!'
+  def regenerate_key
+    if (current_user.admin? || current_user == @user) && ['store_owner_code', 'api_key'].include?(params[:key])
+      @user.send("regenerate_#{params[:key]}")
+      redirect_to @user, notice: 'Success!'
+    else
+      redirect_to @user, error: 'You are not authorized to do this'
+    end
   end
 
   private

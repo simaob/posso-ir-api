@@ -36,22 +36,34 @@
         </p>
 
         <% if current_user.admin? || current_user.store_owner? %>
-          <p data-controller='clipboard'>
-            <strong><%= User.human_attribute_name(:store_owner_code) %>:</strong>
-            <input itype='text' value="<%= @user.store_owner_code %>" data-target='clipboard.source' readonly>
-            <button data-target='clipboard.trigger' data-action='clipboard#copy' class="btn btn-info"><%= t('views.users.show.copy_clipboard') %></button>
-          </p>
-        <% end %>
+          <div class="form-group" data-controller='clipboard'>
+            <strong><%= User.human_attribute_name(:store_owner_code) %>:</strong><br>
+            <div class="input-group">
+              <input itype='text' value="<%= @user.store_owner_code %>" data-target='clipboard.source'
+                class="form-control" readonly>
+              <div class="input-group-append">
+                <button data-target='clipboard.trigger' data-action='clipboard#copy' class="btn btn-info">
+                  <%= t('views.users.show.copy_clipboard') %>
+                </button>
+              </div>
+            </div>
+            <%= link_to t('views.users.show.regenerate_store_owner_code'), regenerate_key_user_path(@user, key: :store_owner_code), method: :post %>
+          </div>
 
-        <% if current_user.admin? || current_user.store_owner? %>
-          <p>
-            <strong><%= ApiKey.human_attribute_name(:access_token) %>:</strong>
-            <%= ApiKey.where(user_id: @user.id, active: true).pluck(:access_token).first %>
-          </p>
-          <% if current_user.admin? %>
-            <%= link_to 'Regenerate api key', regenerate_api_key_user_path(@user),
-              method: :post %>
-          <% end %>
+          <div class="form-group" data-controller='clipboard'>
+            <strong><%= ApiKey.human_attribute_name(:access_token) %>:</strong><br>
+            <div class="input-group">
+              <input itype='text' value="<%= ApiKey.where(user_id: @user.id, active: true).pluck(:access_token).first %>" data-target='clipboard.source' class="form-control" readonly>
+              <div class="input-group-append">
+                <button data-target='clipboard.trigger' data-action='clipboard#copy' class="btn btn-info">
+                  <%= t('views.users.show.copy_clipboard') %>
+                </button>
+              </div>
+            </div>
+            <% if current_user.admin? %>
+              <%= link_to t('views.users.show.regenerate_api_key'), regenerate_key_user_path(@user, key: :api_key), method: :post %>
+            <% end %>
+          </div>
         <% end %>
 
         <% if @user.stores.any? %>

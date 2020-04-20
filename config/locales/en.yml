@@ -57,6 +57,8 @@ en:
         status: 'Status'
         store: 'Store'
         user: 'User'
+      api_key:
+        access_token: 'API Access token'
     enums:
       user:
         roles:
@@ -188,6 +190,8 @@ en:
         stores_title: 'Stores created'
         statuses: 'Estados reportados'
         copy_clipboard: 'Copy to clipboard'
+        regenerate_store_owner_code: 'Generate new store owner code'
+        regenerate_api_key: 'Generate new API key'
       statuses:
         title: 'Statuses reported by %{user}'
     manage_stores:

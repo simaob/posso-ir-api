@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :phones
     resources :users do
       get :statuses, on: :member
-      post :regenerate_api_key, on: :member
+      post :regenerate_key, on: :member
     end
     resources :map
   end

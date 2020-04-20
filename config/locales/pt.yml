@@ -57,6 +57,8 @@ pt:
         status: 'Estado'
         store: 'Loja'
         user: 'Utilizador'
+      api_key:
+        access_token: 'Chave de accesso à API'
     enums:
       user:
         roles:
@@ -194,6 +196,8 @@ pt:
         stores_title: 'Lojas adicionadas'
         statuses: 'Estados reportados'
         copy_clipboard: 'Copiar'
+        regenerate_store_owner_code: 'Gerar novo código lojista'
+        regenerate_api_key: 'Gerar nova chave para a API'
       statuses:
         title: 'Estados reportados por %{user}'
     manage_stores:
