@@ -16,98 +16,120 @@
         </div>
       <% end %>
 
-      <div class="form-group">
-        <%= form.label :state, class: "col-sm-4 col-form-label" %>
-        <% if can? :manage_state, Store %>
-          <%= form.select :state, enum_options_for_select(Store, :state), {}, class: "form-control" %>
-        <% else %>
-          <span class="form-control"><%= enum_l(form.object, :state) %></span>
-        <% end %>
-        <small class="form-text text-muted">
-          <%= t('views.stores.form.help_state_html') %>
-        </small>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :name, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :name, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :store_type, class: "col-sm-4 col-form-label" %>
-        <%= form.select :store_type, enum_options_for_select(Store, :store_type), {}, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :open, class: "col-sm-4 col-form-label" %>
-        <div class="col-sm-10">
-          <%= form.check_box :open, class: 'form-control' %>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <%= form.label :state, class: "col-sm-4 col-form-label" %>
+          <% if can? :manage_state, Store %>
+            <%= form.select :state, enum_options_for_select(Store, :state), {}, class: "form-control" %>
+          <% else %>
+            <span class="form-control"><%= enum_l(form.object, :state) %></span>
+          <% end %>
+          <small class="form-text text-muted">
+            <%= t('views.stores.form.help_state_html') %>
+          </small>
         </div>
-        <small class="form-text text-muted">
-          <%= t('views.stores.form.help_open') %>
-        </small>
+
+        <div class="form-group col-md-6">
+          <%= form.label :open, class: "col-sm-4 col-form-label" %>
+          <div class="col-sm-10">
+            <%= form.check_box :open, class: 'form-control' %>
+          </div>
+          <small class="form-text text-muted">
+            <%= t('views.stores.form.help_open') %>
+          </small>
+        </div>
       </div>
 
-      <div class="form-group">
-        <%= form.label :group, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :group, class: "form-control" %>
-        <small class="form-text text-muted">
-          <%= t('views.stores.form.help_group') %>
-        </small>
+      <div class="form-row">
+        <div class="form-group col-md-7">
+          <%= form.label :name, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group col-md-5">
+          <%= form.label :store_type, class: "col-sm-4 col-form-label" %>
+          <%= form.select :store_type, enum_options_for_select(Store, :store_type), {}, class: 'form-control' %>
+        </div>
       </div>
 
-      <div class="form-group">
-        <%= form.label :street, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :street, class: "form-control" %>
+      <div class="form-row">
+        <div class="form-group col-md-9">
+          <%= form.label :group, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :group, class: "form-control" %>
+          <small class="form-text text-muted">
+            <%= t('views.stores.form.help_group') %>
+          </small>
+        </div>
+
+        <div class="form-group col-md-3">
+          <%= form.label :capacity, class: "col-sm-4 col-form-label" %>
+          <%= form.number_field :capacity, class: "form-control" %>
+        </div>
       </div>
 
-      <div class="form-group">
-        <%= form.label :zip_code, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :zip_code, class: "form-control" %>
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <%= form.label :street, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :street, class: "form-control" %>
+        </div>
+
+        <div class="form-group col-md-4">
+          <%= form.label :zip_code, class: "col-sm-6 col-form-label" %>
+          <%= form.text_field :zip_code, class: "form-control" %>
+        </div>
       </div>
 
-      <div class="form-group">
-        <%= form.label :city, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :city, class: "form-control" %>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <%= form.label :city, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :city, class: "form-control" %>
+        </div>
+
+        <div class="form-group col-md-4">
+          <%= form.label :district, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :district, class: "form-control" %>
+        </div>
+
+        <div class="form-group col-md-4">
+          <%= form.label :country, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :country, class: "form-control" %>
+          <small class="form-text text-muted">
+            <%= t('views.stores.form.help_country') %>
+          </small>
+        </div>
       </div>
 
-      <div class="form-group">
-        <%= form.label :district, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :district, class: "form-control" %>
-      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <%= form.label :latitude, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :latitude, class: "form-control" %>
+          <small class="form-text text-muted">
+            <%= t('views.stores.form.help_coordinates') %>
+          </small>
+        </div>
 
-      <div class="form-group">
-        <%= form.label :country, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :country, class: "form-control" %>
-        <small class="form-text text-muted">
-          <%= t('views.stores.form.help_country') %>
-        </small>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :latitude, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :latitude, class: "form-control" %>
-        <small class="form-text text-muted">
-          <%= t('views.stores.form.help_coordinates') %>
-        </small>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :longitude, class: "col-sm-4 col-form-label" %>
-        <%= form.text_field :longitude, class: "form-control" %>
-        <small class="form-text text-muted">
-          <%= t('views.stores.form.help_coordinates') %>
-        </small>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :capacity, class: "col-sm-4 col-form-label" %>
-        <%= form.number_field :capacity, class: "form-control" %>
+        <div class="form-group col-md-6">
+          <%= form.label :longitude, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :longitude, class: "form-control" %>
+          <small class="form-text text-muted">
+            <%= t('views.stores.form.help_coordinates') %>
+          </small>
+        </div>
       </div>
 
       <div class="form-group">
         <%= form.label :details, class: "col-sm-4 col-form-label" %>
         <%= form.text_area :details, class: "form-control" %>
+      </div>
+
+      <div class="form-group nested-form-fields">
+        <fieldset>
+          <legend><%= t('views.stores.form.phone_number') %></legend>
+          <%= form.fields_for :phones do |phone_form| %>
+            <%= render 'phone_fields', f: phone_form %>
+          <% end %>
+          <%= link_to_add_fields t('views.stores.form.add_phone'), form, :phones %>
+        </fieldset>
       </div>
 
       <div class="form-group">

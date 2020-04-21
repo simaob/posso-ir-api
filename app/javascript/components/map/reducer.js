@@ -10,7 +10,8 @@ export const initialState = {
   shops: {},
   prevShops: null,
   selectedShopId: null,
-  method: null
+  method: null,
+  bounds: null
 };
 
 const onClickCancel = (state, action, draft) => {
@@ -38,6 +39,15 @@ const onDragMarker = (state, action, draft) => {
   shop.latitude = action.payload[1];
 };
 
+const onBoundsChange = (state, action, draft) => {
+  const bounds = action.payload;
+  draft.bounds = bounds;
+};
+
+const onShopsFetched = (state, action, draft) => {
+  draft.shops = action.payload;
+};
+
 function idleStatus(state, action, draft) {
   switch (action.type) {
     case 'clickAdd': {
@@ -63,6 +73,12 @@ function idleStatus(state, action, draft) {
     case 'clickCloseSidebar': {
       draft.selectedShopId = initialState.selectedShopId;
       return draft;
+    }
+    case 'boundsChange': {
+      return onBoundsChange(state, action, draft);
+    }
+    case 'shopsFetched': {
+      return onShopsFetched(state, action, draft);
     }
   }
 }
@@ -103,6 +119,12 @@ function creatingStatus(state, action, draft) {
     case 'clickCancel': {
       return onClickCancel(state, action, draft);
     }
+    case 'boundsChange': {
+      return onBoundsChange(state, action, draft);
+    }
+    case 'shopsFetched': {
+      return onShopsFetched(state, action, draft);
+    }
   }
 }
 
@@ -123,6 +145,12 @@ function deletingStatus(state, action, draft) {
       draft.selectedShopId = state.selectedShopId;
       return draft;
     }
+    case 'boundsChange': {
+      return onBoundsChange(state, action, draft);
+    }
+    case 'shopsFetched': {
+      return onShopsFetched(state, action, draft);
+    }
   }
 }
 
@@ -138,6 +166,12 @@ function editingStatus(state, action, draft) {
       onClickCancel(state, action, draft);
       draft.selectedShopId = state.selectedShopId;
       return draft;
+    }
+    case 'boundsChange': {
+      return onBoundsChange(state, action, draft);
+    }
+    case 'shopsFetched': {
+      return onShopsFetched(state, action, draft);
     }
   }
 }
@@ -160,6 +194,13 @@ function savingStatus(state, action, draft) {
       };
       draft.status = statuses[state.method];
       draft.method = initialState.method;
+      return draft;
+    }
+    case 'boundsChange': {
+      return onBoundsChange(state, action, draft);
+    }
+    case 'shopsFetched': {
+      return onShopsFetched(state, action, draft);
     }
   }
 }

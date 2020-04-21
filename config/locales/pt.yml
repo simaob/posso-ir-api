@@ -32,6 +32,7 @@ pt:
         open: 'Aberto?'
         created_by: 'Criado por'
         updated_by: 'Actualizado por'
+        phones: 'Telefones'
       user:
         email: 'Email'
         name: 'Nome'
@@ -56,6 +57,8 @@ pt:
         status: 'Estado'
         store: 'Loja'
         user: 'Utilizador'
+      api_key:
+        access_token: 'Chave de accesso à API'
     enums:
       user:
         roles:
@@ -107,7 +110,6 @@ pt:
         todays_users_by_reports: 'Top 15 Utilizadores com mais relatórios hoje'
         stores_by_reports: 'Top 30 Lojas por número de relatórios'
         users_by_reports: 'Top 30 Utilizadores por número de relatórios'
-        total: 'Total'
     actions:
       show: 'Ver'
       edit: 'Editar'
@@ -173,6 +175,8 @@ pt:
                      <strong>Activa</strong>: Loja disponível na aplicação.<br>
                     <strong>Marcada para remoção</strong>: Remoção será revista e confirmada por um administrador."
         info_deleting: 'NOTA: Quando marcar uma loja para remoção por favor escreva o porquê dessa marcação no campo de detalhes.'
+        phone_number: 'Números de telefone'
+        add_phone: "Adicionar Telefone"
     status_crowdsource_users:
       index:
         title: 'Estados reportados'
@@ -192,6 +196,8 @@ pt:
         stores_title: 'Lojas adicionadas'
         statuses: 'Estados reportados'
         copy_clipboard: 'Copiar'
+        regenerate_store_owner_code: 'Gerar novo código lojista'
+        regenerate_api_key: 'Gerar nova chave para a API'
       statuses:
         title: 'Estados reportados por %{user}'
     manage_stores:

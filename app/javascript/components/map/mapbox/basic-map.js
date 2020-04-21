@@ -1,11 +1,12 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import cx from 'classnames';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { FlyToInterpolator, TRANSITION_EVENTS } from 'react-map-gl';
 import { useOnLoad } from './use-on-load';
+import WebMercatorViewport from 'viewport-mercator-project';
+import { easeCubic } from 'd3-ease';
 
 function MapboxMap(props) {
   const {
-    onLoad,
     bounds,
     customClass,
     children,
@@ -16,15 +17,63 @@ function MapboxMap(props) {
     touchRotate,
     initialViewport,
     doubleClickZoom,
+    onBoundsChange,
     ...mapboxProps
   } = props;
   const [viewport, setViewport] = useState(null);
+  const [flying, setFlying] = useState(false);
   const mapContainer = useRef(null);
   const map = useRef(null);
   const getMap = useCallback(instance => {
     map.current = instance && instance.getMap();
   }, []);
-  const [loaded, setLoaded] = useOnLoad();
+
+  const onLoad = () => {
+    if (!bounds) {
+      return;
+    }
+
+    const { bbox } = bounds;
+
+    const v = {
+      width: mapContainer.current.offsetWidth,
+      height: mapContainer.current.offsetHeight,
+      ...viewport
+    };
+
+    const { longitude, latitude, zoom } = new WebMercatorViewport(v).fitBounds([
+      [bbox[0], bbox[1]],
+      [bbox[2], bbox[3]]
+    ]);
+
+    const newViewport = {
+      ...viewport,
+      longitude,
+      latitude,
+      zoom,
+      transitionDuration: 2500,
+      transitionInterruption: TRANSITION_EVENTS.UPDATE
+    };
+
+    setFlying(true);
+    setViewport(newViewport);
+
+    const timeout = setTimeout(() => {
+      setFlying(false);
+    }, 2500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  };
+  const [loaded, setLoaded] = useOnLoad(onLoad);
+
+  useEffect(() => {
+    if (map.current && loaded) {
+      const bounds = map.current.getBounds().toArray();
+      onBoundsChange(bounds);
+    }
+  }, [viewport, onBoundsChange]);
 
   return (
     <div ref={mapContainer} className={cx('c-map', { [customClass]: !!customClass })}>
@@ -37,17 +86,19 @@ function MapboxMap(props) {
         width="100%"
         height="100%"
         // INTERACTIVE
-        dragPan={dragPan}
-        dragRotate={dragRotate}
-        scrollZoom={scrollZoom}
-        touchZoom={touchZoom}
-        touchRotate={touchRotate}
-        doubleClickZoom={doubleClickZoom}
+        dragPan={!flying && dragPan}
+        dragRotate={!flying && dragRotate}
+        scrollZoom={!flying && scrollZoom}
+        touchZoom={!flying && touchZoom}
+        touchRotate={!flying && touchRotate}
+        doubleClickZoom={!flying && doubleClickZoom}
         // DEFAULT FUNC IMPLEMENTATIONS
         onLoad={setLoaded}
-        onViewStateChange={setViewport}
-        onViewportChange={setViewport}
-        onResize={setViewport}
+        onViewStateChange={loaded ? setViewport : undefined}
+        onViewportChange={loaded ? setViewport : undefined}
+        onResize={loaded ? setViewport : undefined}
+        transitionInterpolator={new FlyToInterpolator()}
+        transitionEasing={easeCubic}
       >
         {loaded && map.current && typeof children === 'function' && children(map.current)}
       </ReactMapGL>
@@ -62,8 +113,7 @@ MapboxMap.defaultProps = {
   dragPan: true,
   dragRotate: true,
 
-  onViewportChange: () => {},
-  onLoad: () => {}
+  onViewportChange: () => {}
 };
 
 export default MapboxMap;

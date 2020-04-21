@@ -26,6 +26,9 @@ sk:
         store_type: 'Typ predajne'
         state: 'Stav'
         open: 'Otvorené?'
+        created_by: 'Vytvorené'
+        updated_by: 'Aktualizoval používateľ'
+        phones: 'Mobil'
       user:
         email: 'Email'
         name: 'Meno'
@@ -35,6 +38,8 @@ sk:
       status_store_owner:
         updated_time: 'Čas'
         status: 'Stav'
+      api_key:
+        access_token: 'Prístupový kľúč API'
     enums:
       user:
         roles:
@@ -86,7 +91,6 @@ sk:
         todays_users_by_reports: 'Utilizadores por número de relatórios hoje'
         stores_by_reports: 'Lojas por número de relatórios'
         users_by_reports: 'Utilizadores por número de relatórios'
-        total: 'Total'
     actions:
       show: 'Zobraziť'
       edit: 'Upraviť'
@@ -132,6 +136,9 @@ sk:
         filter_store_type: 'Filtrovať podľa typu'
       index:
         confirm_approval: 'Ste si istý, že chcete potvrdiť všetky predajne?'
+      form:
+        phone_number: 'Telefónne čísla'
+        add_phone: "Pridať tel. číslo"
     users:
       search:
         placeholder: 'Vyhľadávať podľa mena alebo emailu...'
@@ -143,6 +150,8 @@ sk:
         stores_title: 'Pridané obchody'
         statuses: 'Hlásené stavy'
         copy_clipboard: 'Skopírovať do schránky'
+        regenerate_store_owner_code: 'Vygenerujte nový kód vlastníka obchodu'
+        regenerate_api_key: 'Vygenerujte nový kľúč API'
       statuses:
         title: 'Statuses reported by %{user}'
     manage_stores:

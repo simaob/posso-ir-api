@@ -13,7 +13,7 @@ const initialViewport = {
 };
 
 function MapboxMap(props) {
-  const { shops = {}, dispatch, selectedShopId, status } = props;
+  const { shops = {}, dispatch, selectedShopId, status, bounds = [], onBoundsChange } = props;
   const [dragging, setDragging] = useState(false);
   const layers = useMemo(() => {
     const _layers = [];
@@ -52,12 +52,14 @@ function MapboxMap(props) {
 
   return (
     <BasicMap
+      bounds={bounds && { bbox: bounds.flat() }}
       mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
       mapStyle={process.env.NODE_ENV !== 'development' ? process.env.MAPBOX_STYLE : undefined}
       minZoom={2}
       interactiveLayerIds={['shops']}
       onClick={onClick}
       initialViewport={initialViewport}
+      onBoundsChange={onBoundsChange}
     >
       {map => (
         <>

@@ -42,7 +42,8 @@ class ImportOsm
       longitude: point[:longitude],
       store_type: store_type,
       lonlat: point[:geom],
-      from_osm: true
+      source: 'OSM',
+      state: :waiting_approval
     )
   end
 
