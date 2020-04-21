@@ -1,8 +1,7 @@
 class StatusStoreOwnersController < ApplicationController
   before_action :set_store
   def new
-    @status_store_owner = @store.status_store_owners
-      .new(updated_time: Time.now)
+    @status_store_owner = @store.status_store_owners.new
     authorize! :new, @status_store_owner
   end
 
