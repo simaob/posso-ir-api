@@ -4,7 +4,7 @@ export function useOnLoad(onLoad = () => {}, payload) {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     if (loaded) {
-      onLoad(payload);
+      return onLoad(payload);
     }
   }, [loaded, payload]);
 
