@@ -15,7 +15,8 @@
 
       <div class="form-group">
         <%= form.label :updated_time, class: "col-sm-2 col-form-label" %>
-        <%= form.time_field :updated_time, class: "form-control datetimepicker" %>
+        <%= form.time_field :updated_time, value: Time.now.strftime('%H:%M'),
+          class: "form-control datetimepicker" %>
       </div>
 
       <div class="form-group queue-radios">
