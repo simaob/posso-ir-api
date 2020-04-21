@@ -1,11 +1,29 @@
 class MapController < ApplicationController
+  respond_to :json, :html
   include EnumI18nHelper
 
+  # GET /stores
+  # GET /stores.json
   def index
     authorize! :read, :map
 
+    @initialBoundsPT = [
+      [-8.693305501609501,41.11531424472605],
+      [-8.520026252042584,41.17823491872437]
+    ]
+
+    @bounds = @initialBoundsPT
+
+    if params[:coordinates]
+      map_to_array = ->(str) {
+        strs = str.split(',')
+        coords = strs.map! { |n| n.to_f }
+        return coords
+      }
+      @bounds = params[:coordinates].map(&map_to_array)
+    end
     @shops = Store.where.not(latitude: nil).where.not(longitude: nil)
-      .where.not(state: :archived)
+      .where.not(state: :archived).in_bounding_box(@bounds);
     @shops = @shops.where(group: current_user.stores&.map(&:group)) if current_user.store_owner?
 
     @shops = Hash[@shops.collect { |item| [item.id, item] }]
@@ -79,6 +97,11 @@ class MapController < ApplicationController
         type: 'text'
       }
     ]
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @shops, status: :ok }
+    end
   end
 
   # POST /map
@@ -129,6 +152,6 @@ class MapController < ApplicationController
   def map_params
     params.permit(:name, :group, :street, :city,
                   :zip_code, :country, :district, :store_type,
-                  :latitude, :longitude, :capacity, :details)
+                  :latitude, :longitude, :capacity, :details, :coordinates)
   end
 end
