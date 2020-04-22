@@ -1,5 +1,5 @@
 class ImportOsm
-  def import(country, page = nil, page_size = 100_000)
+  def import(country)
     Dir.glob(Rails.root.join('db', 'files', "#{country}*")) do |filename|
       src = File.open(filename, 'r')
       file = File.read(src).force_encoding('UTF-8')
