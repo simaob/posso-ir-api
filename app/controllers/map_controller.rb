@@ -28,6 +28,7 @@ class MapController < ApplicationController
   # POST /map
   def create
     @shop = Store.new(map_params)
+    authorize! :create, @shop
 
     @shop.managers << current_user if current_user.store_owner?
 
@@ -48,6 +49,8 @@ class MapController < ApplicationController
   def update
     # PUT /map/:id?name=myname
     @shop = Store.find(params[:id])
+    authorize! :update, @shop
+
     @shop.attributes = map_params
 
     respond_to do |format|
