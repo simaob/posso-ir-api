@@ -1,47 +1,39 @@
 class ImportOsm
   def import(country, page = nil, page_size = 100_000)
-    src = File.open(Rails.root.join('db', 'files', "#{country}.csv"), 'r')
-    file = File.read(src).force_encoding('UTF-8')
+    Dir.glob(Rails.root.join('db', 'files', "#{country}*")) do |filename|
+      src = File.open(filename, 'r')
+      file = File.read(src).force_encoding('UTF-8')
 
-    stores = parse_csv(file)
-    if page
-      start_point = page * page_size - page_size
-      end_point = page * page_size - 1
-      stores = stores[start_point..end_point]
+      CSV.parse(file, skip_blanks: true).each { |point| create_store(point, country) }
     end
-    stores&.each { |point| create_store(point, country) }
-  end
-
-  def parse_csv(file)
-    CSV.parse(file, headers: true, header_converters: :symbol, skip_blanks: true)
   end
 
   def create_store(point, country)
-    store_type = if point[:amenity]
-                   map_amenity(point[:amenity])
-                 elsif point[:shop]
-                   map_shop(point[:shop])
+    store_type = if point[7]
+                   map_amenity(point[7])
+                 elsif point[8]
+                   map_shop(point[8])
                  end
 
     return unless %w[supermarket pharmacy restaurant gas_station bank
                      coffee kiosk other atm post_office].include? store_type
 
-    address = "#{point[:street]} #{point[:housenumber]} #{point[:housename]}"
-    group = point[:operator] || point[:brand]
+    address = "#{point[10]} #{point[2]} #{point[1]}".squish
+    group = point[9] || point[4]
 
     Store.create!(
-      original_id: point[:original_id],
-      name: point[:name],
+      original_id: point[0],
+      name: point[3],
       group: group,
       street: address,
-      city: point[:city],
-      district: point[:district],
+      city: point[11],
+      district: point[13],
       country: country,
-      zip_code: point[:zip_code],
-      latitude: point[:latitude],
-      longitude: point[:longitude],
+      zip_code: point[14],
+      latitude: point[17],
+      longitude: point[18],
       store_type: store_type,
-      lonlat: point[:geom],
+      lonlat: point[19],
       source: 'OSM',
       state: :waiting_approval
     )
