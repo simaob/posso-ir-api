@@ -31,6 +31,10 @@ class MapController < ApplicationController
 
     @shop.managers << current_user if current_user.store_owner?
 
+    if current_user.contributor?
+      @store.source = 'Community'
+    end
+
     respond_to do |format|
       if @shop.save
         format.json { render json: @shop, status: :created, location: @shop }
