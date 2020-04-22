@@ -73,7 +73,11 @@ class Store < ApplicationRecord
   end
 
   def text
-    [name, city].compact.join(', ')
+    str = name
+    str = str + " [#{group}]" if group
+    str = str + ", #{street}" if street
+    str = str + " ID: #{id}"
+    str
   end
 
   def self.groups

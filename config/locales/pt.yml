@@ -118,6 +118,7 @@ pt:
       new: 'Adicionar'
       back: 'Voltar'
       approve_all: 'Aprovar lojas filtradas'
+      confirm_destroy: 'De certeza que pretende apagar este registo? Esta ação é permanente'
     map:
       index:
         title: 'Mapa'

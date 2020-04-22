@@ -76,7 +76,7 @@ class StoresController < ApplicationController
   def destroy
     @store.destroy
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: 'Store was successfully destroyed.' }
+      format.html { redirect_to stores_url(search_params), notice: 'Store was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -115,5 +115,15 @@ class StoresController < ApplicationController
     permitted_params << :state if current_user.admin? || current_user.general_manager?
 
     params.require(:store).permit(permitted_params)
+  end
+
+  def search_params
+    {
+      state: params[:state],
+      group: params[:group],
+      search: params[:search],
+      country: params[:country],
+      store_type: params[:store_type]
+    }
   end
 end
