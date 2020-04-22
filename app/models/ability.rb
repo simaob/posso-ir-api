@@ -25,7 +25,10 @@ class Ability
       can :read, :all
 
     elsif user.contributor?
-      can [:new, :create, :edit, :update], Store
+      can [:new, :create], Store
+      can [:edit, :update], Store do |store|
+        store.source == 'Community' && user.email.present?
+      end
       can :read, Store
 
     elsif user.store_owner?
