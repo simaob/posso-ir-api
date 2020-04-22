@@ -54,7 +54,11 @@
             <% end %>
             <% if can? :destroy, store %>
               |
-              <%= link_to t('views.actions.destroy'), store, method: :delete, data: { confirm: t('views.actions.confirm_destroy') } %>
+              <%= link_to t('views.actions.destroy'),
+                store_path(store, state: params[:state], group: params[:group],
+                                 search: params[:search], country: params[:country],
+                                 store_type: params[:store_type]), method: :delete,
+                                 data: { confirm: t('views.actions.confirm_destroy') } %>
             <% end %>
           </td>
         </tr>

@@ -121,6 +121,7 @@ es:
       new: 'Añadir'
       back: 'Volver'
       approve_all: 'Validar elegidas'
+      confirm_destroy: '¿Seguro que quieres eliminar este registro? Esta acción es permanente.'
     map:
       index:
         title: 'Mapa'

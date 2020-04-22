@@ -99,6 +99,7 @@ sk:
       new: 'Nové'
       back: 'Späť'
       approve_all: 'Schváliť uvedené'
+      confirm_destroy: 'Naozaj chcete odstrániť tento záznam? Táto akcia je trvalá.'
     map:
       index:
         title: 'Mapa'
