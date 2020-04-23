@@ -55,15 +55,20 @@
               <% end %>
             </ul>
           </p>
+          <p><strong><%= t('activerecord.enums.user.roles.store_owner') %></strong><br>
+            <ul>
+              <% @store.managers.each do |user| %>
+                <li>
+                  <% if current_user.admin? %>
+                    <%= link_to user.display_name, user %>
+                  <% else %>
+                    <%= user.display_name %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </p>
         <% end %>
-        <p>
-          <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
-          <%= @store.capacity %>
-        </p>
-        <p>
-          <strong><%= Store.human_attribute_name(:details) %>:</strong>
-          <%= @store.details %>
-        </p>
       </div>
     </div>
   </div>
@@ -94,6 +99,14 @@
         <p>
           <strong><%= t('views.stores.index.coordinates') %>:</strong>
           <%= [@store.latitude, @store.longitude].compact.join(', ') %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
+          <%= @store.capacity %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:details) %>:</strong>
+          <%= @store.details %>
         </p>
       </div>
     </div>
