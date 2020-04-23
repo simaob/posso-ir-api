@@ -25,6 +25,9 @@ Layout/DotPosition:
 Naming/HeredocDelimiterNaming:
   Enabled: false
 
+Style/Alias:
+  Enabled: false
+
 Style/SymbolArray:
   EnforcedStyle: brackets
 

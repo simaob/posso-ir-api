@@ -74,9 +74,9 @@ class Store < ApplicationRecord
 
   def text
     str = name
-    str = str + " [#{group}]" if group
-    str = str + ", #{street}" if street
-    str = str + " ID: #{id}"
+    str += " [#{group}]" if group
+    str += ", #{street}" if street
+    str += " ID: #{id}"
     str
   end
 

@@ -45,10 +45,7 @@ class StoresController < ApplicationController
   # POST /stores.json
   def create
     @store = Store.new(store_params)
-
-    if current_user.contributor?
-      @store.source = 'Community'
-    end
+    @store.source = 'Community' if current_user.contributor?
 
     respond_to do |format|
       if @store.save
