@@ -49,6 +49,7 @@ class User < ApplicationRecord
   def display_name
     name.presence || email.presence || "ID: #{id}"
   end
+  alias_method :text, :display_name
 
   def regenerate_api_key
     return unless persisted?
