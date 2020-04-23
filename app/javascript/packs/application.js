@@ -50,4 +50,24 @@ document.addEventListener('turbolinks:load', function() {
       url: '/stores.json'
     }
   });
+
+  $('.store-owners-select').select2({
+    theme: 'bootstrap4',
+    ajax: {
+      data: function(params) {
+        return {
+          search: params.term
+        };
+      },
+      dataType: "json",
+      quietMillis: 100,
+      results: function(data, page) {
+        return {
+          results: data
+        };
+      },
+      delay: 150,
+      url: '/users.json'
+    }
+  });
 });
