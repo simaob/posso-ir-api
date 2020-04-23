@@ -1,7 +1,7 @@
 class ImportOsm
   def import(country)
     Dir.glob(Rails.root.join('db', 'files', "#{country}*")) do |filename|
-      file = File.open(Rails.root.join('db', 'files', 'auchan.csv'), 'r')
+      file = File.open(filename, 'r')
       CSV.new(file, skip_blanks: true).each { |point| create_store(point, country) }
     end
   end
