@@ -38,6 +38,7 @@ require 'capistrano/passenger'
 require 'capistrano/env-config'
 require 'capistrano/nvm'
 require 'capistrano/yarn'
+require 'capistrano/logrotate'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }

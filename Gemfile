@@ -57,6 +57,7 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-nvm', require: false
   gem 'capistrano-yarn', require: false
+  gem 'capistrano-logrotate'
   gem 'switch_user'
 end
 

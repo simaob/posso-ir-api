@@ -88,6 +88,8 @@ GEM
     capistrano-env-config (0.3.0)
       capistrano (~> 3.0)
       dotenv (~> 2.0)
+    capistrano-logrotate (0.5.0)
+      capistrano (~> 3.0)
     capistrano-nvm (0.0.7)
       capistrano (~> 3.1)
     capistrano-passenger (0.2.0)
@@ -390,6 +392,7 @@ DEPENDENCIES
   capistrano (~> 3.12)
   capistrano-bundler
   capistrano-env-config
+  capistrano-logrotate
   capistrano-nvm
   capistrano-passenger
   capistrano-rails (~> 1.3)
