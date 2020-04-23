@@ -31,10 +31,7 @@ class MapController < ApplicationController
     authorize! :create, @shop
 
     @shop.managers << current_user if current_user.store_owner?
-
-    if current_user.contributor?
-      @store.source = 'Community'
-    end
+    @shop.source = 'Community' if current_user.contributor?
 
     respond_to do |format|
       if @shop.save

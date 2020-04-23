@@ -25,7 +25,7 @@ class Ability
       can :read, :all
 
     elsif user.contributor?
-      can [:new, :create], Store do |store|
+      can [:new, :create], Store do
         user.email.present?
       end
       can [:edit, :update], Store do |store|
