@@ -130,7 +130,7 @@
         </div>
       <% end %>
 
-      <% if current_user.admin? %>
+      <% if current_user.admin? || current_user.store_owner? %>
         <div class="form-group nested-form-fields">
           <fieldset>
             <legend><%= t('views.stores.form.phone_number') %></legend>
