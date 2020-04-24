@@ -56,7 +56,7 @@ const onShopsFetched = (state, action, draft) => {
   });
 };
 
-function idleStatus(state, action, draft) {
+export function idleStatus(state, action, draft) {
   switch (action.type) {
     case 'clickAdd': {
       draft.status = 'creating';
@@ -91,7 +91,7 @@ function idleStatus(state, action, draft) {
   }
 }
 
-function creatingStatus(state, action, draft) {
+export function creatingStatus(state, action, draft) {
   switch (action.type) {
     case 'clickMap': {
       const { lngLat } = action.payload;
@@ -136,7 +136,7 @@ function creatingStatus(state, action, draft) {
   }
 }
 
-function deletingStatus(state, action, draft) {
+export function deletingStatus(state, action, draft) {
   switch (action.type) {
     case 'clickMarker': {
       draft.selectedShopId = getMarkerId(action.payload);
@@ -162,7 +162,7 @@ function deletingStatus(state, action, draft) {
   }
 }
 
-function editingStatus(state, action, draft) {
+export function editingStatus(state, action, draft) {
   switch (action.type) {
     case 'dragMarker': {
       return onDragMarker(state, action, draft);
@@ -184,7 +184,7 @@ function editingStatus(state, action, draft) {
   }
 }
 
-function savingStatus(state, action, draft) {
+export function savingStatus(state, action, draft) {
   switch (action.type) {
     case 'saveSuccessful': {
       const shop = action.payload;
