@@ -74,7 +74,7 @@ class ImportStores
   def import_auchan
     puts "Starting Auchan, we have #{Store.count} total stores"
     file = File.open(Rails.root.join('db', 'files', 'auchan.csv'), 'r')
-    CSV.new(file, headers: true, skip_blanks: true). each do |csv|
+    CSV.new(file, headers: true, skip_blanks: true).each do |csv|
       Store.create(
         name: csv['name'],
         country: 'PT',
@@ -217,7 +217,7 @@ class ImportStores
     puts "Starting Lidl, we have #{Store.count} total stores"
     src = File.open(Rails.root.join('db', 'files', 'lidl.csv'), 'r')
     file = File.read(src).force_encoding('UTF-8')
-    CSV.parse(file, headers: true, skip_blanks: true). each do |csv|
+    CSV.parse(file, headers: true, skip_blanks: true).each do |csv|
       Store.create(
         name: "LIDL #{csv[1]}",
         group: 'LIDL',
@@ -319,7 +319,7 @@ class ImportStores
   def import_pharmacies
     puts "Starting Pharmacies, we have #{Store.count} total stores"
     file = File.open(Rails.root.join('db', 'files', 'farmacias.csv'), 'r')
-    CSV.new(file, headers: true, skip_blanks: true). each do |csv|
+    CSV.new(file, headers: true, skip_blanks: true).each do |csv|
       next unless csv[15].present?
 
       Store.create(
@@ -341,7 +341,7 @@ class ImportStores
   def import_prio
     puts "Starting Prio, we have #{Store.count} total stores"
     file = File.open(Rails.root.join('db', 'files', 'postos_prio.csv'), 'r')
-    CSV.new(file, headers: true, skip_blanks: true). each do |csv|
+    CSV.new(file, headers: true, skip_blanks: true).each do |csv|
       Store.create(
         name: "Prio #{csv[0].titleize}",
         group: 'Prio',
@@ -360,7 +360,7 @@ class ImportStores
   def import_dia
     puts "Starting Dia, we have #{Store.count} total stores"
     file = File.open(Rails.root.join('db', 'files', 'dia.csv'), 'r')
-    CSV.new(file, headers: true, skip_blanks: true). each do |csv|
+    CSV.new(file, headers: true, skip_blanks: true).each do |csv|
       next unless csv[9].present?
 
       Store.create(
@@ -382,7 +382,7 @@ class ImportStores
   def import_from_osm
     puts "Starting OSM Import, we have #{Store.count} total stores"
     file = File.open(Rails.root.join('db', 'files', 'osm_export.csv'), 'r')
-    CSV.new(file, headers: true, skip_blanks: true). each do |csv|
+    CSV.new(file, headers: true, skip_blanks: true).each do |csv|
       Store.create(
         name: csv[0],
         country: 'Portugal',
