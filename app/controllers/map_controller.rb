@@ -163,21 +163,19 @@ class MapController < ApplicationController
     ]
 
     es_bounds = [
-      [-3.941566736714776,40.328785315750025],
-      [-3.4482048268615415,40.515118259540344]
+      [-3.941566736714776, 40.328785315750025],
+      [-3.4482048268615415, 40.515118259540344]
     ]
 
     sk_bounds = [
-      [12.612613950622432,45.377461677566686],
-      [16.88953848960196,46.848256073855225]
+      [12.612613950622432, 45.377461677566686],
+      [16.88953848960196, 46.848256073855225]
     ]
 
-    if (I18n.locale.to_s == 'es')
-      return es_bounds
-    end
-    if (I18n.locale.to_s == 'sk')
-      return sk_bounds
-    end
-    return pt_bounds
+    return es_bounds unless I18n.locale.to_s != 'es'
+
+    return sk_bounds unless I18n.locale.to_s != 'sk'
+
+    pt_bounds
   end
 end
