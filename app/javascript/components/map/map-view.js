@@ -4,7 +4,7 @@ import reducer, { initialState } from './reducer';
 import Toolbar from './toolbar.component';
 import Sidebar from './sidebar.component';
 import ShopsMap from './mapbox/map.component';
-import axios from 'axios';
+import axios, { CancelToken } from 'axios';
 import isEqual from 'lodash/isEqual';
 import debounce from 'lodash/debounce';
 
@@ -25,10 +25,14 @@ function saveShop(shop, method) {
 function fetchMarkers(bounds) {
   const url = '/map.json';
   const token = document.querySelector('meta[name="csrf-token"]').content;
-  return axios(url, {
+  const source = CancelToken.source();
+  const request = axios(url, {
     params: { coordinates: bounds.map(b => b.join(',')) },
-    headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' }
+    headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' },
+    cancelToken: source.token
   }).then(res => res.data);
+
+  return { request, source };
 }
 
 function MapView(props) {
@@ -36,7 +40,7 @@ function MapView(props) {
   const [state, dispatch] = useReducer(reducer, { ...initialState, shops });
   const setBounds = useRef(
     debounce(bounds => dispatch({ type: 'boundsChange', payload: bounds })),
-    700
+    2500
   );
 
   useEffect(() => {
@@ -53,9 +57,20 @@ function MapView(props) {
   });
 
   useEffect(() => {
+    let requestSource = null;
     if (state.bounds) {
-      fetchMarkers(state.bounds).then(payload => dispatch({ type: 'shopsFetched', payload }));
+      const { source, request } = fetchMarkers(state.bounds);
+      requestSource = source;
+      request
+        .then(payload => dispatch({ type: 'shopsFetched', payload }))
+        .catch(err => !axios.isCancel(err) && console.error(err));
     }
+
+    return () => {
+      if (requestSource) {
+        requestSource.cancel();
+      }
+    };
   }, [state.bounds]);
 
   const onBoundsChange = bounds => {

@@ -69,7 +69,7 @@ function MapboxMap(props) {
   const [loaded, setLoaded] = useOnLoad(onLoad);
 
   useEffect(() => {
-    if (map.current && loaded) {
+    if (map.current && loaded && !flying) {
       const bounds = map.current.getBounds().toArray();
       onBoundsChange(bounds);
     }
