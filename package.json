@@ -2,9 +2,10 @@
   "name": "posso-ir-api",
   "private": true,
   "scripts": {
-    "test": "run-p rails:test rails:lint",
+    "test": "run-p rails:test rails:lint react:test",
     "rails:test": "bundle exec rspec",
-    "rails:lint": "bundle exec rubocop"
+    "rails:lint": "bundle exec rubocop",
+    "react:test": "jest --colors --maxWorkers=2 --passWithNoTests"
   },
   "dependencies": {
     "@babel/preset-react": "^7.9.4",
@@ -43,8 +44,21 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "babel-jest": "^25.4.0",
+    "jest": "^25.4.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.2",
     "webpack-dev-server": "^3.10.3"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/app/javascript/components"
+    ],
+    "moduleDirectories": [
+      "<rootDir>/node_modules"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ]
   }
 }
