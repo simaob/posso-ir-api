@@ -10,7 +10,7 @@ class MapController < ApplicationController
     @bounds = if params[:coordinates].present?
                 params[:coordinates].map { |s| s.split(',').map(&:to_f) }
               else
-                pt_bounds
+                default_bounds
               end
 
     @shops = Store.where.not(latitude: nil).where.not(longitude: nil)
@@ -156,10 +156,28 @@ class MapController < ApplicationController
     }
   end
 
-  def pt_bounds
-    [
+  def default_bounds
+    pt_bounds = [
       [-8.693305501609501, 41.11531424472605],
       [-8.520026252042584, 41.17823491872437]
     ]
+
+    es_bounds = [
+      [-3.941566736714776,40.328785315750025],
+      [-3.4482048268615415,40.515118259540344]
+    ]
+
+    sk_bounds = [
+      [12.612613950622432,45.377461677566686],
+      [16.88953848960196,46.848256073855225]
+    ]
+
+    if (I18n.locale.to_s == 'es')
+      return es_bounds
+    end
+    if (I18n.locale.to_s == 'sk')
+      return sk_bounds
+    end
+    return pt_bounds
   end
 end
