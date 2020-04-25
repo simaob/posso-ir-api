@@ -18,5 +18,8 @@
 #
 FactoryBot.define do
   factory :user do
+    after(:create) do |user, _evaluator|
+      user.regenerate_api_key
+    end
   end
 end

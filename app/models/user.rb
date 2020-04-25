@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_many :stores, through: :user_stores
   has_many :created_stores, class_name: 'Store', foreign_key: :created_by_id
   has_many :status_crowdsource_users
+  has_one :api_key
 
   has_secure_token :store_owner_code
 
