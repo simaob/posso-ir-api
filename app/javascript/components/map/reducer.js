@@ -45,7 +45,15 @@ const onBoundsChange = (state, action, draft) => {
 };
 
 const onShopsFetched = (state, action, draft) => {
+  const temporaryShops = Object.values(draft.shops).filter(
+    shop => typeof shop.id === 'undefined' && typeof shop.temporaryId !== 'undefined'
+  );
   draft.shops = action.payload;
+
+  // don't remove newly created stores
+  temporaryShops.forEach(shop => {
+    draft.shops[shop.temporaryId] = shop;
+  });
 };
 
 function idleStatus(state, action, draft) {
