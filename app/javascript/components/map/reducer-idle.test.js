@@ -1,12 +1,18 @@
 import produce from 'immer';
 import { initialState, idleStatus } from './reducer';
+import { shouldChangeBounds, shouldUpdateWithFetchedShops } from './test-utils';
 
 const reducer = (s, a) => produce(s, d => idleStatus(s, a, d));
 
-describe("MapView -> Reducer's Idle Status", () => {
+describe('MapView -> Reducer -> Idle Status', () => {
   const state = {
     ...initialState,
-    shops: { 1: { id: 1 }, 2: { id: 2 } }
+    status: 'idle',
+    shops: {
+      1: { id: 1 },
+      2: { id: 2 },
+      tempOne: { temporaryId: 'tempOne' }
+    }
   };
 
   it('clickAdd: should change status to creating and update prevShops', () => {
@@ -70,14 +76,10 @@ describe("MapView -> Reducer's Idle Status", () => {
   });
 
   it('boundsChange: should update bounds', () => {
-    const action = { type: 'boundsChange', payload: [[1], [2]] };
-    const newState = reducer(state, action);
-    expect(newState).toEqual({ ...state, bounds: action.payload });
+    shouldChangeBounds(state, reducer, expect);
   });
 
-  it('shopsFetched: should update shops', () => {
-    const action = { type: 'shopsFetched', payload: { 4: { id: 4 }, 10: { id: 10 } } };
-    const newState = reducer(state, action);
-    expect(newState).toEqual({ ...state, shops: action.payload });
+  it('shopsFetched: should update with fetched shops', () => {
+    shouldUpdateWithFetchedShops(state, reducer, expect);
   });
 });
