@@ -18,9 +18,9 @@ while getopts ":f:u:d:c:" opt; do
 done
 
 filename="$(basename -- $filepath)"
-osmconvert64 $filepath -o=/tmp/$filename.o5m
-osmfilter $filepath  --keep="shop= or amenity=" > shops_amenities.osm
-osm2pgsql --hstore --username $username --database  $database shops_amenities.osm
-rm /tmp/$filename.o5m
+# osmconvert64 $filepath -o=/tmp/$filename.o5m
+# osmfilter $filepath  --keep="shop= or amenity=" > shops_amenities.osm
+# osm2pgsql --hstore --username $username --database  $database shops_amenities.osm
+# rm /tmp/$filename.o5m
 
-psql -U $username -d $database -f create_osm_points.sql > ../../db/files/$country.csv
+psql -U postgres -d osm_data -c "\copy (SELECT * FROM osm_points) TO program 'split -a 2 -d --lines 100000 - $country' (format csv)"

@@ -9,7 +9,8 @@ import { shopsLayer, devBasemapLayer } from './layers';
 const initialViewport = {
   latitude: 39.65,
   longitude: -4.57,
-  zoom: 5
+  zoom: 6,
+  minZoom: 6
 };
 
 function MapboxMap(props) {
