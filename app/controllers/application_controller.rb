@@ -11,10 +11,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def default_url_options
-    { host: request.host_with_port }
-  end
-
   private
 
   def set_current_user
@@ -31,6 +27,6 @@ class ApplicationController < ActionController::Base
   end
 
   def default_url_options
-    {locale: I18n.locale}
+    {locale: I18n.locale, host: request.host_with_port}
   end
 end
