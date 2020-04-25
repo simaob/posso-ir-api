@@ -1,5 +1,6 @@
-COPY
-(SELECT
+DROP TABLE osm_points IF EXISTS;
+CREATE TABLE osm_points AS
+SELECT
 osm_id AS original_id
 , "addr:housename" AS housename
 , "addr:housenumber" AS housenumber
@@ -47,6 +48,4 @@ osm_id AS original_id
 , ST_Centroid(way) AS geom
 , CURRENT_TIMESTAMP as created_at
 , CURRENT_TIMESTAMP as updated_at
-    FROM planet_osm_polygon)
-    TO STDOUT
- WITH CSV HEADER DELIMITER ',';
+    FROM planet_osm_polygon;
