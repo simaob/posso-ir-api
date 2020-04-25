@@ -36,6 +36,7 @@ class Store < ApplicationRecord
   has_many :status_crowdsources
   has_many :status_store_owners
   has_many :status_generals
+  has_one :status_general
   has_many :statuses
   has_many :status_crowdsource_users
 
