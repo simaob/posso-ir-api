@@ -14,6 +14,7 @@
 #  app_uuid               :string
 #  last_post              :datetime
 #  role                   :integer          default("0")
+#  store_owner_code       :string
 #
 FactoryBot.define do
   factory :user do
