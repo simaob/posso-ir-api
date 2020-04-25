@@ -67,6 +67,21 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.0)
+    aws-eventstream (1.1.0)
+    aws-partitions (1.303.0)
+    aws-sdk-core (3.94.0)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-rails (3.1.0)
+      aws-sdk-ses (~> 1)
+      railties (>= 5.2.0)
+    aws-sdk-ses (1.28.0)
+      aws-sdk-core (~> 3, >= 3.71.0)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.1.2)
+      aws-eventstream (~> 1.0, >= 1.0.2)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -156,6 +171,7 @@ GEM
     jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jmespath (1.4.0)
     jsonapi-resources (0.10.2)
       activerecord (>= 4.1)
       concurrent-ruby
@@ -386,6 +402,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgis-adapter
   annotate
+  aws-sdk-rails
   bootsnap (>= 1.4.2)
   byebug
   cancancan

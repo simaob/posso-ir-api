@@ -93,3 +93,4 @@ gem 'react-rails'
 # charts management
 gem 'chartkick'
 gem 'groupdate'
+gem 'aws-sdk-rails' # to use aws-ses
