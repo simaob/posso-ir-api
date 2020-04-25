@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_current_user
   before_action :set_locale
+  before_filter :make_action_mailer_use_request_host_and_protocol
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -28,5 +29,10 @@ class ApplicationController < ActionController::Base
 
   def default_url_options
     {locale: I18n.locale}
+  end
+
+  def make_action_mailer_use_request_host_and_protocol
+    ActionMailer::Base.default_url_options[:protocol] = request.protocol
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
 end
