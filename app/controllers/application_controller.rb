@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_current_user
   before_action :set_locale
-  before_filter :make_action_mailer_use_request_host_and_protocol
+  before_action :make_action_mailer_use_request_host_and_protocol
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
