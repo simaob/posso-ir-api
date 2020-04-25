@@ -20,7 +20,7 @@ module Api
 
       MAX_STORES = 300
 
-      attributes :id, :updated_time, :valid_until, :status,
+      attributes :updated_time, :valid_until, :status,
                  :queue, :store_id
 
       filter :store_id
