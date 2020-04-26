@@ -19,12 +19,26 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = extract_locale || I18n.default_locale
+    I18n.locale = params_locale || domain_locale || I18n.default_locale
+
+    response.headers['Content-Language'] = I18n.locale.to_s
   end
 
-  def extract_locale
+  def params_locale
     parsed_locale = params[:locale]
-    I18n.locale = I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
+    I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
+  end
+
+  DOMAIN_LOCALES = {
+    'api.posso-ir.com' => 'pt',
+    'api.puedo-ir.es' => 'es',
+    'api.puedo-ir.com' => 'es',
+    'api.can-i-go.co.uk' => 'en',
+    'api.necakajvrade.com' => 'sk'
+  }.freeze
+
+  def domain_locale
+    DOMAIN_LOCALES[request.host]
   end
 
   def default_url_options
