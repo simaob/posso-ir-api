@@ -45,6 +45,9 @@ class Store < ApplicationRecord
   has_many :phones
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
 
+  has_many :week_days
+  accepts_nested_attributes_for :week_days
+
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 

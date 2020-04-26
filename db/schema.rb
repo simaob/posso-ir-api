@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_204432) do
+ActiveRecord::Schema.define(version: 2020_04_24_150635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_204432) do
   create_table "api_keys", force: :cascade do |t|
     t.string "access_token", null: false
     t.datetime "expires_at", null: false
-    t.boolean "active", default: false
+    t.boolean "is_active", default: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -165,6 +165,18 @@ ActiveRecord::Schema.define(version: 2020_04_16_204432) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "week_days", force: :cascade do |t|
+    t.integer "day", null: false
+    t.time "opening_hour"
+    t.time "closing_hour"
+    t.boolean "active", default: false
+    t.string "timestamps"
+    t.bigint "store_id"
+    t.index ["active"], name: "index_week_days_on_active"
+    t.index ["day"], name: "index_week_days_on_day"
+    t.index ["store_id"], name: "index_week_days_on_store_id"
+  end
+
   add_foreign_key "api_keys", "users", on_delete: :cascade
   add_foreign_key "phones", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
@@ -178,4 +190,5 @@ ActiveRecord::Schema.define(version: 2020_04_16_204432) do
   add_foreign_key "stores", "users", column: "updated_by_id"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
+  add_foreign_key "week_days", "stores", on_delete: :cascade
 end
