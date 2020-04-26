@@ -23,6 +23,7 @@ class Ability
 
       can :manage_state, Store
       can :read, :all
+      can :read, :stats
 
     elsif user.contributor?
       can [:new, :create], Store do

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /en|pt|es|sk/ do
     root to: "home#index"
+    resources :stats, only: [:index]
     resources :stores do
       post :approve_all, on: :collection
       get :statuses, on: :member

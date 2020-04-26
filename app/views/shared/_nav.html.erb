@@ -5,6 +5,16 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
+      <% if can? :read, :stats %>
+        <li class="nav-item <%= 'active' if controller_name == 'stats' %>">
+          <%= link_to stats_path, class: 'nav-link' do %>
+            <%= t('views.stats.index.title') %>
+            <% if controller_name == 'stats' %>
+              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
       <% if can? :read, :map %>
         <li class="nav-item <%= 'active' if controller_name == 'map' %>">
           <%= link_to map_index_path, class: 'nav-link' do %>

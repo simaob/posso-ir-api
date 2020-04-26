@@ -96,6 +96,9 @@ pt:
     home:
       index:
         title: 'Bem-vindo ao sistema de gestão da Posso Ir?'
+    stats:
+      index:
+        title: 'Estatísticas de uso'
         total: 'Total'
         totals: 'Total de registos no sistema'
         total_users: 'Utilizadores por função'

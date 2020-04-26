@@ -96,6 +96,9 @@ en:
     home:
       index:
         title: 'Welcome to Can I Go management system'
+    stats:
+      index:
+        title: 'Usage statistics'
         total: 'Total'
         totals: 'Total records in the system'
         total_users: 'Users per role'
