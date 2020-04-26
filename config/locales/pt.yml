@@ -141,6 +141,7 @@ pt:
       title: "Editando %{resource}"
     shared:
       navbar:
+        stats: 'Métricas'
         current: 'Actual'
         logout: 'Terminar sessão'
         login: 'Iniciar sessão'

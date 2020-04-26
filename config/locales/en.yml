@@ -141,6 +141,7 @@ en:
       title: "Editing %{resource}"
     shared:
       navbar:
+        stats: 'Metrics'
         current: 'Current'
         logout: 'Log out'
         login: 'Log in'

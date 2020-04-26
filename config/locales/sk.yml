@@ -121,6 +121,7 @@ sk:
       title: "Úpravy %{resource}"
     shared:
       navbar:
+        stats: 'Metriky'
         current: 'Aktuálne'
         logout: 'Odhlásiť'
         login: 'Prihlásiť'
