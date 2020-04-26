@@ -16,7 +16,7 @@ class WeekDay < ApplicationRecord
   validates_uniqueness_of :day, scope: :store_id
   validate :time_order
 
-  enum day: { sunday: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, thursday: 5, saturday: 6, sunday: 7 }
+  enum day: { sunday: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6 }
 
   private
 
