@@ -35,9 +35,9 @@ describe CalculateStatus do
     end
 
     it 'should only update the status of store1' do
-      expect(store1.status_generals.first.status).to eq(10)
-      expect(store2.status_generals.first.status).to eq(10)
-      expect(store3.status_generals.first.status).to be_nil
+      expect(store1.status_general.status).to eq(10)
+      expect(store2.status_general.status).to eq(10)
+      expect(store3.status_general.status).to be_nil
     end
   end
 

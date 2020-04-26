@@ -30,15 +30,17 @@ class CalculateStatus
       SQL
 
       # TODO: This can be optimized
-      Store.includes(:status_store_owners, :status_generals)
-        .joins(:status_generals).joins(:status_store_owners)
+      Store.includes(:status_store_owners, :status_general)
+        .joins(:status_general).joins(:status_store_owners)
         .where(where_clause).find_each.with_index do |store, i|
         log "Calculated #{i}" if (i % 100).zero?
         owner = store.status_store_owners.order(created_at: :desc).first
-        general = store.status_generals.first
-        general.update!(status: owner.status, updated_time: owner.updated_time,
-                        valid_until: owner.updated_time + UPDATE_TIME.hour,
-                        is_official: true)
+        store.status_general.update!(
+          status: owner.status,
+          updated_time: owner.updated_time,
+          valid_until: owner.updated_time + UPDATE_TIME.hour,
+          is_official: true
+        )
       end
 
       log 'Calculating the general status'
@@ -53,15 +55,17 @@ class CalculateStatus
       SQL
 
       # TODO: This can be optimized
-      Store.includes(:status_generals, :status_crowdsources)
-        .joins(:status_generals, :status_crowdsources)
+      Store.includes(:status_general, :status_crowdsources)
+        .joins(:status_general, :status_crowdsources)
         .where(where_clause).find_each.with_index do |store, i|
         log "Calculated #{i}" if (i % 100).zero?
         crowdsource = store.status_crowdsources.first
-        general = store.status_generals.first
-        general.update(status: crowdsource.status,
-                       updated_time: crowdsource.updated_time,
-                       valid_until: nil, is_official: false)
+        store.status_general.update(
+          status: crowdsource.status,
+          updated_time: crowdsource.updated_time,
+          valid_until: nil,
+          is_official: false
+        )
       end
     end
     log "Finished calculating the statuses in #{duration} ms"
