@@ -16,13 +16,13 @@ class MakePhoneCallsJob < ApplicationJob
     uri = URI.parse endpoint
     apikey = ENV['APIGEE_KEY']
 
-    data = { number: phone }
-    headers = { apikey: apikey, 'Content-Type': 'application/json'}
+    data = {number: phone}
+    headers = {apikey: apikey, 'Content-Type': 'application/json'}
 
     https = Net::HTTP.new(uri.host, uri.port)
     https.use_ssl = true
     request = Net::HTTP::Post.new(uri.request_uri, headers)
     request.body = data.to_json
-    response = https.request(request)
+    https.request(request)
   end
 end
