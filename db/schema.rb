@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_104941) do
   create_table "api_keys", force: :cascade do |t|
     t.string "access_token", null: false
     t.datetime "expires_at", null: false
-    t.boolean "is_active", default: false
+    t.boolean "active", default: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
