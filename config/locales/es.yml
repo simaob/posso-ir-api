@@ -182,6 +182,7 @@ es:
         phone_number: 'Teléfonos'
         add_phone: "Añadir Teléfono"
         schedule: "Horario"
+        phone_call_interval: "Intervalo de llamada telefónica (minutos)"
     status_crowdsource_users:
       index:
         title: 'Estados reportados'

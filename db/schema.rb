@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_104941) do
     t.string "timestamps"
     t.bigint "store_id"
     t.index ["active"], name: "index_week_days_on_active"
-    t.index ["day"], name: "index_week_days_on_day"
+    t.index ["store_id", "day"], name: "index_week_days_on_store_id_and_day", unique: true
     t.index ["store_id"], name: "index_week_days_on_store_id"
   end
 

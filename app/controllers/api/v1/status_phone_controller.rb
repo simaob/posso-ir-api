@@ -8,11 +8,11 @@ module Api
         return forbidden_store unless current_user.stores.pluck(:id)&.include?(store.id)
 
         status = case params['status']
-                 when '1'
+                 when '1', 1
                    0
-                 when '2'
+                 when '2', 2
                    5
-                 when 3
+                 when '3', 3
                    10
                  end
 

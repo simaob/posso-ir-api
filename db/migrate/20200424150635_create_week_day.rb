@@ -11,7 +11,7 @@ class CreateWeekDay < ActiveRecord::Migration[6.0]
       t.references :store, { foreign_key: { on_delete: :cascade }, index: true }
 
       t.index :active
-      t.index :day
+      t.index [:store_id, :day], unique: true
     end
   end
 end

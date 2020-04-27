@@ -141,6 +141,7 @@ sk:
         phone_number: 'Telefónne čísla'
         add_phone: "Pridať tel. číslo"
         schedule: "Otváracie hodiny"
+        phone_call_interval: "Interval pre telefónny hovor (minúty)"
     users:
       search:
         placeholder: 'Vyhľadávať podľa mena alebo emailu...'

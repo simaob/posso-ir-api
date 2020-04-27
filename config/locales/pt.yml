@@ -179,6 +179,7 @@ pt:
         phone_number: 'Números de telefone'
         add_phone: "Adicionar Telefone"
         schedule: "Horário"
+        phone_call_interval: "Intervalo entre chamadas telefónicas (minutos)"
     status_crowdsource_users:
       index:
         title: 'Estados reportados'

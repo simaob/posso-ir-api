@@ -59,7 +59,7 @@ class Store < ApplicationRecord
   enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3, archived: 4}
 
   validates :capacity, allow_nil: true, numericality: {greater_than: 0}
-  validates :phone_call_interval, allow_nil: true, numericality: {greater_than: 30, less_than: 180}
+  validates :phone_call_interval, allow_nil: true, numericality: {greater_than: 29, less_than: 180}
 
   scope :by_country, ->(country) { where(country: country) }
   scope :by_group, ->(group) { where(group: group) }
