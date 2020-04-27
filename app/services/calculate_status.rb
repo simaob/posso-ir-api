@@ -1,20 +1,28 @@
 class CalculateStatus
   UPDATE_TIME = 1
 
+  attr_reader :silent
+  def initialize(silent: Rails.env.test?)
+    @silent = silent
+  end
+
+  def log(msg)
+    puts "[#{Time.now}] #{msg}" unless silent
+  end
+
   def call
-    puts "[#{Time.now}] Going to calculate the statuses"
     duration = Benchmark.ms do
-      puts "[#{Time.now}] Calculating the Crowdsource status"
+      log 'Calculating the Crowdsource status'
       StatusCrowdsource
         .joins(store: :status_crowdsource_users)
         .where('status_crowdsource_users.created_at > ?', 2.hours.ago)
         .find_each.with_index do |s, i|
-        puts "Calculated #{i}" if (i % 100).zero?
+        log "Calculated #{i}" if (i % 100).zero?
         s.calculate_status
       end
 
-      puts "[#{Time.now}] Calculating the status"
-      puts "[#{Time.now}] Calculating the general status for store owners"
+      log 'Calculating the status'
+      log 'Calculating the general status for store owners'
 
       where_clause = <<-SQL
         statuses.updated_time < status_store_owners_stores.updated_time
@@ -22,18 +30,20 @@ class CalculateStatus
       SQL
 
       # TODO: This can be optimized
-      Store.includes(:status_store_owners, :status_generals)
-        .joins(:status_generals).joins(:status_store_owners)
+      Store.includes(:status_store_owners, :status_general)
+        .joins(:status_general).joins(:status_store_owners)
         .where(where_clause).find_each.with_index do |store, i|
-        puts "Calculated #{i}" if (i % 100).zero?
+        log "Calculated #{i}" if (i % 100).zero?
         owner = store.status_store_owners.order(created_at: :desc).first
-        general = store.status_generals.first
-        general.update!(status: owner.status, updated_time: owner.updated_time,
-                        valid_until: owner.updated_time + UPDATE_TIME.hour,
-                        is_official: true)
+        store.status_general.update!(
+          status: owner.status,
+          updated_time: owner.updated_time,
+          valid_until: owner.updated_time + UPDATE_TIME.hour,
+          is_official: true
+        )
       end
 
-      puts "[#{Time.now}] Calculating the general status"
+      log 'Calculating the general status'
 
       where_clause = <<-SQL
         (statuses.updated_time < status_crowdsources_stores.updated_time) AND
@@ -45,17 +55,19 @@ class CalculateStatus
       SQL
 
       # TODO: This can be optimized
-      Store.includes(:status_generals, :status_crowdsources)
-        .joins(:status_generals, :status_crowdsources)
+      Store.includes(:status_general, :status_crowdsources)
+        .joins(:status_general, :status_crowdsources)
         .where(where_clause).find_each.with_index do |store, i|
-        puts "Calculated #{i}" if (i % 100).zero?
+        log "Calculated #{i}" if (i % 100).zero?
         crowdsource = store.status_crowdsources.first
-        general = store.status_generals.first
-        general.update(status: crowdsource.status,
-                       updated_time: crowdsource.updated_time,
-                       valid_until: nil, is_official: false)
+        store.status_general.update(
+          status: crowdsource.status,
+          updated_time: crowdsource.updated_time,
+          valid_until: nil,
+          is_official: false
+        )
       end
     end
-    puts "Finished calculating the statuses in #{duration} ms"
+    log "Finished calculating the statuses in #{duration} ms"
   end
 end
