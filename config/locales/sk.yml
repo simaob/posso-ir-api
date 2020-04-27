@@ -140,6 +140,7 @@ sk:
       form:
         phone_number: 'Telefónne čísla'
         add_phone: "Pridať tel. číslo"
+        schedule: "Otváracie hodiny"
     users:
       search:
         placeholder: 'Vyhľadávať podľa mena alebo emailu...'

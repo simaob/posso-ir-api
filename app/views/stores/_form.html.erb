@@ -140,6 +140,17 @@
             <%= link_to_add_fields t('views.stores.form.add_phone'), form, :phones %>
           </fieldset>
         </div>
+
+        <% if @store.week_days.any? %>
+          <div class="form-group nested-form-fields">
+            <fieldset>
+              <legend><%= t('views.stores.form.schedule') %></legend>
+              <%= form.fields_for :week_days, @store.week_days.order(:day) do |week_days_form| %>
+                <%= render 'week_day_fields', f: week_days_form %>
+              <% end %>
+            </fieldset>
+          </div>
+        <% end %>
       <% end %>
 
       <div class="form-group">

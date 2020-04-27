@@ -178,6 +178,7 @@ pt:
         info_deleting: 'NOTA: Quando marcar uma loja para remoção por favor escreva o porquê dessa marcação no campo de detalhes.'
         phone_number: 'Números de telefone'
         add_phone: "Adicionar Telefone"
+        schedule: "Horário"
     status_crowdsource_users:
       index:
         title: 'Estados reportados'

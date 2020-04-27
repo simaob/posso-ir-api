@@ -181,6 +181,7 @@ es:
         info_deleting: 'NOTA: Al marcar una tienda para su eliminación, escriba el motivo de esta marca en el campo de detalles.'
         phone_number: 'Teléfonos'
         add_phone: "Añadir Teléfono"
+        schedule: "Horario"
     status_crowdsource_users:
       index:
         title: 'Estados reportados'
