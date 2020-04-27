@@ -5,7 +5,7 @@
 #  id           :bigint           not null, primary key
 #  access_token :string           not null
 #  expires_at   :datetime         not null
-#  is_active    :boolean          default("false")
+#  active       :boolean          default("false")
 #  name         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
