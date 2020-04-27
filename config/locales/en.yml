@@ -172,6 +172,8 @@ en:
         info_deleting: 'NOTE: When marking a store for deletion, please write the reason on the details field.'
         phone_number: 'Phone Numbers'
         add_phone: "Add Phone"
+        schedule: "Schedule"
+        phone_call_interval: "Phone Call Interval (minutes)"
     status_crowdsource_users:
       index:
         title: 'Reported statuses'

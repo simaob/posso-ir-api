@@ -2,30 +2,32 @@
 #
 # Table name: stores
 #
-#  id               :bigint           not null, primary key
-#  name             :string
-#  group            :string
-#  street           :string
-#  city             :string
-#  district         :string
-#  country          :string
-#  zip_code         :string
-#  latitude         :float
-#  longitude        :float
-#  capacity         :integer
-#  details          :text
-#  store_type       :integer          default("1"), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  lonlat           :geometry         point, 0
-#  state            :integer          default("1")
-#  reason_to_delete :text
-#  open             :boolean          default("true")
-#  created_by_id    :bigint
-#  updated_by_id    :bigint
-#  from_osm         :boolean          default("false")
-#  original_id      :bigint
-#  source           :string
+#  id                  :bigint           not null, primary key
+#  name                :string
+#  group               :string
+#  street              :string
+#  city                :string
+#  district            :string
+#  country             :string
+#  zip_code            :string
+#  latitude            :float
+#  longitude           :float
+#  capacity            :integer
+#  details             :text
+#  store_type          :integer          default("1"), not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  lonlat              :geometry         point, 0
+#  state               :integer          default("1")
+#  reason_to_delete    :text
+#  open                :boolean          default("true")
+#  created_by_id       :bigint
+#  updated_by_id       :bigint
+#  from_osm            :boolean          default("false")
+#  original_id         :bigint
+#  source              :string
+#  make_phone_calls    :boolean          default("false")
+#  phone_call_interval :integer          default("60")
 #
 class Store < ApplicationRecord
   include UserTrackable
@@ -45,6 +47,9 @@ class Store < ApplicationRecord
   has_many :phones
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
 
+  has_many :week_days
+  accepts_nested_attributes_for :week_days
+
   # geocoded_by :address
   # reverse_geocoded_by :latitude, :longitude
 
@@ -54,6 +59,7 @@ class Store < ApplicationRecord
   enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3, archived: 4}
 
   validates :capacity, allow_nil: true, numericality: {greater_than: 0}
+  validates :phone_call_interval, allow_nil: true, numericality: {greater_than: 29, less_than: 180}
 
   scope :by_country, ->(country) { where(country: country) }
   scope :by_group, ->(group) { where(group: group) }
