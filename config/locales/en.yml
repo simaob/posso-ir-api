@@ -95,7 +95,21 @@ en:
         page_time: 'Server time'
     home:
       index:
-        title: 'Welcome to Can I Go management system'
+        title: 'Can I Go?'
+        intro_html: 'In order to contribute to reducing the size of queues in stores and thus helping keep social distance, the application <i>Can I Go?</i> was born. See how you can contribute.'
+        store_owner: 'Shopkeeper'
+        store_owner_1: 'Sign up to the website and get your store owner code.'
+        store_owner_2: 'Add or link to your store.'
+        store_owner_3: 'Record the status of the queues on the website or in the application.'
+        store_owner_4: 'Help your customers!'
+        register: 'Register'
+        collaborator: 'Collaborator'
+        collaborator_1: 'Sign up to the website.'
+        collaborator_2: 'Add missing stores near you.'
+        collaborator_3: 'Report issues with existing stores.'
+        collaborator_4: 'Help us offer a complete service!'
+        download_the_app: 'The app'
+        download_intro: "If you don't have the application yet download it now for your mobile phone."
     stats:
       index:
         title: 'Usage statistics'

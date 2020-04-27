@@ -98,7 +98,21 @@ es:
         page_time: 'Hora del servidor'
     home:
       index:
-        title: 'Bienvenido a lo sistema de gestión de Puedo Ir'
+        title: 'Puedo Ir?'
+        intro_html: 'Para ayudar a reducir el tamaño de las colas en las tiendas y así ayudar al distanciamiento social, nació la aplicación <i>Puedo Ir?</i> Vea cómo puede contribuir.'
+        store_owner: 'Tendero'
+        store_owner_1: 'Regístrese en el sitio web y obtenga su código de tendero.'
+        store_owner_2: 'Agrega o únete a tu tienda.'
+        store_owner_3: 'Registre el estado de las colas en el sitio web o en la aplicación.'
+        store_owner_4: 'Ayuda a tus clientes!'
+        register: 'Registrarse'
+        collaborator: 'Colaborador'
+        collaborator_1: 'Regístrate en el sitio web.'
+        collaborator_2: 'Agregue tiendas faltantes cerca de usted.'
+        collaborator_3: 'Informar problemas con tiendas existentes.'
+        collaborator_4: 'Ayúdanos a ofrecer un servicio completo!'
+        download_the_app: 'La aplicación'
+        download_intro: 'Si aún no tiene la aplicación, descárguela ahora para su teléfono móvil.'
     stats:
       index:
         title: 'Estadísticas de uso'

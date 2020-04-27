@@ -1,3 +1,56 @@
-<div class="container mt-3">
-  <h1><%= I18n.t('views.home.index.title') %></h1>
+<div class="home-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <div class="container">
+    <h1 class="display-4"><%= t('views.home.index.title') %></h1>
+    <p class="lead text-muted">
+      <%= t('views.home.index.intro_html') %>
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-6 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal"><%= t('views.home.index.store_owner') %></h4>
+      </div>
+      <div class="card-body">
+        <ol class="text-left mt-3 mb-4">
+          <li><%= t('views.home.index.store_owner_1') %></li>
+          <li><%= t('views.home.index.store_owner_2') %></li>
+          <li><%= t('views.home.index.store_owner_3') %></li>
+          <li><%= t('views.home.index.store_owner_4') %></li>
+        </ol>
+        <%= link_to t('views.home.index.register'), new_user_registration_path, class: 'btn btn-lg btn-block btn-primary' %>
+      </div>
+    </div>
+    <div class="card mb-6 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal"><%= t('views.home.index.collaborator') %></h4>
+      </div>
+      <div class="card-body">
+        <ol class="text-left mt-3 mb-4">
+          <li><%= t('views.home.index.collaborator_1') %></li>
+          <li><%= t('views.home.index.collaborator_2') %></li>
+          <li><%= t('views.home.index.collaborator_3') %></li>
+          <li><%= t('views.home.index.collaborator_4') %></li>
+        </ol>
+        <%= link_to t('views.home.index.register'), new_user_registration_path, class: 'btn btn-lg btn-block btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="home-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <div class="container">
+    <h2 class="display-5"><%= t('views.home.index.download_the_app') %></h2>
+    <p class="lead text-muted">
+      <%= t('views.home.index.download_intro') %>
+    </p>
+    <a href="https://apps.apple.com/pt/app/posso-ir/id1503226327?l=pt", class="btn btn-lg btn-outline-dark">
+      Apple Store (iOS)
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.findlapa.possoir", class="btn btn-lg btn-outline-success">
+      Play Store (Android)
+    </a>
+  </div>
 </div>

@@ -76,7 +76,21 @@ sk:
         page_time: 'Čas servera'
     home:
       index:
-        title: 'Vitajte na stránke Nečakaj v rade'
+        title: 'Nečakaj v rade'
+        intro_html: 'S cieľom prispieť k zníženiu veľkosti front v obchodoch, a tým aj k sociálnej vzdialenosti, sa zrodila aplikácia <i>Nečakaj v rade</i>. Pozrite sa, ako môžete prispieť.'
+        store_owner: 'Kramář'
+        store_owner_1: 'Zaregistrujte sa na webovej stránke a získajte kód obchodu.'
+        store_owner_2: 'Pridajte si svoj obchod alebo sa k nemu pripojte.'
+        store_owner_3: 'Zaznamenajte stav frontov na webovú stránku alebo do aplikácie.'
+        store_owner_4: 'Pomôžte svojim zákazníkom!'
+        register: 'Zaregistrujte sa'
+        collaborator: 'Spolupracovník'
+        collaborator_1: 'Zaregistrujte sa na webových stránkach.'
+        collaborator_2: 'Pridajte chýbajúce obchody vo vašom okolí.'
+        collaborator_3: 'Nahláste problémy s existujúcimi obchodmi.'
+        collaborator_4: 'Pomôžte nám ponúknuť kompletné služby!'
+        download_the_app: 'Aplikácia'
+        download_intro: 'Ak ešte nemáte aplikáciu, ktorú si teraz stiahnete pre svoj mobilný telefón.'
     stats:
       index:
         title: 'Štatistika použitia'
