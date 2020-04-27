@@ -66,7 +66,7 @@ pt:
           store_owner: 'Gestor de loja'
           general_manager: 'Gestor do sistema'
           admin: 'Administrador'
-          contributor: 'Colaborador'
+          contributor: 'Voluntário/a'
       store:
         states:
           waiting_approval: 'Aguarda validação'
@@ -103,7 +103,7 @@ pt:
         store_owner_3: 'Registe o estado das filas pelo site ou na aplicação.'
         store_owner_4: 'Ajude os seus clientes!'
         register: 'Registe-se'
-        collaborator: 'Colaborador'
+        collaborator: 'Voluntário/a'
         collaborator_1: 'Registe-se no site'
         collaborator_2: 'Adicione lojas que estejam em falta perto de si.'
         collaborator_3: 'Reporte problemas com lojas registadas no sistema.'
