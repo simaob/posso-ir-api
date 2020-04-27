@@ -14,6 +14,7 @@ class WeekDay < ApplicationRecord
   belongs_to :store
 
   validates_uniqueness_of :day, scope: :store_id
+  validates :opening_hour, :closing_hour, presence: true, if: :active
   validate :time_order
 
   enum day: { sunday: 0, monday: 1, tuesday: 2, wednesday: 3, thursday: 4, friday: 5, saturday: 6 }

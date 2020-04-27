@@ -43,6 +43,9 @@ module PossoIrApi
     config.i18n.default_locale = :pt
     config.i18n.available_locales = [:pt, :es, :en, :sk]
 
+    # ActiveJob
+    config.active_job.queue_adapter = :sidekiq
+
     config.generators do |g|
       g.stylesheets false
     end

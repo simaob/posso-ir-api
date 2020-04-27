@@ -95,3 +95,6 @@ gem 'react-rails'
 gem 'chartkick'
 gem 'groupdate'
 gem 'aws-sdk-rails' # to use aws-ses
+
+# Active job
+gem 'sidekiq'
