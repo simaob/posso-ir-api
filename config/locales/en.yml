@@ -103,11 +103,11 @@ en:
         store_owner_3: 'Record the status of the queues on the website or in the application.'
         store_owner_4: 'Help your customers!'
         register: 'Register'
-        collaborator: 'Collaborator'
-        collaborator_1: 'Sign up to the website.'
-        collaborator_2: 'Add missing stores near you.'
-        collaborator_3: 'Report issues with existing stores.'
-        collaborator_4: 'Help us offer a complete service!'
+        contributor: 'Contributor'
+        contributor_1: 'Sign up to the website.'
+        contributor_2: 'Add missing stores near you.'
+        contributor_3: 'Report issues with existing stores.'
+        contributor_4: 'Help us offer a complete service!'
         download_the_app: 'Download the app'
         download_intro: "If you don't have the application yet download it now for your mobile phone."
     stats:
