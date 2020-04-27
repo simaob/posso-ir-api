@@ -111,8 +111,9 @@ class StoresController < ApplicationController
   def store_params
     permitted_params = [:name, :group, :street, :city, :zip_code, :country,
                         :district, :store_type, :latitude, :longitude,
-                        :store_type, :open, :capacity, :details,
-                        phones_attributes: [:id, :phone_number, :name, :active, :_destroy]]
+                        :store_type, :open, :capacity, :details, :phone_call_interval,
+                        phones_attributes: [:id, :phone_number, :name, :active, :_destroy],
+                        week_days_attributes: [:id, :opening_hour, :closing_hour, :active]]
     if current_user.admin? || current_user.general_manager?
       permitted_params << :state
       permitted_params << {manager_ids: []}

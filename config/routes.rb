@@ -30,4 +30,9 @@ Rails.application.routes.draw do
       post 'status-phone', to: 'status_phone#create'
     end
   end
+
+  require 'sidekiq/web'
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

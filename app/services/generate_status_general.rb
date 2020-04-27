@@ -10,7 +10,7 @@ class GenerateStatusGeneral
   def generates_statuses
     Store.find_each.with_index do |store, index|
       puts "Imported #{index}" if (index % 100).zero?
-      next if store.status_generals.any?
+      next if store.status_general
 
       StatusGeneral.create!(store_id: store.id, updated_time: Time.now)
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_204432) do
+ActiveRecord::Schema.define(version: 2020_04_27_104941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,8 +134,11 @@ ActiveRecord::Schema.define(version: 2020_04_16_204432) do
     t.boolean "from_osm", default: false
     t.bigint "original_id"
     t.string "source"
+    t.boolean "make_phone_calls", default: false
+    t.integer "phone_call_interval", default: 60
     t.index ["created_by_id"], name: "index_stores_on_created_by_id"
     t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
+    t.index ["make_phone_calls"], name: "index_stores_on_make_phone_calls"
     t.index ["updated_by_id"], name: "index_stores_on_updated_by_id"
   end
 
@@ -165,6 +168,18 @@ ActiveRecord::Schema.define(version: 2020_04_16_204432) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "week_days", force: :cascade do |t|
+    t.integer "day", null: false
+    t.time "opening_hour"
+    t.time "closing_hour"
+    t.boolean "active", default: false
+    t.string "timestamps"
+    t.bigint "store_id"
+    t.index ["active"], name: "index_week_days_on_active"
+    t.index ["store_id", "day"], name: "index_week_days_on_store_id_and_day", unique: true
+    t.index ["store_id"], name: "index_week_days_on_store_id"
+  end
+
   add_foreign_key "api_keys", "users", on_delete: :cascade
   add_foreign_key "phones", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
@@ -178,4 +193,5 @@ ActiveRecord::Schema.define(version: 2020_04_16_204432) do
   add_foreign_key "stores", "users", column: "updated_by_id"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
+  add_foreign_key "week_days", "stores", on_delete: :cascade
 end
