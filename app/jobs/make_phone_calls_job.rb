@@ -4,11 +4,10 @@ class MakePhoneCallsJob < ApplicationJob
   require 'net/http'
 
   def perform(args)
-    args.transform_keys!(&:to_sym)
-    Rails.logger.debug("Going to make a phone call to #{args[:phone]}")
+    Rails.logger.debug("Going to make a phone call to #{args['phone']}")
 
-    phone = args.fetch :phone
-    store = args.fetch(:store) || '12345' # random number in case there's no store
+    phone = args.fetch 'phone'
+    store = args.fetch('store') || '12345' # random number in case there's no store
     endpoint = ENV['APIGEE_URL'].gsub('_store_id_', store.to_s)
     uri = URI.parse endpoint
     apikey = ENV['APIGEE_KEY']
