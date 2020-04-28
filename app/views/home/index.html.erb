@@ -20,7 +20,7 @@
           <li><%= t('views.home.index.store_owner_3') %></li>
           <li><%= t('views.home.index.store_owner_4') %></li>
         </ol>
-        <%= link_to t('views.home.index.register'), new_user_registration_path, class: 'btn btn-lg btn-block btn-primary' %>
+        <%= link_to t('views.home.index.register'), new_user_registration_path(role: :store_owner), class: 'btn btn-lg btn-block btn-primary' %>
       </div>
     </div>
     <div class="card mb-6 shadow-sm">
@@ -34,7 +34,7 @@
           <li><%= t('views.home.index.contributor_3') %></li>
           <li><%= t('views.home.index.contributor_4') %></li>
         </ol>
-        <%= link_to t('views.home.index.register'), new_user_registration_path, class: 'btn btn-lg btn-block btn-primary' %>
+        <%= link_to t('views.home.index.register'), new_user_registration_path(role: :contributor), class: 'btn btn-lg btn-block btn-primary' %>
       </div>
     </div>
   </div>
