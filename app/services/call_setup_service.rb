@@ -21,7 +21,7 @@ class CallSetupService
 
       times.each do |time|
         MakePhoneCallsJob.set(wait_until: time)
-          .perform_later('phone' => phone_number, 'store' => store.original_id)
+          .perform_later(phone_number, store.original_id)
       end
     end
   end

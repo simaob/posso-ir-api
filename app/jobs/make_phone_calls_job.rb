@@ -3,11 +3,10 @@ class MakePhoneCallsJob < ApplicationJob
 
   require 'net/http'
 
-  def perform(args)
-    Rails.logger.debug("Going to make a phone call to #{args['phone']}")
+  def perform(phone, store)
+    Sidekiq.logger.debug("Going to make a phone call to #{phone}")
 
-    phone = args.fetch 'phone'
-    store = args.fetch('store') || '12345' # random number in case there's no store
+    store ||= '12345' # random number in case there's no store
     endpoint = ENV['APIGEE_URL'].gsub('_store_id_', store.to_s)
     uri = URI.parse endpoint
     apikey = ENV['APIGEE_KEY']
