@@ -4,6 +4,7 @@ class MakePhoneCallsJob < ApplicationJob
   require 'net/http'
 
   def perform(args)
+    args.transform_keys!(&:to_sym)
     Rails.logger.debug("Going to make a phone call to #{args[:phone]}")
 
     phone = args.fetch :phone
