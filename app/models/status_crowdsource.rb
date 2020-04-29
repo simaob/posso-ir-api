@@ -18,6 +18,7 @@
 #  previous_voters       :integer
 #  is_official           :boolean          default("false")
 #  active                :boolean          default("true")
+#  estimation            :boolean          default("false")
 #
 class StatusCrowdsource < Status
   include TimeHelper

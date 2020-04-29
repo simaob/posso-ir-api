@@ -20,5 +20,14 @@
 #  active                :boolean          default("true")
 #  estimation            :boolean          default("false")
 #
-class StatusUserCount < Status
+class StatusEstimation < Status
+  after_update :create_history
+
+  private
+
+  def create_history
+    StatusEstimationHistory
+      .create(updated_time: updated_time, valid_until: valid_until, status: status,
+              store_id: store_id, old_created_at: created_at, old_updated_at: updated_at)
+  end
 end
