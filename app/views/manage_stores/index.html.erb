@@ -28,16 +28,16 @@
   <div class="col-md-12">
     <div class="main-card mb-3 card">
       <div class="card-body">
-        <%= page_entries_info @stores %>
+        <%= page_entries_info @user_stores %>
         <div class="table-responsive">
           <table class="table table-sm">
             <thead>
               <tr>
                 <th><%= Store.human_attribute_name(:name) %></th>
+                <th><%= UserStore.human_attribute_name(:approved) %></th>
                 <th><%= Store.human_attribute_name(:state) %></th>
                 <th><%= Store.human_attribute_name(:group) %></th>
                 <th><%= Store.human_attribute_name(:street) %></th>
-                <th><%= Store.human_attribute_name(:city) %></th>
                 <th><%= Store.human_attribute_name(:latitude) %></th>
                 <th><%= Store.human_attribute_name(:longitude) %></th>
                 <th><%= t('views.stores.form.phone_number') %></th>
@@ -47,13 +47,14 @@
             </thead>
 
             <tbody>
-              <% @stores.each do |store| %>
+              <% @user_stores.each do |us| %>
+                <% store = us.store %>
                 <tr>
                   <td><%= link_to store.name, store %></td>
+                  <td><%= us.approved? %></td>
                   <td><%= enum_l(store, :state) %></td>
                   <td><%= store.group %></td>
-                  <td><%= store.street %></td>
-                  <td><%= store.city %></td>
+                  <td><%= store.address %></td>
                   <td><%= store.latitude&.round(3) %></td>
                   <td><%= store.longitude&.round(3) %></td>
                   <td><%= store.phones.pluck(:phone_number).join(' ') %></td>
@@ -61,16 +62,18 @@
                   <td>
                     <% if can? :edit, store %>
                       <%= link_to t('views.actions.edit'), edit_store_path(store) %>
-                      |
                     <% end %>
-                    <%= link_to t('views.manage_stores.index.manage_link'),
-                      new_store_status_store_owner_path(store) %>
+                    <% if us.approved? && can?(:new, StatusStoreOwner) %>
+                      |
+                      <%= link_to t('views.manage_stores.index.manage_link'),
+                        new_store_status_store_owner_path(store) %>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>
             </tbody>
           </table>
-          <%= paginate @stores %>
+          <%= paginate @user_stores %>
         </div>
       </div>
     </div>

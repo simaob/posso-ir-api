@@ -59,6 +59,8 @@ pt:
         user: 'Utilizador'
       api_key:
         access_token: 'Chave de accesso à API'
+      user_store:
+        approved: 'Aprovada?'
     enums:
       user:
         roles:
@@ -204,6 +206,10 @@ pt:
       search:
         filter_type: 'Filtrar por tipo'
         button: 'Filtrar'
+    devise:
+      registrations:
+        new:
+          help_stores: 'Procure e escolha as suas lojas e estas serão posteriormente verificadas por um administrador.'
     users:
       search:
         placeholder: 'Procure por nome ou email...'

@@ -59,6 +59,8 @@ en:
         user: 'User'
       api_key:
         access_token: 'API Access token'
+      user_store:
+        approved: '¿Aprobada?'
     enums:
       user:
         roles:
@@ -198,6 +200,10 @@ en:
       search:
         filter_type: 'Filter by type'
         button: 'Filter'
+    devise:
+      registrations:
+        new:
+          help_stores: 'Search and pick your stores, an admin will later validate them.'
     users:
       search:
         placeholder: 'Search by name or email...'

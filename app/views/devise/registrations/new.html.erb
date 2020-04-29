@@ -24,6 +24,9 @@
     <div class="form-group">
       <%= f.label :store_ids, value: Store.model_name.human(count: 2), class: "col-sm-2 col-form-label" %>
       <%= f.select :store_ids, [], {}, {class: "form-control store-managers-select", multiple: true} %>
+      <small class="form-text text-muted">
+        <%= t('views.devise.registrations.new.help_stores') %>
+      </small>
     </div>
   <% end %>
 
