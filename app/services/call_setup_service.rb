@@ -13,8 +13,8 @@ class CallSetupService
 
       o_hour = store_schedule.opening_hour
       c_hour = store_schedule.closing_hour
-      start_at = DateTime.now.change(hour: o_hour.hour, min: o_hour.min) + call_shift.seconds
-      end_at = DateTime.now.change(hour: c_hour.hour, min: c_hour.min)
+      start_at = DateTime.current.change(hour: o_hour.hour, min: o_hour.min) + call_shift.seconds
+      end_at = DateTime.current.change(hour: c_hour.hour, min: c_hour.min)
 
       times = [start_at]
       times << (times.last + store.phone_call_interval.minutes) while times.last < end_at

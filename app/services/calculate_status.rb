@@ -1,13 +1,8 @@
 class CalculateStatus
   UPDATE_TIME = 1
 
-  attr_reader :silent
-  def initialize(silent: Rails.env.test?)
-    @silent = silent
-  end
-
   def log(msg)
-    puts "[#{Time.now}] #{msg}" unless silent
+    Rails.logger.info msg
   end
 
   def call

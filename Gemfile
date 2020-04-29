@@ -37,6 +37,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop'
   gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'factory_bot_rails'
 end
 
@@ -64,6 +65,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'fakefs', require: false
   gem 'selenium-webdriver'
   gem 'timecop'
   # Easy installation and use of web drivers to run system tests with browsers

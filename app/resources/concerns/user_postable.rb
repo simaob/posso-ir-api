@@ -9,12 +9,12 @@ module UserPostable
     current_user = context[:current_user]
     return if current_user.admin?
     return if current_user.last_post.nil?
-    return if current_user.last_post.utc < (Time.now.utc - USER_INTERVAL.minutes)
+    return if current_user.last_post.utc < (Time.current - USER_INTERVAL.minutes)
 
     raise TooManyRequestsError
   end
 
   def update_user_time
-    context[:current_user].update last_post: DateTime.now
+    context[:current_user].update last_post: DateTime.current
   end
 end

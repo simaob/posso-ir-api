@@ -17,21 +17,21 @@ module Api
                  end
 
         StatusStoreOwner.create!(status: status,
-                                 store_id: store.id, updated_time: DateTime.now)
+                                 store_id: store.id, updated_time: DateTime.current)
 
-        render json: {message: "Added status for store: #{store.id}"}, status: 201
+        render json: {message: "Added status for store: #{store.id}"}, status: :created
       rescue StandardError
-        render json: {error: 'Malformed request'}, status: 400
+        render json: {error: 'Malformed request'}, status: :bad_request
       end
 
       private
 
       def forbidden_store
-        render json: {error: "You don't own this store"}, status: 403
+        render json: {error: "You don't own this store"}, status: :forbidden
       end
 
       def wrong_phone
-        render json: {error: 'Invalid phone number'}, status: 406
+        render json: {error: 'Invalid phone number'}, status: :not_acceptable
       end
     end
   end

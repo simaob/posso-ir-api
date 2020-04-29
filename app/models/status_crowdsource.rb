@@ -48,8 +48,8 @@ class StatusCrowdsource < Status
     first_votes = []
     second_votes = []
     third_votes = []
-    first_time = (Time.now - TIME_PARAMS[:first].minutes).utc
-    second_time = (Time.now - TIME_PARAMS[:second].minutes).utc
+    first_time = (Time.current - TIME_PARAMS[:first].minutes).utc
+    second_time = (Time.current - TIME_PARAMS[:second].minutes).utc
 
     votes.each do |v|
       case v.created_at
@@ -80,7 +80,7 @@ class StatusCrowdsource < Status
     update(
       status: new_status.round(2),
       voters: total_votes.count,
-      updated_time: DateTime.now
+      updated_time: DateTime.current
     )
   end
 
@@ -89,7 +89,7 @@ class StatusCrowdsource < Status
   def total_votes
     StatusCrowdsourceUser
       .where(store_id: store_id)
-      .where("created_at > '#{(Time.now - TIME_PARAMS[:third].minutes).utc.to_s(:db)}'")
+      .where("created_at > '#{(Time.current - TIME_PARAMS[:third].minutes).utc.to_s(:db)}'")
       .where.not(status: nil)
       .order(created_at: :desc)
   end

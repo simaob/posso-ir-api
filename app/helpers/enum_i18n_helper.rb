@@ -6,7 +6,7 @@ module EnumI18nHelper
     values = class_name.send(enum.to_s.pluralize).map do |key, _|
       [enum_i18n(class_name, enum, key), key]
     end
-    values.sort { |a, b| a[0] <=> b[0] }
+    values.sort_by { |a| a[0] }
   end
 
   # Returns the i18n version the models current enum key

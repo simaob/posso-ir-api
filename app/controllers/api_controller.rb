@@ -21,15 +21,15 @@ class ApiController < ApplicationController
     return @current_user = User.first if Rails.env.development?
 
     payload = JwtService.decode(token: token)
-    if DateTime.parse(payload['expiration_date']) <= DateTime.now
-      render json: {error: 'Auth token has expired. Please login again'}, status: 401
+    if DateTime.parse(payload['expiration_date']) <= DateTime.current
+      render json: {error: 'Auth token has expired. Please login again'}, status: :unauthorized
     elsif store_owner_code
       @current_user = User.where(store_owner_code: store_owner_code, role: :store_owner).first
     else
       @current_user = User.find_or_create_by(app_uuid: payload['uuid'])
     end
   rescue StandardError
-    render json: {error: 'not authorized'}, status: 401
+    render json: {error: 'not authorized'}, status: :unauthorized
   end
 
   def current_user
@@ -51,7 +51,7 @@ class ApiController < ApplicationController
   end
 
   def too_many_requests
-    render json: {error: 'Too many requests'}, status: 429
+    render json: {error: 'Too many requests'}, status: :too_many_requests
   end
 
   def api_key

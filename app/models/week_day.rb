@@ -13,7 +13,7 @@
 class WeekDay < ApplicationRecord
   belongs_to :store
 
-  validates_uniqueness_of :day, scope: :store_id
+  validates :day, uniqueness: {scope: :store_id}
   validates :opening_hour, :closing_hour, presence: true, if: :active
   validate :time_order
 

@@ -26,7 +26,7 @@ module Api
       filter :store_id
 
       def updated_time
-        Time.now.utc - rand(1..65).minutes
+        Time.current - rand(1..65).minutes
       end
 
       def status
