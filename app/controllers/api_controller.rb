@@ -34,7 +34,7 @@ class ApiController < ApplicationController
 
   def current_user
     @current_user ||= if store_owner_code
-                        User.where(store_owner_code: store_owner_code, role: :store_owner).first
+                        User.find_by(store_owner_code: store_owner_code, role: :store_owner)
                       else
                         User.find_by(app_uuid: JwtService.decode(token: token)['uuid'])
                       end

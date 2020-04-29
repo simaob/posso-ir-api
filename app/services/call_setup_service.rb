@@ -8,7 +8,7 @@ class CallSetupService
 
     stores.each do |store|
       phone_number = store.phones.first.phone_number
-      store_schedule = store.week_days.where(day: week_day).first
+      store_schedule = store.week_days.find_by(day: week_day)
       call_shift = rand(400)
 
       o_hour = store_schedule.opening_hour
