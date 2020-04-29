@@ -14,7 +14,7 @@
 FactoryBot.define do
   factory :status_crowdsource_user do
     status { 5 }
-    posted_at { Time.now }
+    posted_at { Time.current }
     association :user
     association :store
   end

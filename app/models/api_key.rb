@@ -14,9 +14,9 @@
 class ApiKey < ApplicationRecord
   belongs_to :user, optional: false
 
-  validates_presence_of :access_token
-  validates_presence_of :expires_at
-  validates_uniqueness_of :access_token
+  validates :access_token, presence: true
+  validates :expires_at, presence: true
+  validates :access_token, uniqueness: true
   validate :one_active_per_user
 
   before_validation :set_expires_at
@@ -35,12 +35,13 @@ class ApiKey < ApplicationRecord
   end
 
   def set_expires_at
-    self.expires_at = Time.now + 3.months
+    self.expires_at = Time.current + 3.months
   end
 
   def set_access_token
     self.access_token = JwtService.encode payload: {
-      user_id: user_id, created_at: Time.now,
+      user_id: user_id,
+      created_at: Time.current,
       expiration_date: expires_at
     }
   end

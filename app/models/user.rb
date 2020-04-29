@@ -21,17 +21,17 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :registerable
 
-  with_options if: :admin? do |admin|
-    admin.validates_presence_of :email
-    admin.validates_presence_of :password, if: :password_required?
-    admin.validates_confirmation_of :password, if: :password_required?
-    admin.validates_length_of :password, within: 8..128, allow_blank: true
+  with_options if: :admin? do
+    validates :email, presence: true
+    validates :password, presence: true, if: :password_required?
+    validates :password, confirmation: true, if: :password_required?
+    validates :password, length: {within: 8..128, allow_blank: true}
   end
-  validates_uniqueness_of :email, unless: proc { |u| u.email.blank? }
+  validates :email, uniqueness: true, unless: proc { |u| u.email.blank? }
 
   has_many :user_stores, inverse_of: :manager
   has_many :stores, through: :user_stores
-  has_many :created_stores, class_name: 'Store', foreign_key: :created_by_id
+  has_many :created_stores, class_name: 'Store', foreign_key: :created_by_id, inverse_of: :created_by
   has_many :status_crowdsource_users
   has_one :api_key
 
@@ -55,7 +55,7 @@ class User < ApplicationRecord
   def regenerate_api_key
     return unless persisted?
 
-    ApiKey.where(user_id: id).update_all(active: false)
+    ApiKey.where(user_id: id).update(active: false)
     ApiKey.create(user: self, active: true)
   end
 

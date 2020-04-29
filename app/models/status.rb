@@ -21,6 +21,7 @@
 #
 class Status < ApplicationRecord
   paginates_per 100
-  validates_presence_of :updated_time
   belongs_to :store
+
+  validates :updated_time, presence: true
 end

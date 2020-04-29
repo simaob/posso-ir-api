@@ -15,7 +15,7 @@
 
       <div class="form-group">
         <%= form.label :updated_time, class: "col-sm-2 col-form-label" %>
-        <%= form.time_field :updated_time, value: Time.now.strftime('%H:%M'),
+        <%= form.time_field :updated_time, value: Time.current.strftime('%H:%M'),
           class: "form-control datetimepicker" %>
       </div>
 

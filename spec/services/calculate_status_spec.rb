@@ -3,7 +3,7 @@ require 'rails_helper'
 describe CalculateStatus do
   let(:store) { create(:store) }
 
-  def create_statuses(users: [], owners: [], at: Time.now)
+  def create_statuses(users: [], owners: [], at: Time.current)
     Timecop.freeze(at) do
       users.each do |vote|
         create(:status_crowdsource_user, store: store, status: vote)
@@ -25,7 +25,7 @@ describe CalculateStatus do
     let!(:store1) { create(:store) }
     let!(:store2) { create(:store) }
     let!(:store3) { create(:store) }
-    let!(:a_time) { Time.now.utc }
+    let!(:a_time) { Time.current }
 
     let!(:set_the_scene) do
       create(:status_crowdsource_user, status: 10, store: store1, created_at: a_time)
