@@ -145,19 +145,19 @@ class Store < ApplicationRecord
   end
 
   def create_crowdsource_status
-    status = StatusCrowdsourceUser.where(store_id: id).first
+    status = StatusCrowdsource.find_by(store_id: id)
     return if status
 
-    StatusCrowdsource.create(store_id: id, updated_time: Time.now)
+    StatusCrowdsource.create(store_id: id, updated_time: Time.current)
   end
 
   def create_store_owner_status
     status = StatusStoreOwner.new(store_id: id,
-                                  updated_time: Time.now, active: true)
+                                  updated_time: Time.current, active: true)
     status.save!(validate: false)
   end
 
   def create_general_status
-    StatusGeneral.create!(store_id: id, updated_time: Time.now, is_official: false)
+    StatusGeneral.create!(store_id: id, updated_time: Time.current, is_official: false)
   end
 end

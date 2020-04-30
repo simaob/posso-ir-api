@@ -24,7 +24,7 @@ require 'rails_helper'
 RSpec.describe StatusCrowdsource, type: :model do
   let(:store) { create(:store) }
   let(:status_crowdsource) { store.status_crowdsources.first }
-  let!(:a_time) { Time.now.utc }
+  let!(:a_time) { Time.current }
 
   it 'should have status crowdsource nil when created' do
     expect(status_crowdsource.status).to be_nil

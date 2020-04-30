@@ -9,11 +9,11 @@ class GenerateStatusStoreOwner
   # but I don't care cause it's a "run once" task
   def generates_statuses
     Store.find_each.with_index do |store, index|
-      puts "Imported #{index}" if (index % 100).zero?
+      Rails.logger.info "Imported #{index}" if (index % 100).zero?
       next if store.status_store_owners.any?
 
       status = StatusStoreOwner.new(store_id: store.id,
-                                    updated_time: Time.now, active: true)
+                                    updated_time: Time.current, active: true)
       status.save!(validate: false)
     end
   end

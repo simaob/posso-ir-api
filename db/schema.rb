@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_104941) do
+ActiveRecord::Schema.define(version: 2020_04_29_185601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_104941) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
-    t.index ["access_token"], name: "index_api_keys_on_access_token"
+    t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
     t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_104941) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "store_id"
-    t.index ["phone_number"], name: "index_phones_on_phone_number"
+    t.index ["phone_number"], name: "index_phones_on_phone_number", unique: true
     t.index ["store_id"], name: "index_phones_on_store_id"
   end
 

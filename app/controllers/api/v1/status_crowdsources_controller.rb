@@ -4,7 +4,7 @@ module Api
       def index
         return super if params.dig('filter', 'store_id')
 
-        render json: {error: 'Must supply store_id filter'}, status: 422
+        render json: {error: 'Must supply store_id filter'}, status: :unprocessable_entity
       end
     end
   end

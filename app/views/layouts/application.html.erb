@@ -31,10 +31,10 @@
       <div class="container">
         <p class="small">
           <span class="float-left">
-            <%= t('views.layout.application.title') %> &copy; <%= Time.now.year %>
+            <%= t('views.layout.application.title') %> &copy; <%= Time.current.year %>
           </span>
           <span class="float-right">
-            <%= t('views.layout.application.page_time') %> <%= Time.now.strftime('%H:%M') %>
+            <%= t('views.layout.application.page_time') %> <%= Time.current.strftime('%H:%M') %>
           </span>
         </p>
       </div>

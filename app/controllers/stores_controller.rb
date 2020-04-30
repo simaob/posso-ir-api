@@ -89,7 +89,7 @@ class StoresController < ApplicationController
     @stores = @stores.by_state(params[:state]) if params[:state].present?
     @stores = @stores.by_store_type(params[:store_type]) if params[:store_type].present?
     size = @stores.size
-    @stores.update_all(state: :live)
+    @stores.update_all(state: :live) # rubocop:disable Rails/SkipsModelValidations
 
     respond_to do |format|
       format.html { redirect_to stores_url, notice: t('controllers.stores.approve_all.notice', size: size) }
