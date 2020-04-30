@@ -10,7 +10,9 @@ module Api
         return invalid_data unless status
 
         estimation = StatusEstimation.create(status: status,
-                                             store_id: store.id, updated_time: DateTime.now)
+                                             store_id: store.id,
+                                             updated_time: DateTime.current,
+                                             valid_until: DateTime.current + 1.hour)
         if estimation.errors.any?
           render json: {error: estimation.errors.first.message}, status: :unprocessable_entity
         else

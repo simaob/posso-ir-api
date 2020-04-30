@@ -34,7 +34,8 @@ class CalculateStatus
           status: owner.status,
           updated_time: owner.updated_time,
           valid_until: owner.updated_time + UPDATE_TIME.hour,
-          is_official: true
+          is_official: true,
+          estimation: false
         )
       end
 
@@ -59,7 +60,8 @@ class CalculateStatus
           status: crowdsource.status,
           updated_time: crowdsource.updated_time,
           valid_until: nil,
-          is_official: false
+          is_official: false,
+          estimation: false
         )
       end
     end
