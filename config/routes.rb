@@ -29,7 +29,7 @@ Rails.application.routes.draw do
       jsonapi_resources :random_status_generals, only: [:index] do end
 
       post 'status-phone', to: 'status_phone#create'
-      post 'status_estimations', to: 'status_estimations#create'
+      post 'status-estimations', to: 'status_estimations#create'
     end
   end
 

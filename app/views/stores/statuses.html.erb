@@ -34,7 +34,7 @@
 
             <tbody>
               <% @statuses.each do |status| %>
-                <tr>
+                <tr <%= 'class=table-success' if status.is_a?(StatusGeneral) %>>
                   <td><%= status.type %></td>
                   <td><%= status.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
                   <td><%= status.status&.round(3) %></td>
@@ -69,7 +69,7 @@
       <div class="main-card mb-3 card">
         <div class="card-body">
           <h5 class="card-title"><%= t('views.status_estimations.index.title') %></h5>
-          <%= render 'status_estimations/table', estimation: @status_estimation, histories: @estimation_histories %>
+          <%= render 'status_estimations/table', histories: @estimation_histories %>
         </div>
       </div>
     </div>

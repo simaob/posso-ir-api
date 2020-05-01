@@ -103,7 +103,6 @@ class StoresController < ApplicationController
     @statuses = @store.statuses.order(updated_time: :desc)
     @status_crowdsource_users = @store.status_crowdsource_users
       .order(posted_at: :desc).page(params[:page])
-    @status_estimation = @store.status_estimation
     @estimation_histories = StatusEstimationHistory.where(store_id: @store.id)
       .order(updated_time: :desc).page(params[:page])
   end

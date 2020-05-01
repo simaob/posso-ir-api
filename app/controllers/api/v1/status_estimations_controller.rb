@@ -4,7 +4,7 @@ module Api
       def create
         return forbidden unless current_user.admin?
 
-        store = Store.find_by(id: params['id'], active: true).first
+        store = Store.find_by(id: params['store-id'])
         status = params['status']
         return wrong_store unless store
         return invalid_data unless status

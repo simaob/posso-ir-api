@@ -34,6 +34,7 @@ class StatusStoreOwner < Status
   def update_general_status
     StatusGeneral.find_by(store_id: store_id)&.update(
       updated_time: updated_time, status: status, queue: queue,
-      valid_until: valid_until, is_official: true, estimation: false)
+      valid_until: valid_until, voters: nil,
+      is_official: true, estimation: false)
   end
 end

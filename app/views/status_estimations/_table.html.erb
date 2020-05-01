@@ -9,12 +9,8 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td><%= estimation&.status&.round(3) %></td>
-        <td><%= estimation&.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
-      </tr>
-      <% histories.each do |status| %>
-        <tr>
+      <% histories.each_with_index do |status, i| %>
+        <tr <%= 'class=table-primary' if i.zero? %>>
           <td><%= status.status&.round(3) %></td>
           <td><%= status.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
         </tr>
