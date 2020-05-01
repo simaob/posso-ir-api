@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   load_and_authorize_resource except: [:statuses]
-  skip_before_action :authenticate_user!, only: [:index], if: proc { request.json? }
+  skip_before_action :authenticate_user!, if: proc { request.json? && action_name == 'index' }
 
   # GET /stores
   # GET /stores.json
