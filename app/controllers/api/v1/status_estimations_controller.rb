@@ -7,16 +7,16 @@ module Api
         store = Store.find_by(id: params['store-id'])
         status = params['status']
         return wrong_store unless store
-        return invalid_data unless status
+        return invalid_data if status.blank?
 
         estimation = StatusEstimation.create(status: status,
                                              store_id: store.id,
                                              updated_time: DateTime.current,
                                              valid_until: DateTime.current + 1.hour)
         if estimation.errors.any?
-          render json: {error: estimation.errors.first.message}, status: :unprocessable_entity
+          render json: {error: estimation.errors.messages}, status: :unprocessable_entity
         else
-          render json: {message: "Added status for store: #{store.id}"}, status: 201
+          render json: {message: "Added status for store: #{store.id}"}, status: :created
         end
       end
 
