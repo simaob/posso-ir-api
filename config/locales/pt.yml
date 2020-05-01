@@ -243,6 +243,9 @@ pt:
         "0": 'Sem fila'
         "5": 'Fila média'
         "10": 'Fila longa'
+    status_estimations:
+      index:
+        title: "Estados Estimados"
   helpers:
     page_entries_info:
       one_page:

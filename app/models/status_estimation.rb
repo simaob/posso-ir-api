@@ -14,6 +14,7 @@
 class StatusEstimation < Status
   after_update :create_history
   after_update :update_status_general
+  belongs_to :store
 
   private
 

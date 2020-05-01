@@ -197,3 +197,6 @@ sk:
         "0": 'Bez zdržania'
         "5": 'Mierne zdržanie'
         "10": 'Veľké zdržanie'
+    status_estimations:
+      index:
+        title: "Odhadované Stavy"

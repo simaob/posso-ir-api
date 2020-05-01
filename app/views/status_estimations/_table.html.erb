@@ -1,0 +1,25 @@
+<%= page_entries_info histories %>
+<div class="table-responsive">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th><%= StatusEstimation.human_attribute_name(:status) %></th>
+        <th><%= StatusEstimation.human_attribute_name(:updated_time) %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= estimation&.status&.round(3) %></td>
+        <td><%= estimation&.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
+      </tr>
+      <% histories.each do |status| %>
+        <tr>
+          <td><%= status.status&.round(3) %></td>
+          <td><%= status.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate histories %>
+</div>

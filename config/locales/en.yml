@@ -237,3 +237,6 @@ en:
         "0": 'No queue'
         "5": 'Average queue'
         "10": 'Long queue'
+    status_estimations:
+      index:
+        title: "Estimated Statuses"

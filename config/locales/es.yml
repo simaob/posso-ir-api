@@ -224,6 +224,9 @@ es:
         regenerate_api_key: 'Generar nueva clave API'
       statuses:
         title: 'Estados reportados por %{user}'
+    status_estimations:
+      index:
+        title: "Estado Estimados"
   helpers:
     page_entries_info:
       one_page:
