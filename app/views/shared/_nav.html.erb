@@ -1,94 +1,106 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <%= link_to image_tag('logo.png', size: '50', alt: t('views.layout.application.title')), root_path, class: "navbar-brand" %>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <% if can? :read, :map %>
-        <li class="nav-item <%= 'active' if controller_name == 'map' %>">
-          <%= link_to map_index_path, class: 'nav-link' do %>
-            <%= t('views.map.index.title') %>
-            <% if controller_name == 'map' %>
-              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+  <div class="container">
+    <%= link_to image_tag('logo.png', size: '50', alt: t('views.layout.application.title')), root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <% if can? :read, :stats %>
+          <li class="nav-item <%= 'active' if controller_name == 'stats' %>">
+            <%= link_to stats_path, class: 'nav-link' do %>
+              <%= t('views.shared.navbar.stats') %>
+              <% if controller_name == 'stats' %>
+                <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+              <% end %>
             <% end %>
-          <% end %>
-        </li>
-      <% end %>
-      <% if can? :read, Store %>
-        <li class="nav-item <%= 'active' if controller_name == 'stores' %>">
-          <%= link_to stores_path, class: 'nav-link' do %>
-            <%= Store.model_name.human(count: 2) %>
-            <% if controller_name == 'stores' %>
-              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+          </li>
+        <% end %>
+        <% if can? :read, :map %>
+          <li class="nav-item <%= 'active' if controller_name == 'map' %>">
+            <%= link_to map_index_path, class: 'nav-link' do %>
+              <%= t('views.map.index.title') %>
+              <% if controller_name == 'map' %>
+                <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+              <% end %>
             <% end %>
-          <% end %>
-        </li>
-      <% end %>
-      <% if can? :read, StatusCrowdsourceUser %>
-        <li class="nav-item <%= 'active' if controller_name == 'status_crowdsource_users' %>">
-          <%= link_to status_crowdsource_users_path, class: 'nav-link' do %>
-            <%= StatusCrowdsourceUser.model_name.human(count: 2) %>
-            <% if controller_name == 'status_crowdsource_users' %>
-              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+          </li>
+        <% end %>
+        <% if can? :read, Store %>
+          <li class="nav-item <%= 'active' if controller_name == 'stores' %>">
+            <%= link_to stores_path, class: 'nav-link' do %>
+              <%= Store.model_name.human(count: 2) %>
+              <% if controller_name == 'stores' %>
+                <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+              <% end %>
             <% end %>
-          <% end %>
-        </li>
-      <% end %>
-      <% if can? :read, User %>
-        <li class="nav-item <%= 'active' if controller_name == 'users' %>">
-          <%= link_to users_path, class: 'nav-link' do %>
-            <%= User.model_name.human(count: 2) %>
-            <% if controller_name == 'users' %>
-              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+          </li>
+        <% end %>
+        <% if can? :read, StatusCrowdsourceUser %>
+          <li class="nav-item <%= 'active' if controller_name == 'status_crowdsource_users' %>">
+            <%= link_to status_crowdsource_users_path, class: 'nav-link' do %>
+              <%= StatusCrowdsourceUser.model_name.human(count: 2) %>
+              <% if controller_name == 'status_crowdsource_users' %>
+                <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+              <% end %>
             <% end %>
-          <% end %>
-        </li>
-      <% end %>
-      <% if current_user && current_user.stores.any? %>
-        <li class="nav-item <%= 'active' if controller_name == 'manage_stores' %>">
-          <%= link_to manage_stores_path, class: 'nav-link' do %>
-            <%= t('views.manage_stores.index.nav') %>
-            <% if controller_name == 'manage_stores' %>
-              <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+          </li>
+        <% end %>
+        <% if can? :read, User %>
+          <li class="nav-item <%= 'active' if controller_name == 'users' %>">
+            <%= link_to users_path, class: 'nav-link' do %>
+              <%= User.model_name.human(count: 2) %>
+              <% if controller_name == 'users' %>
+                <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+              <% end %>
             <% end %>
-          <% end %>
-        </li>
-      <% end %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lang</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <% [:en, :es, :pt, :sk].each do |locale| %>
-            <%= link_to t('language_name', locale: locale), url_for(locale: locale), class: 'dropdown-item' %>
-          <% end %>
-        </div>
-      </li>
-		</ul>
-    <ul class="navbar-nav px-3">
-      <% if current_user %>
-        <li class="nav-item text-nowrap dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.name.presence || current_user.email.presence || 'N/A' %>
-          </a>
+          </li>
+        <% end %>
+        <% if current_user && current_user.stores.any? %>
+          <li class="nav-item <%= 'active' if controller_name == 'manage_stores' %>">
+            <%= link_to manage_stores_path, class: 'nav-link' do %>
+              <%= t('views.manage_stores.index.nav') %>
+              <% if controller_name == 'manage_stores' %>
+                <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lang</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <%= link_to t('views.shared.navbar.profile'), current_user, class: 'dropdown-item' %>
-            <%= link_to t('views.shared.navbar.change_password'), edit_user_registration_path, class: 'dropdown-item' %>
+            <% [:en, :es, :pt, :sk].each do |locale| %>
+              <%= link_to t('language_name', locale: locale), url_for(locale: locale), class: 'dropdown-item' %>
+            <% end %>
           </div>
         </li>
-        <li class="nav-item text-nowrap">
-          <%= link_to t('views.shared.navbar.logout'), destroy_user_session_path,
-            method: :delete, class: 'nav-link' %>
-        </li>
-      <% else %>
-        <li class="nav-item text-nowrap">
-          <%= link_to t('views.shared.navbar.login'), new_user_session_path,
-            class: 'nav-link' %>
-        </li>
-        <li class="nav-item text-nowrap">
-          <%= link_to t('views.shared.navbar.sign_up'), new_user_registration_path,
-            class: 'nav-link' %>
-        </li>
-      <% end %>
-    </ul>
-	</div>
+      </ul>
+      <ul class="navbar-nav px-3">
+        <% if current_user %>
+          <li class="nav-item text-nowrap dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= current_user.name.presence || current_user.email.presence || 'N/A' %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <%= link_to t('views.shared.navbar.profile'), current_user, class: 'dropdown-item' %>
+              <%= link_to t('views.shared.navbar.change_password'), edit_user_registration_path, class: 'dropdown-item' %>
+            </div>
+          </li>
+          <li class="nav-item text-nowrap">
+            <%= link_to t('views.shared.navbar.logout'), destroy_user_session_path,
+              method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item text-nowrap">
+            <%= link_to t('views.shared.navbar.login'), new_user_session_path,
+              class: 'nav-link' %>
+          </li>
+          <li class="nav-item text-nowrap">
+            <%= link_to t('views.shared.navbar.sign_up'), new_user_registration_path,
+              class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </nav>

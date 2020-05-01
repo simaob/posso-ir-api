@@ -66,7 +66,7 @@ pt:
           store_owner: 'Gestor de loja'
           general_manager: 'Gestor do sistema'
           admin: 'Administrador'
-          contributor: 'Colaborador'
+          contributor: 'Voluntário/a'
       store:
         states:
           waiting_approval: 'Aguarda validação'
@@ -95,7 +95,24 @@ pt:
         page_time: 'Hora do servidor'
     home:
       index:
-        title: 'Bem-vindo ao sistema de gestão da Posso Ir?'
+        title: 'Posso Ir?'
+        intro_html: 'Com o objectivo de contribuir para a diminuição do tamanho das filas em lojas e assim ajudar ao distanciamento social, nasce a aplicação <i>Posso Ir?</i>. Veja como pode contribuir.'
+        store_owner: 'É lojista?'
+        store_owner_1: 'Registe-se e obtenha o seu código lojista.'
+        store_owner_2: 'Adicione ou associe-se à sua loja.'
+        store_owner_3: 'Registe o estado das filas no site ou na aplicação.'
+        store_owner_4: 'Ajude os seus clientes!'
+        register: 'Registe-se'
+        contributor: 'Quer contribuir?'
+        contributor_1: 'Registe-se no site'
+        contributor_2: 'Adicione lojas que estejam em falta.'
+        contributor_3: 'Reporte problemas com as lojas existentes.'
+        contributor_4: 'Ajude-nos a oferecer um serviço robusto!'
+        download_the_app: 'Descarregue a aplicação'
+        download_intro: 'Se ainda não tem a aplicação para o seu telemóvel descarregue-a agora.'
+    stats:
+      index:
+        title: 'Estatísticas de uso'
         total: 'Total'
         totals: 'Total de registos no sistema'
         total_users: 'Utilizadores por função'
@@ -138,6 +155,7 @@ pt:
       title: "Editando %{resource}"
     shared:
       navbar:
+        stats: 'Métricas'
         current: 'Actual'
         logout: 'Terminar sessão'
         login: 'Iniciar sessão'

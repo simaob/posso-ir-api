@@ -1,197 +1,56 @@
-<div class="container mt-3">
-  <h1><%= I18n.t('views.home.index.title') %></h1>
+<div class="home-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <div class="container">
+    <h1 class="display-4"><%= t('views.home.index.title') %></h1>
+    <p class="lead text-muted">
+      <%= t('views.home.index.intro_html') %>
+    </p>
+  </div>
 </div>
 
-<% if current_user&.admin? || current_user&.general_manager? %>
-  <div class="row mt-4">
-    <div class="col-md-12"><p class="h2"><%= t('views.home.index.totals') %></p></div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.total_users') %></h5>
-          <table class="table table-sm">
-            <tbody>
-              <% User.roles.each do |r| %>
-                <tr>
-                  <td><%= t("activerecord.enums.user.roles.#{r[0]}") %></td>
-                  <td><%= User.where(role: r).count %></td>
-                </tr>
-              <% end %>
-              <tr>
-                <th><%= t('views.home.index.total') %></th>
-                <td><%= User.count %></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-6 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal"><%= t('views.home.index.store_owner') %></h4>
+      </div>
+      <div class="card-body">
+        <ol class="text-left mt-3 mb-4">
+          <li><%= t('views.home.index.store_owner_1') %></li>
+          <li><%= t('views.home.index.store_owner_2') %></li>
+          <li><%= t('views.home.index.store_owner_3') %></li>
+          <li><%= t('views.home.index.store_owner_4') %></li>
+        </ol>
+        <%= link_to t('views.home.index.register'), new_user_registration_path, class: 'btn btn-lg btn-block btn-primary' %>
       </div>
     </div>
-
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.total_stores') %></h5>
-          <table class="table table-sm">
-            <tbody>
-              <% Store.store_types.each do |r| %>
-                <tr>
-                  <td><%= t("activerecord.enums.store.store_types.#{r[0]}") %></td>
-                  <td><%= Store.where(store_type: r, state: :live).count %></td>
-                </tr>
-              <% end %>
-              <tr>
-                <th><%= t('views.home.index.total') %></th>
-                <td><%= Store.where(state: :live).count %></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="card mb-6 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal"><%= t('views.home.index.contributor') %></h4>
       </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.total_statuses') %></h5>
-          <table class="table table-sm">
-            <tbody>
-              <% Store.store_types.each do |r| %>
-                <tr>
-                  <td><%= t("activerecord.enums.store.store_types.#{r[0]}") %></td>
-                  <td><%= StatusCrowdsourceUser.joins(:store).where(stores: {store_type: r, state: :live}).count %></td>
-                </tr>
-              <% end %>
-              <tr>
-                <th><%= t('views.home.index.total') %></th>
-                <td><%= StatusCrowdsourceUser.count %></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="card-body">
+        <ol class="text-left mt-3 mb-4">
+          <li><%= t('views.home.index.contributor_1') %></li>
+          <li><%= t('views.home.index.contributor_2') %></li>
+          <li><%= t('views.home.index.contributor_3') %></li>
+          <li><%= t('views.home.index.contributor_4') %></li>
+        </ol>
+        <%= link_to t('views.home.index.register'), new_user_registration_path, class: 'btn btn-lg btn-block btn-primary' %>
       </div>
     </div>
   </div>
-
-  <div class="row mt-4">
-    <div class="col-md-12"><p class="h3"><%= t('views.home.index.break_per_day') %></p></div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.users_per_day') %></h5>
-          <%= line_chart @users_per_day %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.statuses_per_day') %></h5>
-          <%= line_chart @statuses_per_day %>
-        </div>
-      </div>
-    </div>
+</div>
+<hr>
+<div class="home-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <div class="container">
+    <h2 class="display-5"><%= t('views.home.index.download_the_app') %></h2>
+    <p class="lead text-muted">
+      <%= t('views.home.index.download_intro') %>
+    </p>
+    <a href="https://apps.apple.com/pt/app/posso-ir/id1503226327?l=pt", class="btn btn-lg btn-outline-dark">
+      Apple Store (iOS)
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.findlapa.possoir", class="btn btn-lg btn-outline-success">
+      Play Store (Android)
+    </a>
   </div>
-
-  <div class="row mt-4">
-    <div class="col-md-12"><p class="h3"><%= t('views.home.index.daily_ranking') %></p></div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.todays_stores_by_reports') %></h5>
-          <table class="table table-sm">
-            <thead>
-              <tr>
-                <th><%= Store.model_name.human(count: 1) %></th>
-                <th><%= t('views.home.index.total') %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @todays_stores_by_reports.each do |store| %>
-                <tr>
-                  <td><%= link_to store.name, statuses_store_path(store) %></td>
-                  <td><%= store.count %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.todays_users_by_reports') %></h5>
-          <table class="table table-sm">
-            <thead>
-              <tr>
-                <th><%= User.model_name.human(count: 1) %></th>
-                <th><%= t('views.home.index.total') %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @todays_users_by_reports.each do |user| %>
-                <tr>
-                  <td><%= link_to user.display_name, statuses_user_path(user) %></td>
-                  <td><%= user.count %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-4">
-    <div class="col-md-12"><p class="h3"><%= t('views.home.index.total_ranking') %></p></div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.stores_by_reports') %></h5>
-          <table class="table table-sm">
-            <thead>
-              <tr>
-                <th><%= Store.model_name.human(count: 1) %></th>
-                <th><%= t('views.home.index.total') %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @stores_by_reports.each do |store| %>
-                <tr>
-                  <td><%= link_to store.name, statuses_store_path(store) %></td>
-                  <td><%= store.count %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= t('views.home.index.users_by_reports') %></h5>
-          <table class="table table-sm">
-            <thead>
-              <tr>
-                <th><%= User.model_name.human(count: 1) %></th>
-                <th><%= t('views.home.index.total') %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @users_by_reports.each do |user| %>
-                <tr>
-                  <td><%= link_to user.display_name, statuses_user_path(user) %></td>
-                  <td><%= user.count %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
+</div>
