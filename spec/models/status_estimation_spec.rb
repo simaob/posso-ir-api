@@ -31,11 +31,13 @@ RSpec.describe StatusEstimation, type: :model do
   end
 
   context 'active general statuses' do
-    let(:general) {StatusGeneral.find_by(store_id: store.id)}
-    let(:updated_time) { a_time - 2.minutes}
+    let(:general) { StatusGeneral.find_by(store_id: store.id) }
+    let(:updated_time) { a_time - 2.minutes }
     context 'general status is an estimation' do
       it 'should update the general status' do
+        # rubocop:disable Rails/SkipsModelValidations
         general.update_columns(status: 0, updated_time: updated_time, estimation: true)
+        # rubocop:enable Rails/SkipsModelValidations
         estimation.save!
         general.reload
 
@@ -46,7 +48,9 @@ RSpec.describe StatusEstimation, type: :model do
 
     context 'general status is crowdsource' do
       it "shouldn't update the the general status" do
+        # rubocop:disable Rails/SkipsModelValidations
         general.update_columns(status: 0, updated_time: updated_time, estimation: false, is_official: true)
+        # rubocop:enable Rails/SkipsModelValidations
         estimation.save!
         general.reload
 
@@ -59,7 +63,9 @@ RSpec.describe StatusEstimation, type: :model do
 
     context 'general status is store owner' do
       it "shouldn't update the general status" do
+        # rubocop:disable Rails/SkipsModelValidations
         general.update_columns(status: 0, updated_time: updated_time, estimation: false, is_official: false)
+        # rubocop:enable Rails/SkipsModelValidations
         estimation.save!
         general.reload
 

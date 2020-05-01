@@ -31,7 +31,7 @@ module Api
       end
 
       def invalid_data
-        render json: {error: 'Invalid status'}, status:  :bad_request
+        render json: {error: 'Invalid status'}, status: :bad_request
       end
     end
   end

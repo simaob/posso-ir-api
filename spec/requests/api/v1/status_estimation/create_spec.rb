@@ -18,9 +18,9 @@ describe Api::V1::StatusEstimationsController do
       sign_in create(:user)
 
       post(
-          api_v1_status_estimations_path,
-          params: params.to_json,
-          headers: {'Content-Type': 'application/vnd.api+json'}
+        api_v1_status_estimations_path,
+        params: params.to_json,
+        headers: {'Content-Type': 'application/vnd.api+json'}
       )
 
       assert_response :forbidden
@@ -30,9 +30,9 @@ describe Api::V1::StatusEstimationsController do
       sign_in create(:admin_user, role: 'admin', email: "#{rand(50)}@test.com", password: 'testpass')
 
       post(
-          api_v1_status_estimations_path,
-          params: params_404.to_json,
-          headers: {'Content-Type': 'application/vnd.api+json'}
+        api_v1_status_estimations_path,
+        params: params_404.to_json,
+        headers: {'Content-Type': 'application/vnd.api+json'}
       )
 
       assert_response :not_found
@@ -42,9 +42,9 @@ describe Api::V1::StatusEstimationsController do
       sign_in create(:admin_user, role: 'admin', email: "#{rand(50)}@test.com", password: 'testpass')
 
       post(
-          api_v1_status_estimations_path,
-          params: params_no_status.to_json,
-          headers: {'Content-Type': 'application/vnd.api+json'}
+        api_v1_status_estimations_path,
+        params: params_no_status.to_json,
+        headers: {'Content-Type': 'application/vnd.api+json'}
       )
 
       assert_response :bad_request
@@ -54,9 +54,9 @@ describe Api::V1::StatusEstimationsController do
       sign_in create(:admin_user)
 
       post(
-          api_v1_status_estimations_path,
-          params: params_wrong.to_json,
-          headers: {'Content-Type': 'application/vnd.api+json'}
+        api_v1_status_estimations_path,
+        params: params_wrong.to_json,
+        headers: {'Content-Type': 'application/vnd.api+json'}
       )
 
       assert_response :unprocessable_entity

@@ -24,6 +24,6 @@ class Status < ApplicationRecord
   paginates_per 100
   belongs_to :store
 
-  validates :status, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10}, allow_blank: true
+  validates :status, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 10}, allow_blank: true
   validates :updated_time, presence: true
 end
