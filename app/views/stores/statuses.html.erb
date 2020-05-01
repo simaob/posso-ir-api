@@ -34,7 +34,7 @@
 
             <tbody>
               <% @statuses.each do |status| %>
-                <tr>
+                <tr <%= 'class=table-success' if status.is_a?(StatusGeneral) %>>
                   <td><%= status.type %></td>
                   <td><%= status.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
                   <td><%= status.status&.round(3) %></td>
@@ -60,6 +60,16 @@
         <div class="card-body">
           <h5 class="card-title"><%= t('views.status_crowdsource_users.index.title') %></h5>
           <%= render 'status_crowdsource_users/table', status_crowdsource_users: @status_crowdsource_users %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.status_estimations.index.title') %></h5>
+          <%= render 'status_estimations/table', histories: @estimation_histories %>
         </div>
       </div>
     </div>

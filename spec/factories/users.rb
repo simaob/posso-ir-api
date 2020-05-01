@@ -18,6 +18,11 @@
 #
 FactoryBot.define do
   factory :user do
+    factory :admin_user, class: 'User' do
+      role { 'admin' }
+      password { 'testpassword' }
+      sequence(:email) { |n| "#{n}@test.com" }
+    end
     after(:create) do |user, _evaluator|
       user.regenerate_api_key
     end
