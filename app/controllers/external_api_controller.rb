@@ -21,7 +21,7 @@ class ExternalApiController < ApplicationController
   end
 
   def current_user
-    return @current_user = User.first if Rails.env.development?
+    return @current_user = User.find_by(role: :admin) if Rails.env.development?
 
     @current_user ||= ApiKey.find_by(access_token: token).user
   rescue StandardError

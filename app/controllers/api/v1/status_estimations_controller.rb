@@ -1,6 +1,7 @@
 module Api
   module V1
     class StatusEstimationsController < ExternalApiController
+      # This Endpoint is not using JSON API format!
       def create
         return forbidden unless current_user.admin?
 
