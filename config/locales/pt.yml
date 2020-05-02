@@ -220,7 +220,8 @@ pt:
       index:
         stores_created: 'Lojas adicionadas'
       show:
-        stores_title: 'Lojas adicionadas'
+        stores_created: 'Lojas adicionadas'
+        stores_owned: 'Lojas geridas'
         statuses: 'Estados reportados'
         copy_clipboard: 'Copiar'
         regenerate_store_owner_code: 'Gerar novo código lojista'

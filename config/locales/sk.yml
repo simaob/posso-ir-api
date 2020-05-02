@@ -174,7 +174,8 @@ sk:
       index:
         stores_created: 'Pridané obchody'
       show:
-        stores_title: 'Pridané obchody'
+        stores_created: 'Pridané obchody'
+        stores_owned: 'Riadené obchody'
         statuses: 'Hlásené stavy'
         copy_clipboard: 'Skopírovať do schránky'
         regenerate_store_owner_code: 'Vygenerujte nový kód vlastníka obchodu'

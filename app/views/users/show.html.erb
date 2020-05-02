@@ -67,7 +67,7 @@
         <% end %>
 
         <% if @user.stores.any? %>
-          <p><strong><%= Store.model_name.human(count: 2) %></strong>
+          <p><strong><%= t('views.users.show.stores_owned') %></strong>
           <ul>
             <% @user.stores.order(:name).each do |store| %>
               <li><%= link_to store.name, store %></li>
@@ -83,7 +83,7 @@
 <% if @created_stores.any? %>
   <div class="row mt-2">
     <div class="col-md-12">
-      <p class="h2"><%= t('views.users.show.stores_title') %></p>
+      <p class="h2"><%= t('views.users.show.stores_created') %></p>
       <%= form_tag @user, method: :get, class: 'form-inline' do %>
         <%= label_tag :search, 'Search', class: 'sr-only' %>
         <%= text_field_tag :search, params[:search], class: 'form-control col-md-3 mb-2 mr-sm-2',

@@ -223,7 +223,8 @@ es:
       index:
         stores_created: 'Tiendas agregadas'
       show:
-        stores_title: 'Tiendas agregadas'
+        stores_created: 'Tiendas agregadas'
+        stores_owned: 'Tiendas administradas'
         statuses: 'Estados reportados'
         copy_clipboard: 'Copiar al portapapeles'
         regenerate_store_owner_code: 'Generar nuevo código de propietario de tienda'

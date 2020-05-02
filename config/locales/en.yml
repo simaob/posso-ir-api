@@ -214,7 +214,8 @@ en:
       index:
         stores_created: 'Stores created'
       show:
-        stores_title: 'Stores created'
+        stores_created: 'Stores created'
+        stores_owned: 'Managed stores'
         statuses: 'Estados reportados'
         copy_clipboard: 'Copy to clipboard'
         regenerate_store_owner_code: 'Generate new store owner code'
