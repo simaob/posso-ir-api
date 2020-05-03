@@ -5,7 +5,7 @@
     "test": "run-p rails:test rails:lint react:test",
     "rails:test": "bundle exec rspec",
     "rails:lint": "bundle exec rubocop",
-    "react:test": "jest --colors --maxWorkers=2"
+    "react:test": "jest --colors --maxWorkers=2 --coverage"
   },
   "dependencies": {
     "@babel/preset-react": "^7.9.4",
@@ -59,6 +59,7 @@
     ],
     "moduleFileExtensions": [
       "js"
-    ]
+    ],
+    "coverageReporters": ["text"]
   }
 }

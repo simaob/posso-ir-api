@@ -36,3 +36,4 @@ yarn-debug.log*
 
 /db/files
 .rspec
+coverage/
