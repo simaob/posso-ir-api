@@ -4,8 +4,7 @@ import {
   mockShop,
   shouldChangeBounds,
   shouldUpdateShopAndSave,
-  shouldUpdateWithFetchedShops,
-  shouldUpdateLngLatOnDrag
+  shouldUpdateWithFetchedShops
 } from './test-utils';
 
 jest.mock('uuid', () => ({
