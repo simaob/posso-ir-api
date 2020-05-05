@@ -4,8 +4,10 @@ module Api
       immutable
       caching
 
+      has_one :current_day, class_name: 'WeekDay', exclude_links: :default
+
       attributes :name, :group, :address, :coordinates, :capacity,
-                 :details, :store_type, :lonlat
+                 :details, :store_type, :lonlat#, :opening_hour, :closing_hour
 
       filters :location, :store_type
 
@@ -26,6 +28,14 @@ module Api
         [@model.latitude, @model.longitude]
       end
 
+      def opening_hour
+        @model.current_day&.opening_hour
+      end
+
+      def closing_hour
+        @model.current_day&.closing_hour
+      end
+
       def self.records(options = {})
         current_user = options[:context][:current_user]
         if current_user&.store_owner?
@@ -34,6 +44,8 @@ module Api
           Store.available
         end
       end
+
+      exclude_links :default
     end
   end
 end

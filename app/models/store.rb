@@ -49,6 +49,7 @@ class Store < ApplicationRecord
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
 
   has_many :week_days
+  has_one :current_day, -> { today }, class_name: 'WeekDay', inverse_of: 'store'
   accepts_nested_attributes_for :week_days
 
   # geocoded_by :address
