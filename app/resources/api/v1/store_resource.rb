@@ -7,16 +7,16 @@ module Api
       has_one :current_day, class_name: 'WeekDay', exclude_links: :default
 
       attributes :name, :group, :address, :coordinates, :capacity,
-                 :details, :store_type, :lonlat#, :opening_hour, :closing_hour
+                 :details, :store_type, :lonlat, :opening_hour, :closing_hour
 
       filters :location, :store_type
 
-      filter :location, apply: ->(_records, value, options) {
+      filter :location, apply: ->(records, value, options) {
         current_user = options[:context][:current_user]
         if current_user&.store_owner?
           current_user.stores.retrieve_stores(value.first, value.second)
         else
-          Store.retrieve_stores(value.first, value.second)
+          records.retrieve_stores(value.first, value.second)
         end
       }
 
@@ -41,7 +41,7 @@ module Api
         if current_user&.store_owner?
           current_user.stores.available
         else
-          Store.available
+          super(options).available.eager_load(:week_days)
         end
       end
 
