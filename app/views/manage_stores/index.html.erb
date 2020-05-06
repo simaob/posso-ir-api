@@ -60,7 +60,7 @@
                   <td><%= store.phones.pluck(:phone_number).join(' ') %></td>
                   <td><%= latest_status(store.latest_owner_status) %></td>
                   <td>
-                    <% if can? :edit, store %>
+                    <% if us.approved? && can? :edit, store %>
                       <%= link_to t('views.actions.edit'), edit_store_path(store) %>
                     <% end %>
                     <% if us.approved? && can?(:new, StatusStoreOwner) %>
