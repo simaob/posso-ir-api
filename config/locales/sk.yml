@@ -40,6 +40,8 @@ sk:
         status: 'Stav'
       api_key:
         access_token: 'Prístupový kľúč API'
+      user_store:
+        approved: 'Schválený?'
     enums:
       user:
         roles:
@@ -160,6 +162,10 @@ sk:
         add_phone: "Pridať tel. číslo"
         schedule: "Otváracie hodiny"
         phone_call_interval: "Interval pre telefónny hovor (minúty)"
+    devise:
+      registrations:
+        new:
+          help_stores: 'Vyhľadajte a vyberte svoje obchody, správca ich neskôr overí.'
     users:
       search:
         placeholder: 'Vyhľadávať podľa mena alebo emailu...'
@@ -168,7 +174,8 @@ sk:
       index:
         stores_created: 'Pridané obchody'
       show:
-        stores_title: 'Pridané obchody'
+        stores_created: 'Pridané obchody'
+        stores_owned: 'Riadené obchody'
         statuses: 'Hlásené stavy'
         copy_clipboard: 'Skopírovať do schránky'
         regenerate_store_owner_code: 'Vygenerujte nový kód vlastníka obchodu'

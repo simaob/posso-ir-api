@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_195905) do
     t.bigint "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "approved", default: false
     t.index ["store_id"], name: "index_user_stores_on_store_id"
     t.index ["user_id"], name: "index_user_stores_on_user_id"
   end

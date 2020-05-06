@@ -6,39 +6,43 @@
     </p>
   </div>
 </div>
-
-<div class="container">
-  <div class="card-deck mb-3 text-center">
-    <div class="card mb-6 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal"><%= t('views.home.index.store_owner') %></h4>
+<% if current_user %>
+  <div class="container">
+  </div>
+<% else %>
+  <div class="container">
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-6 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal"><%= t('views.home.index.store_owner') %></h4>
+        </div>
+        <div class="card-body">
+          <ol class="text-left mt-3 mb-4">
+            <li><%= t('views.home.index.store_owner_1') %></li>
+            <li><%= t('views.home.index.store_owner_2') %></li>
+            <li><%= t('views.home.index.store_owner_3') %></li>
+            <li><%= t('views.home.index.store_owner_4') %></li>
+          </ol>
+          <%= link_to t('views.home.index.register'), new_user_registration_path(role: :store_owner), class: 'btn btn-lg btn-block btn-primary' %>
+        </div>
       </div>
-      <div class="card-body">
-        <ol class="text-left mt-3 mb-4">
-          <li><%= t('views.home.index.store_owner_1') %></li>
-          <li><%= t('views.home.index.store_owner_2') %></li>
-          <li><%= t('views.home.index.store_owner_3') %></li>
-          <li><%= t('views.home.index.store_owner_4') %></li>
-        </ol>
-        <%= link_to t('views.home.index.register'), new_user_registration_path, class: 'btn btn-lg btn-block btn-primary' %>
-      </div>
-    </div>
-    <div class="card mb-6 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal"><%= t('views.home.index.contributor') %></h4>
-      </div>
-      <div class="card-body">
-        <ol class="text-left mt-3 mb-4">
-          <li><%= t('views.home.index.contributor_1') %></li>
-          <li><%= t('views.home.index.contributor_2') %></li>
-          <li><%= t('views.home.index.contributor_3') %></li>
-          <li><%= t('views.home.index.contributor_4') %></li>
-        </ol>
-        <%= link_to t('views.home.index.register'), new_user_registration_path, class: 'btn btn-lg btn-block btn-primary' %>
+      <div class="card mb-6 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal"><%= t('views.home.index.contributor') %></h4>
+        </div>
+        <div class="card-body">
+          <ol class="text-left mt-3 mb-4">
+            <li><%= t('views.home.index.contributor_1') %></li>
+            <li><%= t('views.home.index.contributor_2') %></li>
+            <li><%= t('views.home.index.contributor_3') %></li>
+            <li><%= t('views.home.index.contributor_4') %></li>
+          </ol>
+          <%= link_to t('views.home.index.register'), new_user_registration_path(role: :contributor), class: 'btn btn-lg btn-block btn-primary' %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
 <hr>
 <div class="home-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <div class="container">
