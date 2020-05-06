@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_185601) do
+ActiveRecord::Schema.define(version: 2020_04_29_195905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 2020_04_29_185601) do
     t.index ["posted_at"], name: "index_status_crowdsource_users_on_posted_at"
     t.index ["store_id"], name: "index_status_crowdsource_users_on_store_id"
     t.index ["user_id"], name: "index_status_crowdsource_users_on_user_id"
+  end
+
+  create_table "status_estimation_histories", force: :cascade do |t|
+    t.datetime "updated_time"
+    t.datetime "valid_until"
+    t.float "status"
+    t.bigint "store_id"
+    t.datetime "old_created_at"
+    t.datetime "old_updated_at"
   end
 
   create_table "status_histories", force: :cascade do |t|
@@ -106,7 +115,9 @@ ActiveRecord::Schema.define(version: 2020_04_29_185601) do
     t.integer "previous_voters"
     t.boolean "is_official", default: false
     t.boolean "active", default: true
+    t.boolean "estimation", default: false
     t.index ["active"], name: "index_statuses_on_active"
+    t.index ["estimation"], name: "index_statuses_on_estimation"
     t.index ["store_id"], name: "index_statuses_on_store_id"
   end
 
@@ -147,6 +158,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_185601) do
     t.bigint "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "approved", default: false
     t.index ["store_id"], name: "index_user_stores_on_store_id"
     t.index ["user_id"], name: "index_user_stores_on_user_id"
   end

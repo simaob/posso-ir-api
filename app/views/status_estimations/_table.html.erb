@@ -1,0 +1,21 @@
+<%= page_entries_info histories %>
+<div class="table-responsive">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th><%= StatusEstimation.human_attribute_name(:status) %></th>
+        <th><%= StatusEstimation.human_attribute_name(:updated_time) %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% histories.each_with_index do |status, i| %>
+        <tr <%= 'class=table-primary' if i.zero? %>>
+          <td><%= status.status&.round(3) %></td>
+          <td><%= status.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate histories %>
+</div>

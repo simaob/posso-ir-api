@@ -18,6 +18,7 @@
 #  previous_voters       :integer
 #  is_official           :boolean          default("false")
 #  active                :boolean          default("true")
+#  estimation            :boolean          default("false")
 #
 class StatusStoreOwner < Status
   after_validation :set_valid_until
@@ -33,6 +34,7 @@ class StatusStoreOwner < Status
   def update_general_status
     StatusGeneral.find_by(store_id: store_id)&.update(
       updated_time: updated_time, status: status, queue: queue,
-      valid_until: valid_until, is_official: true)
+      valid_until: valid_until, voters: nil,
+      is_official: true, estimation: false)
   end
 end

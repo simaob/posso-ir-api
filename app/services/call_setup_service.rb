@@ -2,7 +2,7 @@ class CallSetupService
   # Find all the phone stores for which there an active calendar for the current day of the week
   # For each store, create a job to make the request
   def call
-    week_day = DateTime.new.wday
+    week_day = DateTime.now.wday
     stores = Store.where(make_phone_calls: true)
       .joins(:week_days).where(week_days: {day: week_day, active: true}).joins(:phones)
 

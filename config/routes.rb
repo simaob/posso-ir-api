@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   scope "(:locale)", locale: /en|pt|es|sk/ do
     root to: "home#index"
+    resources :stats, only: [:index]
     resources :stores do
       post :approve_all, on: :collection
       get :statuses, on: :member
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
       jsonapi_resources :random_status_generals, only: [:index] do end
 
       post 'status-phone', to: 'status_phone#create'
+      post 'status-estimations', to: 'status_estimations#create'
     end
   end
 

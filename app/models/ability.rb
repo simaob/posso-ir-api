@@ -5,6 +5,7 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
+    can :index, Store
     return if user.user?
 
     can [:show, :edit, :update], User, id: user.id
@@ -23,6 +24,7 @@ class Ability
 
       can :manage_state, Store
       can :read, :all
+      can :read, :stats
 
     elsif user.contributor?
       can [:new, :create], Store do

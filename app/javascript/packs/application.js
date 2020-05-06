@@ -36,7 +36,8 @@ document.addEventListener('turbolinks:load', function() {
     ajax: {
       data: function(params) {
         return {
-          search: params.term
+          search: params.term,
+          state: 'live'
         };
       },
       dataType: "json",

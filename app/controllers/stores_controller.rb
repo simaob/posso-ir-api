@@ -1,5 +1,6 @@
 class StoresController < ApplicationController
   load_and_authorize_resource except: [:statuses]
+  skip_before_action :authenticate_user!, if: proc { request.format.json? && action_name == 'index' }
 
   # GET /stores
   # GET /stores.json
@@ -103,6 +104,8 @@ class StoresController < ApplicationController
     @statuses = @store.statuses.order(updated_time: :desc)
     @status_crowdsource_users = @store.status_crowdsource_users
       .order(posted_at: :desc).page(params[:page])
+    @estimation_histories = StatusEstimationHistory.where(store_id: @store.id)
+      .order(updated_time: :desc).page(params[:page])
   end
 
   private

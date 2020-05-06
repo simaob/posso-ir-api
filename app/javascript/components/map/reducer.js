@@ -40,7 +40,7 @@ const onDragMarker = (state, action, draft) => {
 };
 
 const onBoundsChange = (state, action, draft) => {
-  const bounds = action.payload;
+  const bounds = [...action.payload];
   draft.bounds = bounds;
 };
 
@@ -48,7 +48,7 @@ const onShopsFetched = (state, action, draft) => {
   const temporaryShops = Object.values(draft.shops).filter(
     shop => typeof shop.id === 'undefined' && typeof shop.temporaryId !== 'undefined'
   );
-  draft.shops = action.payload;
+  draft.shops = { ...action.payload };
 
   // don't remove newly created stores
   temporaryShops.forEach(shop => {
@@ -56,7 +56,7 @@ const onShopsFetched = (state, action, draft) => {
   });
 };
 
-function idleStatus(state, action, draft) {
+export function idleStatus(state, action, draft) {
   switch (action.type) {
     case 'clickAdd': {
       draft.status = 'creating';
@@ -91,12 +91,15 @@ function idleStatus(state, action, draft) {
   }
 }
 
-function creatingStatus(state, action, draft) {
+export function creatingStatus(state, action, draft) {
   switch (action.type) {
     case 'clickMap': {
       const { lngLat } = action.payload;
       if (state.selectedShopId && draft.shops) {
-        delete draft.shops[state.selectedShopId];
+        const shop = draft.shops[state.selectedShopId];
+        if (shop && shop.temporaryId) {
+          delete draft.shops[state.selectedShopId];
+        }
       }
       const temporaryId = uuidv4();
       let fields = {};
@@ -136,7 +139,7 @@ function creatingStatus(state, action, draft) {
   }
 }
 
-function deletingStatus(state, action, draft) {
+export function deletingStatus(state, action, draft) {
   switch (action.type) {
     case 'clickMarker': {
       draft.selectedShopId = getMarkerId(action.payload);
@@ -162,7 +165,7 @@ function deletingStatus(state, action, draft) {
   }
 }
 
-function editingStatus(state, action, draft) {
+export function editingStatus(state, action, draft) {
   switch (action.type) {
     case 'dragMarker': {
       return onDragMarker(state, action, draft);
@@ -184,10 +187,10 @@ function editingStatus(state, action, draft) {
   }
 }
 
-function savingStatus(state, action, draft) {
+export function savingStatus(state, action, draft) {
   switch (action.type) {
     case 'saveSuccessful': {
-      const shop = action.payload;
+      const shop = { ...action.payload };
       delete draft.shops[state.selectedShopId];
       draft.shops[shop.id] = shop;
       draft.selectedShopId = shop.id;
