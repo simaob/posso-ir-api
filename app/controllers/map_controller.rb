@@ -16,7 +16,10 @@ class MapController < ApplicationController
     @shops = Store.where.not(latitude: nil).where.not(longitude: nil)
       .where.not(state: :archived).in_bounding_box(@bounds)
 
-    @shops = @shops.where(id: current_user.user_stores.where(approved: true).pluck(:store_id)) if current_user.store_owner?
+    if current_user.store_owner?
+      @shops = @shops.where(id: current_user.user_stores.where(approved: true).pluck(:store_id))
+    end
+
     @shops = @shops.index_by(&:id)
 
     respond_to do |format|
