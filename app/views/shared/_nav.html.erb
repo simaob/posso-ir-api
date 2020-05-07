@@ -27,14 +27,17 @@
           </li>
         <% end %>
         <% if can? :read, Store %>
-          <li class="nav-item <%= 'active' if controller_name == 'stores' %>">
-            <%= link_to stores_path, class: 'nav-link' do %>
+          <li class="nav-item dropdown <%= 'active' if ['stores', 'user_stores'].include?(controller_name) %>">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= Store.model_name.human(count: 2) %>
-              <% if controller_name == 'stores' %>
-                <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <%= link_to Store.model_name.human(count: 2), stores_path, class: 'dropdown-item' %>
+              <% if can? :manage, UserStore %>
+                <%= link_to t('views.shared.navbar.approve_store_allocations'), user_stores_path,
+                  class: 'dropdown-item' %>
               <% end %>
-            <% end %>
-          </li>
+            </div>
         <% end %>
         <% if can? :read, StatusCrowdsourceUser %>
           <li class="nav-item <%= 'active' if controller_name == 'status_crowdsource_users' %>">
