@@ -10,6 +10,10 @@ sk:
         one: 'Používateľ'
         other: 'Používatelia'
         few: 'Používatelia'
+      user_store:
+        one: 'Riadený obchod'
+        other: 'Riadené obchody'
+        few: 'Riadené obchody'
     attributes:
       store:
         name: 'Názov'
@@ -145,6 +149,7 @@ sk:
         profile: 'Môj profil'
         change_password: 'Zmeniť heslo'
         language: 'Jazyk'
+        approve_store_allocations: 'Overte priradenia obchodu'
     form:
       submit: 'Potvrdiť'
     stores:
@@ -182,6 +187,9 @@ sk:
         regenerate_api_key: 'Vygenerujte nový kľúč API'
       statuses:
         title: 'Statuses reported by %{user}'
+    user_stores:
+      index:
+        approve: 'Schvaľovať'
     manage_stores:
       index:
         nav: 'Moje predajne'

@@ -1,0 +1,49 @@
+<% content_for :page_title, UserStore.model_name.human(count: 2) %>
+
+<div class="row mt-3">
+  <div class="col-md-10">
+    <h1><%= UserStore.model_name.human(count: 2) %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <%= page_entries_info @user_stores %>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= User.model_name.human(count: 1) %></th>
+                <th><%= Store.human_attribute_name(:name) %></th>
+                <th><%= Store.human_attribute_name(:group) %></th>
+                <th><%= Store.human_attribute_name(:street) %></th>
+                <th><%= UserStore.human_attribute_name(:approved) %></th>
+                <th><%= t('views.actions.title') %></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @user_stores.each do |us| %>
+                <tr>
+                  <td><%= link_to us.manager.display_name, us.manager %></td>
+                  <td><%= link_to us.store.name, us.store %></td>
+                  <td><%= us.store.group %></td>
+                  <td><%= us.store.address %></td>
+                  <td><%= us.approved? %></td>
+                  <td>
+                    <% if can?(:update, us) %>
+                      <%= link_to t('views.user_stores.index.approve'), us, method: :patch %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @user_stores %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

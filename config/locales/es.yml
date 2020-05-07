@@ -17,6 +17,9 @@ es:
       status:
         one: 'Estado'
         other: 'Estados'
+      user_store:
+        one: 'Tienda administrada'
+        other: 'Tiendas administradas'
     attributes:
       store:
         name: 'Nombre'
@@ -167,6 +170,7 @@ es:
         sign_up: 'Criar cuenta'
         profile: 'Página de perfil'
         change_password: 'Cambiar la contraseña'
+        approve_store_allocations: 'Validar asignaciones de tienda'
     form:
       submit: 'Enviar'
     pagination:
@@ -231,6 +235,31 @@ es:
         regenerate_api_key: 'Generar nueva clave API'
       statuses:
         title: 'Estados reportados por %{user}'
+    user_stores:
+      index:
+        approve: 'Aprobar'
+    manage_stores:
+      index:
+        nav: 'Mis tiendas'
+        manage_link: 'Actualizar estado'
+        latest_status: 'Último estado informado'
+        state_valid_until: '%{state} | Válido hasta %{time}'
+        state_invalid: '%{state} | Caducado'
+        "0": 'Sin cola'
+        "5": 'Cola media'
+        "10": 'Cola larga'
+    status_store_owners:
+      new:
+        title: 'Actualizar estado de la tienda %{resource}'
+        no_queue: 'Sin cola'
+        average_queue: 'Cola media'
+        long_queue: 'Cola larga'
+        title_latest: 'Último estado informado'
+        valid_until: 'Válido hasta %{time}'
+        expired_on: 'Caducado à las %{time}'
+        "0": 'Sin cola'
+        "5": 'Cola media'
+        "10": 'Cola larga'
     status_estimations:
       index:
         title: "Estado Estimados"
