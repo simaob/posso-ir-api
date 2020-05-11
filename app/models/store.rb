@@ -120,6 +120,15 @@ class Store < ApplicationRecord
     where(query).available
   end
 
+  def self.retrieve_closest(lat, lon)
+    query = <<~SQL
+      stores.*,
+      ST_SetSRID(ST_MakePoint(#{lon}, #{lat}),4326) <-> stores.lonlat AS distance
+    SQL
+
+    select(query).available.order('distance ASC').limit(100)
+  end
+
   def self.in_bounding_box(coordinates)
     Store.where(['lonlat && ST_MakeEnvelope(?, ?, ?, ?, 4326)',
                  coordinates.flatten(1)].flatten(1))

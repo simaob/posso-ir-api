@@ -2,7 +2,7 @@ module Api
   module V1
     class StoreResource < ApplicationResource
       immutable
-      caching
+      #caching
 
       has_one :current_day, class_name: 'WeekDay', exclude_links: :default
 
@@ -41,7 +41,7 @@ module Api
         if current_user&.store_owner?
           current_user.stores.available
         else
-          super(options).available.eager_load(:week_days)
+          super(options).available.includes(:week_days)
         end
       end
 

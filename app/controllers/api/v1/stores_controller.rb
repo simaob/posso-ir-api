@@ -12,7 +12,20 @@ module Api
           return
         end
 
-        super
+        location = params[:filter][:location].split(',')
+
+        result = records.retrieve_closest(*location)
+        render json: result.to_json
+      end
+
+      private
+
+      def records
+        if @current_user&.store_owner?
+          @current_user.stores.available
+        else
+          Store.available.includes(:week_days)
+        end
       end
     end
   end
