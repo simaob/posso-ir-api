@@ -14,6 +14,13 @@
       <%= link_to t('views.actions.new'), new_store_path,
         class: 'btn btn-sm btn-outline-primary' %>
     <% end %>
+    <% if current_user.admin? %>
+      <%= link_to t('views.actions.download'),
+                  stores_path(group: params[:group], search: params[:search],
+                    store_type: params[:store_type], state: params[:state],
+                    format: 'csv'),
+                  class: 'btn btn-sm btn-outline-success' %>
+    <% end %>
   </div>
 </div>
 
