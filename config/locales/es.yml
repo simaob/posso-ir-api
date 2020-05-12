@@ -144,6 +144,7 @@ es:
       back: 'Volver'
       approve_all: 'Validar elegidas'
       confirm_destroy: '¿Seguro que quieres eliminar este registro? Esta acción es permanente.'
+      download: 'Descargar (.csv)'
     map:
       index:
         title: 'Mapa'

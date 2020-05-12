@@ -27,6 +27,9 @@ class StoresController < ApplicationController
       format.json do
         @stores = @stores.limit(50)
       end
+      format.csv do
+        send_data @stores.to_csv, type: 'csv', filename: 'stores-export.csv'
+      end
     end
   end
 

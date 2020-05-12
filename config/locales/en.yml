@@ -141,6 +141,7 @@ en:
       back: 'Back'
       approve_all: 'Approve listed'
       confirm_destroy: 'Are you sure you want to remove this record? This action is permanent'
+      download: 'Download (.csv)'
     map:
       index:
         title: 'Map'

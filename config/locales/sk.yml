@@ -123,6 +123,7 @@ sk:
       back: 'Späť'
       approve_all: 'Schváliť uvedené'
       confirm_destroy: 'Naozaj chcete odstrániť tento záznam? Táto akcia je trvalá.'
+      download: 'Download (.csv)'
     map:
       index:
         title: 'Mapa'
