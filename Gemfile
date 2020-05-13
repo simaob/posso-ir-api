@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'geocoder'
 gem 'jsonapi-resources'
+gem 'fast_jsonapi'
 gem 'rack-cors'
 gem 'dotenv-rails'
 gem 'activerecord-postgis-adapter'

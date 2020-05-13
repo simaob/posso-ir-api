@@ -1,13 +1,14 @@
+# TODO: This is not used anymore and can be removed
 module Api
   module V1
     class StoreResource < ApplicationResource
       immutable
-      #caching
+      caching
 
       has_one :current_day, class_name: 'WeekDay', exclude_links: :default
 
       attributes :name, :group, :address, :coordinates, :capacity,
-                 :details, :store_type, :lonlat, :opening_hour, :closing_hour
+                 :details, :store_type, :lonlat
 
       filters :location, :store_type
 
@@ -26,14 +27,6 @@ module Api
 
       def coordinates
         [@model.latitude, @model.longitude]
-      end
-
-      def opening_hour
-        @model.current_day&.opening_hour
-      end
-
-      def closing_hour
-        @model.current_day&.closing_hour
       end
 
       def self.records(options = {})

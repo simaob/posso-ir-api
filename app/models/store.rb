@@ -126,7 +126,7 @@ class Store < ApplicationRecord
       ST_SetSRID(ST_MakePoint(#{lon}, #{lat}),4326) <-> stores.lonlat AS distance
     SQL
 
-    select(query).available.order('distance ASC').limit(100)
+    select(query).order('distance ASC')
   end
 
   def self.in_bounding_box(coordinates)
@@ -141,6 +141,10 @@ class Store < ApplicationRecord
         csv << [store.id, store.name, store.store_type, store.latitude, store.longitude, store.address]
       end
     end
+  end
+
+  def cache_key
+    updated_at
   end
 
   private
