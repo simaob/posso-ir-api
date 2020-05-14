@@ -124,6 +124,15 @@ class Store < ApplicationRecord
                  coordinates.flatten(1)].flatten(1))
   end
 
+  def self.to_csv
+    CSV.generate(headers: true, force_quotes: true) do |csv|
+      csv << %w(id name store_type latitude longitude address)
+      all.find_each do |store|
+        csv << [store.id, store.name, store.store_type, store.latitude, store.longitude, store.address]
+      end
+    end
+  end
+
   private
 
   # x: longitude
@@ -160,14 +169,5 @@ class Store < ApplicationRecord
 
   def create_general_status
     StatusGeneral.create!(store_id: id, updated_time: Time.current, is_official: false)
-  end
-
-  def self.to_csv
-    CSV.generate(headers: true, force_quotes: true) do |csv|
-      csv << %w(id name store_type latitude longitude address)
-      self.all.each do |store|
-        csv << [store.id, store.name, store.store_type, store.latitude, store.longitude, store.address]
-      end
-    end
   end
 end
