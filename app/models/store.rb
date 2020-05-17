@@ -28,6 +28,8 @@
 #  source              :string
 #  make_phone_calls    :boolean          default("false")
 #  phone_call_interval :integer          default("60")
+#  category            :integer
+#  quality_flag        :boolean
 #
 class Store < ApplicationRecord
   include UserTrackable
@@ -57,11 +59,14 @@ class Store < ApplicationRecord
 
   enum store_type: {supermarket: 1, pharmacy: 2, restaurant: 3,
                     gas_station: 4, bank: 5, coffee: 6, kiosk: 7,
-                    other: 8, atm: 9, post_office: 10}
+                    other: 8, atm: 9, post_office: 10, beach: 11}
   enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3, archived: 4}
+  enum category: {ocean: 1, river: 2}
 
   validates :capacity, allow_nil: true, numericality: {greater_than: 0}
   validates :phone_call_interval, allow_nil: true, numericality: {greater_than: 29, less_than: 180}
+  validates :quality_flag, absence: true, if: proc { |s| s.store_type != 'beach' }
+  validates :category, absence: true, if: proc { |s| s.store_type != beach }
 
   scope :by_country, ->(country) { where(country: country) }
   scope :by_group, ->(group) { where(group: group) }
