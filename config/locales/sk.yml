@@ -71,6 +71,7 @@ sk:
           other: 'Iné'
           atm: 'Bankomat'
           post_office: 'Pošta'
+          beach: 'Pláž'
         categories:
           ocean: 'Ocean'
           river: 'River'

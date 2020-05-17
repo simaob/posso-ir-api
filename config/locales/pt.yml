@@ -89,6 +89,7 @@ pt:
           other: 'Outro'
           atm: 'Multibanco'
           post_office: 'Correios'
+          beach: 'Praia'
         categories:
           ocean: 'Marítima'
           river: 'Fluvial'
