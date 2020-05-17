@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_203155) do
+ActiveRecord::Schema.define(version: 2020_05_17_153726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,8 +189,8 @@ ActiveRecord::Schema.define(version: 2020_05_05_203155) do
     t.boolean "active", default: false
     t.string "timestamps"
     t.bigint "store_id"
-    t.datetime "created_at", default: "2020-05-05 20:33:42", null: false
-    t.datetime "updated_at", default: "2020-05-05 20:33:42", null: false
+    t.datetime "created_at", default: "2020-05-17 19:52:25", null: false
+    t.datetime "updated_at", default: "2020-05-17 19:52:25", null: false
     t.index ["active"], name: "index_week_days_on_active"
     t.index ["store_id", "day"], name: "index_week_days_on_store_id_and_day", unique: true
     t.index ["store_id"], name: "index_week_days_on_store_id"
