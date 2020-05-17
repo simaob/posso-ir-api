@@ -49,6 +49,7 @@ class Store < ApplicationRecord
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
 
   has_many :week_days
+  has_one :current_day, -> { today }, class_name: 'WeekDay', inverse_of: 'store'
   accepts_nested_attributes_for :week_days
 
   # geocoded_by :address
@@ -119,6 +120,15 @@ class Store < ApplicationRecord
     where(query).available
   end
 
+  def self.retrieve_closest(lat, lon)
+    query = <<~SQL
+      stores.*,
+      ST_SetSRID(ST_MakePoint(#{lon}, #{lat}),4326) <-> stores.lonlat AS distance
+    SQL
+
+    select(query).order('distance ASC')
+  end
+
   def self.in_bounding_box(coordinates)
     Store.where(['lonlat && ST_MakeEnvelope(?, ?, ?, ?, 4326)',
                  coordinates.flatten(1)].flatten(1))
@@ -131,6 +141,10 @@ class Store < ApplicationRecord
         csv << [store.id, store.name, store.store_type, store.latitude, store.longitude, store.address]
       end
     end
+  end
+
+  def cache_key
+    updated_at
   end
 
   private
