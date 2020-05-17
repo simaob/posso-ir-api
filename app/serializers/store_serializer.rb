@@ -33,7 +33,8 @@
 class StoreSerializer
   include FastJsonapi::ObjectSerializer
   attributes :name, :group, :address, :capacity,
-             :details, :store_type, :lonlat, :opening_hour, :closing_hour
+             :details, :store_type, :lonlat, :opening_hour, :closing_hour,
+             :category, :quality_flag
   attribute :closing_hour do |object|
     object.current_day&.closing_hour
   end
@@ -43,5 +44,11 @@ class StoreSerializer
   attribute :coordinates do |object|
     [[object.latitude, object.longitude]]
   end
+  attribute :category, if: Proc.new { |object|
+    object.store_type == 'beach'
+  }
+  attribute :quality_flag, if: Proc.new { |object|
+    object.store_type == 'beach'
+  }
   cache_options enabled: true, cache_length: 2.hours
 end

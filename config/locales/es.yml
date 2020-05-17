@@ -92,6 +92,9 @@ es:
           other: 'Otro'
           atm: 'Cajero automático'
           post_office: 'Correos'
+        categories:
+          ocean: 'Marítima'
+          river: 'Fluvial'
   controllers:
     stores:
       approve_all:

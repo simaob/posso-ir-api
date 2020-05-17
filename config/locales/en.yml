@@ -89,6 +89,9 @@ en:
           other: 'Other'
           atm: 'ATM'
           post_office: 'Post Office'
+        categories:
+          ocean: 'Sea side'
+          river: 'River side'
   controllers:
     stores:
       approve_all:
