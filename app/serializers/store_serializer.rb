@@ -45,10 +45,10 @@ class StoreSerializer
     [[object.latitude, object.longitude]]
   end
   attribute :category, if: proc { |object|
-    object.store_type == 'beach'
+    object.beach?
   }
   attribute :quality_flag, if: proc { |object|
-    object.store_type == 'beach'
+    object.beach?
   }
   cache_options enabled: true, cache_length: 2.hours
 end

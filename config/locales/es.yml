@@ -92,6 +92,7 @@ es:
           other: 'Otro'
           atm: 'Cajero automático'
           post_office: 'Correos'
+          beach: 'Playa'
         categories:
           ocean: 'Marítima'
           river: 'Fluvial'

@@ -52,7 +52,7 @@
         </div>
       </div>
 
-      <div class="form-row<%= " hidden" unless @store.store_type == 'beach'%>">
+      <div class="form-row<%= " hidden" unless @store.beach? %>">
         <div class="form-group col-md-6">
           <%= form.label :category, class: "col-sm-4 col-form-label" %>
           <%= form.select :category, enum_options_for_select(Store, :category, true), {}, class: 'form-control',

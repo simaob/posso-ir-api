@@ -89,6 +89,7 @@ en:
           other: 'Other'
           atm: 'ATM'
           post_office: 'Post Office'
+          beach: 'Beach'
         categories:
           ocean: 'Sea side'
           river: 'River side'
