@@ -20,10 +20,10 @@ function MapView(props) {
   useFetchShops(state, dispatch);
   useSaveShop(state, dispatch);
 
-  const onBoundsChange = bounds => {
+  const onBoundsChange = (bounds, viewport) => {
     const prevBounds = (state.bounds || initialBounds || []).flat().map(b => b.toFixed(3));
     const nextBounds = bounds.flat().map(b => b.toFixed(3));
-    if (!isEqual(nextBounds, prevBounds)) {
+    if (!isEqual(nextBounds, prevBounds) && viewport.zoom >= 10) {
       setBounds.current(bounds);
     }
   };
