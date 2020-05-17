@@ -89,6 +89,9 @@ pt:
           other: 'Outro'
           atm: 'Multibanco'
           post_office: 'Correios'
+        categories:
+          ocean: 'Marítima'
+          river: 'Fluvial'
   controllers:
     stores:
       approve_all:

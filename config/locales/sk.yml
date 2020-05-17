@@ -71,6 +71,9 @@ sk:
           other: 'Iné'
           atm: 'Bankomat'
           post_office: 'Pošta'
+        categories:
+          ocean: 'Ocean'
+          river: 'River'
   controllers:
     stores:
       approve_all:

@@ -52,6 +52,19 @@
         </div>
       </div>
 
+      <div class="form-row<%= " hidden" unless @store.store_type == 'beach'%>">
+        <div class="form-group col-md-6">
+          <%= form.label :category, class: "col-sm-4 col-form-label" %>
+          <%= form.select :category, enum_options_for_select(Store, :category, true), {}, class: 'form-control',
+                          class: "form-control" %>
+        </div>
+
+        <div class="form-group col-md-6">
+          <%= form.label :quality_flag, class: "col-sm-4 col-form-label" %>
+          <%= form.check_box :quality_flag,  class: "form-control" %>
+        </div>
+      </div>
+
       <div class="form-row">
         <div class="form-group col-md-9">
           <%= form.label :group, class: "col-sm-4 col-form-label" %>

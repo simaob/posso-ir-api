@@ -2,10 +2,11 @@ module EnumI18nHelper
   # Returns an array of the possible key/i18n values for the enum
   # Example usage:
   # enum_options_for_select(User, :approval_state)
-  def enum_options_for_select(class_name, enum)
+  def enum_options_for_select(class_name, enum, blank = false)
     values = class_name.send(enum.to_s.pluralize).map do |key, _|
       [enum_i18n(class_name, enum, key), key]
     end
+    values << ['', ''] if blank
     values.sort_by { |a| a[0] }
   end
 
