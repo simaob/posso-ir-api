@@ -66,7 +66,7 @@ class Store < ApplicationRecord
   validates :capacity, allow_nil: true, numericality: {greater_than: 0}
   validates :phone_call_interval, allow_nil: true, numericality: {greater_than: 29, less_than: 180}
   validates :quality_flag, absence: true, if: proc { |s| s.store_type != 'beach' }
-  validates :category, absence: true, if: proc { |s| s.store_type != beach }
+  validates :category, absence: true, if: proc { |s| s.store_type != 'beach' }
 
   scope :by_country, ->(country) { where(country: country) }
   scope :by_group, ->(group) { where(group: group) }
