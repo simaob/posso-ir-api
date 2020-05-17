@@ -147,6 +147,8 @@ ActiveRecord::Schema.define(version: 2020_05_05_203155) do
     t.string "source"
     t.boolean "make_phone_calls", default: false
     t.integer "phone_call_interval", default: 60
+    t.integer "category"
+    t.boolean "quality_flag"
     t.index ["created_by_id"], name: "index_stores_on_created_by_id"
     t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
     t.index ["make_phone_calls"], name: "index_stores_on_make_phone_calls"
