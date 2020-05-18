@@ -41,7 +41,7 @@ class StoreSerializer
     object.current_day&.opening_hour
   end
   attribute :coordinates do |object|
-    [[object.latitude, object.longitude]]
+    [object.latitude, object.longitude]
   end
   cache_options enabled: true, cache_length: 2.hours
 end
