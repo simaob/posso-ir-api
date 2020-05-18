@@ -32,6 +32,8 @@
 
 class StoreSerializer
   include FastJsonapi::ObjectSerializer
+  set_key_transform :dash
+
   attributes :name, :group, :address, :capacity,
              :details, :store_type, :lonlat, :opening_hour, :closing_hour
   attribute :closing_hour do |object|
