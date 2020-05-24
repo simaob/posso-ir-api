@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_153726) do
+ActiveRecord::Schema.define(version: 2020_05_24_202948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,53 @@ ActiveRecord::Schema.define(version: 2020_05_17_153726) do
     t.bigint "user_id"
     t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
     t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
+
+  create_table "beach_configurations", force: :cascade do |t|
+    t.integer "category"
+    t.string "beach_type"
+    t.string "ground"
+    t.string "restrictions"
+    t.string "risk_areas"
+    t.integer "average_users"
+    t.boolean "guarded"
+    t.boolean "first_aid_station"
+    t.boolean "wc"
+    t.boolean "showers"
+    t.boolean "accessibility"
+    t.boolean "garbage_collection"
+    t.boolean "cleaning"
+    t.boolean "info_panel"
+    t.boolean "restaurant"
+    t.boolean "parking"
+    t.integer "parking_spots"
+    t.date "season_start"
+    t.date "season_end"
+    t.integer "water_quality"
+    t.string "water_quality_url"
+    t.boolean "quality_flag"
+    t.string "water_quality_entity"
+    t.string "water_quality_contact"
+    t.string "water_contact_email"
+    t.string "security_entity"
+    t.string "security_entity_contact"
+    t.string "security_entity_email"
+    t.string "health_authority"
+    t.string "health_authority_contact"
+    t.string "health_authority_email"
+    t.string "municipality"
+    t.string "municipality_contact"
+    t.string "municipality_email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "store_id"
+    t.index ["average_users"], name: "index_beach_configurations_on_average_users"
+    t.index ["category"], name: "index_beach_configurations_on_category"
+    t.index ["guarded"], name: "index_beach_configurations_on_guarded"
+    t.index ["parking"], name: "index_beach_configurations_on_parking"
+    t.index ["quality_flag"], name: "index_beach_configurations_on_quality_flag"
+    t.index ["store_id"], name: "index_beach_configurations_on_store_id"
+    t.index ["water_quality"], name: "index_beach_configurations_on_water_quality"
   end
 
   create_table "phones", force: :cascade do |t|
@@ -147,8 +194,6 @@ ActiveRecord::Schema.define(version: 2020_05_17_153726) do
     t.string "source"
     t.boolean "make_phone_calls", default: false
     t.integer "phone_call_interval", default: 60
-    t.integer "category"
-    t.boolean "quality_flag"
     t.index ["created_by_id"], name: "index_stores_on_created_by_id"
     t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
     t.index ["make_phone_calls"], name: "index_stores_on_make_phone_calls"
@@ -189,14 +234,15 @@ ActiveRecord::Schema.define(version: 2020_05_17_153726) do
     t.boolean "active", default: false
     t.string "timestamps"
     t.bigint "store_id"
-    t.datetime "created_at", default: "2020-05-14 16:13:10", null: false
-    t.datetime "updated_at", default: "2020-05-14 16:13:10", null: false
+    t.datetime "created_at", default: "2020-05-05 20:33:42", null: false
+    t.datetime "updated_at", default: "2020-05-05 20:33:42", null: false
     t.index ["active"], name: "index_week_days_on_active"
     t.index ["store_id", "day"], name: "index_week_days_on_store_id_and_day", unique: true
     t.index ["store_id"], name: "index_week_days_on_store_id"
   end
 
   add_foreign_key "api_keys", "users", on_delete: :cascade
+  add_foreign_key "beach_configurations", "stores", on_delete: :cascade
   add_foreign_key "phones", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "users", on_delete: :cascade

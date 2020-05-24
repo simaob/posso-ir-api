@@ -28,8 +28,6 @@
 #  source              :string
 #  make_phone_calls    :boolean          default("false")
 #  phone_call_interval :integer          default("60")
-#  category            :integer
-#  quality_flag        :boolean
 #
 class Store < ApplicationRecord
   include UserTrackable
@@ -50,23 +48,20 @@ class Store < ApplicationRecord
   has_many :phones
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
 
+  has_one :beach_configuration, -> { where(store_type: 'beach') }, inverse_of: :store
+  accepts_nested_attributes_for :beach_configuration, allow_destroy: true, reject_if: :all_blank
+
   has_many :week_days
   has_one :current_day, -> { today }, class_name: 'WeekDay', inverse_of: 'store'
   accepts_nested_attributes_for :week_days
-
-  # geocoded_by :address
-  # reverse_geocoded_by :latitude, :longitude
 
   enum store_type: {supermarket: 1, pharmacy: 2, restaurant: 3,
                     gas_station: 4, bank: 5, coffee: 6, kiosk: 7,
                     other: 8, atm: 9, post_office: 10, beach: 11}
   enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3, archived: 4}
-  enum category: {ocean: 1, river: 2}
 
   validates :capacity, allow_nil: true, numericality: {greater_than: 0}
   validates :phone_call_interval, allow_nil: true, numericality: {greater_than: 29, less_than: 180}
-  validates :quality_flag, absence: true, if: proc { |s| !s.beach? }
-  validates :category, absence: true, if: proc { |s| !s.beach? }
 
   scope :by_country, ->(country) { where(country: country) }
   scope :by_group, ->(group) { where(group: group) }
@@ -74,8 +69,6 @@ class Store < ApplicationRecord
   scope :by_store_type, ->(store_type) { where(store_type: store_type) }
   scope :available, -> { where(state: [:live, :marked_for_deletion]).where(open: true) }
 
-  # after_validation :reverse_geocode
-  # after_validation :geocode
   after_save :set_lonlat
   after_create :create_status
 

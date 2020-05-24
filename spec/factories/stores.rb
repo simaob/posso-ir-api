@@ -28,8 +28,6 @@
 #  source              :string
 #  make_phone_calls    :boolean          default("false")
 #  phone_call_interval :integer          default("60")
-#  category            :integer
-#  quality_flag        :boolean
 #
 FactoryBot.define do
   factory :store do
