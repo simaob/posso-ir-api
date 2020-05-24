@@ -48,7 +48,7 @@ class Store < ApplicationRecord
   has_many :phones
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
 
-  has_one :beach_configuration, -> { where(store_type: 'beach') }, inverse_of: :store
+  has_one :beach_configuration, inverse_of: :store
   accepts_nested_attributes_for :beach_configuration, allow_destroy: true, reject_if: :all_blank
 
   has_many :week_days
