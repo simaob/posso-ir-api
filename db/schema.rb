@@ -234,8 +234,8 @@ ActiveRecord::Schema.define(version: 2020_05_24_202948) do
     t.boolean "active", default: false
     t.string "timestamps"
     t.bigint "store_id"
-    t.datetime "created_at", default: "2020-05-05 20:33:42", null: false
-    t.datetime "updated_at", default: "2020-05-05 20:33:42", null: false
+    t.datetime "created_at", default: "2020-05-14 16:13:10", null: false
+    t.datetime "updated_at", default: "2020-05-14 16:13:10", null: false
     t.index ["active"], name: "index_week_days_on_active"
     t.index ["store_id", "day"], name: "index_week_days_on_store_id_and_day", unique: true
     t.index ["store_id"], name: "index_week_days_on_store_id"
