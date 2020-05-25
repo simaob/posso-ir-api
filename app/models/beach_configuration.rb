@@ -42,8 +42,6 @@
 #  store_id                 :bigint
 #
 class BeachConfiguration < ApplicationRecord
-  include UserTrackable
-
   belongs_to :store
 
   enum category: {ocean: 1, river: 2}

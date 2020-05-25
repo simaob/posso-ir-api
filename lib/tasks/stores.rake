@@ -95,4 +95,8 @@ namespace :stores do
   task meu_super: :environment do
     ImportStores.new.import_meu_super
   end
+
+  task beaches: :environment do
+    ImportBeaches.new.import_beaches
+  end
 end
