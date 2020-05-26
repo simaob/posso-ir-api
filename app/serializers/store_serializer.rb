@@ -39,6 +39,10 @@ class StoreSerializer
   attributes :name, :group, :address, :capacity,
              :details, :store_type, :lonlat, :opening_hour, :closing_hour
 
+  attribute :photo do |object|
+    rails_blob_path(object.photo, only_path: true) if object.photo.attached?
+  end
+
   attribute :closing_hour do |object|
     object.current_day&.closing_hour
   end

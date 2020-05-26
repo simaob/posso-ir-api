@@ -40,6 +40,10 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  store_id                 :bigint
+#  beach_support            :boolean
+#  water_chair              :boolean
+#  construction             :boolean
+#  collapsing_risk          :boolean
 #
 class BeachConfiguration < ApplicationRecord
   belongs_to :store

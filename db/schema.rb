@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_120829) do
+ActiveRecord::Schema.define(version: 2020_05_26_183650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,10 @@ ActiveRecord::Schema.define(version: 2020_05_26_120829) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "store_id"
+    t.boolean "beach_support"
+    t.boolean "water_chair"
+    t.boolean "construction"
+    t.boolean "collapsing_risk"
     t.index ["average_users"], name: "index_beach_configurations_on_average_users"
     t.index ["category"], name: "index_beach_configurations_on_category"
     t.index ["guarded"], name: "index_beach_configurations_on_guarded"
