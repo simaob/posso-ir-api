@@ -14,6 +14,9 @@ class Ability
     if user.admin?
       can :manage, :all
 
+    elsif user.beach_admin?
+      can :manage, :beaches
+
     elsif user.general_manager?
       can [:new, :create, :edit, :update], Store
       can [:new, :create], User

@@ -72,6 +72,8 @@ en:
           general_manager: 'General manager'
           admin: 'Administrator'
           contributor: 'Contributor'
+          beach_admin: 'Administrator - Beaches'
+          beach_manager: 'Beach Manager'
       store:
         states:
           waiting_approval: 'Waiting approval'
@@ -203,6 +205,10 @@ en:
         add_phone: "Add Phone"
         schedule: "Schedule"
         phone_call_interval: "Phone Call Interval (minutes)"
+    beaches:
+      index:
+        title: 'Beaches'
+        entry_name: 'beach'
     status_crowdsource_users:
       index:
         title: 'Reported statuses'

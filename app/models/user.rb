@@ -37,7 +37,8 @@ class User < ApplicationRecord
 
   has_secure_token :store_owner_code
 
-  enum role: {user: 0, store_owner: 1, general_manager: 2, admin: 3, contributor: 4}
+  enum role: {user: 0, store_owner: 1, general_manager: 2, admin: 3, contributor: 4,
+    beach_admin: 5, beach_manager: 6}
 
   def self.search(search)
     return all unless search
@@ -57,6 +58,10 @@ class User < ApplicationRecord
 
     ApiKey.where(user_id: id).update(active: false)
     ApiKey.create(user: self, active: true)
+  end
+
+  def any_admin?
+    admin? || beach_admin?
   end
 
   protected

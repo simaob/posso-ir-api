@@ -1,11 +1,12 @@
 class StoresController < ApplicationController
-  load_and_authorize_resource except: [:statuses]
+  load_and_authorize_resource :store, except: [:statuses, :index, :approve_all]
+  before_action :set_stores, only: [:index, :approve_all]
   skip_before_action :authenticate_user!, if: proc { request.format.json? && action_name == 'index' }
 
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.search(params[:search])
+    @stores = @stores.search(params[:search])
     @stores = @stores.by_country(params[:country]) if params[:country].present?
     @stores = @stores.by_group(params[:group]) if params[:group].present?
 
@@ -87,7 +88,7 @@ class StoresController < ApplicationController
   end
 
   def approve_all
-    @stores = Store.search(params[:search])
+    @stores = @stores.search(params[:search])
     @stores = @stores.by_group(params[:group]) if params[:group].present?
     @stores = @stores.by_country(params[:country]) if params[:country].present?
     @stores = @stores.by_state(params[:state]) if params[:state].present?
@@ -96,7 +97,7 @@ class StoresController < ApplicationController
     @stores.update_all(state: :live) # rubocop:disable Rails/SkipsModelValidations
 
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: t('controllers.stores.approve_all.notice', size: size) }
+      format.html { redirect_to polymorphic_url(controller_name), notice: t('controllers.stores.approve_all.notice', size: size) }
       format.json { head :no_content }
     end
   end
@@ -112,6 +113,10 @@ class StoresController < ApplicationController
   end
 
   private
+
+  def set_stores
+    @stores = Store.where.not(store_type: :beach)
+  end
 
   # Only allow a list of trusted parameters through.
   def store_params

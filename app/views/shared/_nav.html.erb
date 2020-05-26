@@ -39,6 +39,16 @@
               <% end %>
             </div>
         <% end %>
+        <% if can? :read, :beaches %>
+          <li class="nav-item <%= 'active' if controller_name == 'beaches' %>">
+            <%= link_to beaches_path, class: 'nav-link' do %>
+              <%= t('views.beaches.index.title') %>
+              <% if controller_name == 'beaches' %>
+                <span class="sr-only">(<%= t('views.shared.navbar.current') %>)</span>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
         <% if can? :read, StatusCrowdsourceUser %>
           <li class="nav-item <%= 'active' if controller_name == 'status_crowdsource_users' %>">
             <%= link_to status_crowdsource_users_path, class: 'nav-link' do %>

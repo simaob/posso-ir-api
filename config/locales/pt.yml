@@ -72,6 +72,8 @@ pt:
           general_manager: 'Gestor do sistema'
           admin: 'Administrador'
           contributor: 'Voluntário/a'
+          beach_admin: 'Adminstrador - Praias'
+          beach_manager: 'Concessionário Praias'
       store:
         states:
           waiting_approval: 'Aguarda validação'
@@ -209,6 +211,10 @@ pt:
         add_phone: "Adicionar Telefone"
         schedule: "Horário"
         phone_call_interval: "Intervalo entre chamadas telefónicas (minutos)"
+    beaches:
+      index:
+        title: 'Praias'
+        entry_name: 'praia'
     status_crowdsource_users:
       index:
         title: 'Estados reportados'
