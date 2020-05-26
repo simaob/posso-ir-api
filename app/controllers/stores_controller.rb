@@ -82,7 +82,10 @@ class StoresController < ApplicationController
   def destroy
     @store.destroy
     respond_to do |format|
-      format.html { redirect_to polymorphic_url(controller_name, search_params), notice: 'Store was successfully destroyed.' }
+      format.html do
+        redirect_to polymorphic_url(controller_name, search_params),
+                    notice: 'Store was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -97,7 +100,10 @@ class StoresController < ApplicationController
     @stores.update_all(state: :live) # rubocop:disable Rails/SkipsModelValidations
 
     respond_to do |format|
-      format.html { redirect_to polymorphic_url(controller_name), notice: t('controllers.stores.approve_all.notice', size: size) }
+      format.html do
+        redirect_to polymorphic_url(controller_name),
+                    notice: t('controllers.stores.approve_all.notice', size: size)
+      end
       format.json { head :no_content }
     end
   end

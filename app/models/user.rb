@@ -38,7 +38,7 @@ class User < ApplicationRecord
   has_secure_token :store_owner_code
 
   enum role: {user: 0, store_owner: 1, general_manager: 2, admin: 3, contributor: 4,
-    beach_admin: 5, beach_manager: 6}
+              beach_admin: 5, beach_manager: 6}
 
   def self.search(search)
     return all unless search
