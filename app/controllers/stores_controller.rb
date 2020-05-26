@@ -82,7 +82,7 @@ class StoresController < ApplicationController
   def destroy
     @store.destroy
     respond_to do |format|
-      format.html { redirect_to stores_url(search_params), notice: 'Store was successfully destroyed.' }
+      format.html { redirect_to polymorphic_url(controller_name, search_params), notice: 'Store was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

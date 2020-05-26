@@ -34,7 +34,7 @@
           <td><%= store.longitude&.round(3) %></td>
           <td>
             <%= link_to t('views.actions.show'), store %>
-            <% if can? :edit, store %>
+            <% if can? :edit, :beaches %>
               |
               <%= link_to t('views.actions.edit'), edit_store_path(store) %>
             <% end %>
@@ -42,10 +42,10 @@
               |
               <%= link_to t('views.stores.show.statuses'), statuses_store_path(store) %>
             <% end %>
-            <% if can? :destroy, store %>
+            <% if can? :destroy, :beaches %>
               |
               <%= link_to t('views.actions.destroy'),
-                store_path(store, state: params[:state], group: params[:group],
+                beach_path(store, state: params[:state], group: params[:group],
                                  search: params[:search], country: params[:country],
                                  store_type: params[:store_type]), method: :delete,
                                  data: { confirm: t('views.actions.confirm_destroy') } %>
