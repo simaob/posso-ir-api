@@ -32,6 +32,8 @@
 class Store < ApplicationRecord
   include UserTrackable
 
+  has_one_attached :photo
+
   RADIUS = 5000
   PROJECTION = 4326
 

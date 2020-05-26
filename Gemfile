@@ -101,3 +101,7 @@ gem 'aws-sdk-rails' # to use aws-ses
 
 # Active job
 gem 'sidekiq'
+
+# File management
+gem 'aws-sdk-s3', require: false
+gem 'image_processing'
