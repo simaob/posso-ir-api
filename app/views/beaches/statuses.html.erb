@@ -1,0 +1,77 @@
+<% content_for :page_title, t('views.stores.statuses.title', store: @store.name&.titleize) %>
+
+<div class="row mt-3">
+  <div class="col-md-11">
+    <span class="h2"><%= @store.name %></span>
+    <%= badge_for @store %>
+  </div>
+  <% if can? :edit, @store %>
+    <div class="col-md-1">
+      <%= link_to t('views.actions.back'), @store, class: 'btn btn-sm btn-outline-primary' %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <h5 class="card-title"><%= Status.model_name.human(count: 1) %></h5>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th><%= Status.human_attribute_name(:type) %></th>
+                <th><%= Status.human_attribute_name(:updated_time) %></th>
+                <th><%= Status.human_attribute_name(:status) %></th>
+                <th><%= Status.human_attribute_name(:voters) %></th>
+                <th><%= Status.human_attribute_name(:previous_status) %></th>
+                <th><%= Status.human_attribute_name(:previous_voters) %></th>
+                <th><%= Status.human_attribute_name(:is_official) %></th>
+                <th><%= Status.human_attribute_name(:active) %></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @statuses.each do |status| %>
+                <tr <%= 'class=table-success' if status.is_a?(StatusGeneral) %>>
+                  <td><%= status.type %></td>
+                  <td><%= status.updated_time&.strftime('%H:%M %d/%m/%Y') %></td>
+                  <td><%= status.status&.round(3) %></td>
+                  <td><%= status.voters %></td>
+                  <td><%= status.previous_status&.round(3) %></td>
+                  <td><%= status.previous_voters %></td>
+                  <td><%= status.is_official %></td>
+                  <td><%= status.active %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if current_user.admin? %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.status_crowdsource_users.index.title') %></h5>
+          <%= render 'status_crowdsource_users/table', status_crowdsource_users: @status_crowdsource_users %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title"><%= t('views.status_estimations.index.title') %></h5>
+          <%= render 'status_estimations/table', histories: @estimation_histories %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

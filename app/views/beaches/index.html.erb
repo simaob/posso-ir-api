@@ -1,0 +1,50 @@
+<% content_for :page_title, t('views.beaches.index.title') %>
+
+<div class="row mt-3">
+  <div class="col-md-<%= current_user.any_admin? && params[:state] == 'waiting_approval' ? 10 : 11 %>">
+    <h1><%= t('views.beaches.index.title') %></h1>
+  </div>
+  <div class="col-md-<%= current_user.any_admin? && params[:state] == 'waiting_approval' ? 2 : 1 %>">
+    <% if current_user.any_admin? && params[:state] == 'waiting_approval' %>
+      <%= link_to t('views.actions.approve_all'), approve_all_beaches_path(group: params[:group], search: params[:search], store_type: params[:store_type], state: params[:state]), method: :post,
+        data: {confirm: t('views.stores.index.confirm_approval')},
+        class: 'btn btn-sm btn-outline-success' %>
+    <% end %>
+    <% if can? :new, Store %>
+      <%= link_to t('views.actions.new'), new_beach_path,
+        class: 'btn btn-sm btn-outline-primary' %>
+    <% end %>
+    <% if current_user.any_admin? %>
+      <%= link_to t('views.actions.download'),
+                  beaches_path(group: params[:group], search: params[:search],
+                    store_type: params[:store_type], state: params[:state],
+                    format: 'csv'),
+                  class: 'btn btn-sm btn-outline-success' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-12">
+    <%= form_tag beaches_path, method: :get, class: 'form-inline' do %>
+      <%= label_tag :search, 'Search', class: 'sr-only' %>
+      <%= text_field_tag :search, params[:search], class: 'form-control col-md-7 mb-2 mr-sm-2',
+        placeholder: t('views.stores.search.placeholder') %>
+      <%= label_tag :state, 'State', class: 'sr-only' %>
+      <%= select_tag :state, options_for_select(enum_options_for_select(Store, :state), params[:state]), {include_blank: t('views.stores.search.filter_state'),
+                                                                                                          class: 'form-control col-md-3 mb-2 mr-sm-2'} %>
+      <%= submit_tag t('views.stores.search.button'),
+        class: 'btn btn-primary mb-2' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <%= render 'table', stores: @stores %>
+      </div>
+    </div>
+  </div>
+</div>
