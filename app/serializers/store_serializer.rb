@@ -34,10 +34,11 @@ class StoreSerializer
   include FastJsonapi::ObjectSerializer
   set_key_transform :dash
   set_type :stores
+  has_one :beach_configuration, if: Proc.new { |s| s.beach? }
 
   attributes :name, :group, :address, :capacity,
-             :details, :store_type, :lonlat, :opening_hour, :closing_hour,
-             :category, :quality_flag
+             :details, :store_type, :lonlat, :opening_hour, :closing_hour
+
   attribute :closing_hour do |object|
     object.current_day&.closing_hour
   end
@@ -47,11 +48,11 @@ class StoreSerializer
   attribute :coordinates do |object|
     [object.latitude, object.longitude]
   end
-  attribute :category, if: proc { |object|
-    object.beach?
-  }
-  attribute :quality_flag, if: proc { |object|
-    object.beach?
-  }
+  #attribute :category, if: proc { |object|
+  #  object.beach?
+  #}
+  #attribute :quality_flag, if: proc { |object|
+  #  object.beach?
+  #}
   cache_options enabled: true, cache_length: 2.hours
 end
