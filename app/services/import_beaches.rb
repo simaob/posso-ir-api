@@ -1,7 +1,8 @@
 class ImportBeaches
   def all
     cleanup
-    import_beaches
+    import_beaches_deco
+    import_beaches_apa
     Rails.logger.info "#{Store.where(store_type: :beach).count} total stores"
   end
 
@@ -9,7 +10,44 @@ class ImportBeaches
     Store.where(store_type: :beach).delete_all
   end
 
-  def import_beaches
+  def import_beaches_apa
+    import 'Importing beaches', 'praias_apa.json' do |file|
+      JSON.parse(file.read.force_encoding('UTF-8'))['features'].each do |item|
+        beach = item['attributes']
+        store = Store.new(
+          name: beach['praia'],
+          country: 'Portugal',
+          store_type: :beach,
+          latitude: beach['latitude'],
+          longitude: beach['longitude'],
+          source: 'APA',
+          original_id: beach['id']
+        )
+        store.beach_configuration = BeachConfiguration.new(
+          code: beach['code'],
+          water_code: beach['codigo_agua_balnear'],
+          guarded: beach['vigilancia'],
+          first_aid_station: beach['posto_socorros'],
+          wc: beach['sanitarios'],
+          showers: beach['duche'],
+          garbage_collection: beach['recolha_lixo'],
+          cleaning: beach['limpeza_praia'],
+          info_panel: beach['painel_informativo'],
+          bathing_support: beach['apoio_balnear'],
+          beach_support: beach['apoio_praia'],
+          parking: beach['estacionamento'],
+          quality_flag: beach['bandeira_azul'],
+          accessibility: beach['accessivel'],
+          water_chair: beach['cadeira_anfibia'],
+          construction: beach['obras_em_curso'],
+          collapsing_risk: beach['risco_derrocada']
+        )
+        store.save
+      end
+    end
+  end
+
+  def import_beaches_deco
     import 'Importing beaches', 'praias.csv' do |file|
       CSV.new(file, headers: true, skip_blanks: true).each do |csv|
         store = Store.new(
