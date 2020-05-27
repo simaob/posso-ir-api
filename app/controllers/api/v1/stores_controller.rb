@@ -9,7 +9,9 @@ module Api
 
       def index
         result = apply_params(records)
-        render json: StoreSerializer.new(result).serialized_json
+        options = {}
+        options[:include] = [:beach_configuration]
+        render json: StoreSerializer.new(result, options).serialized_json
       end
 
       private
@@ -52,7 +54,7 @@ module Api
         if @current_user&.store_owner?
           @current_user.stores.available
         else
-          Store.available.includes(:current_day)
+          Store.available.includes(:current_day, :beach_configuration)
         end
       end
     end

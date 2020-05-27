@@ -54,6 +54,8 @@ sk:
           general_manager: 'Hlavný manažér'
           admin: 'Administrátor'
           contributor: 'Prispievateľ'
+          beach_admin:
+          beach_manager:
       store:
         states:
           waiting_approval: 'Očakáva sa schválenie'
@@ -71,6 +73,10 @@ sk:
           other: 'Iné'
           atm: 'Bankomat'
           post_office: 'Pošta'
+          beach: 'Pláž'
+        categories:
+          ocean: 'Ocean'
+          river: 'River'
   controllers:
     stores:
       approve_all:
@@ -168,6 +174,10 @@ sk:
         add_phone: "Pridať tel. číslo"
         schedule: "Otváracie hodiny"
         phone_call_interval: "Interval pre telefónny hovor (minúty)"
+    beaches:
+      index:
+        title: 'Praias'
+        entry_name: 'praia'
     devise:
       registrations:
         new:

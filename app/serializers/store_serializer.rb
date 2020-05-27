@@ -34,9 +34,15 @@ class StoreSerializer
   include FastJsonapi::ObjectSerializer
   set_key_transform :dash
   set_type :stores
+  has_one :beach_configuration, if: proc { |s| s.beach? }
 
   attributes :name, :group, :address, :capacity,
              :details, :store_type, :lonlat, :opening_hour, :closing_hour
+
+  attribute :photo do |object|
+    rails_blob_path(object.photo, only_path: true) if object.photo.attached?
+  end
+
   attribute :closing_hour do |object|
     object.current_day&.closing_hour
   end
@@ -46,5 +52,11 @@ class StoreSerializer
   attribute :coordinates do |object|
     [object.latitude, object.longitude]
   end
+  # attribute :category, if: proc { |object|
+  #  object.beach?
+  # }
+  # attribute :quality_flag, if: proc { |object|
+  #  object.beach?
+  # }
   cache_options enabled: true, cache_length: 2.hours
 end

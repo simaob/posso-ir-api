@@ -1,0 +1,22 @@
+<div class="nested-fields">
+  <%= f.hidden_field :_destroy %>
+  <div class="form-row">
+    <div class="form-group col-md-4 my-1">
+      <%= f.label :phone_number, class: 'sr-only' %>
+      <%= f.phone_field :phone_number, placeholder: 'Number', class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-4 my-1">
+      <%= f.label :name, class: 'sr-only' %>
+      <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %>
+    </div>
+    <div class="col-auto my-1">
+      <div class="form-check">
+        <%= f.check_box :active %>
+        <%= f.label :active %>
+      </div>
+    </div>
+    <div class="col-auto my-1">
+      <%= link_to "Remove", '#', class: "remove_fields btn btn-danger" %>
+    </div>
+  </div>
+</div>

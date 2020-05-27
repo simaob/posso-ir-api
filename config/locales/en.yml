@@ -72,6 +72,8 @@ en:
           general_manager: 'General manager'
           admin: 'Administrator'
           contributor: 'Contributor'
+          beach_admin: 'Administrator - Beaches'
+          beach_manager: 'Beach Manager'
       store:
         states:
           waiting_approval: 'Waiting approval'
@@ -89,6 +91,10 @@ en:
           other: 'Other'
           atm: 'ATM'
           post_office: 'Post Office'
+          beach: 'Beach'
+        categories:
+          ocean: 'Sea side'
+          river: 'River side'
   controllers:
     stores:
       approve_all:
@@ -199,6 +205,10 @@ en:
         add_phone: "Add Phone"
         schedule: "Schedule"
         phone_call_interval: "Phone Call Interval (minutes)"
+    beaches:
+      index:
+        title: 'Beaches'
+        entry_name: 'beach'
     status_crowdsource_users:
       index:
         title: 'Reported statuses'

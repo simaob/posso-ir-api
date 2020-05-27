@@ -9,6 +9,8 @@
 #  active       :boolean          default("false")
 #  timestamps   :string
 #  store_id     :bigint
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 class WeekDay < ApplicationRecord
   belongs_to :store

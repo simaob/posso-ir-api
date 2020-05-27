@@ -7,6 +7,7 @@
 #  store_id   :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  approved   :boolean          default("false")
 #
 FactoryBot.define do
   factory :user_store do

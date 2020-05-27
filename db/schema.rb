@@ -10,11 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_203155) do
+ActiveRecord::Schema.define(version: 2020_05_27_094943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "api_keys", force: :cascade do |t|
     t.string "access_token", null: false
@@ -26,6 +47,60 @@ ActiveRecord::Schema.define(version: 2020_05_05_203155) do
     t.bigint "user_id"
     t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
     t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
+
+  create_table "beach_configurations", force: :cascade do |t|
+    t.integer "category"
+    t.string "beach_type"
+    t.string "ground"
+    t.string "restrictions"
+    t.string "risk_areas"
+    t.integer "average_users"
+    t.boolean "guarded"
+    t.boolean "first_aid_station"
+    t.boolean "wc"
+    t.boolean "showers"
+    t.boolean "accessibility"
+    t.boolean "garbage_collection"
+    t.boolean "cleaning"
+    t.boolean "info_panel"
+    t.boolean "restaurant"
+    t.boolean "parking"
+    t.integer "parking_spots"
+    t.date "season_start"
+    t.date "season_end"
+    t.integer "water_quality"
+    t.string "water_quality_url"
+    t.boolean "quality_flag"
+    t.string "water_quality_entity"
+    t.string "water_quality_contact"
+    t.string "water_contact_email"
+    t.string "security_entity"
+    t.string "security_entity_contact"
+    t.string "security_entity_email"
+    t.string "health_authority"
+    t.string "health_authority_contact"
+    t.string "health_authority_email"
+    t.string "municipality"
+    t.string "municipality_contact"
+    t.string "municipality_email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "store_id"
+    t.boolean "beach_support"
+    t.boolean "water_chair"
+    t.boolean "construction"
+    t.boolean "collapsing_risk"
+    t.float "code"
+    t.string "water_code"
+    t.boolean "bathing_support"
+    t.index ["average_users"], name: "index_beach_configurations_on_average_users"
+    t.index ["category"], name: "index_beach_configurations_on_category"
+    t.index ["guarded"], name: "index_beach_configurations_on_guarded"
+    t.index ["parking"], name: "index_beach_configurations_on_parking"
+    t.index ["quality_flag"], name: "index_beach_configurations_on_quality_flag"
+    t.index ["store_id"], name: "index_beach_configurations_on_store_id"
+    t.index ["water_quality"], name: "index_beach_configurations_on_water_quality"
   end
 
   create_table "phones", force: :cascade do |t|
@@ -187,14 +262,16 @@ ActiveRecord::Schema.define(version: 2020_05_05_203155) do
     t.boolean "active", default: false
     t.string "timestamps"
     t.bigint "store_id"
-    t.datetime "created_at", default: "2020-05-05 20:33:42", null: false
-    t.datetime "updated_at", default: "2020-05-05 20:33:42", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["active"], name: "index_week_days_on_active"
     t.index ["store_id", "day"], name: "index_week_days_on_store_id_and_day", unique: true
     t.index ["store_id"], name: "index_week_days_on_store_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_keys", "users", on_delete: :cascade
+  add_foreign_key "beach_configurations", "stores", on_delete: :cascade
   add_foreign_key "phones", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "users", on_delete: :cascade
