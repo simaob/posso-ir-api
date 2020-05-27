@@ -76,7 +76,7 @@ class Store < ApplicationRecord
 
   def address(unique: false)
     result = [street, city, country].map(&:presence).compact
-    result << "store-#{id}" if unique
+    result << "#{I18n.t("activerecord.enums.store.store_types.#{store_type}")}-#{id}" if unique
     result.join(', ')
   end
 
