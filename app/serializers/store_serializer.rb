@@ -52,11 +52,51 @@ class StoreSerializer
   attribute :coordinates do |object|
     [object.latitude, object.longitude]
   end
-  # attribute :category, if: proc { |object|
-  #  object.beach?
-  # }
-  # attribute :quality_flag, if: proc { |object|
-  #  object.beach?
-  # }
+  attribute :category, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.category
+  end
+  attribute :quality_flag, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.quality_flag
+  end
+  attribute :average_users, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.average_users
+  end
+  attribute :guarded, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.guarded
+  end
+  attribute :first_aid_station, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.first_aid_station
+  end
+  attribute :wc, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.wc
+  end
+  attribute :showers, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.showers
+  end
+  attribute :accessibility, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.accessibility
+  end
+  attribute :parking, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.parking
+  end
+  attribute :parking_spots, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.parking_spots
+  end
+  attribute :season_start, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.season_start
+  end
+  attribute :season_end, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.season_end
+  end
+  attribute :water_quality, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.water_quality
+  end
+  attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.water_quality_url
+  end
+  attribute :quality_flag, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.quality_flag
+  end
+
   cache_options enabled: true, cache_length: 2.hours
 end
