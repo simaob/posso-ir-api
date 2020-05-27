@@ -9,8 +9,8 @@
 #  active       :boolean          default("false")
 #  timestamps   :string
 #  store_id     :bigint
-#  created_at   :datetime         default("2020-05-05 20:33:42.790398"), not null
-#  updated_at   :datetime         default("2020-05-05 20:33:42.800137"), not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 class WeekDay < ApplicationRecord
   belongs_to :store

@@ -44,6 +44,9 @@
 #  water_chair              :boolean
 #  construction             :boolean
 #  collapsing_risk          :boolean
+#  code                     :float
+#  water_code               :string
+#  bathing_support          :boolean
 #
 class BeachConfigurationSerializer
   include FastJsonapi::ObjectSerializer
