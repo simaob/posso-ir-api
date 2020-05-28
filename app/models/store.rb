@@ -122,6 +122,7 @@ class Store < ApplicationRecord
 
   def self.retrieve_closest(lat, lon)
     query = <<~SQL
+      DISTINCT
       stores.*,
       ST_SetSRID(ST_MakePoint(#{lon}, #{lat}),4326) <-> stores.lonlat AS distance
     SQL
