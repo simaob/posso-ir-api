@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     end
     resources :beaches do
       post :approve_all, on: :collection
+      get :statuses, on: :member
+      resources :status_store_owners, only: [:new, :create]
     end
     resources :status_crowdsource_users, only: [:index]
     resources :manage_stores, only: [:index]
