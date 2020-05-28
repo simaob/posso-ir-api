@@ -33,14 +33,14 @@
           <td><%= store.latitude&.round(3) %></td>
           <td><%= store.longitude&.round(3) %></td>
           <td>
-            <%= link_to t('views.actions.show'), store %>
+            <%= link_to t('views.actions.show'), beach_path(store) %>
             <% if can? :edit, :beaches %>
               |
-              <%= link_to t('views.actions.edit'), edit_store_path(store) %>
+              <%= link_to t('views.actions.edit'), edit_beach_path(store) %>
             <% end %>
             <% if can? :read, :statuses_store %>
               |
-              <%= link_to t('views.stores.show.statuses'), statuses_store_path(store) %>
+              <%= link_to t('views.stores.show.statuses'), statuses_beach_path(store) %>
             <% end %>
             <% if can? :destroy, :beaches %>
               |
