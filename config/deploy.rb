@@ -20,7 +20,7 @@ set :rvm_roles, [:app, :web, :db]
 
 append :linked_files, '.env', 'config/master.key'
 
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", 'db/files'
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", 'db/files', 'config/credentials'
 
 set :user, 'ubuntu'
 
