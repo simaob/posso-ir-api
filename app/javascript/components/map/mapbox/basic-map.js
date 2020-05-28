@@ -71,7 +71,7 @@ function MapboxMap(props) {
   useEffect(() => {
     if (map.current && loaded && !flying) {
       const bounds = map.current.getBounds().toArray();
-      onBoundsChange(bounds);
+      onBoundsChange(bounds, viewport);
     }
   }, [viewport, onBoundsChange]);
 
@@ -94,7 +94,7 @@ function MapboxMap(props) {
         doubleClickZoom={!flying && doubleClickZoom}
         // DEFAULT FUNC IMPLEMENTATIONS
         onLoad={setLoaded}
-        onViewStateChange={loaded ? setViewport : undefined}
+        onViewStateChange={loaded ? e => setViewport(e.viewState) : undefined}
         onViewportChange={loaded ? setViewport : undefined}
         onResize={loaded ? setViewport : undefined}
         transitionInterpolator={new FlyToInterpolator()}

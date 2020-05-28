@@ -32,6 +32,8 @@
 class Store < ApplicationRecord
   include UserTrackable
 
+  has_one_attached :photo
+
   RADIUS = 5000
   PROJECTION = 4326
 
@@ -48,15 +50,16 @@ class Store < ApplicationRecord
   has_many :phones
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
 
-  has_many :week_days
-  accepts_nested_attributes_for :week_days
+  has_one :beach_configuration, inverse_of: :store
+  accepts_nested_attributes_for :beach_configuration, allow_destroy: true, reject_if: :all_blank
 
-  # geocoded_by :address
-  # reverse_geocoded_by :latitude, :longitude
+  has_many :week_days
+  has_one :current_day, -> { today }, class_name: 'WeekDay', inverse_of: 'store'
+  accepts_nested_attributes_for :week_days
 
   enum store_type: {supermarket: 1, pharmacy: 2, restaurant: 3,
                     gas_station: 4, bank: 5, coffee: 6, kiosk: 7,
-                    other: 8, atm: 9, post_office: 10}
+                    other: 8, atm: 9, post_office: 10, beach: 11}
   enum state: {waiting_approval: 1, live: 2, marked_for_deletion: 3, archived: 4}
 
   validates :capacity, allow_nil: true, numericality: {greater_than: 0}
@@ -68,14 +71,12 @@ class Store < ApplicationRecord
   scope :by_store_type, ->(store_type) { where(store_type: store_type) }
   scope :available, -> { where(state: [:live, :marked_for_deletion]).where(open: true) }
 
-  # after_validation :reverse_geocode
-  # after_validation :geocode
   after_save :set_lonlat
   after_create :create_status
 
   def address(unique: false)
     result = [street, city, country].map(&:presence).compact
-    result << "store-#{id}" if unique
+    result << "#{I18n.t("activerecord.enums.store.store_types.#{store_type}")}-#{id}" if unique
     result.join(', ')
   end
 
@@ -119,6 +120,15 @@ class Store < ApplicationRecord
     where(query).available
   end
 
+  def self.retrieve_closest(lat, lon)
+    query = <<~SQL
+      stores.*,
+      ST_SetSRID(ST_MakePoint(#{lon}, #{lat}),4326) <-> stores.lonlat AS distance
+    SQL
+
+    select(query).order('distance ASC')
+  end
+
   def self.in_bounding_box(coordinates)
     Store.where(['lonlat && ST_MakeEnvelope(?, ?, ?, ?, 4326)',
                  coordinates.flatten(1)].flatten(1))
@@ -131,6 +141,10 @@ class Store < ApplicationRecord
         csv << [store.id, store.name, store.store_type, store.latitude, store.longitude, store.address]
       end
     end
+  end
+
+  def cache_key
+    updated_at
   end
 
   private

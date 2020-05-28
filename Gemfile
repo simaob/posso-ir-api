@@ -8,7 +8,7 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'geocoder'
 gem 'jsonapi-resources'
+gem 'fast_jsonapi'
 gem 'rack-cors'
 gem 'dotenv-rails'
 gem 'activerecord-postgis-adapter'
@@ -100,3 +101,7 @@ gem 'aws-sdk-rails' # to use aws-ses
 
 # Active job
 gem 'sidekiq'
+
+# File management
+gem 'aws-sdk-s3', require: false
+gem 'image_processing'

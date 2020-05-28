@@ -29,6 +29,10 @@ module Api
         Time.current - rand(1..65).minutes
       end
 
+      def valid_until
+        Time.current + 1.hour
+      end
+
       def status
         rand(-1..10)
       end
