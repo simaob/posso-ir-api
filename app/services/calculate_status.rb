@@ -59,7 +59,7 @@ class CalculateStatus
         store.status_general.update(
           status: crowdsource.status,
           updated_time: crowdsource.updated_time,
-          valid_until: nil,
+          valid_until: crowdsource.updated_time + UPDATE_TIME.hour,
           is_official: false,
           estimation: false
         )
