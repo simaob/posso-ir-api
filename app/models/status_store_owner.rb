@@ -32,7 +32,7 @@ class StatusStoreOwner < Status
   end
 
   def update_general_status
-    StatusGeneral.find_or_initialize_by(store_id: store_id)&.update(
+    StatusGeneral.find_by(store_id: store_id)&.update(
       updated_time: updated_time, status: status, queue: queue,
       valid_until: valid_until, voters: nil,
       is_official: true, estimation: false)
