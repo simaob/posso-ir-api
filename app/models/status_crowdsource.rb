@@ -81,7 +81,8 @@ class StatusCrowdsource < Status
     update(
       status: new_status.round(2),
       voters: total_votes.count,
-      updated_time: DateTime.current
+      updated_time: DateTime.current,
+      valid_until: DateTime.current + 1.hour
     )
   end
 

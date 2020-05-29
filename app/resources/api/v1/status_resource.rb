@@ -29,6 +29,10 @@ module Api
         @model.updated_time
       end
 
+      def valid_until
+        @model.valid_until || (@model.updated_time + 1.hour)
+      end
+
       def status
         @model.status.nil? ? -1 : @model.status
       end

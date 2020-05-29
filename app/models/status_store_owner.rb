@@ -28,11 +28,11 @@ class StatusStoreOwner < Status
   private
 
   def set_valid_until
-    self.valid_until = updated_time + 1.hour rescue Time.current + 1.hour
+    self.valid_until = updated_time + 2.hour rescue Time.current + 2.hour
   end
 
   def update_general_status
-    StatusGeneral.find_by(store_id: store_id)&.update(
+    StatusGeneral.find_or_initialize_by(store_id: store_id)&.update(
       updated_time: updated_time, status: status, queue: queue,
       valid_until: valid_until, voters: nil,
       is_official: true, estimation: false)
