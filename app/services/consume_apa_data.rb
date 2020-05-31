@@ -24,7 +24,6 @@ class ConsumeApaData
       b_config.water_quality = attrs['ultima_classificacao']
       b_config.water_quality_last_updated_at = last_update
       b_config.save
-      puts "Updated #{b_config.store.name}"
     end
   end
 
