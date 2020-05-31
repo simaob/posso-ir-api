@@ -33,7 +33,7 @@
 class BeachSerializer
   include FastJsonapi::ObjectSerializer
   set_key_transform :dash
-  set_type :stores
+  set_type :beaches
 
   attributes :original_id
 
