@@ -3,9 +3,7 @@ module Api
     class RandomStoresController < StoresController
       def index
         result = apply_params(records)
-        options = {}
-        options[:include] = [:beach_configuration]
-        render json: RandomStoreSerializer.new(result, options).serialized_json
+        render json: RandomStoreSerializer.new(result).serialized_json
       end
     end
   end
