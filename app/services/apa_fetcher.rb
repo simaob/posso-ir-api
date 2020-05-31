@@ -36,6 +36,8 @@ class ApaFetcher
       next unless b_config && entry['state'].present? && entry['hour'].present?
 
       time = DateTime.strptime(entry['hour'].to_s, '%Q')
+
+      # ToDo: need to define how to parse the state
       StatusStoreOwner.create(
         updated_time: time,
         status: entry['state'],
