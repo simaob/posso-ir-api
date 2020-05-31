@@ -91,6 +91,9 @@ gem 'kaminari'
 # used to decode html in some imported strings
 gem 'htmlentities'
 
+# consume APIs
+gem 'httparty'
+
 # frontend stuff
 gem 'react-rails'
 
