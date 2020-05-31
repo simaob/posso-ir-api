@@ -58,6 +58,9 @@ class RandomStoreSerializer
   attribute :water_quality, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality
   end
+  attribute :water_quality_last_updated_at, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.water_quality_last_updated_at
+  end
   attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality_url
   end
