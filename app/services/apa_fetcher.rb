@@ -1,4 +1,4 @@
-class ConsumeApaData
+class ApaFetcher
   include Singleton
   include HTTParty
 
