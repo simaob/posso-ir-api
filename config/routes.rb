@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       get 'beach-status', to: 'beaches#index'
       post 'status-phone', to: 'status_phone#create'
       post 'status-estimations', to: 'status_estimations#create'
+      post 'schedules', to: 'schedules#create'
       post 'register', to: 'auth#register'
       post 'login', to: 'auth#login'
       post 'logout', to: 'auth#logout'
