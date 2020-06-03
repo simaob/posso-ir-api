@@ -25,7 +25,7 @@ module Api
         errors = []
         WeekDay.transaction do
           WeekDay.days.keys.each do |day|
-            day_time = WeekDay.find_or_create_by(store_id: store.id, day: day)
+            day_time = WeekDay.find_or_initialize_by(store_id: store.id, day: day)
             day_time.opening_hour = timetable.dig(day, 'o')
             day_time.closing_hour = timetable.dig(day, 'c')
             day_time.save!
