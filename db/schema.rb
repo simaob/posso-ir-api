@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_094943) do
+ActiveRecord::Schema.define(version: 2020_06_03_135932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_094943) do
     t.float "code"
     t.string "water_code"
     t.boolean "bathing_support"
+    t.datetime "water_quality_updated_at"
     t.index ["average_users"], name: "index_beach_configurations_on_average_users"
     t.index ["category"], name: "index_beach_configurations_on_category"
     t.index ["guarded"], name: "index_beach_configurations_on_guarded"
@@ -251,7 +252,13 @@ ActiveRecord::Schema.define(version: 2020_05_27_094943) do
     t.datetime "last_post"
     t.integer "role", default: 0
     t.string "store_owner_code"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "phone"
     t.index ["name"], name: "index_users_on_name"
+    t.index ["phone"], name: "index_users_on_phone"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

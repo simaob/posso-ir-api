@@ -12,7 +12,7 @@ class ApiController < ApplicationController
   protect_from_forgery with: :null_session
 
   def context
-    {current_user: current_user}
+    {current_user: current_user, app_uuid: app_uuid}
   end
 
   private
@@ -40,6 +40,12 @@ class ApiController < ApplicationController
                       end
   rescue StandardError
     @current_user = nil
+  end
+
+  def app_uuid
+    JwtService.decode(token: token)['uuid']
+  rescue StandardError
+    nil
   end
 
   def token

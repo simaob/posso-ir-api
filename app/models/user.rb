@@ -15,11 +15,17 @@
 #  last_post              :datetime
 #  role                   :integer          default("0")
 #  store_owner_code       :string
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#  phone                  :string
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :registerable
+  devise :database_authenticatable, :recoverable, :rememberable, :registerable,
+         :confirmable
 
   with_options if: :admin? do
     validates :email, presence: true
@@ -28,6 +34,7 @@ class User < ApplicationRecord
     validates :password, length: {within: 8..128, allow_blank: true}
   end
   validates :email, uniqueness: true, unless: proc { |u| u.email.blank? }
+  validates :phone, uniqueness: true, unless: proc { |u| u.phone.blank? }
 
   has_many :user_stores, inverse_of: :manager
   has_many :stores, through: :user_stores

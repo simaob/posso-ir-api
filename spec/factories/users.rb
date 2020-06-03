@@ -15,6 +15,11 @@
 #  last_post              :datetime
 #  role                   :integer          default("0")
 #  store_owner_code       :string
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#  phone                  :string
 #
 FactoryBot.define do
   factory :user do
