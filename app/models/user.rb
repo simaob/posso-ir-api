@@ -29,6 +29,7 @@ class User < ApplicationRecord
     validates :password, length: {within: 8..128, allow_blank: true}
   end
   validates :email, uniqueness: true, unless: proc { |u| u.email.blank? }
+  validates :phone, uniqueness: true, unless: proc { |u| u.phone.blank? }
 
   has_many :user_stores, inverse_of: :manager
   has_many :stores, through: :user_stores
