@@ -6,4 +6,9 @@ namespace :apa_fetcher do
   task occupation: :environment do
     ApaFetcher.occupation
   end
+
+  task set_jobs: :environment do
+    OccupationUpdateJob.perform_later
+    WaterQualityUpdateJob.perform_later
+  end
 end
