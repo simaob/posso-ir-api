@@ -11,14 +11,13 @@ module Api
         User.transaction do
           # archive old user
           user = context[:current_user]
-          app_uuid = user.app_uuid
-          user.update(app_uuid: "#{app_uuid}_old_#{Time.current.to_i}")
+          app_uuid = context[:app_uuid]
+          user.update(app_uuid: "#{user.app_uuid}_old_#{Time.current.to_i}")
 
           new_user = User.create(
             app_uuid: app_uuid,
             email: params[:email],
             password: params[:password],
-            password_confirmation: params[:password],
             phone: params[:phone]
           )
         end
@@ -32,9 +31,9 @@ module Api
       def login
         user = User.where.not(email: nil).find_by(email: params[:email])
         if user&.valid_password?(params[:password])
-          user.app_uuid = context[:current_user].app_uuid
+          user.app_uuid = context[:app_uuid]
           user.save
-          render json: {success: 'login successful'}, status: :success
+          render json: {success: 'login successful'}, status: :ok
         else
           render json: {error: 'wrong password'}, status: :unauthorized
         end
@@ -43,9 +42,9 @@ module Api
       end
 
       def logout
-        if context[:current_user].email
+        if context[:current_user].email.present?
           context[:current_user].update(app_uuid: "#{context[:current_user].app_uuid}_old_#{Time.current.to_i}")
-          render json: {success: 'user logged out'}, status: :success
+          render json: {success: 'user logged out'}, status: :ok
         else
           render json: {error: 'user not logged in'}, status: :unauthorized
         end
