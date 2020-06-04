@@ -105,3 +105,4 @@ gem 'sidekiq'
 # File management
 gem 'aws-sdk-s3', require: false
 gem 'image_processing'
+gem 'pg_search'

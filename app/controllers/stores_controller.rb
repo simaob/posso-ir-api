@@ -6,7 +6,7 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    @stores = @stores.search(params[:search])
+    @stores = @stores.full_text_search(params[:search]).with_pg_search_rank if params[:search].present?
     @stores = @stores.by_country(params[:country]) if params[:country].present?
     @stores = @stores.by_group(params[:group]) if params[:group].present?
 
