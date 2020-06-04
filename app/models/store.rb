@@ -76,18 +76,18 @@ class Store < ApplicationRecord
   after_create :create_status
 
   pg_search_scope :full_text_search,
-    against: {
-      name: 'A',
-      street: 'B',
-      district: 'C',
-      city: 'D'
-    },
-    using: {
-      tsearch: {
-        prefix: true
-      }
-    },
-    ignoring: :accents
+                  against: {
+                    name: 'A',
+                    street: 'B',
+                    district: 'C',
+                    city: 'D'
+                  },
+                  using: {
+                    tsearch: {
+                      prefix: true
+                    }
+                  },
+                  ignoring: :accents
 
   def address(unique: false)
     result = [street, city, country].map(&:presence).compact
