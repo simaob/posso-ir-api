@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_003331) do
+ActiveRecord::Schema.define(version: 2020_06_04_181935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_003331) do
     t.boolean "water_chair"
     t.boolean "construction"
     t.boolean "collapsing_risk"
-    t.float "code"
+    t.string "code"
     t.string "water_code"
     t.boolean "bathing_support"
     t.datetime "water_quality_updated_at"

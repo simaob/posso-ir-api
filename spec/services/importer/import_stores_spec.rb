@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ImportStores do
+describe Importer::ImportStores do
   context '.import_aldi' do
     include FakeFS::SpecHelpers
 
@@ -14,7 +14,7 @@ describe ImportStores do
     end
 
     it 'imports ALDI data' do
-      ImportStores.new.import_aldi
+      Importer::ImportStores.new.import_aldi
 
       store = Store.first
 
