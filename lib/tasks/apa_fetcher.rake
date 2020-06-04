@@ -8,7 +8,7 @@ namespace :apa_fetcher do
   end
 
   task set_jobs: :environment do
-    OccupationUpdateJob.perform_later
-    WaterQualityUpdateJob.perform_later
+    OccupationUpdateJob.set(wait_until: Time.current + 2.minutes).perform_later
+    WaterQualityUpdateJob.set(wait_until: Time.current + 2.minutes).perform_later
   end
 end
