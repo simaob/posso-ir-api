@@ -26,7 +26,7 @@ module Importer
         store.source = 'APA'
         store.original_id = beach['id']
 
-        store.beach_configuration.delete if store.beach_configuration
+        store.beach_configuration&.delete
 
         store.beach_configuration = BeachConfiguration.new(
           code: beach['code']&.to_s,
