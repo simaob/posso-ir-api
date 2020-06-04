@@ -1,5 +1,9 @@
 module Importer
   class ImportBeaches
+    include HTTParty
+
+    base_uri 'infopraiaapi.apambiente.pt'
+
     def all
       cleanup
       import_beaches_deco
@@ -12,39 +16,38 @@ module Importer
     end
 
     def import_beaches_apa
-      import 'Importing beaches', 'praias_apa.json' do |file|
-        JSON.parse(file.read.force_encoding('UTF-8'))['features'].each do |item|
-          beach = item['attributes']
-          store = Store.new(
-            name: beach['praia'],
-            country: 'Portugal',
-            store_type: :beach,
-            latitude: beach['latitude'],
-            longitude: beach['longitude'],
-            source: 'APA',
-            original_id: beach['id']
-          )
-          store.beach_configuration = BeachConfiguration.new(
-            code: beach['code'],
-            water_code: beach['codigo_agua_balnear'],
-            guarded: beach['vigilancia'],
-            first_aid_station: beach['posto_socorros'],
-            wc: beach['sanitarios'],
-            showers: beach['duche'],
-            garbage_collection: beach['recolha_lixo'],
-            cleaning: beach['limpeza_praia'],
-            info_panel: beach['painel_informativo'],
-            bathing_support: beach['apoio_balnear'],
-            beach_support: beach['apoio_praia'],
-            parking: beach['estacionamento'],
-            quality_flag: beach['bandeira_azul'],
-            accessibility: beach['accessivel'],
-            water_chair: beach['cadeira_anfibia'],
-            construction: beach['obras_em_curso'],
-            collapsing_risk: beach['risco_derrocada']
-          )
-          store.save
-        end
+      data = self.class.get('/perfil.json')&.body
+      JSON.parse(data)['features'].each do |item|
+        beach = item['attributes']
+        store = Store.find_or_initialize_by(name: beach['praia'], store_type: :beach)
+        store.country =  'Portugal'
+        store.latitude = beach['latitude']
+        store.longitude = beach['longitude']
+        store.source = 'APA'
+        store.original_id = beach['id']
+
+        store.beach_configuration.delete if store.beach_configuration
+
+        store.beach_configuration = BeachConfiguration.new(
+          code: beach['code']&.to_s,
+          water_code: beach['codigo_agua_balnear'],
+          guarded: beach['vigilancia'],
+          first_aid_station: beach['posto_socorros'],
+          wc: beach['sanitarios'],
+          showers: beach['duche'],
+          garbage_collection: beach['recolha_lixo'],
+          cleaning: beach['limpeza_praia'],
+          info_panel: beach['painel_informativo'],
+          bathing_support: beach['apoio_balnear'],
+          beach_support: beach['apoio_praia'],
+          parking: beach['estacionamento'],
+          quality_flag: beach['bandeira_azul'],
+          accessibility: beach['accessivel'],
+          water_chair: beach['cadeira_anfibia'],
+          construction: beach['obras_em_curso'],
+          collapsing_risk: beach['risco_derrocada']
+        )
+        store.save
       end
     end
 
