@@ -152,9 +152,10 @@ class Store < ApplicationRecord
 
   def self.to_csv
     CSV.generate(headers: true, force_quotes: true) do |csv|
-      csv << %w(id name store_type latitude longitude address)
+      csv << %w(id name store_type latitude longitude street city district country source)
       all.find_each do |store|
-        csv << [store.id, store.name, store.store_type, store.latitude, store.longitude, store.address]
+        csv << [store.id, store.name, store.store_type, store.latitude, store.longitude, store.street, store.city, store.district,
+                store.country, store.source]
       end
     end
   end
