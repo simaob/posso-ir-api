@@ -88,6 +88,9 @@ class StoreSerializer
   attribute :season_end, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.season_end
   end
+  attribute :water_classification, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.water_classification.presence || rand(1..4)
+  end
   attribute :water_quality, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality
   end

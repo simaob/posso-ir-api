@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_181935) do
+ActiveRecord::Schema.define(version: 2020_06_05_174749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_181935) do
     t.string "water_code"
     t.boolean "bathing_support"
     t.datetime "water_quality_updated_at"
+    t.integer "water_classification"
     t.index ["average_users"], name: "index_beach_configurations_on_average_users"
     t.index ["category"], name: "index_beach_configurations_on_category"
     t.index ["guarded"], name: "index_beach_configurations_on_guarded"

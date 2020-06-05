@@ -7,6 +7,31 @@ class ApaFetcher
   class << self
     delegate :water_quality, to: :instance
     delegate :occupation, to: :instance
+    delegate :city_and_water_classification, to: :instance
+  end
+
+  def city_and_water_classification
+    data = self.class.get('/qualidade.json')&.body
+    return if data.blank?
+
+    JSON.parse(data)['features'].each do |entry|
+      attrs = entry['attributes']
+      next unless attrs['codigo_agua_balnear']
+
+      b_config = BeachConfiguration.find_by(water_code: attrs['codigo_agua_balnear'])
+
+      unless b_config
+        Rails.logger.info "can't find beach config for #{attrs['codigo_agua_balnear']}"
+        next
+      end
+
+      beach = b_config.store
+      beach.city = attrs['concelho']&.titleize
+      beach.save
+
+      b_config.water_classification = attrs['categoria_agua_balnear']
+      b_config.save
+    end
   end
 
   def water_quality
@@ -19,8 +44,8 @@ class ApaFetcher
 
       b_config = BeachConfiguration.find_by(water_code: attrs['codigo_agua_balnear'])
 
-      if !b_config
-        puts "can't find beach config for #{attrs['codigo_agua_balnear']}"
+      unless b_config
+        Rails.logger.info "can't find beach config for #{attrs['codigo_agua_balnear']}"
         next
       end
 
