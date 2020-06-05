@@ -21,7 +21,7 @@ module Api
       MAX_STORES = 300
 
       attributes :updated_time, :valid_until, :status,
-                 :queue, :store_id, :is_official
+                 :queue, :store_id, :is_official, :estimation
 
       filter :store_id
 
@@ -46,6 +46,10 @@ module Api
         [true, false].sample
       end
       # rubocop:enable Naming/PredicateName
+
+      def estimation
+        [true, false].sample
+      end
 
       filter :store_id, apply: ->(records, value, _options) {
         value = value[0...MAX_STORES]
