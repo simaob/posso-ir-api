@@ -45,7 +45,9 @@ module Importer
           accessibility: beach['accessivel'],
           water_chair: beach['cadeira_anfibia'],
           construction: beach['obras_em_curso'],
-          collapsing_risk: beach['risco_derrocada']
+          collapsing_risk: beach['risco_derrocada'],
+          season_start: Date.parse("06/06/#{Date.current.year}"),
+          season_end: Date.parse("30/09/#{Date.current.year}")
         )
         store.save
       end
@@ -85,8 +87,8 @@ module Importer
             restaurant: csv[22],
             parking: csv[23],
             parking_spots: csv[24],
-            season_start: season_dates ? Date.parse(season_dates.first) : Date.parse('06/06'),
-            season_end: season_dates ? Date.parse(season_dates.last) : Date.parse('30/09'),
+            season_start: season_dates ? Date.parse(season_dates.first) : Date.parse("06/06/#{Date.current.year}"),
+            season_end: season_dates ? Date.parse(season_dates.last) : Date.parse("30/09/#{Date.current.year}"),
             water_quality: csv[31],
             water_quality_url: csv[32]&.strip,
             quality_flag: csv[33],
