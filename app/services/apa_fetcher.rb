@@ -15,14 +15,20 @@ class ApaFetcher
 
     JSON.parse(data)['features'].each do |entry|
       attrs = entry['attributes']
-      next if !attrs['data_ultima_classificacao'] || !entry['codigo_agua_balnear']
+      next if !attrs['data_ultima_classificacao'] || !attrs['codigo_agua_balnear']
 
-      b_config = BeachConfiguration.find_by(water_code: entry['codigo_agua_balnear'])
+      b_config = BeachConfiguration.find_by(water_code: attrs['codigo_agua_balnear'])
+
+      if !b_config
+        puts "can't find beach config for #{attrs['codigo_agua_balnear']}"
+        next
+      end
+
       last_update = DateTime.strptime(attrs['data_ultima_classificacao'].to_s, '%Q')
-      next if b_config.water_quality_last_updated_at.present? && b_config.water_quality_last_updated_at > last_update
+      next if b_config.water_quality_updated_at.present? && b_config.water_quality_updated_at > last_update
 
       b_config.water_quality = attrs['ultima_classificacao']
-      b_config.water_quality_last_updated_at = last_update
+      b_config.water_quality_updated_at = last_update
       b_config.save
     end
   end
