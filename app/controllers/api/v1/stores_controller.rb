@@ -37,9 +37,10 @@ module Api
         store_type = params.dig(:filter, :'store-type')
         store_type = Store.store_types.include?(store_type) ? store_type : nil
 
-        results = records.retrieve_closest(*location) if location
-        results = records.where(store_type: store_type) if store_type
-        results
+        results = records
+        results = results.retrieve_closest(*location) if location
+        results = results.where(store_type: store_type) if store_type
+        results.where.not(latitude: nil, longitude: nil)
       end
 
       def pagination(results)
