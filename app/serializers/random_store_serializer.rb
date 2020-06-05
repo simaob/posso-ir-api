@@ -49,10 +49,10 @@ class RandomStoreSerializer
   attribute :parking_spots, if: proc { |object| object.beach? } do
     rand(10..80)
   end
-  attribute :season_start, if: proc { |object| object.beach? } do |object|
+  attribute :season_start, if: proc { |object| object.beach? } do
     Date.parse('06/06')
   end
-  attribute :season_end, if: proc { |object| object.beach? } do |object|
+  attribute :season_end, if: proc { |object| object.beach? } do
     Date.parse('30/09')
   end
   attribute :water_quality, if: proc { |object| object.beach? } do |object|
@@ -69,6 +69,6 @@ class RandomStoreSerializer
   end
 
   def address
-    ["Passeio Alegre, Porto", "Rua da Praia", "Junto à Areia, Porto, Portugal"].sample
+    ['Passeio Alegre, Porto', 'Rua da Praia', 'Junto à Areia, Porto, Portugal'].sample
   end
 end
