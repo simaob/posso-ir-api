@@ -47,6 +47,7 @@
 #  code                     :float
 #  water_code               :string
 #  bathing_support          :boolean
+#  water_quality_updated_at :datetime
 #
 class BeachConfigurationSerializer
   include FastJsonapi::ObjectSerializer

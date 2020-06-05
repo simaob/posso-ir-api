@@ -31,6 +31,7 @@
 #
 class Store < ApplicationRecord
   include UserTrackable
+  include PgSearch::Model
 
   has_one_attached :photo
 
@@ -73,6 +74,20 @@ class Store < ApplicationRecord
 
   after_save :set_lonlat
   after_create :create_status
+
+  pg_search_scope :full_text_search,
+                  against: {
+                    name: 'A',
+                    street: 'B',
+                    district: 'C',
+                    city: 'D'
+                  },
+                  using: {
+                    tsearch: {
+                      prefix: true
+                    }
+                  },
+                  ignoring: :accents
 
   def address(unique: false)
     result = [street, city, country].map(&:presence).compact

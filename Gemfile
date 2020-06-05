@@ -91,6 +91,9 @@ gem 'kaminari'
 # used to decode html in some imported strings
 gem 'htmlentities'
 
+# consume APIs
+gem 'httparty'
+
 # frontend stuff
 gem 'react-rails'
 
@@ -105,3 +108,4 @@ gem 'sidekiq'
 # File management
 gem 'aws-sdk-s3', require: false
 gem 'image_processing'
+gem 'pg_search'
