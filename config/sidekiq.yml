@@ -1,3 +1,5 @@
 :logfile: ./log/sidekiq.log
 :queues:
   - phone_calls
+  - water_quality
+  - occupation
