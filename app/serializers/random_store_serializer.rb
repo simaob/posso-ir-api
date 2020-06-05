@@ -50,10 +50,10 @@ class RandomStoreSerializer
     rand(10..80)
   end
   attribute :season_start, if: proc { |object| object.beach? } do
-    Date.parse('06/06')
+    Date.parse('06/06/2020')
   end
   attribute :season_end, if: proc { |object| object.beach? } do
-    Date.parse('30/09')
+    Date.parse('30/09/2020')
   end
   attribute :water_classification, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_classification.presence || rand(1..4)
