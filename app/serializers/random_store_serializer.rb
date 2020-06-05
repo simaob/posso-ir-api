@@ -49,22 +49,26 @@ class RandomStoreSerializer
   attribute :parking_spots, if: proc { |object| object.beach? } do
     rand(10..80)
   end
-  attribute :season_start, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.season_start
+  attribute :season_start, if: proc { |object| object.beach? } do
+    Date.parse('06/06')
   end
-  attribute :season_end, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.season_end
+  attribute :season_end, if: proc { |object| object.beach? } do
+    Date.parse('30/09')
   end
   attribute :water_quality, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.water_quality
+    object.beach_configuration.water_quality.presence || rand(1..4)
   end
   attribute :water_quality_updated_at, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.water_quality_updated_at
+    object.beach_configuration.water_quality_updated_at.presence || (Time.current - 2.hours)
   end
   attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.water_quality_url
+    object.beach_configuration.water_quality_url.presence || 'https://apambiente.pt/'
   end
   attribute :quality_flag, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.quality_flag
+    object.beach_configuration.quality_flag.presence || [true, false].sample
+  end
+
+  def address
+    ['Passeio Alegre, Porto', 'Rua da Praia', 'Junto à Areia, Porto, Portugal'].sample
   end
 end
