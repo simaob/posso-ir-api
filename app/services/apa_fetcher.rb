@@ -19,8 +19,8 @@ class ApaFetcher
 
       b_config = BeachConfiguration.find_by(water_code: attrs['codigo_agua_balnear'])
 
-      if !b_config
-        puts "can't find beach config for #{attrs['codigo_agua_balnear']}"
+      unless b_config
+        Rails.logger.info "can't find beach config for #{attrs['codigo_agua_balnear']}"
         next
       end
 
