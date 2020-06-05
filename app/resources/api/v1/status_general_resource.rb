@@ -15,7 +15,7 @@
 module Api
   module V1
     class StatusGeneralResource < StatusResource
-      attributes :is_official
+      attributes :is_official, :estimation
     end
   end
 end
