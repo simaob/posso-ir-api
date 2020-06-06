@@ -68,11 +68,20 @@ class ApaFetcher
 
       time = DateTime.strptime(entry['hour'].to_s, '%Q')
 
+      state = case entry['state']
+              when '1'
+                0.0
+              when '2'
+                5.0
+              else
+                10.0
+              end
+
       # TODO: need to define how to parse the state
       StatusStoreOwner.create!(
         store_id: b_config.store.id,
         updated_time: time,
-        status: entry['state'],
+        status: state,
         valid_until: time + 2.hours,
         is_official: true
       )
