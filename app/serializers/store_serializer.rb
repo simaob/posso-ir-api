@@ -39,10 +39,6 @@ class StoreSerializer
   attributes :name, :group, :address, :capacity,
              :details, :store_type, :lonlat, :opening_hour, :closing_hour
 
-  attribute :photo do |object|
-    rails_blob_path(object.photo, only_path: true) if object.photo.attached?
-  end
-
   attribute :closing_hour do |object|
     object.current_day&.closing_hour
   end
@@ -52,14 +48,8 @@ class StoreSerializer
   attribute :coordinates do |object|
     [object.latitude, object.longitude]
   end
-  attribute :category, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.category
-  end
   attribute :quality_flag, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.quality_flag
-  end
-  attribute :average_users, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.average_users
   end
   attribute :guarded, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.guarded
@@ -73,36 +63,46 @@ class StoreSerializer
   attribute :showers, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.showers
   end
-  attribute :accessibility, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.accessibility
-  end
   attribute :parking, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.parking
-  end
-  attribute :parking_spots, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.parking_spots
-  end
-  attribute :season_start, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.season_start
-  end
-  attribute :season_end, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.season_end
   end
   attribute :water_classification, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_classification.presence || rand(1..4)
   end
-  attribute :water_quality, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.water_quality
-  end
   attribute :water_quality_updated_at, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality_updated_at
-  end
-  attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.water_quality_url
   end
   attribute :quality_flag, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.quality_flag
   end
+
+  # attribute :average_users, if: proc { |object| object.beach? } do |object|
+  #   object.beach_configuration.average_users
+  # end
+  # attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
+  #   object.beach_configuration.water_quality_url
+  # end
+  # attribute :accessibility, if: proc { |object| object.beach? } do |object|
+  #   object.beach_configuration.accessibility
+  # end
+  # attribute :water_quality, if: proc { |object| object.beach? } do |object|
+  #   object.beach_configuration.water_quality
+  # end
+  # attribute :photo do |object|
+  #   rails_blob_path(object.photo, only_path: true) if object.photo.attached?
+  # end
+  # attribute :category, if: proc { |object| object.beach? } do |object|
+  #   object.beach_configuration.category
+  # end
+  # attribute :parking_spots, if: proc { |object| object.beach? } do |object|
+  #   object.beach_configuration.parking_spots
+  # end
+  # attribute :season_start, if: proc { |object| object.beach? } do |object|
+  #   object.beach_configuration.season_start
+  # end
+  # attribute :season_end, if: proc { |object| object.beach? } do |object|
+  #   object.beach_configuration.season_end
+  # end
 
   # cache_options enabled: true, cache_length: 2.hours
 end
