@@ -76,33 +76,33 @@ class StoreSerializer
     object.beach_configuration.quality_flag
   end
 
-  # attribute :average_users, if: proc { |object| object.beach? } do |object|
-  #   object.beach_configuration.average_users
-  # end
-  # attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
-  #   object.beach_configuration.water_quality_url
-  # end
-  # attribute :accessibility, if: proc { |object| object.beach? } do |object|
-  #   object.beach_configuration.accessibility
-  # end
-  # attribute :water_quality, if: proc { |object| object.beach? } do |object|
-  #   object.beach_configuration.water_quality
-  # end
-  # attribute :photo do |object|
-  #   rails_blob_path(object.photo, only_path: true) if object.photo.attached?
-  # end
-  # attribute :category, if: proc { |object| object.beach? } do |object|
-  #   object.beach_configuration.category
-  # end
-  # attribute :parking_spots, if: proc { |object| object.beach? } do |object|
-  #   object.beach_configuration.parking_spots
-  # end
-  # attribute :season_start, if: proc { |object| object.beach? } do |object|
-  #   object.beach_configuration.season_start
-  # end
-  # attribute :season_end, if: proc { |object| object.beach? } do |object|
-  #   object.beach_configuration.season_end
-  # end
+  attribute :average_users, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.average_users
+  end
+  attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.water_quality_url
+  end
+  attribute :accessibility, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.accessibility
+  end
+  attribute :water_quality, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.water_quality
+  end
+  attribute :photo do |object|
+    rails_blob_path(object.photo, only_path: true) if object.photo.attached?
+  end
+  attribute :category, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.category
+  end
+  attribute :parking_spots, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.parking_spots
+  end
+  attribute :season_start, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.season_start
+  end
+  attribute :season_end, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.season_end
+  end
 
   # cache_options enabled: true, cache_length: 2.hours
 end
