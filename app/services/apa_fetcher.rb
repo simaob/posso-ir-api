@@ -77,7 +77,12 @@ class ApaFetcher
                 10.0
               end
 
-      # TODO: need to define how to parse the state
+      # avoid duplications
+      next if StatusStoreOwner.where(store_id: b_config.store.id,
+                                     updated_time: time,
+                                     status: state,
+                                     is_official: true).any?
+
       StatusStoreOwner.create!(
         store_id: b_config.store.id,
         updated_time: time,
