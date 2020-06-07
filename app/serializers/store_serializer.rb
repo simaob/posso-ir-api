@@ -97,6 +97,27 @@ class StoreSerializer
   attribute :parking_spots, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.parking_spots
   end
+  attribute :garbage_collection, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.garbage_collection
+  end
+  attribute :cleaning, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.cleaning
+  end
+  attribute :info_panel, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.info_panel
+  end
+  attribute :restaurant, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.restaurant
+  end
+  attribute :beach_support, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.beach_support
+  end
+  attribute :water_chair, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.water_chair
+  end
+  attribute :bathing_support, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.bathing_support
+  end
   attribute :season_start, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.season_start
   end
