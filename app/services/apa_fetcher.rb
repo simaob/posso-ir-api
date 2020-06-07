@@ -87,7 +87,7 @@ class ApaFetcher
         store_id: b_config.store.id,
         updated_time: time,
         status: state,
-        valid_until: time + 2.hours,
+        valid_until: time + 4.hours,
         is_official: true
       )
     end
