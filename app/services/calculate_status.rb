@@ -1,5 +1,6 @@
 class CalculateStatus
   UPDATE_TIME = 1
+  BEACH_UPDATE_TIME = 4
 
   def log(msg)
     Rails.logger.info msg
@@ -33,7 +34,7 @@ class CalculateStatus
         store.status_general.update!(
           status: owner.status,
           updated_time: owner.updated_time,
-          valid_until: owner.updated_time + UPDATE_TIME.hour,
+          valid_until: owner.updated_time + (store.beach? ? BEACH_UPDATE_TIME.hours : UPDATE_TIME.hour),
           is_official: true,
           estimation: false
         )
