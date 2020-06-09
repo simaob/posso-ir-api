@@ -1,7 +1,7 @@
 module Api
   module V1
     class StoresController < ApiController
-      PAGE_NUMBER = 1
+      PAGE_NUMBER = 0
       PAGE_SIZE = 100
       MAX_PAGE_SIZE = 1000
 
@@ -43,10 +43,10 @@ module Api
       end
 
       def pagination(results)
-        page_number = params.dig(:page, :number) || PAGE_NUMBER
         page_size = [(params.dig(:page, :size) || PAGE_SIZE).to_i, MAX_PAGE_SIZE].min
+        offset = (params.dig(:page, :number) || PAGE_NUMBER) * page_size
 
-        results = results.limit(page_size).offset(page_number)
+        results = results.limit(page_size).offset(offset)
         results
       end
 
