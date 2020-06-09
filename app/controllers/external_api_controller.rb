@@ -10,8 +10,8 @@ class ExternalApiController < ApplicationController
   def authenticate_with_api_key!
     return @current_user = User.first if Rails.env.development?
 
-    payload = token && JwtService.decode(token: token)
-    if payload && DateTime.parse(payload['expiration_date']) <= DateTime.current
+    payload = JwtService.decode(token: token)
+    if DateTime.parse(payload['expiration_date']) <= DateTime.current
       render json: {error: 'Auth token has expired. Please login again'}, status: :unauthorized
     else
       @current_user = ApiKey.find_by(access_token: api_key).user
