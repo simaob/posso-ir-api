@@ -9,6 +9,14 @@ module Api
         render json: BeachSerializer.new(beaches).serialized_json
       end
 
+      def general_status
+        return forbidden unless current_user.any_admin?
+
+        beaches = Store.beach.live
+
+        render json: BeachGeneralStatusSerializer.new(beaches).serialized_json
+      end
+
       private
 
       def forbidden

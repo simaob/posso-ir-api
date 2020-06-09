@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       jsonapi_resources :random_status_generals, only: [:index] do end
 
       get 'beach-status', to: 'beaches#index'
+      get 'beach-general-status', to: 'beaches#general_status'
       post 'status-phone', to: 'status_phone#create'
       post 'status-estimations', to: 'status_estimations#create'
       post 'schedules', to: 'schedules#create'
