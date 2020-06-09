@@ -1,4 +1,7 @@
-class BeachGeneralStatusSerializer < BeachSerializer
+class BeachGeneralStatusSerializer
+  include FastJsonapi::ObjectSerializer
+  set_key_transform :dash
+  set_type :beach
   attributes :name
   attribute :sapo_code do |object|
     object.beach_configuration&.sapo_code
@@ -12,6 +15,8 @@ class BeachGeneralStatusSerializer < BeachSerializer
       2
     when 6.7...10
       3
+    else
+      -1
     end
   end
 
@@ -23,6 +28,8 @@ class BeachGeneralStatusSerializer < BeachSerializer
       'Ocupação média'
     when 6.7...10
       'Ocupação alta'
+    else
+      'Sem informação de estado da praia'
     end
   end
 
