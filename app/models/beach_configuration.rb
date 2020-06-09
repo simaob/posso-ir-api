@@ -49,6 +49,7 @@
 #  bathing_support          :boolean
 #  water_quality_updated_at :datetime
 #  water_classification     :integer
+#  sapo_code                :string
 #
 class BeachConfiguration < ApplicationRecord
   belongs_to :store
