@@ -35,7 +35,7 @@ class ApiKey < ApplicationRecord
   end
 
   def set_expires_at
-    self.expires_at = Time.current + 3.months
+    self.expires_at = Time.current + 6.months
   end
 
   def set_access_token

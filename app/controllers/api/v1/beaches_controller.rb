@@ -2,7 +2,7 @@ module Api
   module V1
     class BeachesController < ExternalApiController
       def index
-        return forbidden unless current_user.beach_admin?
+        return forbidden unless current_user.any_admin?
 
         beaches = Store.beach.live
 
