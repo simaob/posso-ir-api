@@ -12,7 +12,7 @@ module Api
       def general_status
         return forbidden unless current_user.any_admin?
 
-        beaches = Store.beach.live
+        beaches = Store.beach.live.includes(:status_general, :beach_configuration)
 
         render json: BeachGeneralStatusSerializer.new(beaches).serialized_json
       end
