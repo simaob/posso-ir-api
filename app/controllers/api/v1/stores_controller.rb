@@ -40,8 +40,6 @@ module Api
                        store_type
                      elsif store_type == 'others' # all but beach, supermarket, pharmacy, restaurant, coffee
                        [:gas_station, :bank, :kiosk, :other, :atm, :post_office]
-                     else
-                       nil
                      end
         results = results.retrieve_closest(*location) if location
         results = results.where(store_type: store_type) if store_type
