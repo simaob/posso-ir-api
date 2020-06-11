@@ -39,6 +39,22 @@
             <%= link_to(@beach.updated_by.display_name, @beach.updated_by) if @beach.updated_by %>
           </p>
         <% end %>
+        <p>
+          <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
+          <%= @beach.capacity %>
+        </p>
+        <p>
+          <strong><%= BeachConfiguration.human_attribute_name(:code) %>:</strong>
+          <%= @beach.beach_configuration.code %>
+        </p>
+        <p>
+          <strong><%= BeachConfiguration.human_attribute_name(:water_code) %>:</strong>
+          <%= @beach.beach_configuration.water_code %>
+        </p>
+        <p>
+          <strong><%= BeachConfiguration.human_attribute_name(:sapo_code) %>:</strong>
+          <%= @beach.beach_configuration.sapo_code %>
+        </p>
       </div>
     </div>
   </div>
@@ -75,10 +91,6 @@
           <%= [@beach.latitude, @beach.longitude].compact.join(', ') %>
         </p>
         <p>
-          <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
-          <%= @beach.capacity %>
-        </p>
-        <p>
           <strong><%= Store.human_attribute_name(:details) %>:</strong>
           <%= @beach.details %>
         </p>
@@ -86,3 +98,128 @@
     </div>
   </div>
 </div>
+<% b_config = @beach.beach_configuration %>
+<% if b_config %>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:category) %></strong>
+            <%= b_config.category %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:beach_type) %></strong>
+            <%= b_config.beach_type %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:ground) %></strong>
+            <%= b_config.ground %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:restrictions) %></strong>
+            <%= b_config.restrictions %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:risk_areas) %></strong>
+            <%= b_config.risk_areas %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:average_users) %></strong>
+            <%= b_config.average_users %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:guarded) %></strong>
+            <%= b_config.guarded %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:first_aid_station) %></strong>
+            <%= b_config.first_aid_station %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:season_start) %></strong>
+            <%= b_config.season_start %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:season_end) %></strong>
+            <%= b_config.season_end %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_quality) %></strong>
+            <%= b_config.water_quality %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_quality_updated_at) %></strong>
+            <%= b_config.water_quality_updated_at %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_quality_url) %></strong>
+            <%= b_config.water_quality_url %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_classification) %></strong>
+            <%= b_config.water_classification %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:quality_flag) %></strong>
+            <%= b_config.quality_flag %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:beach_support) %></strong>
+            <%= b_config.beach_support %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:wc) %></strong>
+            <%= b_config.wc %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:showers) %></strong>
+            <%= b_config.showers %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:accessibility) %></strong>
+            <%= b_config.accessibility %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:garbage_collection) %></strong>
+            <%= b_config.garbage_collection %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:cleaning) %></strong>
+            <%= b_config.cleaning %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:info_panel) %></strong>
+            <%= b_config.info_panel %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:restaurant) %></strong>
+            <%= b_config.parking %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:parking_spots) %></strong>
+            <%= b_config.parking_spots %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_chair) %></strong>
+            <%= b_config.water_chair %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:construction) %></strong>
+            <%= b_config.construction %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:bathing_support) %></strong>
+            <%= b_config.bathing_support %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
