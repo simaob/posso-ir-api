@@ -227,6 +227,7 @@ pt:
                      <strong>Activa</strong>: Praia disponível na aplicação.<br>
                     <strong>Marcada para remoção</strong>: Remoção será revista e confirmada por um administrador."
         info_deleting: 'NOTA: Quando marcar uma praia para remoção por favor escreva o porquê dessa marcação no campo de detalhes.'
+        beaches_attributes: 'Atributos das praias'
     status_crowdsource_users:
       index:
         title: 'Estados reportados'
