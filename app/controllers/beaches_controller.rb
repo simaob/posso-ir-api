@@ -1,4 +1,8 @@
 class BeachesController < StoresController
+  def edit
+    @beach = Store.find(params[:id])
+  end
+
   private
 
   def set_stores

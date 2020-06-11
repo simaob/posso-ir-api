@@ -17,6 +17,9 @@ pt:
       user_store:
         one: 'Loja gerida'
         other: 'Lojas geridas'
+      beach:
+        one: 'Praia'
+        other: 'Praias'
     attributes:
       store:
         name: 'Nome'
@@ -92,6 +95,7 @@ pt:
           atm: 'Multibanco'
           post_office: 'Correios'
           beach: 'Praia'
+      beach_configuration:
         categories:
           ocean: 'Marítima'
           river: 'Fluvial'
@@ -215,6 +219,14 @@ pt:
       index:
         title: 'Praias'
         entry_name: 'praia'
+      form:
+        help_open: 'A praia está em funcionamento durante a pandemia?'
+        help_country: 'Exemplo: Portugal, España, United Kingdom, etc.'
+        help_coordinates: 'Latitude e Longitude são necessários para a praia ficar disponível na aplicação.'
+        help_state_html: "<strong>À espera de validação</strong>: Um administrador irá confirmar a informação e aprovar;<br>
+                     <strong>Activa</strong>: Praia disponível na aplicação.<br>
+                    <strong>Marcada para remoção</strong>: Remoção será revista e confirmada por um administrador."
+        info_deleting: 'NOTA: Quando marcar uma praia para remoção por favor escreva o porquê dessa marcação no campo de detalhes.'
     status_crowdsource_users:
       index:
         title: 'Estados reportados'
