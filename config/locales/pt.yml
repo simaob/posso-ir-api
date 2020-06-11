@@ -17,6 +17,9 @@ pt:
       user_store:
         one: 'Loja gerida'
         other: 'Lojas geridas'
+      beach:
+        one: 'Praia'
+        other: 'Praias'
     attributes:
       store:
         name: 'Nome'
@@ -64,6 +67,39 @@ pt:
         access_token: 'Chave de accesso à API'
       user_store:
         approved: 'Aprovada?'
+      beach_configuration:
+        category: 'Categoria'
+        beach_type: 'Tipo de praia'
+        ground: 'Terreno'
+        restrictions: 'Restrições'
+        risk_areas: 'Áreas de risco'
+        average_users: 'Média de utilizadores'
+        guarded: 'Vigiada'
+        first_aid_station: 'Posto primeiros socorros'
+        wc: 'Sanitários'
+        showers: 'Duche'
+        accessibility: 'Acessibilidades'
+        garbage_collection: 'Recolha de lixo'
+        cleaning: 'Limpeza de praia'
+        info_panel: 'Painel informativo'
+        restaurant: 'Bar/restaurante'
+        parking: 'Estacionamento'
+        parking_spots: 'Lugares de estacionamento'
+        season_start: 'Início época balnear'
+        season_end: 'Fim época balnear'
+        water_quality: 'Qualidade da água'
+        water_quality_url: 'Link para qualidade da água'
+        quality_flag: 'Bandeira azul'
+        beach_support: 'Apoio de praia'
+        water_chair: 'Cadeira anfíbia'
+        construction: 'Obras'
+        collapsing_risk: 'Risco de derrocada'
+        code: 'Código APA'
+        water_code: 'Código água balnear APA'
+        bathing_support: 'Apoio balnear'
+        water_quality_updated_at: 'Qualidade da água actualizada em'
+        water_classification: 'Classificação da água'
+        sapo_code: 'Código SAPO'
     enums:
       user:
         roles:
@@ -92,6 +128,7 @@ pt:
           atm: 'Multibanco'
           post_office: 'Correios'
           beach: 'Praia'
+      beach_configuration:
         categories:
           ocean: 'Marítima'
           river: 'Fluvial'
@@ -215,6 +252,15 @@ pt:
       index:
         title: 'Praias'
         entry_name: 'praia'
+      form:
+        help_open: 'A praia está em funcionamento durante a pandemia?'
+        help_country: 'Exemplo: Portugal, España, United Kingdom, etc.'
+        help_coordinates: 'Latitude e Longitude são necessários para a praia ficar disponível na aplicação.'
+        help_state_html: "<strong>À espera de validação</strong>: Um administrador irá confirmar a informação e aprovar;<br>
+                     <strong>Activa</strong>: Praia disponível na aplicação.<br>
+                    <strong>Marcada para remoção</strong>: Remoção será revista e confirmada por um administrador."
+        info_deleting: 'NOTA: Quando marcar uma praia para remoção por favor escreva o porquê dessa marcação no campo de detalhes.'
+        beaches_attributes: 'Atributos das praias'
     status_crowdsource_users:
       index:
         title: 'Estados reportados'

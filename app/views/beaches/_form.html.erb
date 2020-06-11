@@ -1,15 +1,16 @@
 <div class="row mt-4">
   <div class="col-md-12">
     <div class="alert alert-warning">
-      <%= t('views.stores.form.info_deleting') %>
+      <%= t('views.beaches.form.info_deleting') %>
     </div>
-    <%= form_with(model: store, local: true) do |form| %>
-      <% if store.errors.any? %>
+    <%= form_with(model: beach, url: beach.new_record? ? beaches_path : beach_path(beach),
+                  scope: :beach, method: beach.new_record? ? :post : :patch, local: true) do |form| %>
+      <% if beach.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(store.errors.count, "error") %> impediram store de ser guardado:</h2>
+          <h2><%= pluralize(beach.errors.count, "error") %> impediram store de ser guardado:</h2>
 
           <ul>
-            <% store.errors.full_messages.each do |message| %>
+            <% beach.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
@@ -25,9 +26,11 @@
             <span class="form-control"><%= enum_l(form.object, :state) %></span>
           <% end %>
           <small class="form-text text-muted">
-            <%= t('views.stores.form.help_state_html') %>
+            <%= t('views.beaches.form.help_state_html') %>
           </small>
         </div>
+
+        <%= form.hidden_field :store_type, value: beach.store_type || :beach %>
 
         <div class="form-group col-md-6">
           <%= form.label :open, class: "col-sm-4 col-form-label" %>
@@ -35,7 +38,7 @@
             <%= form.check_box :open, class: 'form-control' %>
           </div>
           <small class="form-text text-muted">
-            <%= t('views.stores.form.help_open') %>
+            <%= t('views.beaches.form.help_open') %>
           </small>
         </div>
       </div>
@@ -47,34 +50,6 @@
         </div>
 
         <div class="form-group col-md-6">
-          <%= form.label :store_type, class: "col-sm-8 col-form-label" %>
-          <%= form.select :store_type, enum_options_for_select(Store, :store_type), {}, class: 'form-control' %>
-        </div>
-      </div>
-
-      <div class="form-row<%= " hidden" unless @store.beach? %>">
-        <div class="form-group col-md-6">
-          <%= form.label :category, class: "col-sm-4 col-form-label" %>
-          <%= form.select :category, enum_options_for_select(BeachConfiguration, :category, true), {}, class: 'form-control',
-                          class: "form-control" %>
-        </div>
-
-        <div class="form-group col-md-6">
-          <%= form.label :quality_flag, class: "col-sm-4 col-form-label" %>
-          <%= form.check_box :quality_flag,  class: "form-control" %>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-9">
-          <%= form.label :group, class: "col-sm-4 col-form-label" %>
-          <%= form.text_field :group, class: "form-control" %>
-          <small class="form-text text-muted">
-            <%= t('views.stores.form.help_group') %>
-          </small>
-        </div>
-
-        <div class="form-group col-md-3">
           <%= form.label :capacity, class: "col-sm-4 col-form-label" %>
           <%= form.number_field :capacity, class: "form-control" %>
         </div>
@@ -93,21 +68,26 @@
       </div>
 
       <div class="form-row">
-        <div class="form-group col-md-4">
-          <%= form.label :city, class: "col-sm-4 col-form-label" %>
+        <div class="form-group col-md-3">
+          <%= form.label :city, class: "col-sm-3 col-form-label" %>
           <%= form.text_field :city, class: "form-control" %>
         </div>
 
-        <div class="form-group col-md-4">
-          <%= form.label :district, class: "col-sm-4 col-form-label" %>
+        <div class="form-group col-md-3">
+          <%= form.label :municipality, class: "col-sm-3 col-form-label" %>
+          <%= form.text_field :municipality, class: "form-control" %>
+        </div>
+
+        <div class="form-group col-md-3">
+          <%= form.label :district, class: "col-sm-3 col-form-label" %>
           <%= form.text_field :district, class: "form-control" %>
         </div>
 
-        <div class="form-group col-md-4">
-          <%= form.label :country, class: "col-sm-4 col-form-label" %>
+        <div class="form-group col-md-3">
+          <%= form.label :country, class: "col-sm-3 col-form-label" %>
           <%= form.text_field :country, class: "form-control" %>
           <small class="form-text text-muted">
-            <%= t('views.stores.form.help_country') %>
+            <%= t('views.beaches.form.help_country') %>
           </small>
         </div>
       </div>
@@ -117,7 +97,7 @@
           <%= form.label :latitude, class: "col-sm-4 col-form-label" %>
           <%= form.text_field :latitude, class: "form-control" %>
           <small class="form-text text-muted">
-            <%= t('views.stores.form.help_coordinates') %>
+            <%= t('views.beaches.form.help_coordinates') %>
           </small>
         </div>
 
@@ -125,7 +105,7 @@
           <%= form.label :longitude, class: "col-sm-4 col-form-label" %>
           <%= form.text_field :longitude, class: "form-control" %>
           <small class="form-text text-muted">
-            <%= t('views.stores.form.help_coordinates') %>
+            <%= t('views.beaches.form.help_coordinates') %>
           </small>
         </div>
       </div>
@@ -135,43 +115,149 @@
         <%= form.text_area :details, class: "form-control" %>
       </div>
 
-      <% if current_user.admin? || current_user.general_manager? %>
+      <% if current_user.admin? %>
         <div class="form-group">
-          <%= form.label :manager_ids, value: t('activerecord.enums.user.roles.store_owner'), class: "col-sm-4 col-form-label" %>
-          <%= form.select :manager_ids, @store.managers&.collect{|s| [s.text, s.id]}, {},
-            {class: "form-control store-owners-select", multiple: true} %>
+          <%= form.label :source, class: "col-sm-4 col-form-label" %>
+          <%= form.text_field :source, class: "form-control" %>
         </div>
       <% end %>
 
-      <% if current_user.admin? || current_user.store_owner? %>
-        <div class="form-group nested-form-fields">
-          <fieldset>
-            <legend><%= t('views.stores.form.phone_number') %></legend>
-            <%= form.fields_for :phones do |phone_form| %>
-              <%= render 'phone_fields', f: phone_form %>
-            <% end %>
-            <%= link_to_add_fields t('views.stores.form.add_phone'), form, :phones %>
-          </fieldset>
+      <hr>
+      <h5><%= t('views.beaches.form.beach_attributes') %></h5>
+      <%= form.fields_for :beach_configuration do |builder| %>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= builder.label :category, class: "col-sm-4 col-form-label" %>
+            <%= builder.select :category, enum_options_for_select(BeachConfiguration, :category, true), {}, class: 'form-control' %>
+          </div>
+
+          <div class="form-group col-md-6">
+            <%= builder.label :quality_flag, class: "col-sm-4 col-form-label" %>
+            <%= builder.check_box :quality_flag,  class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= builder.label :beach_type, class: "col-sm-4 col-form-label" %>
+            <%= builder.text_field :beach_type, class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-6">
+            <%= builder.label :ground, class: "col-sm-4 col-form-label" %>
+            <%= builder.text_field :ground,  class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <%= builder.label :restrictions, class: "col-sm-4 col-form-label" %>
+            <%= builder.text_field :restrictions, class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :risk_areas, class: "col-sm-4 col-form-label" %>
+            <%= builder.text_field :risk_areas,  class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :average_users, class: "col-sm-6 col-form-label" %>
+            <%= builder.text_field :average_users,  class: "form-control" %>
+          </div>
         </div>
 
-        <% if @store.week_days.any? %>
-          <div class="form-group nested-form-fields">
-            <fieldset>
-              <legend><%= t('views.stores.form.phone_call_interval') %></legend>
-            <div class="form-group col-md-2 my-1">
-              <%= form.number_field :phone_call_interval, placeholder: 'Interval', class: 'form-control', min: 30, max: 179 %>
-            </div>
-            </fieldset>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <%= builder.label :guarded, class: "col-sm-4 col-form-label" %>
+            <%= builder.check_box :guarded, class: "form-control" %>
           </div>
-          <div class="form-group nested-form-fields">
-            <fieldset>
-              <legend><%= t('views.stores.form.schedule') %></legend>
-              <%= form.fields_for :week_days, @store.week_days.order(:day) do |week_days_form| %>
-                <%= render 'week_day_fields', f: week_days_form %>
-              <% end %>
-            </fieldset>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :first_aid_station, class: "col-sm-8 col-form-label" %>
+            <%= builder.check_box :first_aid_station,  class: "form-control" %>
           </div>
-        <% end %>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :wc, class: "col-sm-4 col-form-label" %>
+            <%= builder.check_box :wc,  class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <%= builder.label :showers, class: "col-sm-4 col-form-label" %>
+            <%= builder.check_box :showers,  class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :accessibility, class: "col-sm-4 col-form-label" %>
+            <%= builder.check_box :accessibility,  class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :garbage_collection, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :garbage_collection,  class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <%= builder.label :cleaning, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :cleaning,  class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :info_panel, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :info_panel,  class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :restaurant, class: "col-sm-4 col-form-label" %>
+            <%= builder.check_box :restaurant,  class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <%= builder.label :parking, class: "col-sm-4 col-form-label" %>
+            <%= builder.check_box :parking,  class: "form-control" %>
+          </div>
+          <div class="form-group col-md-4">
+            <%= builder.label :beach_support, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :beach_support,  class: "form-control" %>
+          </div>
+          <div class="form-group col-md-4">
+            <%= builder.label :water_chair, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :water_chair,  class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <%= builder.label :construction, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :construction,  class: "form-control" %>
+          </div>
+          <div class="form-group col-md-4">
+            <%= builder.label :collapsing_risk, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :collapsing_risk,  class: "form-control" %>
+          </div>
+          <div class="form-group col-md-4">
+            <%= builder.label :bathing_support, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :bathing_support,  class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <%= builder.label :parking_spots, class: "col-sm-8 col-form-label" %>
+            <%= builder.text_field :parking_spots,  class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :water_classification, class: "col-sm-8 col-form-label" %>
+            <%= builder.text_field :water_classification,  class: "form-control" %>
+          </div>
+
+          <div class="form-group col-md-4">
+            <%= builder.label :sapo_code, class: "col-sm-6 col-form-label" %>
+            <%= builder.text_field :sapo_code,  class: "form-control" %>
+          </div>
+        </div>
       <% end %>
 
       <div class="form-group">

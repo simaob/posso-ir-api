@@ -28,4 +28,5 @@
 #  source              :string
 #  make_phone_calls    :boolean          default("false")
 #  phone_call_interval :integer          default("60")
+#  municipality        :string
 #

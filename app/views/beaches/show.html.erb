@@ -1,18 +1,14 @@
-<% content_for :page_title, @store.name&.titleize %>
+<% content_for :page_title, @beach.name&.titleize %>
 
 <div class="row mt-3">
   <div class="col-md-10">
-    <span class="h2"><%= @store.name %></span>
-    <%= badge_for @store %>
+    <span class="h2"><%= @beach.name %></span>
+    <%= badge_for @beach %>
   </div>
   <div class="col-md-2">
-    <% if can? :edit, @store %>
-      <%= link_to t('views.actions.edit'), edit_store_path(@store),
+    <% if can? :edit, @beach %>
+      <%= link_to t('views.actions.edit'), edit_beach_path(@beach),
         class: 'btn btn-sm btn-outline-primary' %>
-    <% end %>
-    <% if can? :read, :statuses_store %>
-      <%= link_to t('views.stores.show.statuses'), statuses_store_path(@store),
-        class: 'btn btn-sm btn-outline-info' %>
     <% end %>
   </div>
 </div>
@@ -23,52 +19,42 @@
       <div class="card-body">
         <p>
           <strong><%= Store.human_attribute_name(:name) %>:</strong>
-          <%= @store.name %>
+          <%= @beach.name %>
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:group) %>:</strong>
-          <%= link_to @store.group, stores_path(group: @store.group) %>
-        </p>
-        <p>
-          <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
-          <%= link_to enum_l(@store, :store_type), stores_path(store_type: @store.store_type) %>
+          <%= link_to @beach.group, beaches_path(group: @beach.group) %>
         </p>
         <% if current_user&.admin? %>
           <p>
             <strong><%= Store.human_attribute_name(:open) %>:</strong>
-            <%= @store.open %>
+            <%= @beach.open %>
           </p>
           <p>
           <strong><%= Store.human_attribute_name(:created_by) %>:</strong>
-            <%= link_to(@store.created_by.display_name, @store.created_by) if @store.created_by %>
+            <%= link_to(@beach.created_by.display_name, @beach.created_by) if @beach.created_by %>
           </p>
           <p>
             <strong><%= Store.human_attribute_name(:updated_by) %>:</strong>
-            <%= link_to(@store.updated_by.display_name, @store.updated_by) if @store.updated_by %>
+            <%= link_to(@beach.updated_by.display_name, @beach.updated_by) if @beach.updated_by %>
           </p>
         <% end %>
-        <% if current_user&.admin? || (current_user.store_owner? && current_user.stores.include?(@store)) %>
-          <p><strong><%= Store.human_attribute_name(:phones) %>:</strong><br>
-            <ul>
-              <% @store.phones.each do |p| %>
-                <li><%= "#{p.phone_number} (#{p.name})" %> <%= p.active? ? 'Active' : 'Not active' %></li>
-              <% end %>
-            </ul>
-          </p>
-          <p><strong><%= t('activerecord.enums.user.roles.store_owner') %></strong><br>
-            <ul>
-              <% @store.managers.each do |user| %>
-                <li>
-                  <% if current_user.admin? %>
-                    <%= link_to user.display_name, user %>
-                  <% else %>
-                    <%= user.display_name %>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </p>
-        <% end %>
+        <p>
+          <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
+          <%= @beach.capacity %>
+        </p>
+        <p>
+          <strong><%= BeachConfiguration.human_attribute_name(:code) %>:</strong>
+          <%= @beach.beach_configuration.code %>
+        </p>
+        <p>
+          <strong><%= BeachConfiguration.human_attribute_name(:water_code) %>:</strong>
+          <%= @beach.beach_configuration.water_code %>
+        </p>
+        <p>
+          <strong><%= BeachConfiguration.human_attribute_name(:sapo_code) %>:</strong>
+          <%= @beach.beach_configuration.sapo_code %>
+        </p>
       </div>
     </div>
   </div>
@@ -78,37 +64,162 @@
       <div class="card-body">
         <p>
           <strong><%= Store.human_attribute_name(:street) %>:</strong>
-          <%= @store.street %>
+          <%= @beach.street %>
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:zip_code) %>:</strong>
-          <%= @store.zip_code %>
+          <%= @beach.zip_code %>
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:city) %>:</strong>
-          <%= @store.city %>
+          <%= @beach.city %>
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:district) %>:</strong>
-          <%= @store.district %>
+          <%= @beach.district %>
+        </p>
+        <p>
+          <strong><%= Store.human_attribute_name(:municipality) %>:</strong>
+          <%= @beach.municipality %>
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:country) %>:</strong>
-          <%= @store.country %>
+          <%= @beach.country %>
         </p>
         <p>
           <strong><%= t('views.stores.index.coordinates') %>:</strong>
-          <%= [@store.latitude, @store.longitude].compact.join(', ') %>
-        </p>
-        <p>
-          <strong><%= Store.human_attribute_name(:capacity) %>:</strong>
-          <%= @store.capacity %>
+          <%= [@beach.latitude, @beach.longitude].compact.join(', ') %>
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:details) %>:</strong>
-          <%= @store.details %>
+          <%= @beach.details %>
         </p>
       </div>
     </div>
   </div>
 </div>
+<% b_config = @beach.beach_configuration %>
+<% if b_config %>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:category) %></strong>
+            <%= b_config.category %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:beach_type) %></strong>
+            <%= b_config.beach_type %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:ground) %></strong>
+            <%= b_config.ground %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:restrictions) %></strong>
+            <%= b_config.restrictions %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:risk_areas) %></strong>
+            <%= b_config.risk_areas %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:average_users) %></strong>
+            <%= b_config.average_users %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:guarded) %></strong>
+            <%= b_config.guarded %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:first_aid_station) %></strong>
+            <%= b_config.first_aid_station %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:season_start) %></strong>
+            <%= b_config.season_start %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:season_end) %></strong>
+            <%= b_config.season_end %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_quality) %></strong>
+            <%= b_config.water_quality %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_quality_updated_at) %></strong>
+            <%= b_config.water_quality_updated_at %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_quality_url) %></strong>
+            <%= b_config.water_quality_url %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_classification) %></strong>
+            <%= b_config.water_classification %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:quality_flag) %></strong>
+            <%= b_config.quality_flag %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:beach_support) %></strong>
+            <%= b_config.beach_support %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:wc) %></strong>
+            <%= b_config.wc %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:showers) %></strong>
+            <%= b_config.showers %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:accessibility) %></strong>
+            <%= b_config.accessibility %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:garbage_collection) %></strong>
+            <%= b_config.garbage_collection %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:cleaning) %></strong>
+            <%= b_config.cleaning %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:info_panel) %></strong>
+            <%= b_config.info_panel %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:restaurant) %></strong>
+            <%= b_config.parking %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:parking_spots) %></strong>
+            <%= b_config.parking_spots %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:water_chair) %></strong>
+            <%= b_config.water_chair %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:construction) %></strong>
+            <%= b_config.construction %>
+          </p>
+          <p>
+            <strong><%= BeachConfiguration.human_attribute_name(:bathing_support) %></strong>
+            <%= b_config.bathing_support %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

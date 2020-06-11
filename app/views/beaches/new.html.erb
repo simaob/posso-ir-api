@@ -1,15 +1,13 @@
-<% content_for :page_title, t('views.actions.new', resource: Store.model_name.human) %>
+<% content_for :page_title, t('views.actions.new', resource: Beach.model_name.human) %>
 
 <div class="row mt-3">
   <div class="col-md-11">
-    <h1><%= "#{t('views.actions.new')} #{Store.model_name.human(count: 1)}" %></h1>
+    <h1><%= "#{t('views.actions.new')} #{Beach.model_name.human(count: 1)}" %></h1>
   </div>
-  <% if can? :new, Store %>
-    <div class="col-md-1">
-      <%= link_to t('views.actions.back'), stores_path,
-        class: 'btn btn-sm btn-outline-primary' %>
+  <div class="col-md-1">
+    <%= link_to t('views.actions.back'), beaches_path,
+      class: 'btn btn-sm btn-outline-primary' %>
   </div>
-<% end %>
 </div>
 
-<%= render 'form', store: @store %>
+<%= render 'form', beach: @beach %>
