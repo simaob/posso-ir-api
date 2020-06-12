@@ -59,7 +59,8 @@ class BeachesController < StoresController
                           :info_panel, :restaurant, :parking, :parking_spots,
                           :season_start, :season_end, :beach_support,
                           :water_chair, :construction, :collapsing_risk,
-                          :bathing_support, :water_classification, :sapo_code]]
+                          :bathing_support, :water_classification, :sapo_code
+                        ]]
     if current_user.any_admin? || current_user.general_manager?
       permitted_params << :state
       permitted_params << :source

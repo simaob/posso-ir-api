@@ -4,18 +4,32 @@
       <%= f.label :day, class: 'sr-only' %>
       <%= f.phone_field :day, class: 'form-control', disabled: true %>
     </div>
-    <div class="form-group col-md-4 my-1">
-      <%= f.label :opening_hour %>
+    <div class="form-group col-md-2 my-1">
+      <%= f.label :open %>
       <%= f.time_select :opening_hour, placeholder: 'Opening hour', class: 'form-control' %>
     </div>
-    <div class="form-group col-md-4 my-1">
-      <%= f.label :closing_hour %>
+    <div class="form-group col-md-2 my-1">
+      <%= f.label :close %>
       <%= f.time_select :closing_hour, placeholder: 'Closing hour', class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-2 my-1">
+      <%= f.label :open %>
+      <%= f.time_select :opening_hour_2, placeholder: 'Opening hour 2', class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-2 my-1">
+      <%= f.label :close %>
+      <%= f.time_select :closing_hour_2, placeholder: 'Closing hour 2', class: 'form-control' %>
     </div>
     <div class="col-auto my-1">
       <div class="form-check">
         <%= f.check_box :active %>
         <%= f.label :active %>
+      </div>
+    </div>
+    <div class="col-auto my-1">
+      <div class="form-check">
+        <%= f.check_box :open %>
+        <%= f.label :open %>
       </div>
     </div>
   </div>

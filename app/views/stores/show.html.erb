@@ -27,7 +27,7 @@
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:group) %>:</strong>
-          <%= link_to(@store.group, stores_path(group: @store.group)) if @store.group.present %>
+          <%= link_to(@store.group, stores_path(group: @store.group)) if @store.group.present? %>
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:store_type) %>:</strong>
