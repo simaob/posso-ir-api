@@ -19,7 +19,7 @@
     <tbody>
       <% stores.each do |store| %>
         <tr>
-          <td><%= link_to store.name, store %></td>
+          <td><%= link_to store.name, beach_path(store) %></td>
           <td><%= enum_l(store, :state) %></td>
           <td><%= store.address %></td>
           <% if current_user.any_admin? || current_user.general_manager? %>
