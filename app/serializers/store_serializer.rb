@@ -50,33 +50,29 @@ class StoreSerializer
     [object.latitude, object.longitude]
   end
   attribute :quality_flag, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.quality_flag
+    object.beach_configuration.quality_flag || false
   end
   attribute :guarded, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.guarded
+    object.beach_configuration.guarded || false
   end
   attribute :first_aid_station, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.first_aid_station
+    object.beach_configuration.first_aid_station || false
   end
   attribute :wc, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.wc
+    object.beach_configuration.wc || false
   end
   attribute :showers, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.showers
+    object.beach_configuration.showers || false
   end
   attribute :parking, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.parking
+    object.beach_configuration.parking || false
   end
   attribute :water_classification, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.water_classification.presence || rand(1..4)
+    object.beach_configuration.water_classification.presence || -1
   end
   attribute :water_quality_updated_at, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality_updated_at
   end
-  attribute :quality_flag, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.quality_flag
-  end
-
   attribute :average_users, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.average_users
   end
@@ -84,7 +80,7 @@ class StoreSerializer
     object.beach_configuration.water_quality_url
   end
   attribute :accessibility, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.accessibility
+    object.beach_configuration.accessibility || false
   end
   attribute :water_quality, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality
@@ -99,25 +95,25 @@ class StoreSerializer
     object.beach_configuration.parking_spots
   end
   attribute :garbage_collection, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.garbage_collection
+    object.beach_configuration.garbage_collection || false
   end
   attribute :cleaning, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.cleaning
+    object.beach_configuration.cleaning || false
   end
   attribute :info_panel, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.info_panel
+    object.beach_configuration.info_panel || false
   end
   attribute :restaurant, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.restaurant
+    object.beach_configuration.restaurant || false
   end
   attribute :beach_support, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.beach_support
+    object.beach_configuration.beach_support || false
   end
   attribute :water_chair, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.water_chair
+    object.beach_configuration.water_chair || false
   end
   attribute :bathing_support, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.bathing_support
+    object.beach_configuration.bathing_support || false
   end
   attribute :season_start, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.season_start
