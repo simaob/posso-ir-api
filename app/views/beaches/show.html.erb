@@ -23,7 +23,7 @@
         </p>
         <p>
           <strong><%= Store.human_attribute_name(:group) %>:</strong>
-          <%= link_to @beach.group, beaches_path(group: @beach.group) %>
+          <%= link_to(@beach.group, beaches_path(group: @beach.group)) if @beach.group.present? %>
         </p>
         <% if current_user&.admin? %>
           <p>
