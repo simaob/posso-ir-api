@@ -130,7 +130,9 @@ class StoresController < ApplicationController
                         :district, :store_type, :latitude, :longitude, :municipality,
                         :store_type, :open, :capacity, :details, :phone_call_interval,
                         phones_attributes: [:id, :phone_number, :name, :active, :_destroy],
-                        week_days_attributes: [:id, :opening_hour, :closing_hour, :active]]
+                        week_days_attributes: [:id, :opening_hour, :closing_hour,
+                                               :opening_hour_2, :closing_hour_2, :open,
+                                               :active]]
     if current_user.admin? || current_user.general_manager?
       permitted_params << :state
       permitted_params << {manager_ids: []}
