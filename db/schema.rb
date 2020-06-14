@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_160639) do
+ActiveRecord::Schema.define(version: 2020_06_12_151148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,7 +275,11 @@ ActiveRecord::Schema.define(version: 2020_06_11_160639) do
     t.bigint "store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "open", default: true
+    t.time "opening_hour_2"
+    t.time "closing_hour_2"
     t.index ["active"], name: "index_week_days_on_active"
+    t.index ["open"], name: "index_week_days_on_open"
     t.index ["store_id", "day"], name: "index_week_days_on_store_id_and_day", unique: true
     t.index ["store_id"], name: "index_week_days_on_store_id"
   end
