@@ -47,7 +47,7 @@ class WeekDay < ApplicationRecord
   end
 
   def time_slots_sequence
-    return if closing_hour.blank? && opening_hour_2.blank?
+    return if closing_hour.blank? || opening_hour_2.blank?
 
     errors.add(:opening_hour_2, 'You must open before you close') if closing_hour > opening_hour_2
   end
