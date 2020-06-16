@@ -53,7 +53,7 @@ class StoreSerializer
     object.current_day&.opening_hour_2
   end
   attribute :open_today do |object|
-    object.current_day&.open
+    object.current_day&.open || true
   end
   attribute :coordinates do |object|
     [object.latitude, object.longitude]
