@@ -4,7 +4,7 @@ class RandomStoreSerializer
   set_type :stores
 
   attributes :name, :group, :address, :capacity,
-             :details, :store_type, :lonlat, :opening_hour, :closing_hour
+             :details, :store_type, :lonlat
 
   attribute :opening_hour do
     Time.zone.parse(['8:00', '9:00', '10:00', '11:00'].sample)
@@ -19,6 +19,9 @@ class RandomStoreSerializer
     Time.zone.parse(['20:00', '22:00', '23:59'].sample)
   end
   attribute :open_today do
+    [true, false].sample
+  end
+  attribute :open do
     [true, false].sample
   end
   attribute :coordinates do |object|
