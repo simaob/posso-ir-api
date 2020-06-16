@@ -38,7 +38,7 @@ class StoreSerializer
   has_one :beach_configuration, if: proc { |s| s.beach? }
 
   attributes :name, :group, :address, :capacity,
-             :details, :store_type, :lonlat, :opening_hour, :closing_hour
+             :details, :store_type, :lonlat
 
   attribute :closing_hour do |object|
     object.current_day&.closing_hour
@@ -53,6 +53,10 @@ class StoreSerializer
     object.current_day&.opening_hour_2
   end
   attribute :open_today do |object|
+    object.current_day&.open || true
+  end
+  # TODO: proper logic here considering opening and closing hours
+  attribute :open do |object|
     object.current_day&.open || true
   end
   attribute :coordinates do |object|
