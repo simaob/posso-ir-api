@@ -55,9 +55,8 @@ class StoreSerializer
   attribute :open_today do |object|
     object.current_day&.open || true
   end
-  # TODO: proper logic here considering opening and closing hours
   attribute :open do |object|
-    object.current_day&.open || true
+    object.beach? || object.open_right_now?
   end
   attribute :coordinates do |object|
     [object.latitude, object.longitude]

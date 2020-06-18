@@ -26,6 +26,15 @@ class WeekDay < ApplicationRecord
 
   scope :today, -> { where(day: DateTime.now.wday) }
 
+  def open_now?
+    return false unless open?
+
+    (opening_hour.present? && closing_hour.present? &&
+     (opening_hour.to_s(:time)..closing_hour.to_s(:time)).cover?(Time.current)) ||
+      (opening_hour_2.present? && closing_hour_2.present? &&
+       (opening_hour_2.to_s(:time)..closing_hour_2.to_s(:time)).cover?(Time.current))
+  end
+
   private
 
   def time_order
