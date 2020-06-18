@@ -104,6 +104,10 @@ class Store < ApplicationRecord
     str
   end
 
+  def open_right_now?
+    current_day&.open_now? || (Time.zone.parse('8:00')..Time.zone.parse('22:00')).cover?(Time.current)
+  end
+
   def self.groups
     select(:group).order(:group).distinct.pluck(:group).map(&:presence).compact
   end
