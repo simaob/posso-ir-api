@@ -46,7 +46,7 @@ class Store < ApplicationRecord
   has_many :status_crowdsource_users
   has_one :status_estimation
 
-  has_many :user_stores, inverse_of: :store
+  has_many :user_stores, inverse_of: :store, dependent: :destroy
   has_many :managers, through: :user_stores
 
   has_many :phones

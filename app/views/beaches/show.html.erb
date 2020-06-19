@@ -10,6 +10,11 @@
       <%= link_to t('views.actions.edit'), edit_beach_path(@beach),
         class: 'btn btn-sm btn-outline-primary' %>
     <% end %>
+    <% if can? :destroy, @beach %>
+      <%= link_to t('views.actions.destroy'), beach_path(@beach),
+        method: :delete, data: { confirm: t('views.actions.confirm_destroy') },
+        class: 'btn btn-sm btn-outline-danger' %>
+    <% end %>
   </div>
 </div>
 

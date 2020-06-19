@@ -1,11 +1,11 @@
 <% content_for :page_title, @store.name&.titleize %>
 
 <div class="row mt-3">
-  <div class="col-md-10">
+  <div class="col-md-8">
     <span class="h2"><%= @store.name %></span>
     <%= badge_for @store %>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-4">
     <% if can? :edit, @store %>
       <%= link_to t('views.actions.edit'), edit_store_path(@store),
         class: 'btn btn-sm btn-outline-primary' %>
@@ -13,6 +13,11 @@
     <% if can? :read, :statuses_store %>
       <%= link_to t('views.stores.show.statuses'), statuses_store_path(@store),
         class: 'btn btn-sm btn-outline-info' %>
+    <% end %>
+    <% if can? :destroy, @store %>
+      <%= link_to t('views.actions.destroy'), store_path(@store),
+        method: :delete, data: { confirm: t('views.actions.confirm_destroy') },
+        class: 'btn btn-sm btn-outline-danger' %>
     <% end %>
   </div>
 </div>

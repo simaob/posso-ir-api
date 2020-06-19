@@ -1,5 +1,5 @@
 class BeachesController < StoresController
-  before_action :set_beach, only: [:show, :edit, :update]
+  before_action :set_beach, only: [:show, :edit, :update, :destroy]
 
   def new
     @beach = Store.new(store_type: :beach)
@@ -34,6 +34,17 @@ class BeachesController < StoresController
         format.html { render :edit }
         format.json { render json: @store.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @beach.destroy
+    respond_to do |format|
+      format.html do
+        redirect_to polymorphic_url(controller_name, search_params),
+                    notice: 'Beach was successfully destroyed.'
+      end
+      format.json { head :no_content }
     end
   end
 
