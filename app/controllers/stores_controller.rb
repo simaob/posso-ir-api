@@ -121,7 +121,7 @@ class StoresController < ApplicationController
   private
 
   def set_stores
-    @stores = Store.where.not(store_type: :beach)
+    @stores = Store.all
   end
 
   # Only allow a list of trusted parameters through.
