@@ -63,15 +63,6 @@ class RandomStoreSerializer
   attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality_url.presence || 'https://apambiente.pt/'
   end
-  attribute :category, if: proc { |object| object.beach? } do
-    [:ocean, :river].sample
-  end
-  attribute :average_users, if: proc { |object| object.beach? } do
-    rand(10..200)
-  end
-  attribute :parking_spots, if: proc { |object| object.beach? } do
-    rand(10..80)
-  end
   attribute :season_start, if: proc { |object| object.beach? } do
     Date.parse('06/06/2020')
   end

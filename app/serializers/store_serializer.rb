@@ -85,9 +85,6 @@ class StoreSerializer
   attribute :water_quality_updated_at, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality_updated_at
   end
-  attribute :average_users, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.average_users
-  end
   attribute :water_quality_url, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_quality_url
   end
@@ -100,12 +97,6 @@ class StoreSerializer
   attribute :photo do |object|
     rails_blob_path(object.photo, only_path: true) if object.photo.attached?
   end
-  attribute :category, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.category
-  end
-  attribute :parking_spots, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.parking_spots
-  end
   attribute :garbage_collection, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.garbage_collection || false
   end
@@ -114,9 +105,6 @@ class StoreSerializer
   end
   attribute :info_panel, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.info_panel || false
-  end
-  attribute :restaurant, if: proc { |object| object.beach? } do |object|
-    object.beach_configuration.restaurant || false
   end
   attribute :beach_support, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.beach_support || false

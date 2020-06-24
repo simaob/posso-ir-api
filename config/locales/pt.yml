@@ -68,12 +68,6 @@ pt:
       user_store:
         approved: 'Aprovada?'
       beach_configuration:
-        category: 'Categoria'
-        beach_type: 'Tipo de praia'
-        ground: 'Terreno'
-        restrictions: 'Restrições'
-        risk_areas: 'Áreas de risco'
-        average_users: 'Média de utilizadores'
         guarded: 'Vigiada'
         first_aid_station: 'Posto primeiros socorros'
         wc: 'Sanitários'
@@ -82,9 +76,7 @@ pt:
         garbage_collection: 'Recolha de lixo'
         cleaning: 'Limpeza de praia'
         info_panel: 'Painel informativo'
-        restaurant: 'Bar/restaurante'
         parking: 'Estacionamento'
-        parking_spots: 'Lugares de estacionamento'
         season_start: 'Início época balnear'
         season_end: 'Fim época balnear'
         water_quality: 'Qualidade da água'
