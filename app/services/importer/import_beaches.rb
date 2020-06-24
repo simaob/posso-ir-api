@@ -15,11 +15,56 @@ module Importer
       Store.where(store_type: :beach).delete_all
     end
 
+    def update_beaches_apa
+      data = self.class.get('/perfil.json')&.body
+      count_updates = 0
+      missing_beaches = 0
+      JSON.parse(data)['features'].each do |item|
+        beach = item['attributes']
+        store = Store.find_by(original_id: beach['id'], source: 'APA', store_type: :beach)
+        if !store
+          missing_beaches += 1
+          next
+        else
+          count_updates += 1
+        end
+
+        store.name = beach['praia']
+        beach_conf = store.beach_configuration
+
+
+        beach_conf.code = beach['code']&.to_s
+        beach_conf.water_code = beach['codigo_agua_balnear']
+        beach_conf.guarded = beach['vigilancia']
+        beach_conf.first_aid_station = beach['posto_socorros']
+        beach_conf.wc = beach['sanitarios']
+        beach_conf.showers = beach['duche']
+        beach_conf.garbage_collection = beach['recolha_lixo']
+        beach_conf.cleaning = beach['limpeza_praia']
+        beach_conf.info_panel = beach['painel_informativo']
+        beach_conf.bathing_support = beach['apoio_balnear']
+        beach_conf.beach_support = beach['apoio_praia']
+        beach_conf.parking = beach['estacionamento']
+        beach_conf.quality_flag = beach['bandeira_azul']
+        beach_conf.accessibility = beach['accessivel']
+        beach_conf.water_chair = beach['cadeira_anfibia']
+        beach_conf.construction = beach['obras_em_curso']
+        beach_conf.collapsing_risk = beach['risco_derrocada']
+        beach_conf.season_start = Date.parse("06/06/#{Date.current.year}")
+        beach_conf.season_end = Date.parse("30/09/#{Date.current.year}")
+
+        beach_conf.save
+        store.save
+      end
+      Rails.logger.info "There seem to be #{missing_beaches} new beaches"
+      Rails.logger.info "We updated #{count_updates} beaches"
+    end
+
     def import_beaches_apa
       data = self.class.get('/perfil.json')&.body
       JSON.parse(data)['features'].each do |item|
         beach = item['attributes']
-        store = Store.find_or_initialize_by(name: beach['praia'], store_type: :beach)
+        store = Store.find_or_initialize_by(original_id: beach['id'], source: 'APA', store_type: :beach)
         store.country =  'Portugal'
         store.latitude = beach['latitude']
         store.longitude = beach['longitude']

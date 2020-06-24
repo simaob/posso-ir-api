@@ -103,4 +103,8 @@ namespace :stores do
   task apa_beaches: :environment do
     Importer::ImportBeaches.new.import_beaches_apa
   end
+
+  task update_beaches_apa: :environment do
+    Importer::ImportBeaches.new.update_beaches_apa
+  end
 end
