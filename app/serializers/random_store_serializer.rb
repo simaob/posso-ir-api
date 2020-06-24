@@ -45,6 +45,27 @@ class RandomStoreSerializer
   attribute :parking, if: proc { |object| object.beach? } do
     [true, false].sample
   end
+  attribute :garbage_collection, if: proc { |object| object.beach? } do
+    [true, false].sample
+  end
+  attribute :cleaning, if: proc { |object| object.beach? } do
+    [true, false].sample
+  end
+  attribute :info_panel, if: proc { |object| object.beach? } do
+    [true, false].sample
+  end
+  attribute :beach_support, if: proc { |object| object.beach? } do
+    [true, false].sample
+  end
+  attribute :construction, if: proc { |object| object.beach? } do
+    [true, false].sample
+  end
+  attribute :collapsing_risk, if: proc { |object| object.beach? } do
+    [true, false].sample
+  end
+  attribute :bathing_support, if: proc { |object| object.beach? } do
+    [true, false].sample
+  end
   attribute :water_classification, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_classification.presence || rand(1..4)
   end

@@ -112,6 +112,12 @@ class StoreSerializer
   attribute :water_chair, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.water_chair || false
   end
+  attribute :construction, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.construction || false
+  end
+  attribute :collapsing_risk, if: proc { |object| object.beach? } do |object|
+    object.beach_configuration.collapsing_risk || false
+  end
   attribute :bathing_support, if: proc { |object| object.beach? } do |object|
     object.beach_configuration.bathing_support || false
   end
