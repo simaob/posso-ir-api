@@ -30,6 +30,9 @@ module Importer
         end
 
         store.name = beach['praia']
+        store.country =  'Portugal'
+        store.latitude = beach['latitude']
+        store.longitude = beach['longitude']
         beach_conf = store.beach_configuration
 
 
