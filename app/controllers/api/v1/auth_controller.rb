@@ -1,8 +1,10 @@
 module Api
   module V1
     class AuthController < ApiController
+      before_action :set_attrs
+
       def register
-        if User.find_by(email: params[:email]) || params[:email].blank?
+        if User.find_by(email: @attrs[:email]) || @attrs[:email].blank?
           render json: {error: 'email already registered'}, status: :unauthorized and return
         end
 
@@ -16,9 +18,9 @@ module Api
 
           new_user = User.create(
             app_uuid: app_uuid,
-            email: params[:email],
-            password: params[:password],
-            phone: params[:phone]
+            name: @attrs[:name],
+            email: @attrs[:email],
+            password: @attrs[:password]
           )
         end
         if new_user.errors.any?
@@ -29,8 +31,8 @@ module Api
       end
 
       def login
-        user = User.where.not(email: nil).find_by(email: params[:email])
-        if user&.valid_password?(params[:password])
+        user = User.where.not(email: nil).find_by(email: @attrs[:email])
+        if user&.valid_password?(@attrs[:password])
           user.app_uuid = context[:app_uuid]
           user.save
 
@@ -53,6 +55,12 @@ module Api
         else
           render json: {error: 'user not logged in'}, status: :unauthorized
         end
+      end
+
+      private
+
+      def set_attrs
+        @attrs = params[:data][:attributes]
       end
     end
   end
