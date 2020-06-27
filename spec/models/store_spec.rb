@@ -44,4 +44,53 @@ describe Store do
       expect(query).to eq([tesco])
     end
   end
+
+  describe 'open_right_now?' do
+    let(:store) { create(:store) }
+
+    it 'should return closed if no weekdays defined and time is past close time' do
+      allow(Time).to receive(:current).and_return(Time.zone.parse('23:00'))
+      expect(store.open_right_now?).to be(false)
+    end
+
+    it 'should return closed if no weekdays defined and time is before default open time' do
+      allow(Time).to receive(:current).and_return(Time.zone.parse('7:00'))
+      expect(store.open_right_now?).to be(false)
+    end
+
+    it 'should return open if no weekdays defined and time is inside open defaults' do
+      allow(Time).to receive(:current).and_return(Time.zone.parse('12:00'))
+      expect(store.open_right_now?).to be(true)
+    end
+
+    context 'store with weekday defined' do
+      let!(:week_day) {
+        create(:week_day, store_id: store.id, day: Date.current.wday,
+                          opening_hour: Time.zone.parse('10:00'),
+                          closing_hour: Time.zone.parse('12:00'),
+                          opening_hour_2: Time.zone.parse('15:00'),
+                          closing_hour_2: Time.zone.parse('17:00'))
+      }
+      it 'should return close if time is before 10' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('9:00'))
+        expect(store.open_right_now?).to be(false)
+      end
+      it 'should return open if time is between 10 an 12:00' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('10:00'))
+        expect(store.open_right_now?).to be(true)
+      end
+      it 'should return close if time is between 12 an 15:00' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('13:00'))
+        expect(store.open_right_now?).to be(false)
+      end
+      it 'should return open if time is between 15 an 17:00' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('15:30'))
+        expect(store.open_right_now?).to be(true)
+      end
+      it 'should return close if time is after 17:00' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('17:10'))
+        expect(store.open_right_now?).to be(false)
+      end
+    end
+  end
 end
