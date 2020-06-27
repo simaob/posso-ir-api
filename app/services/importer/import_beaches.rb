@@ -48,7 +48,7 @@ module Importer
         beach_conf.beach_support = beach['apoio_praia']
         beach_conf.parking = beach['estacionamento']
         beach_conf.quality_flag = beach['bandeira_azul']
-        beach_conf.accessibility = beach['accessivel']
+        beach_conf.accessibility = beach['acessivel']
         beach_conf.water_chair = beach['cadeira_anfibia']
         beach_conf.construction = beach['obras_em_curso']
         beach_conf.collapsing_risk = beach['risco_derrocada']
