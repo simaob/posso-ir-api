@@ -92,5 +92,33 @@ describe Store do
         expect(store.open_right_now?).to be(false)
       end
     end
+
+    context 'store with weekday defined without hours' do
+      let!(:week_day) {
+        create(:week_day, store_id: store.id, day: Date.current.wday,
+                          open: true, opening_hour: nil, closing_hour: nil,
+                          opening_hour_2: nil, closing_hour_2: nil)
+      }
+      it 'should return close if time is before 10' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('7:00'))
+        expect(store.open_right_now?).to be(false)
+      end
+      it 'should return open if time is between 10 an 12:00' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('10:00'))
+        expect(store.open_right_now?).to be(true)
+      end
+      it 'should return open if time is between 12 an 15:00' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('13:00'))
+        expect(store.open_right_now?).to be(true)
+      end
+      it 'should return open if time is between 15 an 17:00' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('15:30'))
+        expect(store.open_right_now?).to be(true)
+      end
+      it 'should return close if time is after 23:00' do
+        allow(Time).to receive(:current).and_return(Time.zone.parse('23:10'))
+        expect(store.open_right_now?).to be(false)
+      end
+    end
   end
 end

@@ -35,6 +35,11 @@ class WeekDay < ApplicationRecord
        (opening_hour_2.to_s(:time)..closing_hour_2.to_s(:time)).cover?(Time.current))
   end
 
+  def has_times_set?
+    (opening_hour.present? && closing_hour.present?) ||
+      (opening_hour_2.present? && closing_hour_2.present?)
+  end
+
   private
 
   def time_order
