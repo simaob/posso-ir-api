@@ -105,7 +105,7 @@ class Store < ApplicationRecord
   end
 
   def open_right_now?
-    return current_day.open_now? if current_day&.has_times_set?
+    return current_day.open_now? if current_day&.times_set?
 
     (Time.zone.parse('8:00')..Time.zone.parse('22:00')).cover?(Time.current)
   end
