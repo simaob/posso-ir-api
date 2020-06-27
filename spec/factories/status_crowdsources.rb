@@ -24,5 +24,6 @@ FactoryBot.define do
   factory :status_crowdsource do
     association :store
     updated_time { Time.current }
+    valid_until { Time.current + 1.hour }
   end
 end
