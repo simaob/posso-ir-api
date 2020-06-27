@@ -35,7 +35,6 @@ module Importer
         store.longitude = beach['longitude']
         beach_conf = store.beach_configuration
 
-
         beach_conf.code = beach['code']&.to_s
         beach_conf.water_code = beach['codigo_agua_balnear']
         beach_conf.guarded = beach['vigilancia']

@@ -63,11 +63,10 @@ class BeachesController < StoresController
                         :district, :store_type, :latitude, :longitude,
                         :municipality, :store_type, :open, :capacity, :details,
                         beach_configuration_attributes: [
-                          :id, :category, :quality_flag, :beach_type,
-                          :ground, :restrictions, :risk_areas, :average_users,
+                          :id, :quality_flag,
                           :guarded, :first_aid_station, :wc, :showers,
                           :accessibility, :garbage_collection, :cleaning,
-                          :info_panel, :restaurant, :parking, :parking_spots,
+                          :info_panel, :parking,
                           :season_start, :season_end, :beach_support,
                           :water_chair, :construction, :collapsing_risk,
                           :bathing_support, :water_classification, :sapo_code

@@ -127,40 +127,12 @@
       <%= form.fields_for :beach_configuration do |builder| %>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <%= builder.label :category, class: "col-sm-4 col-form-label" %>
-            <%= builder.select :category, enum_options_for_select(BeachConfiguration, :category, true), {}, class: 'form-control' %>
-          </div>
-
-          <div class="form-group col-md-6">
             <%= builder.label :quality_flag, class: "col-sm-4 col-form-label" %>
             <%= builder.check_box :quality_flag,  class: "form-control" %>
           </div>
-        </div>
-        <div class="form-row">
           <div class="form-group col-md-6">
-            <%= builder.label :beach_type, class: "col-sm-4 col-form-label" %>
-            <%= builder.text_field :beach_type, class: "form-control" %>
-          </div>
-
-          <div class="form-group col-md-6">
-            <%= builder.label :ground, class: "col-sm-4 col-form-label" %>
-            <%= builder.text_field :ground,  class: "form-control" %>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <%= builder.label :restrictions, class: "col-sm-4 col-form-label" %>
-            <%= builder.text_field :restrictions, class: "form-control" %>
-          </div>
-
-          <div class="form-group col-md-4">
-            <%= builder.label :risk_areas, class: "col-sm-4 col-form-label" %>
-            <%= builder.text_field :risk_areas,  class: "form-control" %>
-          </div>
-
-          <div class="form-group col-md-4">
-            <%= builder.label :average_users, class: "col-sm-6 col-form-label" %>
-            <%= builder.text_field :average_users,  class: "form-control" %>
+            <%= builder.label :sapo_code, class: "col-sm-6 col-form-label" %>
+            <%= builder.text_field :sapo_code,  class: "form-control" %>
           </div>
         </div>
 
@@ -202,23 +174,17 @@
             <%= builder.label :cleaning, class: "col-sm-6 col-form-label" %>
             <%= builder.check_box :cleaning,  class: "form-control" %>
           </div>
-
           <div class="form-group col-md-4">
             <%= builder.label :info_panel, class: "col-sm-6 col-form-label" %>
             <%= builder.check_box :info_panel,  class: "form-control" %>
           </div>
-
-          <div class="form-group col-md-4">
-            <%= builder.label :restaurant, class: "col-sm-4 col-form-label" %>
-            <%= builder.check_box :restaurant,  class: "form-control" %>
-          </div>
-        </div>
-
-        <div class="form-row">
           <div class="form-group col-md-4">
             <%= builder.label :parking, class: "col-sm-4 col-form-label" %>
             <%= builder.check_box :parking,  class: "form-control" %>
           </div>
+        </div>
+
+        <div class="form-row">
           <div class="form-group col-md-4">
             <%= builder.label :beach_support, class: "col-sm-6 col-form-label" %>
             <%= builder.check_box :beach_support,  class: "form-control" %>
@@ -227,12 +193,12 @@
             <%= builder.label :water_chair, class: "col-sm-6 col-form-label" %>
             <%= builder.check_box :water_chair,  class: "form-control" %>
           </div>
-        </div>
-        <div class="form-row">
           <div class="form-group col-md-4">
             <%= builder.label :construction, class: "col-sm-6 col-form-label" %>
             <%= builder.check_box :construction,  class: "form-control" %>
           </div>
+        </div>
+        <div class="form-row">
           <div class="form-group col-md-4">
             <%= builder.label :collapsing_risk, class: "col-sm-6 col-form-label" %>
             <%= builder.check_box :collapsing_risk,  class: "form-control" %>
@@ -241,21 +207,9 @@
             <%= builder.label :bathing_support, class: "col-sm-6 col-form-label" %>
             <%= builder.check_box :bathing_support,  class: "form-control" %>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-4">
-            <%= builder.label :parking_spots, class: "col-sm-8 col-form-label" %>
-            <%= builder.text_field :parking_spots,  class: "form-control" %>
-          </div>
-
           <div class="form-group col-md-4">
             <%= builder.label :water_classification, class: "col-sm-8 col-form-label" %>
             <%= builder.text_field :water_classification,  class: "form-control" %>
-          </div>
-
-          <div class="form-group col-md-4">
-            <%= builder.label :sapo_code, class: "col-sm-6 col-form-label" %>
-            <%= builder.text_field :sapo_code,  class: "form-control" %>
           </div>
         </div>
       <% end %>

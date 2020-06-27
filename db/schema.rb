@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_151148) do
+ActiveRecord::Schema.define(version: 2020_06_24_110119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,12 +51,6 @@ ActiveRecord::Schema.define(version: 2020_06_12_151148) do
   end
 
   create_table "beach_configurations", force: :cascade do |t|
-    t.integer "category"
-    t.string "beach_type"
-    t.string "ground"
-    t.string "restrictions"
-    t.string "risk_areas"
-    t.integer "average_users"
     t.boolean "guarded"
     t.boolean "first_aid_station"
     t.boolean "wc"
@@ -65,26 +59,12 @@ ActiveRecord::Schema.define(version: 2020_06_12_151148) do
     t.boolean "garbage_collection"
     t.boolean "cleaning"
     t.boolean "info_panel"
-    t.boolean "restaurant"
     t.boolean "parking"
-    t.integer "parking_spots"
     t.date "season_start"
     t.date "season_end"
     t.integer "water_quality"
     t.string "water_quality_url"
     t.boolean "quality_flag"
-    t.string "water_quality_entity"
-    t.string "water_quality_contact"
-    t.string "water_contact_email"
-    t.string "security_entity"
-    t.string "security_entity_contact"
-    t.string "security_entity_email"
-    t.string "health_authority"
-    t.string "health_authority_contact"
-    t.string "health_authority_email"
-    t.string "municipality"
-    t.string "municipality_contact"
-    t.string "municipality_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "store_id"
@@ -98,8 +78,6 @@ ActiveRecord::Schema.define(version: 2020_06_12_151148) do
     t.datetime "water_quality_updated_at"
     t.integer "water_classification"
     t.string "sapo_code"
-    t.index ["average_users"], name: "index_beach_configurations_on_average_users"
-    t.index ["category"], name: "index_beach_configurations_on_category"
     t.index ["guarded"], name: "index_beach_configurations_on_guarded"
     t.index ["parking"], name: "index_beach_configurations_on_parking"
     t.index ["quality_flag"], name: "index_beach_configurations_on_quality_flag"
