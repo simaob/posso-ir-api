@@ -60,8 +60,6 @@ module Api
       private
 
       def set_attrs
-        # Temporary debug info
-        puts 'PARAMS: ' + params.to_s
         @attrs = params.dig(:data, :attributes) || params.dig(:auth, :data, :attributes)
       end
     end
