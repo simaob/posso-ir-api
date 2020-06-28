@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_110119) do
+ActiveRecord::Schema.define(version: 2020_06_28_215106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,16 @@ ActiveRecord::Schema.define(version: 2020_06_24_110119) do
     t.index ["quality_flag"], name: "index_beach_configurations_on_quality_flag"
     t.index ["store_id"], name: "index_beach_configurations_on_store_id"
     t.index ["water_quality"], name: "index_beach_configurations_on_water_quality"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "store_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["store_id", "user_id"], name: "index_favorites_on_store_id_and_user_id"
+    t.index ["store_id"], name: "index_favorites_on_store_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "phones", force: :cascade do |t|
@@ -265,6 +275,8 @@ ActiveRecord::Schema.define(version: 2020_06_24_110119) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_keys", "users", on_delete: :cascade
   add_foreign_key "beach_configurations", "stores", on_delete: :cascade
+  add_foreign_key "favorites", "stores"
+  add_foreign_key "favorites", "users"
   add_foreign_key "phones", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "users", on_delete: :cascade
