@@ -5,7 +5,7 @@ module Api
 
       def register
         if User.find_by(email: @attrs[:email]) || @attrs[:email].blank?
-          render json: {error: 'email already registered'}, status: :unauthorized and return
+          render json: {error: 'email already registered'}, status: :forbidden and return
         end
 
         new_user = nil
@@ -42,10 +42,10 @@ module Api
           # rubocop:enable Rails/SkipsModelValidations
           render json: FavoriteSerializer.new(user.favorites).serialized_json, status: :ok
         else
-          render json: {error: 'wrong password'}, status: :unauthorized
+          render json: {error: 'wrong password'}, status: :forbidden
         end
       rescue StandardError
-        render json: {error: 'authentication failed'}, status: :unauthorized
+        render json: {error: 'authentication failed'}, status: :forbidden
       end
 
       def logout
@@ -53,7 +53,7 @@ module Api
           context[:current_user].update(app_uuid: "#{context[:current_user].app_uuid}_old_#{Time.current.to_i}")
           render json: {success: 'user logged out'}, status: :ok
         else
-          render json: {error: 'user not logged in'}, status: :unauthorized
+          render json: {error: 'user not logged in'}, status: :forbidden
         end
       end
 
