@@ -2,6 +2,7 @@ module Api
   module V1
     class AuthController < ApiController
       before_action :set_attrs
+      skip_before_action :verify_authenticity_token
 
       def register
         if User.find_by(email: @attrs[:email]) || @attrs[:email].blank?
