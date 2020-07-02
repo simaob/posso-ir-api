@@ -27,6 +27,8 @@ module Api
         if new_user.errors.any?
           render json: {error: "unable to create user: #{new_user.errors.full_messages.join(', ')}"}, status: :conflict
         else
+          # confirm user straight away if using staging
+          new_user.confirm if Rails.env.staging?
           render json: {success: 'User created successfully'}, status: :created
         end
       end
