@@ -127,8 +127,19 @@
       <%= form.fields_for :beach_configuration do |builder| %>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <%= builder.label :quality_flag, class: "col-sm-4 col-form-label" %>
-            <%= builder.check_box :quality_flag,  class: "form-control" %>
+            <%= builder.label :season_start, class: "col-sm-4 col-form-label" %>
+            <%= builder.date_field :season_start,  class: "form-control" %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= builder.label :season_end, class: "col-sm-6 col-form-label" %>
+            <%= builder.date_field :season_end,  class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <%= builder.label :water_classification, class: "col-sm-8 col-form-label" %>
+            <%= builder.text_field :water_classification,  class: "form-control" %>
           </div>
           <div class="form-group col-md-6">
             <%= builder.label :sapo_code, class: "col-sm-6 col-form-label" %>
@@ -208,8 +219,8 @@
             <%= builder.check_box :bathing_support,  class: "form-control" %>
           </div>
           <div class="form-group col-md-4">
-            <%= builder.label :water_classification, class: "col-sm-8 col-form-label" %>
-            <%= builder.text_field :water_classification,  class: "form-control" %>
+            <%= builder.label :quality_flag, class: "col-sm-6 col-form-label" %>
+            <%= builder.check_box :quality_flag,  class: "form-control" %>
           </div>
         </div>
       <% end %>
