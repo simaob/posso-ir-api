@@ -42,8 +42,10 @@ module Api
           # Invalidate other users on the same devise
           # rubocop:disable Rails/SkipsModelValidations
           User.where.not(id: user.id).where(app_uuid: user.app_uuid).update_all(app_uuid: nil)
+          options = {}
+          options[:include] = [:stores]
           # rubocop:enable Rails/SkipsModelValidations
-          render json: FavoriteSerializer.new(user.favorites).serialized_json, status: :ok
+          render json: UserSerializer.new(user, options).serialized_json, status: :ok
         else
           render json: {error: 'wrong password'}, status: :forbidden
         end

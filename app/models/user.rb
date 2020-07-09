@@ -41,6 +41,7 @@ class User < ApplicationRecord
   has_many :created_stores, class_name: 'Store', foreign_key: :created_by_id, inverse_of: :created_by
   has_many :status_crowdsource_users
   has_many :favorites
+  has_many :stores, through: :favorites, source: :store
   has_one :api_key
 
   has_secure_token :store_owner_code
