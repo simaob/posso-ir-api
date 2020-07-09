@@ -30,7 +30,7 @@ module Api
       end
 
       def index
-        favorites = context[:current_user].favorite_stores
+        favorites = context[:current_user].stores
         render json: StoreSerializer.new(favorites).serialized_json
       end
 
