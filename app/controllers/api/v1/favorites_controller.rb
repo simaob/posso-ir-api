@@ -16,11 +16,8 @@ module Api
       def destroy
         return if no_user
 
-        favorite = Favorite.find_by id: params[:id]
+        favorite = Favorite.find_by user_id: @user.id, store_id: params[:id]
         return render json: {errors: "Couldn't find favorite"}, status: :not_found unless favorite
-        unless @user == favorite.user
-          return render json: {errors: "Favorite doesn't belong to user"}, status: :forbidden
-        end
 
         if favorite.destroy
           render json: {}, status: :no_content
