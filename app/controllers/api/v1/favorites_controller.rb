@@ -7,7 +7,7 @@ module Api
 
         favorite = Favorite.new(store: @store, user: @user)
         if favorite.save
-          render json: FavoriteSerializer.new(favorite).serialized_json, status: :created
+          render json: StoreSerializer.new(favorite.store).serialized_json, status: :created
         else
           render json: {errors: favorite.errors.full_messages.join(', ')}, status: :conflict
         end
@@ -30,8 +30,8 @@ module Api
       end
 
       def index
-        @favorites = context[:current_user].favorites
-        super
+        favorites = context[:current_user].favorite_stores
+        render json: StoreSerializer.new(favorites).serialized_json
       end
 
       private

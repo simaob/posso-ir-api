@@ -43,7 +43,7 @@ module Api
           # rubocop:disable Rails/SkipsModelValidations
           User.where.not(id: user.id).where(app_uuid: user.app_uuid).update_all(app_uuid: nil)
           # rubocop:enable Rails/SkipsModelValidations
-          render json: FavoriteSerializer.new(user.favorites).serialized_json, status: :ok
+          render json: StoreSerializer.new(user.favorite_stores).serialized_json, status: :ok
         else
           render json: {error: 'wrong password'}, status: :forbidden
         end
