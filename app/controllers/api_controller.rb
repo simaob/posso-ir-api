@@ -18,7 +18,7 @@ class ApiController < ApplicationController
   private
 
   def authenticate_with_jwt!
-    return @current_user = User.first if Rails.env.development?
+    # return @current_user = User.first if Rails.env.development?
 
     payload = JwtService.decode(token: token)
     if DateTime.parse(payload['expiration_date']) <= DateTime.current
@@ -36,7 +36,8 @@ class ApiController < ApplicationController
     @current_user ||= if store_owner_code
                         User.find_by(store_owner_code: store_owner_code, role: :store_owner)
                       else
-                        User.find_by(app_uuid: JwtService.decode(token: token)['uuid'])
+                        tmp_uuid = JwtService.decode(token: token)['uuid']
+                        tmp_uuid.present? ? User.find_by(app_uuid: tmp_uuid) : nil
                       end
   rescue StandardError
     @current_user = nil
