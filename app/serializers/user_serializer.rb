@@ -14,4 +14,3 @@ class UserSerializer
 
   has_many :stores, type: :stores, serializer: StoreSerializer
 end
-
