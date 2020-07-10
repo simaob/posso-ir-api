@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       jsonapi_resources :status_generals, only: [:index] do end
       jsonapi_resources :random_status_generals, only: [:index] do end
       jsonapi_resources :favorites, only: [:index, :create, :destroy] do end
+      jsonapi_resources :users, only: [:index, :update] do end
 
 
       get 'beach-status', to: 'beaches#index'
