@@ -6,10 +6,10 @@ class UserSerializer
   attribute :email
   attribute :name
   attribute :reports_made do
-    rand(1..100)
+    Rails.env.production? ? 0 : rand(1..100)
   end
   attribute :reporter_ranking do
-    rand(1..100)
+    Rails.env.production? ? 0 : rand(1..100)
   end
 
   has_many :stores, type: :stores, serializer: StoreSerializer
