@@ -5,8 +5,8 @@ class UserSerializer
 
   attribute :email
   attribute :name
-  attribute :reports_made do
-    Rails.env.production? ? 0 : rand(1..100)
+  attribute :reports_made do |object|
+    Rails.env.production? ? object.status_crowdsource_users.count : rand(1..100)
   end
   attribute :reporter_ranking do
     Rails.env.production? ? 0 : rand(1..100)
