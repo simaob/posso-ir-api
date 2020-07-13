@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_081037) do
+ActiveRecord::Schema.define(version: 2020_07_12_215729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_081037) do
     t.bigint "store_id"
     t.datetime "old_created_at"
     t.datetime "old_updated_at"
+    t.index ["store_id"], name: "index_status_estimation_histories_on_store_id"
   end
 
   create_table "status_histories", force: :cascade do |t|
@@ -140,6 +141,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_081037) do
     t.boolean "is_official"
     t.datetime "old_created_at"
     t.datetime "old_updated_at"
+    t.index ["store_id"], name: "index_status_histories_on_store_id"
   end
 
   create_table "status_user_commitment_users", force: :cascade do |t|
