@@ -50,6 +50,5 @@ RSpec.describe User, type: :model do
       expect(reporter2.reporter_rank).to eql(2)
       expect(reporter3.reporter_rank).to eql(3)
     end
-
   end
 end

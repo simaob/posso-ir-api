@@ -77,7 +77,7 @@ class User < ApplicationRecord
     my_rank = StatusCrowdsourceUser.select('COUNT(*) AS count, user_id, RANK() over (ORDER BY COUNT(*) DESC)')
       .group(:user_id)
       .limit(100)
-    my_rank.to_a.select{|t| t.user_id == id}&.first&.rank || 0
+    my_rank.to_a.select { |t| t.user_id == id }&.first&.rank || 0
   end
 
   protected
