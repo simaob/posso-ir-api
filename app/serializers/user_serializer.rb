@@ -34,6 +34,16 @@ class UserSerializer
   attribute :reporter_ranking do |object|
     Rails.env.production? ? object.reporter_rank : rand(1..100)
   end
+  attribute :top_10_count do
+    rand(0..3)
+  end
+  attribute :top_50_count do
+    rand(0..3)
+  end
+  attribute :top_100_count do
+    rand(0..3)
+  end
 
   has_many :stores, type: :stores, serializer: StoreSerializer
+  has_many :user_badges, type: :badges, serialiezr: UserBadgeSerializer
 end

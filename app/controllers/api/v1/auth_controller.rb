@@ -42,15 +42,16 @@ module Api
           # Invalidate other users on the same devise
           # rubocop:disable Rails/SkipsModelValidations
           User.where.not(id: user.id).where(app_uuid: user.app_uuid).update_all(app_uuid: nil)
+          random_badges_for(user) unless Rails.env.production?
           options = {}
-          options[:include] = [:stores]
+          options[:include] = [:stores, :user_badges]
           # rubocop:enable Rails/SkipsModelValidations
           render json: UserSerializer.new(user, options).serialized_json, status: :ok
         else
           render json: {error: 'wrong password'}, status: :forbidden
         end
-      rescue StandardError
-        render json: {error: 'authentication failed'}, status: :forbidden
+      #rescue StandardError
+      #  render json: {error: 'authentication failed'}, status: :forbidden
       end
 
       def logout
@@ -66,6 +67,14 @@ module Api
 
       def set_attrs
         @attrs = params.dig(:data, :attributes) || params.dig(:auth, :data, :attributes)
+      end
+
+      def random_badges_for(user)
+        user.user_badges.destroy_all
+        [:welcome, :observer, :addicted, :noob, :beginner].sample(rand(0..4)).each do |badge|
+          bdg = Badge.find_or_create_by(slug: badge, name: badge.to_s.titleize)
+          user.user_badges << UserBadge.new(badge_id: bdg.id, date: rand(1..2).days.ago)
+        end
       end
     end
   end

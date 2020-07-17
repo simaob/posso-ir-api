@@ -12,4 +12,6 @@
 class UserBadge < ApplicationRecord
   belongs_to :user
   belongs_to :badge
+
+  delegate :slug, :name, to: :badge
 end
