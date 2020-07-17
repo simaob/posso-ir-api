@@ -10,7 +10,7 @@
 #
 FactoryBot.define do
   factory :badge do
-    name { "MyString" }
-    slug { "MyString" }
+    name { 'MyString' }
+    slug { 'MyString' }
   end
 end

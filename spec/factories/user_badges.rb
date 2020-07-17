@@ -13,6 +13,6 @@ FactoryBot.define do
   factory :user_badge do
     user { nil }
     badge { nil }
-    date { "2020-07-17 17:22:33" }
+    date { '2020-07-17 17:22:33' }
   end
 end

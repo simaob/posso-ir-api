@@ -50,8 +50,8 @@ module Api
         else
           render json: {error: 'wrong password'}, status: :forbidden
         end
-      #rescue StandardError
-      #  render json: {error: 'authentication failed'}, status: :forbidden
+      rescue StandardError
+        render json: {error: 'authentication failed'}, status: :forbidden
       end
 
       def logout
