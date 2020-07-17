@@ -43,6 +43,8 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :stores, through: :favorites, source: :store
   has_one :api_key
+  has_many :user_badges
+  has_many :badges, through: :user_badges
 
   has_secure_token :store_owner_code
 
