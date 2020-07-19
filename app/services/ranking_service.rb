@@ -23,7 +23,7 @@ class RankingService
           .where('status_crowdsource_users.created_at > ?', Time.current.beginning_of_month)
           .group(:user_id)
           .order(score: :desc).to_a.each.with_index do |s, i|
-          if s.count == previous_score
+          if s.score == previous_score
             Ranking.create(user_id: s.user_id, position: previous_position, score: s.score)
           else
             Ranking.create(user_id: s.user_id, position: s.position, score: s.score)

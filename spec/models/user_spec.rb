@@ -33,13 +33,13 @@ RSpec.describe User, type: :model do
       stores
     }
     let(:reporter1) {
-      create(:user)
+      create(:user, confirmed_at: DateTime.current)
     }
     let(:reporter2) {
-      create(:user)
+      create(:user, confirmed_at: DateTime.current)
     }
     let(:reporter3) {
-      create(:user)
+      create(:user, confirmed_at: DateTime.current)
     }
     let(:random_reporters) {
       reporters = []
