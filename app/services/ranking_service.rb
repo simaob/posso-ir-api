@@ -26,7 +26,7 @@ class RankingService
           if s.score == previous_score
             Ranking.create(user_id: s.user_id, position: previous_position, score: s.score)
           else
-            Ranking.create(user_id: s.user_id, position: s.position, score: s.score)
+            Ranking.create(user_id: s.user_id, position: i, score: s.score)
             previous_position = i
             previous_score = s.score
           end
