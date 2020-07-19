@@ -3,7 +3,7 @@ class CreateRankings < ActiveRecord::Migration[6.0]
     create_table :rankings do |t|
       t.integer :position, null: false
       t.integer :score, null: false
-      t.references :users, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
 

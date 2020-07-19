@@ -128,11 +128,11 @@ ActiveRecord::Schema.define(version: 2020_07_19_184040) do
   create_table "rankings", force: :cascade do |t|
     t.integer "position", null: false
     t.integer "score", null: false
-    t.bigint "users_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["position"], name: "index_rankings_on_position"
-    t.index ["users_id"], name: "index_rankings_on_users_id"
+    t.index ["user_id"], name: "index_rankings_on_user_id"
   end
 
   create_table "status_crowdsource_users", force: :cascade do |t|
@@ -319,7 +319,7 @@ ActiveRecord::Schema.define(version: 2020_07_19_184040) do
   add_foreign_key "favorites", "stores"
   add_foreign_key "favorites", "users"
   add_foreign_key "phones", "stores", on_delete: :cascade
-  add_foreign_key "rankings", "users", column: "users_id"
+  add_foreign_key "rankings", "users"
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "users", on_delete: :cascade
   add_foreign_key "status_user_commitment_users", "stores", on_delete: :cascade
