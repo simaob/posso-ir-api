@@ -34,10 +34,10 @@ class RankingService
       end
     end
     log "Finished calculating the rankings in #{duration} ms"
-
-    private
-
-    # TODO: Define this. Users must belong to countries
-    attr_reader :country
   end
+
+  private
+
+  # TODO: Define this. Users must belong to countries
+  attr_reader :country
 end
