@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_162233) do
+ActiveRecord::Schema.define(version: 2020_07_19_184040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,28 @@ ActiveRecord::Schema.define(version: 2020_07_17_162233) do
     t.bigint "store_id"
     t.index ["phone_number"], name: "index_phones_on_phone_number", unique: true
     t.index ["store_id"], name: "index_phones_on_store_id"
+  end
+
+  create_table "ranking_histories", force: :cascade do |t|
+    t.integer "position", null: false
+    t.integer "score", null: false
+    t.integer "user_id", null: false
+    t.date "date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["date"], name: "index_ranking_histories_on_date"
+    t.index ["position", "date"], name: "index_ranking_histories_on_position_and_date"
+    t.index ["user_id"], name: "index_ranking_histories_on_user_id"
+  end
+
+  create_table "rankings", force: :cascade do |t|
+    t.integer "position", null: false
+    t.integer "score", null: false
+    t.bigint "users_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["position"], name: "index_rankings_on_position"
+    t.index ["users_id"], name: "index_rankings_on_users_id"
   end
 
   create_table "status_crowdsource_users", force: :cascade do |t|
@@ -297,6 +319,7 @@ ActiveRecord::Schema.define(version: 2020_07_17_162233) do
   add_foreign_key "favorites", "stores"
   add_foreign_key "favorites", "users"
   add_foreign_key "phones", "stores", on_delete: :cascade
+  add_foreign_key "rankings", "users", column: "users_id"
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "users", on_delete: :cascade
   add_foreign_key "status_user_commitment_users", "stores", on_delete: :cascade

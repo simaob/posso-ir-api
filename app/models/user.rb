@@ -45,6 +45,8 @@ class User < ApplicationRecord
   has_one :api_key
   has_many :user_badges
   has_many :badges, through: :user_badges
+  has_one :ranking
+  has_many :ranking_histories
 
   has_secure_token :store_owner_code
 
@@ -75,11 +77,19 @@ class User < ApplicationRecord
     admin? || beach_admin?
   end
 
+  # def reporter_rank
+  #   my_rank = StatusCrowdsourceUser.select('COUNT(*) AS count, user_id, RANK() over (ORDER BY COUNT(*) DESC)')
+  #     .group(:user_id)
+  #     .limit(100)
+  #   my_rank.to_a.select { |t| t.user_id == id }&.first&.rank || 0
+  # end
+
   def reporter_rank
-    my_rank = StatusCrowdsourceUser.select('COUNT(*) AS count, user_id, RANK() over (ORDER BY COUNT(*) DESC)')
-      .group(:user_id)
-      .limit(100)
-    my_rank.to_a.select { |t| t.user_id == id }&.first&.rank || 0
+    ranking&.position || 0
+  end
+
+  def reporter_score
+    ranking&.score || 0
   end
 
   protected
