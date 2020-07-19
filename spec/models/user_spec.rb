@@ -55,6 +55,7 @@ RSpec.describe User, type: :model do
       150.times do
         create(:status_crowdsource_user, store_id: stores.sample.id, user_id: random_reporters.sample.id)
       end
+      RankingService.new.call
 
       expect(reporter1.reporter_rank).to eql(1)
       expect(reporter3.reporter_rank).to eql(0)
@@ -68,6 +69,7 @@ RSpec.describe User, type: :model do
         create(:status_crowdsource_user, store_id: stores.sample.id, user_id: reporter2.id)
       end
       create(:status_crowdsource_user, store_id: stores.sample.id, user_id: reporter3.id)
+      RankingService.new.call
 
       expect(reporter1.reporter_rank).to eql(1)
       expect(reporter2.reporter_rank).to eql(2)

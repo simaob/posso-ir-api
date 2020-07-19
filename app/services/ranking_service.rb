@@ -20,7 +20,8 @@ class RankingService
         StatusCrowdsourceUser.joins(:user)
           .where.not(users: {confirmed_at: nil})
           .select('COUNT(*) as score, user_id ')
-          .where('created_at > ?', Time.current.beginning_of_month)
+          .where('status_crowdsource_users.created_at > ?', Time.current.beginning_of_month)
+          .group(:user_id)
           .order(score: :desc).find_each.with_index do |s, i|
           if s.count == previous_score
             Ranking.create(user_id: s.user_id, position: previous_position, score: s.score)
