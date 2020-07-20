@@ -3,7 +3,7 @@ module Api
     class UserResource < ApplicationResource
       caching
 
-      attributes :id, :name, :email, :password
+      attributes :name, :email, :password
 
       def self.records(options = {})
         current_user = options[:context][:current_user]
