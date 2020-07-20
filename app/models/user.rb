@@ -43,6 +43,10 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :stores, through: :favorites, source: :store
   has_one :api_key
+  has_many :user_badges
+  has_many :badges, through: :user_badges
+  has_one :ranking
+  has_many :ranking_histories
 
   has_secure_token :store_owner_code
 
@@ -71,6 +75,22 @@ class User < ApplicationRecord
 
   def any_admin?
     admin? || beach_admin?
+  end
+
+  def reporter_rank
+    ranking&.position || 0
+  end
+
+  def reporter_score
+    ranking&.score || 0
+  end
+
+  def reporter_reports
+    ranking&.reports || 0
+  end
+
+  def reporter_places
+    ranking&.places || 0
   end
 
   protected
