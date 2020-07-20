@@ -28,6 +28,8 @@ class StatusStoreOwner < Status
   private
 
   def set_valid_until
+    return if self.valid_until
+
     self.valid_until = updated_time + 2.hours rescue Time.current + 2.hours
   end
 
