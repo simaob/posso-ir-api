@@ -11,6 +11,8 @@ class RankingHistoryService
           RankingHistory.create(user_id: r.user_id,
                                 position: r.position,
                                 score: r.score,
+                                reports: r.reports,
+                                places: r.places,
                                 date: Time.zone.today)
         end
       end

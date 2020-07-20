@@ -17,18 +17,29 @@ class RankingService
 
         previous_score = -1
         previous_position = -1
-        StatusCrowdsourceUser.joins(:user)
-          .where.not(users: {confirmed_at: nil})
-          .select('COUNT(*) as score, user_id ')
-          .where('status_crowdsource_users.created_at > ?', Time.current.beginning_of_month)
-          .group(:user_id)
-          .order(score: :desc).to_a.each.with_index do |s, i|
-          if s.score == previous_score
-            Ranking.create(user_id: s.user_id, position: previous_position, score: s.score)
+        query = <<~SQL
+          SELECT 3 * COUNT(*) + SUM(sub.reports) as score, SUM(sub.reports) as reports, COUNT(*) as places, sub.user_id
+          FROM
+              (
+              SELECT COUNT(*) as reports, user_id, store_id
+              FROM status_crowdsource_users
+              WHERE status_crowdsource_users.created_at > '#{Time.current.beginning_of_month}'
+              GROUP BY user_id, store_id) as sub
+          JOIN users ON users.id = sub.user_id AND users.confirmed_at IS NOT NULL
+          GROUP BY sub.user_id
+          ORDER BY score DESC
+        SQL
+
+        ranks = ActiveRecord::Base.connection.execute query
+        ranks.to_a.each.with_index do |s, i|
+          if s['score'] == previous_score
+            Ranking.create(user_id: s['user_id'], position: previous_position,
+                           score: s['score'], reports: s['reports'], places: s['places'])
           else
-            Ranking.create(user_id: s.user_id, position: i + 1, score: s.score)
+            Ranking.create(user_id: s['user_id'], position: i + 1, score: s['score'],
+                           reports: s['reports'], places: s['places'])
             previous_position = i + 1
-            previous_score = s.score
+            previous_score = s['score']
           end
         end
       end

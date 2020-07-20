@@ -9,6 +9,8 @@
 #  date       :date             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  reports    :integer          default("0"), not null
+#  places     :integer          default("0"), not null
 #
 FactoryBot.define do
   factory :ranking_history do
