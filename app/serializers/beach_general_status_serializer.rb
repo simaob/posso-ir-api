@@ -33,6 +33,10 @@ class BeachGeneralStatusSerializer
     end
   end
 
+  attribute :status_updated_time do |object|
+    object.status_general&.updated_time
+  end
+
   attribute :status_valid_until do |object|
     object.status_general&.valid_until
   end
