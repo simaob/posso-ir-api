@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_215729) do
+ActiveRecord::Schema.define(version: 2020_07_20_183611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 2020_07_12_215729) do
     t.bigint "user_id"
     t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
     t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
+
+  create_table "badges", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "beach_configurations", force: :cascade do |t|
@@ -104,6 +111,36 @@ ActiveRecord::Schema.define(version: 2020_07_12_215729) do
     t.bigint "store_id"
     t.index ["phone_number"], name: "index_phones_on_phone_number", unique: true
     t.index ["store_id"], name: "index_phones_on_store_id"
+  end
+
+  create_table "ranking_histories", force: :cascade do |t|
+    t.integer "position", null: false
+    t.integer "score", null: false
+    t.integer "user_id", null: false
+    t.date "date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "reports", default: 0, null: false
+    t.integer "places", default: 0, null: false
+    t.index ["date"], name: "index_ranking_histories_on_date"
+    t.index ["places"], name: "index_ranking_histories_on_places"
+    t.index ["position", "date"], name: "index_ranking_histories_on_position_and_date"
+    t.index ["reports"], name: "index_ranking_histories_on_reports"
+    t.index ["user_id"], name: "index_ranking_histories_on_user_id"
+  end
+
+  create_table "rankings", force: :cascade do |t|
+    t.integer "position", null: false
+    t.integer "score", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "reports", default: 0, null: false
+    t.integer "places", default: 0, null: false
+    t.index ["places"], name: "index_rankings_on_places"
+    t.index ["position"], name: "index_rankings_on_position"
+    t.index ["reports"], name: "index_rankings_on_reports"
+    t.index ["user_id"], name: "index_rankings_on_user_id"
   end
 
   create_table "status_crowdsource_users", force: :cascade do |t|
@@ -223,6 +260,16 @@ ActiveRecord::Schema.define(version: 2020_07_12_215729) do
     t.index ["updated_by_id"], name: "index_stores_on_updated_by_id"
   end
 
+  create_table "user_badges", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "badge_id", null: false
+    t.datetime "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
+  end
+
   create_table "user_stores", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "store_id", null: false
@@ -280,6 +327,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_215729) do
   add_foreign_key "favorites", "stores"
   add_foreign_key "favorites", "users"
   add_foreign_key "phones", "stores", on_delete: :cascade
+  add_foreign_key "rankings", "users"
   add_foreign_key "status_crowdsource_users", "stores", on_delete: :cascade
   add_foreign_key "status_crowdsource_users", "users", on_delete: :cascade
   add_foreign_key "status_user_commitment_users", "stores", on_delete: :cascade
@@ -289,6 +337,8 @@ ActiveRecord::Schema.define(version: 2020_07_12_215729) do
   add_foreign_key "statuses", "stores", on_delete: :cascade
   add_foreign_key "stores", "users", column: "created_by_id"
   add_foreign_key "stores", "users", column: "updated_by_id"
+  add_foreign_key "user_badges", "badges"
+  add_foreign_key "user_badges", "users"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
   add_foreign_key "week_days", "stores", on_delete: :cascade
