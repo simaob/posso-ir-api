@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_19_184040) do
+ActiveRecord::Schema.define(version: 2020_07_20_183611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,8 +120,12 @@ ActiveRecord::Schema.define(version: 2020_07_19_184040) do
     t.date "date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "reports", default: 0, null: false
+    t.integer "places", default: 0, null: false
     t.index ["date"], name: "index_ranking_histories_on_date"
+    t.index ["places"], name: "index_ranking_histories_on_places"
     t.index ["position", "date"], name: "index_ranking_histories_on_position_and_date"
+    t.index ["reports"], name: "index_ranking_histories_on_reports"
     t.index ["user_id"], name: "index_ranking_histories_on_user_id"
   end
 
@@ -131,7 +135,11 @@ ActiveRecord::Schema.define(version: 2020_07_19_184040) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "reports", default: 0, null: false
+    t.integer "places", default: 0, null: false
+    t.index ["places"], name: "index_rankings_on_places"
     t.index ["position"], name: "index_rankings_on_position"
+    t.index ["reports"], name: "index_rankings_on_reports"
     t.index ["user_id"], name: "index_rankings_on_user_id"
   end
 
