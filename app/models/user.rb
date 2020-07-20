@@ -77,19 +77,20 @@ class User < ApplicationRecord
     admin? || beach_admin?
   end
 
-  # def reporter_rank
-  #   my_rank = StatusCrowdsourceUser.select('COUNT(*) AS count, user_id, RANK() over (ORDER BY COUNT(*) DESC)')
-  #     .group(:user_id)
-  #     .limit(100)
-  #   my_rank.to_a.select { |t| t.user_id == id }&.first&.rank || 0
-  # end
-
   def reporter_rank
     ranking&.position || 0
   end
 
   def reporter_score
     ranking&.score || 0
+  end
+
+  def reporter_reports
+    ranking&.reports || 0
+  end
+
+  def reporter_places
+    ranking&.places || 0
   end
 
   protected
