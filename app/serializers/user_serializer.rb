@@ -40,6 +40,9 @@ class UserSerializer
   attribute :reporter_reports do |object|
     Rails.env.production? ? object.reporter_reports : rand(1..100)
   end
+  attribute :winner_count do
+    rand(0..3)
+  end
   attribute :top_10_count do
     rand(0..3)
   end
