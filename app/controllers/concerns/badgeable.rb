@@ -9,4 +9,3 @@ module Badgeable
     end
   end
 end
-
