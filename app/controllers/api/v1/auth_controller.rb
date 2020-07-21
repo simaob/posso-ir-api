@@ -46,7 +46,7 @@ module Api
           User.where.not(id: user.id).where(app_uuid: user.app_uuid).update_all(app_uuid: nil)
           random_badges_for(user) unless Rails.env.production?
           options = {}
-          options[:include] = [:stores, :user_badges]
+          options[:include] = [:stores]
           # rubocop:enable Rails/SkipsModelValidations
           render json: UserSerializer.new(user, options).serialized_json, status: :ok
         else

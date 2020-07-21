@@ -51,5 +51,10 @@ class UserSerializer
   end
 
   has_many :stores, type: :stores, serializer: StoreSerializer
-  has_many :user_badges, type: :badges, serializer: UserBadgeSerializer
+
+  Badge.order(:slug).each do |badge|
+    attribute "badge_#{badge.slug}".to_sym do |object|
+      object.badges.include?(badge)
+    end
+  end
 end
