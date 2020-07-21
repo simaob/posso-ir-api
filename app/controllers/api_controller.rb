@@ -18,7 +18,7 @@ class ApiController < ApplicationController
   private
 
   def authenticate_with_jwt!
-    # return @current_user = User.first if Rails.env.development?
+    return @current_user = User.first if Rails.env.development?
 
     payload = JwtService.decode(token: token)
     if DateTime.parse(payload['expiration_date']) <= DateTime.current
