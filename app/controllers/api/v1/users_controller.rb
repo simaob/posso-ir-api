@@ -1,6 +1,8 @@
 module Api
   module V1
     class UsersController < ApiController
+      include Badgeable
+
       before_action :ensure_user
 
       def update
@@ -13,7 +15,10 @@ module Api
       end
 
       def index
-        render json: UserSerializer.new(@user).serialized_json
+        random_badges_for(@user) unless Rails.env.production?
+        options = {}
+        options[:include] = [:user_badges]
+        render json: UserSerializer.new(@user, options).serialized_json
       end
 
       # TODO
