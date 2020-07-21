@@ -54,7 +54,7 @@ class UserSerializer
 
   Badge.order(:slug).each do |badge|
     attribute "badge_#{badge.slug}".to_sym do |object|
-      object.badges.include?(badge)
+      UserBadge.find_by(user_id: object.id, badge_id: badge.id).present?
     end
   end
 end
