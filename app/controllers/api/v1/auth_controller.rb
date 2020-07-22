@@ -31,7 +31,7 @@ module Api
         else
           # confirm user straight away if using staging
           new_user.confirm if Rails.env.staging?
-          render json: {success: 'User created successfully'}, status: :created
+          render json: UserSerializer.new(new_user).serialized_json, status: :created
         end
       end
 
