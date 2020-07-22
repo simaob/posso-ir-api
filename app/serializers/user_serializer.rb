@@ -28,6 +28,7 @@ class UserSerializer
 
   attribute :email
   attribute :name
+  attribute :sign_in_count
   attribute :reports_made do |object|
     Rails.env.production? ? object.status_crowdsource_users.count : rand(1..100)
   end

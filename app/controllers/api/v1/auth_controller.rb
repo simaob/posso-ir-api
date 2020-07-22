@@ -39,6 +39,7 @@ module Api
         user = User.where.not(email: nil).find_by(email: @attrs[:email])
         if user&.valid_password?(@attrs[:password])
           user.app_uuid = context[:app_uuid]
+          sign_in(user)
           user.save
 
           # Invalidate other users on the same devise
@@ -59,6 +60,7 @@ module Api
       def logout
         if context[:current_user]&.email.present?
           context[:current_user].update(app_uuid: "#{context[:current_user].app_uuid}_old_#{Time.current.to_i}")
+          sign_out(context[:current_user])
           render json: {success: 'user logged out'}, status: :ok
         else
           render json: {error: 'user not logged in'}, status: :forbidden
