@@ -32,13 +32,16 @@ class UserSerializer
     Rails.env.production? ? object.status_crowdsource_users.count : rand(1..100)
   end
   attribute :reporter_ranking do |object|
-    Rails.env.production? ? object.reporter_rank : rand(1..100)
+    Rails.env.production? ? object.reporter_rank : rand(1..120)
   end
   attribute :reporter_places do |object|
     Rails.env.production? ? object.reporter_places : rand(1..100)
   end
   attribute :reporter_reports do |object|
     Rails.env.production? ? object.reporter_reports : rand(1..100)
+  end
+  attribute :reporter_score do |object|
+    Rails.env.production? ? object.reporter_score : rand(1..100)
   end
   attribute :winner_count do
     rand(0..3)
