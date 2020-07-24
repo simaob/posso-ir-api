@@ -20,6 +20,11 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  phone                  :string
+#  sign_in_count          :integer          default("0"), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :inet
+#  last_sign_in_ip        :inet
 #
 class UserSerializer
   include FastJsonapi::ObjectSerializer
@@ -28,17 +33,24 @@ class UserSerializer
 
   attribute :email
   attribute :name
+  attribute :sign_in_count
   attribute :reports_made do |object|
     Rails.env.production? ? object.status_crowdsource_users.count : rand(1..100)
   end
   attribute :reporter_ranking do |object|
-    Rails.env.production? ? object.reporter_rank : rand(1..100)
+    Rails.env.production? ? object.reporter_rank : rand(1..120)
   end
   attribute :reporter_places do |object|
     Rails.env.production? ? object.reporter_places : rand(1..100)
   end
   attribute :reporter_reports do |object|
     Rails.env.production? ? object.reporter_reports : rand(1..100)
+  end
+  attribute :reporter_score do |object|
+    Rails.env.production? ? object.reporter_score : rand(1..100)
+  end
+  attribute :winner_count do
+    rand(0..3)
   end
   attribute :top_10_count do
     rand(0..3)
@@ -51,5 +63,10 @@ class UserSerializer
   end
 
   has_many :stores, type: :stores, serializer: StoreSerializer
-  has_many :user_badges, type: :badges, serializer: UserBadgeSerializer
+
+  Badge.order(:slug).each do |badge|
+    attribute "badge_#{badge.slug}".to_sym do |object|
+      UserBadge.find_by(user_id: object.id, badge_id: badge.id).present?
+    end
+  end
 end

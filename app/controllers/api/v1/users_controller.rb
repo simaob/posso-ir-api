@@ -17,7 +17,7 @@ module Api
       def index
         random_badges_for(@user) unless Rails.env.production?
         options = {}
-        options[:include] = [:user_badges]
+        options[:include] = [:stores]
         render json: UserSerializer.new(@user, options).serialized_json
       end
 

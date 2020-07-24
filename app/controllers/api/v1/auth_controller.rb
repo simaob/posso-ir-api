@@ -31,7 +31,7 @@ module Api
         else
           # confirm user straight away if using staging
           new_user.confirm if Rails.env.staging?
-          render json: {success: 'User created successfully'}, status: :created
+          render json: UserSerializer.new(new_user).serialized_json, status: :created
         end
       end
 
@@ -39,6 +39,7 @@ module Api
         user = User.where.not(email: nil).find_by(email: @attrs[:email])
         if user&.valid_password?(@attrs[:password])
           user.app_uuid = context[:app_uuid]
+          sign_in(user)
           user.save
 
           # Invalidate other users on the same devise
@@ -46,7 +47,7 @@ module Api
           User.where.not(id: user.id).where(app_uuid: user.app_uuid).update_all(app_uuid: nil)
           random_badges_for(user) unless Rails.env.production?
           options = {}
-          options[:include] = [:stores, :user_badges]
+          options[:include] = [:stores]
           # rubocop:enable Rails/SkipsModelValidations
           render json: UserSerializer.new(user, options).serialized_json, status: :ok
         else
@@ -59,6 +60,7 @@ module Api
       def logout
         if context[:current_user]&.email.present?
           context[:current_user].update(app_uuid: "#{context[:current_user].app_uuid}_old_#{Time.current.to_i}")
+          sign_out(context[:current_user])
           render json: {success: 'user logged out'}, status: :ok
         else
           render json: {error: 'user not logged in'}, status: :forbidden
