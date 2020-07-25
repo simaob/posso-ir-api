@@ -51,17 +51,17 @@ class UserSerializer
   attribute :reporter_score do |object|
     Rails.env.production? ? object.reporter_score : rand(1..100)
   end
-  attribute :winner_count do
-    Rails.env.production? ? 0 : rand(0..3)
+  attribute :winner_count do |object|
+    Rails.env.production? ? object.badges_tracker.dig('top_1') : rand(0..3)
   end
-  attribute :top_10_count do
-    Rails.env.production? ? 0 : rand(0..3)
+  attribute :top_10_count do |object|
+    Rails.env.production? ? object.badges_tracker.dig('top_10') : rand(0..3)
   end
-  attribute :top_50_count do
-    Rails.env.production? ? 0 : rand(0..3)
+  attribute :top_50_count do |object|
+    Rails.env.production? ? object.badges_tracker.dig('top_50') : rand(0..3)
   end
-  attribute :top_100_count do
-    Rails.env.production? ? 0 : rand(0..3)
+  attribute :top_100_count do |object|
+    Rails.env.production? ? object.badges_tracker.dig('top_100') : rand(0..3)
   end
 
   has_many :stores, type: :stores, serializer: StoreSerializer
