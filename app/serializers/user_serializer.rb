@@ -63,6 +63,15 @@ class UserSerializer
   attribute :top_100_count do |object|
     Rails.env.production? ? object.badges_tracker.dig('top_100') : rand(0..3)
   end
+  attribute :badges_won do |object|
+    if object.badges_won.present?
+      result = object.badges_won.split(' ').compact.uniq
+      object.update(badges_won: '')
+      result
+    else
+      []
+    end
+  end
 
   has_many :stores, type: :stores, serializer: StoreSerializer
 
