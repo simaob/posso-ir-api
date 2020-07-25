@@ -149,7 +149,10 @@ class User < ApplicationRecord
     diff_arr = diff.last.reject { |k, v| v == diff.first[k] }
 
     Badge.where.not(id: user_badges.pluck(:badge_id)).where(counter: diff_arr.keys).find_each do |b|
-      self.badges_own = badges_own + ' ' + b.slug if diff_array[b.counter] >= b.target
+      if diff_arr[b.counter] >= b.target
+        self.badges_won = badges_won + ' ' + b.slug
+        badges << b
+      end
     end
   end
 end
