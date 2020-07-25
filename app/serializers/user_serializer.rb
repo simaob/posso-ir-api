@@ -50,16 +50,16 @@ class UserSerializer
     Rails.env.production? ? object.reporter_score : rand(1..100)
   end
   attribute :winner_count do
-    rand(0..3)
+    Rails.env.production? ? 0 : rand(0..3)
   end
   attribute :top_10_count do
-    rand(0..3)
+    Rails.env.production? ? 0 : rand(0..3)
   end
   attribute :top_50_count do
-    rand(0..3)
+    Rails.env.production? ? 0 : rand(0..3)
   end
   attribute :top_100_count do
-    rand(0..3)
+    Rails.env.production? ? 0 : rand(0..3)
   end
 
   has_many :stores, type: :stores, serializer: StoreSerializer
