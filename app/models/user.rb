@@ -25,6 +25,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  badges_tracker         :jsonb
+#  badges_won             :string           default("")
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -40,6 +42,8 @@ class User < ApplicationRecord
   end
   validates :email, uniqueness: true, unless: proc { |u| u.email.blank? }
   validates :phone, uniqueness: true, unless: proc { |u| u.phone.blank? }
+
+  before_save :add_badges, if: :will_save_change_to_badges_tracker?
 
   has_many :user_stores, inverse_of: :manager
   has_many :stores, through: :user_stores
@@ -98,6 +102,19 @@ class User < ApplicationRecord
     ranking&.places || 0
   end
 
+  def increase_login_counter
+    return unless badges_tracker[:sign_in_day] != Date.current
+
+    badges_tracker[:sign_in_date] = Date.current
+    increase_badges_counter(:daily_login_count)
+  end
+
+  def increase_badges_counter(field)
+    create_badges_tracker if badges_tracker.blank?
+    badges_tracker[field] += 1
+    save
+  end
+
   protected
 
   # Checks whether a password is needed or not. For validations only.
@@ -105,5 +122,25 @@ class User < ApplicationRecord
   # or confirmation are being set somewhere.
   def password_required?
     admin? && (!persisted? || !password.nil? || !password_confirmation.nil?)
+  end
+
+  def create_badges_tracker
+    self.badges_tracker = {
+      sign_in_date: Date.current,
+      daily_login_count: 1,
+      total_reports: 0,
+      beach_reports: 0,
+      supermarket_reports: 0,
+      pharmacy_reports: 0,
+      restaurant_reports: 0,
+      top_100: 0,
+      top_50: 0,
+      top_10: 0,
+      top_1: 0
+    }
+  end
+
+  def add_badges
+    Badge.where.not(id: user_badges.pluck(:badge_id))
   end
 end

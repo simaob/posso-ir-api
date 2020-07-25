@@ -25,6 +25,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  badges_tracker         :jsonb
+#  badges_won             :string           default("")
 #
 class UserSerializer
   include FastJsonapi::ObjectSerializer
