@@ -103,11 +103,29 @@ class User < ApplicationRecord
   end
 
   def increase_login_counter
-    return unless badges_tracker[:sign_in_date] != Date.current
+    return unless badges_tracker['sign_in_date'] != Date.current
 
     create_badges_tracker if badges_tracker.blank?
     badges_tracker['sign_in_date'] = Date.current
     badges_tracker['daily_login_count'] += 1
+    save
+  end
+
+  def increase_conquests_counter(position)
+    create_badges_tracker if badges_tracker.blank?
+    return unless last_conquest_updated_more_than_a_month_ago?
+
+    badges_tracker['conquests_updated_at'] = Date.current
+    case position
+    when 1
+      badges_tracker['top_1'] += 1
+    when 2..10
+      badges_tracker['top_10'] += 1
+    when 11..50
+      badges_tracker['top_50'] += 1
+    when 51..100
+      badges_tracker['top_100'] += 1
+    end
     save
   end
 
@@ -117,6 +135,14 @@ class User < ApplicationRecord
       badges_tracker[field] += 1
     end
     save
+  end
+
+  def last_conquest_updated_more_than_a_month_ago?
+    last_update = badges_tracker.dig('conquests_updated_at')
+    return true if last_update.blank?
+
+    ((Date.current.year * 12 + Date.current.month) -
+     (last_update.month * 12 + last_update.year)).positive?
   end
 
   protected
@@ -137,6 +163,7 @@ class User < ApplicationRecord
       supermarket_reports: 0,
       pharmacy_reports: 0,
       restaurant_reports: 0,
+      conquests_updated_at: nil,
       top_100: 0,
       top_50: 0,
       top_10: 0,
