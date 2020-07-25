@@ -146,7 +146,7 @@ class User < ApplicationRecord
     diff = changes_to_save['badges_tracker']
     diff_arr = diff.last.reject { |k, v| v == diff.first[k] }
 
-    Badge.where.not(id: user_badges.pluck(:badge_id)).where(counter: diff_arr.keys).each do |b|
+    Badge.where.not(id: user_badges.pluck(:badge_id)).where(counter: diff_arr.keys).find_each do |b|
       self.badges_own = badges_own + ' ' + b.slug if diff_array[b.counter] >= b.target
     end
   end
