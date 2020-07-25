@@ -7,16 +7,24 @@ module Api
                  :user_id, :badges_won
 
       before_create :set_user_id, :validate_user_interval
-      after_create :update_user_time
+      after_create :update_user_time, :increase_counters
 
       def badges_won
-        Rails.env.production? ? [] : Badge.pluck(:slug).sample(rand(0..2))
+        @model.user.badges_won&.split(' ')&.compact&.uniq || []
       end
 
       def set_user_id
         return if context[:current_user].blank?
 
         @model.user_id = context[:current_user].id
+      end
+
+      def increase_counters
+        store_type = @model.store.store_type
+        counters = ['total_reports']
+        counters << "#{store_type}_reports" if ['beach', 'supermarket', 'pharmacy', 'restaurant'].include?(store_type)
+
+        @model.user.increase_badges_counter(*counters)
       end
     end
   end
