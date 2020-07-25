@@ -10,7 +10,13 @@ module Api
       after_create :update_user_time, :increase_counters
 
       def badges_won
-        @model.user.badges_won&.split(' ')&.compact&.uniq || []
+        if @model.user.badges_won.present?
+          result = @model.user.badges_won.split(' ').compact.uniq
+          @model.user.update(badges_won: '')
+          result
+        else
+          []
+        end
       end
 
       def set_user_id
