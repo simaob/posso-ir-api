@@ -111,9 +111,11 @@ class User < ApplicationRecord
     save
   end
 
-  def increase_badges_counter(field)
+  def increase_badges_counter(*fields)
     create_badges_tracker if badges_tracker.blank?
-    badges_tracker[field] += 1
+    fields.each do |field|
+      badges_tracker[field] += 1
+    end
     save
   end
 
