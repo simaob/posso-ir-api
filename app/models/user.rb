@@ -129,10 +129,16 @@ class User < ApplicationRecord
     save
   end
 
-  def increase_badges_counter(*fields)
+  def increase_badges_counter(report)
+    fields = [{type: 'total_reports', id: report['id']}]
+    fields << {type: report['type'], id: report['id']} if report['id']
     create_badges_tracker if badges_tracker.blank?
     fields.each do |field|
-      badges_tracker[field] += 1
+      store_ = report['type'].gsub '_reports', '_'
+      badges_tracker[field['type']] += 1
+      badges_tracker["#{store_}list"] << field['id']
+      badges_tracker["#{store_}list"] = badges_tracker["#{store_}list"].uniq
+      badges_tracker["#{store_}uniq"] = badges_tracker["#{store_}list"].count
     end
     save
   end
@@ -159,15 +165,20 @@ class User < ApplicationRecord
       sign_in_date: Date.current,
       daily_login_count: 1,
       total_reports: 0,
-      total_count: 0,
+      total_unique: 0,
+      total_list: [],
       beach_reports: 0,
-      beach_total: 0,
+      beach_unique: 0,
+      beach_list: [],
       supermarket_reports: 0,
-      supermarket_count: 0,
+      supermarket_unique: 0,
+      supermarket_list: [],
       pharmacy_reports: 0,
-      pharmacy_total: 0,
+      pharmacy_unique: 0,
+      pharmacy_list: [],
       restaurant_reports: 0,
-      restaurant_total: 0,
+      restaurant_unique: 0,
+      restaurant_list: [],
       conquests_updated_at: nil,
       top_100: 0,
       top_50: 0,

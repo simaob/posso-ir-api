@@ -27,10 +27,9 @@ module Api
 
       def increase_counters
         store_type = @model.store.store_type
-        counters = ['total_reports']
-        counters << "#{store_type}_reports" if %w(beach supermarket pharmacy restaurant).include?(store_type)
-
-        @model.user.increase_badges_counter(*counters)
+        report = {id: @model.store.id}
+        report[:type] = "#{store_type}_reports" if %w(beach supermarket pharmacy restaurant).include?(store_type)
+        @model.user.increase_badges_counter(report)
       end
     end
   end
