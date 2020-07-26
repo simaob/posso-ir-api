@@ -83,4 +83,80 @@ RSpec.describe User, type: :model do
       expect(reporter3.reporter_rank).to eql(3)
     end
   end
+
+  context '#Badges should work' do
+    let!(:user) { FactoryBot.create(:user, confirmed_at: Time.current - 1.minute) }
+    let!(:badge_1) { FactoryBot.create(:badge_daily_login_count) }
+    let!(:badge_2) { FactoryBot.create(:badge_total_reports) }
+    let!(:badge_3) { FactoryBot.create(:badge_total_2) }
+    let!(:badge_4) { FactoryBot.create(:badge_beach_unique_2) }
+
+    context 'Calls #increase_login_counter for the first time' do
+      it 'Should have 1 in the number of days logged in and the corresponding badge' do
+        user.increase_login_counter
+
+        expect(user.badges_tracker['daily_login_count']).to eql(1)
+        expect(user.badges_tracker['total_reports']).to eql(0)
+        expect(user.badges_won).to eql(' welcome')
+      end
+    end
+    context 'Reports a beach' do
+      let!(:beach) { FactoryBot.create(:store, store_type: :beach) }
+      let!(:update_user) { user.increase_badges_counter({type: "#{beach.store_type}_reports", id: beach.id}) }
+
+      it 'Should have 1 in the total_reports' do
+        expect(user.badges_tracker['total_reports']).to eql(1)
+      end
+      it 'Should have 1 in the beach_reports' do
+        expect(user.badges_tracker['beach_reports']).to eql(1)
+      end
+      it 'Should have the new badge' do
+        expect(user.badges_won).to eql(' noob')
+      end
+
+      context 'Reports two beaches' do
+        let!(:beach2) { FactoryBot.create(:store, store_type: :beach) }
+        let!(:update_user2) { user.increase_badges_counter({type: "#{beach2.store_type}_reports", id: beach2.id}) }
+
+        it 'Should have 2 in the total_reports' do
+          expect(user.badges_tracker['total_reports']).to eql(2)
+        end
+        it 'Should have 2 in the beach_reports' do
+          expect(user.badges_tracker['beach_reports']).to eql(2)
+        end
+        it 'Should have 2 in the beach_uniq' do
+          expect(user.badges_tracker['beach_unique']).to eql(2)
+        end
+        it 'Should have the traveler and beach badges' do
+          expect(user.badges_won.split(' ')).to include('beach')
+          expect(user.badges_won.split(' ')).to include('traveler')
+        end
+
+        context 'Reports the same beach again' do
+          let!(:update_user3) { user.increase_badges_counter({type: "#{beach2.store_type}_reports", id: beach2.id}) }
+
+          it 'Should have 3 in total_reports' do
+            expect(user.badges_tracker['total_reports']).to eql(3)
+          end
+          it 'Should have 3 in the beach_reports' do
+            expect(user.badges_tracker['beach_reports']).to eql(3)
+          end
+          it 'Should have 2 in the beach_uniq' do
+            expect(user.badges_tracker['beach_unique']).to eql(2)
+          end
+        end
+      end
+    end
+
+    context 'Medals' do
+      context 'Finished in the first place' do
+        let!(:update_user) { user.increase_conquests_counter(1) }
+        it 'Should have it in the badges tracker' do
+          expect(user.badges_tracker['top_1']).to eql(1)
+        end
+        # TODO: Should it?
+        pending 'Should have a medal'
+      end
+    end
+  end
 end

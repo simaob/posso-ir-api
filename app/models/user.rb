@@ -138,7 +138,7 @@ class User < ApplicationRecord
       badges_tracker[field['type']] += 1
       badges_tracker["#{store_}list"] << field['id']
       badges_tracker["#{store_}list"] = badges_tracker["#{store_}list"].uniq
-      badges_tracker["#{store_}uniq"] = badges_tracker["#{store_}list"].count
+      badges_tracker["#{store_}unique"] = badges_tracker["#{store_}list"].count
     end
     save
   end
@@ -163,7 +163,7 @@ class User < ApplicationRecord
   def create_badges_tracker
     self.badges_tracker = {
       sign_in_date: Date.current,
-      daily_login_count: 1,
+      daily_login_count: 0,
       total_reports: 0,
       total_unique: 0,
       total_list: [],
