@@ -19,7 +19,10 @@ namespace :badges do
       {name: 'glutton', target: 20, counter: 'restaurant_reports'},
       {name: 'dishwatcher', target: 5, counter: 'restaurant_count'}
     ].each do |badge|
-      Badge.find_or_create_by(name: badge.titleize, slug: badge)
+      Badge.find_or_create_by(name: badge[:name].titleize,
+                              slug: badge[:name],
+                              target: badge[:target],
+                              counter: badge[:counter])
     end
     Rails.logger.info("We now have #{Badge.count} badges")
   end
