@@ -25,6 +25,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  badges_tracker         :jsonb
+#  badges_won             :string           default("")
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -40,6 +42,8 @@ class User < ApplicationRecord
   end
   validates :email, uniqueness: true, unless: proc { |u| u.email.blank? }
   validates :phone, uniqueness: true, unless: proc { |u| u.phone.blank? }
+
+  before_save :add_badges, if: :will_save_change_to_badges_tracker?
 
   has_many :user_stores, inverse_of: :manager
   has_many :stores, through: :user_stores
@@ -98,6 +102,55 @@ class User < ApplicationRecord
     ranking&.places || 0
   end
 
+  def increase_login_counter
+    return unless badges_tracker['sign_in_date'] != Date.current
+
+    create_badges_tracker if badges_tracker.blank?
+    badges_tracker['sign_in_date'] = Date.current
+    badges_tracker['daily_login_count'] += 1
+    save
+  end
+
+  def increase_conquests_counter(position)
+    create_badges_tracker if badges_tracker.blank?
+    return unless last_conquest_updated_more_than_a_month_ago?
+
+    badges_tracker['conquests_updated_at'] = Date.current
+    case position
+    when 1
+      badges_tracker['top_1'] += 1
+    when 2..10
+      badges_tracker['top_10'] += 1
+    when 11..50
+      badges_tracker['top_50'] += 1
+    when 51..100
+      badges_tracker['top_100'] += 1
+    end
+    save
+  end
+
+  def increase_badges_counter(report)
+    fields = [{'type' => 'total_reports', 'id' => report[:id]}]
+    fields << {'type' => report[:type], 'id' => report[:id]} if report[:id]
+    create_badges_tracker if badges_tracker.blank?
+    fields.each do |field|
+      store_ = field['type'].gsub '_reports', '_'
+      badges_tracker[field['type']] += 1
+      badges_tracker["#{store_}list"] << field['id']
+      badges_tracker["#{store_}list"] = badges_tracker["#{store_}list"].uniq
+      badges_tracker["#{store_}unique"] = badges_tracker["#{store_}list"].count
+    end
+    save
+  end
+
+  def last_conquest_updated_more_than_a_month_ago?
+    last_update = badges_tracker.dig('conquests_updated_at')
+    return true if last_update.blank?
+
+    ((Date.current.year * 12 + Date.current.month) -
+     (last_update.month * 12 + last_update.year)).positive?
+  end
+
   protected
 
   # Checks whether a password is needed or not. For validations only.
@@ -105,5 +158,44 @@ class User < ApplicationRecord
   # or confirmation are being set somewhere.
   def password_required?
     admin? && (!persisted? || !password.nil? || !password_confirmation.nil?)
+  end
+
+  def create_badges_tracker
+    self.badges_tracker = {
+      sign_in_date: Date.current,
+      daily_login_count: 0,
+      total_reports: 0,
+      total_unique: 0,
+      total_list: [],
+      beach_reports: 0,
+      beach_unique: 0,
+      beach_list: [],
+      supermarket_reports: 0,
+      supermarket_unique: 0,
+      supermarket_list: [],
+      pharmacy_reports: 0,
+      pharmacy_unique: 0,
+      pharmacy_list: [],
+      restaurant_reports: 0,
+      restaurant_unique: 0,
+      restaurant_list: [],
+      conquests_updated_at: nil,
+      top_100: 0,
+      top_50: 0,
+      top_10: 0,
+      top_1: 0
+    }
+  end
+
+  def add_badges
+    diff = changes_to_save['badges_tracker']
+    diff_arr = diff.last.reject { |k, v| v == diff.first[k] }
+
+    Badge.where.not(id: user_badges.pluck(:badge_id)).where(counter: diff_arr.keys).find_each do |b|
+      if diff_arr[b.counter] >= b.target
+        self.badges_won = badges_won + ' ' + b.slug
+        badges << b
+      end
+    end
   end
 end

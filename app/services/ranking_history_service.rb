@@ -8,6 +8,7 @@ class RankingHistoryService
       log 'Calculating the Rankings'
       RankingHistory.transaction do
         Ranking.find_each do |r|
+          r.user.increase_conquests_counter(r.position) if r.position <= 100
           RankingHistory.create(user_id: r.user_id,
                                 position: r.position,
                                 score: r.score,
