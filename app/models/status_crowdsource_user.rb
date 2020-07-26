@@ -29,8 +29,8 @@ class StatusCrowdsourceUser < ApplicationRecord
 
     StatusCrowdsource.find_by(store_id: store_id).update(updated_time: Time.current, status: status, voters: 1)
     StatusGeneral.find_or_initialize_by(store_id: store_id).update(updated_time: Time.current,
-                                                     status: status,
-                                                     voters: 1,
-                                                     is_official: false)
+                                                                   status: status,
+                                                                   voters: 1,
+                                                                   is_official: false)
   end
 end
