@@ -110,8 +110,12 @@ RSpec.describe User, type: :model do
       it 'Should have 1 in the beach_reports' do
         expect(user.badges_tracker['beach_reports']).to eql(1)
       end
-      it 'Should have the new badge' do
+      it 'Should have the new badge in the badges own' do
         expect(user.badges_won).to eql(' noob')
+      end
+      it 'Should have the new badge' do
+        expect(user.badges.count).to eql(1)
+        expect(user.badges.first.name).to eql('Noob')
       end
 
       context 'Reports two beaches' do
