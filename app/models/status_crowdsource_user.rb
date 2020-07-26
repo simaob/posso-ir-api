@@ -28,7 +28,7 @@ class StatusCrowdsourceUser < ApplicationRecord
     return if StatusGeneral.where(store_id: store_id).where('updated_time > ?', Time.current - 1.hour).any?
 
     StatusCrowdsource.find_by(store_id: store_id).update(updated_time: Time.current, status: status, voters: 1)
-    StatusGeneral.find_by(store_id: store_id).update(updated_time: Time.current,
+    StatusGeneral.find_or_initialize_by(store_id: store_id).update(updated_time: Time.current,
                                                      status: status,
                                                      voters: 1,
                                                      is_official: false)
