@@ -15,6 +15,7 @@ module Api
       end
 
       def index
+        @user.increase_login_counter
         random_badges_for(@user) unless Rails.env.production?
         options = {}
         options[:include] = [:stores]
