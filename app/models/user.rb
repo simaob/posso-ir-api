@@ -103,7 +103,7 @@ class User < ApplicationRecord
   end
 
   def increase_login_counter
-    return unless badges_tracker['sign_in_date'] != Date.current
+    return unless badges_tracker['sign_in_date'] != Date.current.to_s
 
     create_badges_tracker if badges_tracker.blank?
     badges_tracker['sign_in_date'] = Date.current
@@ -147,7 +147,8 @@ class User < ApplicationRecord
     last_update = badges_tracker.dig('conquests_updated_at')
     return true if last_update.blank?
 
-    ((Date.current.year * 12 + Date.current.month) -
+    last_update = Date.parse(last_update)
+    ((Date.current.month * 12 + Date.current.year) -
      (last_update.month * 12 + last_update.year)).positive?
   end
 
