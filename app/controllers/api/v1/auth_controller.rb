@@ -46,6 +46,7 @@ module Api
           # rubocop:disable Rails/SkipsModelValidations
           User.where.not(id: user.id).where(app_uuid: user.app_uuid).update_all(app_uuid: nil)
           random_badges_for(user) unless Rails.env.production?
+          user.increase_login_counter
           options = {}
           options[:include] = [:stores]
           # rubocop:enable Rails/SkipsModelValidations
