@@ -27,10 +27,8 @@ module Api
 
       def increase_counters
         store_type = @model.store.store_type
-        return unless %w(beach supermarket pharmacy restaurant).include?(store_type)
-
         report = {id: @model.store.id}
-        report[:type] = "#{store_type}_reports"
+        report[:type] = "#{store_type}_reports" if %w(beach supermarket pharmacy restaurant).include?(store_type)
         @model.user.increase_badges_counter(report)
       end
     end
