@@ -131,7 +131,7 @@ class User < ApplicationRecord
 
   def increase_badges_counter(report)
     fields = [{'type' => 'total_reports', 'id' => report[:id]}]
-    fields << {'type' => report[:type], 'id' => report[:id]} if report[:id]
+    fields << {'type' => report[:type], 'id' => report[:id]} if report[:id] && report[:type]
     create_badges_tracker if badges_tracker.blank?
     fields.each do |field|
       store_ = field['type'].gsub '_reports', '_'
