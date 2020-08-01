@@ -22,9 +22,11 @@ module Api
         render json: UserSerializer.new(@user, options).serialized_json
       end
 
-      # TODO
-      # def destroy
-      # end
+      def destroy
+        sign_out(@user)
+        @user.soft_destroy!
+        render json: {success: 'user account removed'}, status: :ok
+      end
 
       private
 

@@ -152,6 +152,14 @@ class User < ApplicationRecord
      (last_update.month * 12 + last_update.year)).positive?
   end
 
+  def soft_destroy!
+    user_badges.destroy_all
+    update!(app_uuid: "#{app_uuid}_deleted#{Time.current.to_i}",
+            name: 'Conta Apagada',
+            email: nil,
+            password: nil)
+  end
+
   protected
 
   # Checks whether a password is needed or not. For validations only.
