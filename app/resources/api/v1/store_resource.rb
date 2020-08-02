@@ -10,7 +10,7 @@ module Api
       attributes :name, :group, :address, :coordinates, :capacity,
                  :details, :store_type, :lonlat
 
-      filters :location, :store_type
+      filters :location, :store_type, :search
 
       filter :location, apply: ->(records, value, options) {
         current_user = options[:context][:current_user]
