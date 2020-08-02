@@ -35,6 +35,7 @@ module Api
       def filters(results)
         location = params[:filter][:location].split(',')
         store_type = params.dig(:filter, :'store-type')
+        search = params.dig(:filter, :search)
 
         store_type = if Store.store_types.include?(store_type)
                        store_type
@@ -43,6 +44,7 @@ module Api
                      end
         results = results.retrieve_closest(*location) if location
         results = results.where(store_type: store_type) if store_type
+        results = results.full_text_search(search).with_pg_search_rank if search
         results.where.not(latitude: nil).where.not(longitude: nil)
       end
 
