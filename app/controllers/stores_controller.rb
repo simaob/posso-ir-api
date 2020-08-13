@@ -46,6 +46,16 @@ class StoresController < ApplicationController
   # GET /stores/1/edit
   def edit; end
 
+  def edit_schedule
+    @week_days = if @store.week_days.any?
+                   @store.week_days.order(:day)
+                 else
+                   Date::DAYNAMES.map do |i|
+                     @store.week_days.build(day: i.downcase.to_sym)
+                   end
+                 end
+  end
+
   # POST /stores
   # POST /stores.json
   def create
@@ -130,7 +140,7 @@ class StoresController < ApplicationController
                         :district, :store_type, :latitude, :longitude, :municipality,
                         :store_type, :open, :capacity, :details, :phone_call_interval,
                         phones_attributes: [:id, :phone_number, :name, :active, :_destroy],
-                        week_days_attributes: [:id, :opening_hour, :closing_hour,
+                        week_days_attributes: [:id, :opening_hour, :closing_hour, :day,
                                                :opening_hour_2, :closing_hour_2, :open,
                                                :active]]
     if current_user.admin? || current_user.general_manager?
