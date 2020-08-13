@@ -28,6 +28,9 @@ set :nvm_node, 'v12.16.1'
 set :nvm_type, :user
 set :nvm_map_bins, %w{node npm yarn}
 
+set :logrotate_logs_keep, -> { 12 }
+set :logrotate_interval, -> { 'monthly' }
+
 
 namespace :nvm do
   namespace :webpacker do
