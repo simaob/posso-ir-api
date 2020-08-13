@@ -9,6 +9,8 @@
     <% if can? :edit, @store %>
       <%= link_to t('views.actions.edit'), edit_store_path(@store),
         class: 'btn btn-sm btn-outline-primary' %>
+      <%= link_to t('views.stores.show.edit_schedule'), edit_schedule_store_path(@store),
+        class: 'btn btn-sm btn-outline-info' %>
     <% end %>
     <% if can? :read, :statuses_store %>
       <%= link_to t('views.stores.show.statuses'), statuses_store_path(@store),

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :stores do
       post :approve_all, on: :collection
       get :statuses, on: :member
+      get :edit_schedule, on: :member
       resources :status_store_owners, only: [:new, :create]
     end
     resources :beaches do

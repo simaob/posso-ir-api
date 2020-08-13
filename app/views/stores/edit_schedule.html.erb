@@ -1,0 +1,43 @@
+<% content_for :page_title, t('views.stores.edit_schedule.title') %>
+
+<div class="row mt-3">
+  <div class="col-md-11">
+    <h1><%= "#{t('views.stores.edit_schedule.title')} - #{@store.name}" %></h1>
+  </div>
+  <div class="col-md-1">
+    <%= link_to t('views.actions.show'), @store,
+      class: 'btn btn-sm btn-outline-primary' %>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-12">
+    <%= form_with(model: @store, local: true) do |form| %>
+      <% if @store.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(store.errors.count, "error") %> impediram store de ser guardado:</h2>
+
+          <ul>
+            <% store.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <% if current_user.admin? || current_user.store_owner? %>
+        <div class="form-group nested-form-fields">
+          <fieldset>
+            <legend><%= t('views.stores.form.schedule') %></legend>
+            <%= form.fields_for :week_days, @week_days do |week_days_form| %>
+              <%= render 'week_day_fields', f: week_days_form %>
+            <% end %>
+          </fieldset>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.submit t('views.form.submit'), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

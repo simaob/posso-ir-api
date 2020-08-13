@@ -225,6 +225,7 @@ pt:
       show:
         coordinates: 'Coordenadas'
         statuses: 'Estados reportados'
+        edit_schedule: 'Editar horários'
       statuses:
         title: 'Estados reportados de %{store}'
       form:
@@ -240,6 +241,8 @@ pt:
         add_phone: "Adicionar Telefone"
         schedule: "Horário"
         phone_call_interval: "Intervalo entre chamadas telefónicas (minutos)"
+      edit_schedule:
+        title: 'Editar horários'
     beaches:
       index:
         title: 'Praias'
