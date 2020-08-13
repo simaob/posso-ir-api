@@ -18,11 +18,8 @@ module Api
 
       def validate_request
         # if a store owner code was passed and that user exists and is a store owner
-        # or otherwise if there's a filter by location present
         if store_owner_code && !context[:current_user]&.store_owner?
           render(json: {error: 'you are not authorized to list all available stores'}, status: :forbidden)
-        elsif !store_owner_code && !params.dig(:filter, :location)
-          render(json: {error: 'filter[location]={lat,lng} is mandatory for this request'}, status: :forbidden)
         end
       end
 
@@ -33,7 +30,7 @@ module Api
       end
 
       def filters(results)
-        location = params[:filter][:location].split(',')
+        location = params.dig(:filter, :location)&.split(',')
         store_type = params.dig(:filter, :'store-type')
         search = params.dig(:filter, :search)
 
