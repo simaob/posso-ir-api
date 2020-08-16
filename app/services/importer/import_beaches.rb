@@ -64,10 +64,16 @@ module Importer
 
     def import_beaches_apa
       data = self.class.get('/perfil.json')&.body
+      count = 0
       JSON.parse(data)['features'].each do |item|
         beach = item['attributes']
         store = Store.find_or_initialize_by(original_id: beach['id'], source: 'APA', store_type: :beach)
+        next unless store.new_record?
+
+        count += 1
         store.country =  'Portugal'
+        store.name = beach['praia']
+        store.district = beach['arh'].titleize
         store.latitude = beach['latitude']
         store.longitude = beach['longitude']
         store.source = 'APA'
@@ -89,7 +95,7 @@ module Importer
           beach_support: beach['apoio_praia'],
           parking: beach['estacionamento'],
           quality_flag: beach['bandeira_azul'],
-          accessibility: beach['accessivel'],
+          accessibility: beach['acessivel'],
           water_chair: beach['cadeira_anfibia'],
           construction: beach['obras_em_curso'],
           collapsing_risk: beach['risco_derrocada'],
@@ -98,6 +104,7 @@ module Importer
         )
         store.save
       end
+      puts "added new #{count} beaches"
     end
 
     def import_beaches_deco
