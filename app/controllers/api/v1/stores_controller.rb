@@ -41,7 +41,7 @@ module Api
                      end
         results = results.retrieve_closest(*location) if location
         results = results.where(store_type: store_type) if store_type
-        results = results.full_text_search(search).with_pg_search_rank if search
+        results = results.api_text_search(search) if search
         results.where.not(latitude: nil).where.not(longitude: nil)
       end
 

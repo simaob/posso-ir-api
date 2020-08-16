@@ -90,6 +90,15 @@ class Store < ApplicationRecord
                   },
                   ignoring: :accents
 
+  pg_search_scope :api_text_search,
+                  against: [:name],
+                  using: {
+                    tsearch: {
+                      prefix: true
+                    }
+                  },
+                  ignoring: :accents
+
   def address(unique: false)
     result = [street, city, country].map(&:presence).compact
     result << "#{I18n.t("activerecord.enums.store.store_types.#{store_type}")}-#{id}" if unique
