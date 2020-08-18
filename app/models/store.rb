@@ -94,7 +94,8 @@ class Store < ApplicationRecord
                   against: [:name],
                   using: {
                     tsearch: {
-                      prefix: true
+                      any_word: true,
+                      dictionary: 'portuguese'
                     }
                   },
                   ignoring: :accents
