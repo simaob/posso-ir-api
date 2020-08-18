@@ -94,7 +94,7 @@ class Store < ApplicationRecord
                   against: [:name],
                   using: {
                     tsearch: {
-                      any_word: true,
+                      prefix: true,
                       dictionary: 'portuguese'
                     }
                   },
