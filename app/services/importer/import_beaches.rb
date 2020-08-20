@@ -64,13 +64,11 @@ module Importer
 
     def import_beaches_apa
       data = self.class.get('/perfil.json')&.body
-      count = 0
       JSON.parse(data)['features'].each do |item|
         beach = item['attributes']
         store = Store.find_or_initialize_by(original_id: beach['id'], source: 'APA', store_type: :beach)
         next unless store.new_record?
 
-        count += 1
         store.country = 'Portugal'
         store.name = beach['praia']
         store.district = beach['arh'].titleize
