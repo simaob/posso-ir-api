@@ -66,7 +66,7 @@ module Importer
       data = self.class.get('/perfil.json')&.body
       JSON.parse(data)['features'].each do |item|
         beach = item['attributes']
-        next unless BeachConfiguration.find_by(code: beach['code']&.to_s)
+        next if BeachConfiguration.find_by(code: beach['code']&.to_s)
 
         store = Store.new(original_id: beach['id'], source: 'APA', store_type: :beach)
 
