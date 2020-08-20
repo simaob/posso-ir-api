@@ -66,8 +66,9 @@ module Importer
       data = self.class.get('/perfil.json')&.body
       JSON.parse(data)['features'].each do |item|
         beach = item['attributes']
-        store = Store.find_or_initialize_by(original_id: beach['id'], source: 'APA', store_type: :beach)
-        next unless store.new_record?
+        next if BeachConfiguration.find_by(code: beach['code']&.to_s)
+
+        store = Store.new(original_id: beach['id'], source: 'APA', store_type: :beach)
 
         store.country = 'Portugal'
         store.name = beach['praia']
@@ -76,8 +77,6 @@ module Importer
         store.longitude = beach['longitude']
         store.source = 'APA'
         store.original_id = beach['id']
-
-        store.beach_configuration&.delete
 
         store.beach_configuration = BeachConfiguration.new(
           code: beach['code']&.to_s,
