@@ -18,9 +18,9 @@ module Api
 
       def validate_request
         # if a store owner code was passed and that user exists and is a store owner
-        if store_owner_code && !context[:current_user]&.store_owner?
-          render(json: {error: 'you are not authorized to list all available stores'}, status: :forbidden)
-        end
+        return unless store_owner_code && !context[:current_user]&.store_owner?
+
+        render(json: {error: 'you are not authorized to list all available stores'}, status: :forbidden)
       end
 
       def apply_params(results)

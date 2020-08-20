@@ -71,7 +71,7 @@ module Importer
         next unless store.new_record?
 
         count += 1
-        store.country =  'Portugal'
+        store.country = 'Portugal'
         store.name = beach['praia']
         store.district = beach['arh'].titleize
         store.latitude = beach['latitude']
@@ -104,7 +104,6 @@ module Importer
         )
         store.save
       end
-      puts "added new #{count} beaches"
     end
 
     def import_beaches_deco
