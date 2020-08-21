@@ -214,10 +214,10 @@ class Store < ApplicationRecord
              end
 
     prefix = I18n.t("activerecord.enums.store.store_types.#{store_type}", locale: locale)
-    self.search_name = if name.downcase.include?(prefix.downcase)
+    self.search_name = if name&.downcase&.include?(prefix.downcase)
                          name
                        else
-                         [prefix, name].join(' ')
+                         [prefix, name].compact.join(' ')
                        end
   end
 
