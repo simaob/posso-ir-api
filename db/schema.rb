@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_25_091713) do
+ActiveRecord::Schema.define(version: 2020_08_21_081752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_091713) do
     t.boolean "make_phone_calls", default: false
     t.integer "phone_call_interval", default: 60
     t.string "municipality"
+    t.string "search_name"
     t.index ["created_by_id"], name: "index_stores_on_created_by_id"
     t.index ["lonlat"], name: "index_stores_on_lonlat", using: :gist
     t.index ["make_phone_calls"], name: "index_stores_on_make_phone_calls"

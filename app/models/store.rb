@@ -29,6 +29,7 @@
 #  make_phone_calls    :boolean          default("false")
 #  phone_call_interval :integer          default("60")
 #  municipality        :string
+#  search_name         :string
 #
 class Store < ApplicationRecord
   include UserTrackable
@@ -74,6 +75,7 @@ class Store < ApplicationRecord
   scope :available, -> { where(state: [:live, :marked_for_deletion]).where(open: true) }
 
   after_save :set_lonlat
+  before_save :update_search_name, if: :will_save_change_to_name?
   after_create :create_status
 
   pg_search_scope :full_text_search,
@@ -91,7 +93,7 @@ class Store < ApplicationRecord
                   ignoring: :accents
 
   pg_search_scope :api_text_search,
-                  against: [:name],
+                  against: [:search_name],
                   using: {
                     tsearch: {
                       prefix: true,
@@ -197,6 +199,26 @@ class Store < ApplicationRecord
       WHERE id = #{id}
     SQL
     ActiveRecord::Base.connection.execute sql
+  end
+
+  def update_search_name
+    locale = case country.strip
+             when 'Portugal', 'PT'
+               'pt'
+             when 'España', 'Spain', 'ES'
+               'es'
+             when 'Slovakia', 'SK', 'Slovenská'
+               'sk'
+             else
+               'en'
+             end
+
+    prefix = I18n.t("activerecord.enums.store.store_types.#{store_type}", locale: locale)
+    self.search_name = if name.downcase.include?(prefix.downcase)
+                         name
+                       else
+                         [prefix, name].join(' ')
+                       end
   end
 
   def create_status
