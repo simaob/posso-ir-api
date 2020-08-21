@@ -202,15 +202,15 @@ class Store < ApplicationRecord
   end
 
   def update_search_name
-    locale = case country.strip
-             when 'Portugal', 'PT'
-               'pt'
+    locale = case country&.strip
+             when 'United Kingdom', 'UK', 'England'
+               'en'
              when 'España', 'Spain', 'ES'
                'es'
              when 'Slovakia', 'SK', 'Slovenská'
                'sk'
              else
-               'en'
+               'pt'
              end
 
     prefix = I18n.t("activerecord.enums.store.store_types.#{store_type}", locale: locale)
