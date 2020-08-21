@@ -29,6 +29,7 @@
 #  make_phone_calls    :boolean          default("false")
 #  phone_call_interval :integer          default("60")
 #  municipality        :string
+#  search_name         :string
 #
 class Beach < Store
 end

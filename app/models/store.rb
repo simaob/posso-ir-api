@@ -29,6 +29,7 @@
 #  make_phone_calls    :boolean          default("false")
 #  phone_call_interval :integer          default("60")
 #  municipality        :string
+#  search_name         :string
 #
 class Store < ApplicationRecord
   include UserTrackable
@@ -91,7 +92,7 @@ class Store < ApplicationRecord
                   ignoring: :accents
 
   pg_search_scope :api_text_search,
-                  against: [:name],
+                  against: [:search_name],
                   using: {
                     tsearch: {
                       prefix: true,
