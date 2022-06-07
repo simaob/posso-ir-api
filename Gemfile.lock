@@ -187,7 +187,7 @@ GEM
     jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     jsonapi-resources (0.10.2)
       activerecord (>= 4.1)
       concurrent-ruby
